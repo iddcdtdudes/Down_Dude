@@ -17,4 +17,6 @@ public class Chunk : ScriptableObject {
     public GameObject chunkPrefab;  // gameObject containing chunk
 
     public float chunkHeight;       // height of chunk from top to bottom
+
+    public float timeLimit;          // time limit set at the start of the chunk
 }

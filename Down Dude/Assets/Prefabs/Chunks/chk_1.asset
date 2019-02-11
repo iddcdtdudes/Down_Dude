@@ -15,3 +15,4 @@ MonoBehaviour:
   chunkPrefab: {fileID: 1033008269286250, guid: ddb324cd5c90ba544a893f19f9022fd8,
     type: 2}
   chunkHeight: 15
+  timeLimit: 10

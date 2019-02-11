@@ -1,19 +1,41 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+// DudeController : MonoBehavior
+//
+// manage Dude's controls
+// - jetpack
+// - parachute
+// - idle
+// - walking
+// - dying
+
 public class DudeController : MonoBehaviour {
+    
+    // singleton instance
+    public static DudeController instance;
 
-    private void Update()
+    public event Action reachCheckpointEvent;
+
+    private void Awake()
     {
-        if(Input.touchCount > 0) {
-
-            Touch touch = Input.GetTouch(0);
-
-            Vector2 position = Camera.main.ScreenToWorldPoint(touch.position);
-
-            transform.position = position + new Vector2(0f, 0.5f);
+        // initialize singleton instance
+        if(instance == null) {
+            instance = this;
+        } else {
+            Destroy(gameObject);
         }
+    }
 
+    private void OnTriggerEnter2D(Collider2D collider)
+    {
+        // invoke checkpoint event
+        if(collider.CompareTag("Checkpoint")) {
+            if(reachCheckpointEvent != null) {
+                reachCheckpointEvent.Invoke();
+            }
+        }
     }
 }
