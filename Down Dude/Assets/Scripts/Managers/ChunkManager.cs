@@ -15,7 +15,7 @@ public class ChunkManager : MonoBehaviour {
     [SerializeField] private Chunk[] m_chunkList;       // list of all chunk scriptable objects available
 
     private int m_firstChunkIndex;                      // index of first chunk
-    [SerializeField] private int m_loadedChunksLimit;
+    [SerializeField] private int m_loadedChunksLimit;   // limit of chunks loaded at once
     private List<GameObject> m_loadedChunks;            // chunks loaded
 
     [SerializeField] private float spawnOffset;         // distance of Dude from the current chunk's checkpoint to spawn the next chunk
@@ -117,12 +117,17 @@ public class ChunkManager : MonoBehaviour {
 
     // returns the chunk index of the loaded chunk
     // chunk = 0 : latest chunk; +1 every older chunk
-    private int GetChunkIndex(int chunk)
+    public int GetChunkIndex(int chunk)
     {
         if(m_loadedChunks.Count - chunk - 1 >= 0) {
             return m_loadedChunks[m_loadedChunks.Count - chunk - 1].GetComponent<ChunkInfo>().GetChunkIndex();
         } else {
             return -1;
         }
+    }
+
+    public Chunk[] GetChunkList()
+    {
+        return m_chunkList;
     }
 }
