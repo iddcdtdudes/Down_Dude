@@ -18,9 +18,6 @@ public class ChunkManager : MonoBehaviour {
     [SerializeField] private int m_loadedChunksLimit;
     private List<GameObject> m_loadedChunks;            // chunks loaded
 
-    private float m_newChunkTimeLimit;                  // time limit of newly spawned chunk
-
-    private float m_previousChunkHeight;                // height of the latest loaded chunk
     [SerializeField] private float spawnOffset;         // distance of Dude from the current chunk's checkpoint to spawn the next chunk
 
     private void Awake()
@@ -32,16 +29,15 @@ public class ChunkManager : MonoBehaviour {
             Destroy(gameObject);
         }
 
+        // initialize loaded chunk list
+        m_loadedChunks = new List<GameObject>();
+
         // randomize index of first chunk
         m_firstChunkIndex = Random.Range(0, m_chunkListCount);
-        m_newChunkTimeLimit = m_chunkList[m_firstChunkIndex].timeLimit;
     }
 
     private void Start()
     {
-        // initialize loaded chunk list
-        m_loadedChunks = new List<GameObject>();
-
         // add first chunk
         PushChunk(m_firstChunkIndex);
     }
@@ -67,7 +63,7 @@ public class ChunkManager : MonoBehaviour {
 
         // y position of Dude that should spawn a chunk
         // equals to the the next checkpoint - spawnOffset
-        float spawningY = m_loadedChunks[m_loadedChunks.Count - 1].transform.position.y - m_previousChunkHeight + spawnOffset;
+        float spawningY = m_loadedChunks[m_loadedChunks.Count - 1].transform.position.y - m_chunkList[GetChunkIndex(0)].chunkHeight + spawnOffset;
 
         // if dude has surpassed the point, chunk is ready to spawn
         if(dudeY <= spawningY) {
@@ -82,19 +78,23 @@ public class ChunkManager : MonoBehaviour {
     {
         // instantiate chunk
         m_loadedChunks.Add(Instantiate(m_chunkList[index].chunkPrefab));
+
+        // add chunk info component and set index
+        m_loadedChunks[m_loadedChunks.Count - 1].AddComponent<ChunkInfo>();
+        m_loadedChunks[m_loadedChunks.Count - 1].GetComponent<ChunkInfo>().SetChunkIndex(index);
+
+        // set parent
         m_loadedChunks[m_loadedChunks.Count - 1].transform.parent = this.transform;
 
         // position chunk
         if(m_loadedChunks.Count >= 2) {
             float previousChunkY = m_loadedChunks[m_loadedChunks.Count - 2].transform.position.y;
-            m_loadedChunks[m_loadedChunks.Count - 1].transform.position = new Vector3(0f, previousChunkY - m_previousChunkHeight, 0f);
+            float previousChunkHeight = m_chunkList[GetChunkIndex(1)].chunkHeight;
+
+            m_loadedChunks[m_loadedChunks.Count - 1].transform.position = new Vector3(0f, previousChunkY - previousChunkHeight, 0f);
         } else {
             m_loadedChunks[m_loadedChunks.Count - 1].transform.position = Vector3.zero;
         }
-
-        // update class states
-        m_previousChunkHeight = m_chunkList[index].chunkHeight;
-        m_newChunkTimeLimit = m_chunkList[index].timeLimit;
     }
 
     // despawn the top most chunk
@@ -105,8 +105,24 @@ public class ChunkManager : MonoBehaviour {
         m_loadedChunks.RemoveAt(0);
     }
 
+    // returns the latest spawned chunk's time limit
     public float GetNewChunkTimeLimit()
     {
-        return m_newChunkTimeLimit;
+        if(m_loadedChunks.Count > 0) {
+            return m_chunkList[GetChunkIndex(0)].timeLimit;
+        } else {
+            return m_chunkList[m_firstChunkIndex].timeLimit;
+        }
+    }
+
+    // returns the chunk index of the loaded chunk
+    // chunk = 0 : latest chunk; +1 every older chunk
+    private int GetChunkIndex(int chunk)
+    {
+        if(m_loadedChunks.Count - chunk - 1 >= 0) {
+            return m_loadedChunks[m_loadedChunks.Count - chunk - 1].GetComponent<ChunkInfo>().GetChunkIndex();
+        } else {
+            return -1;
+        }
     }
 }
