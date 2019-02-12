@@ -26,7 +26,7 @@ public class GameManager : MonoBehaviour {
     private int m_score;                                // game score
 
     [SerializeField] private int m_scoreBaseline;                                   // base score reward for reaching a checkpoint
-    [SerializeField] private int m_scoreTimeScale;                                  // additional maximum core earned through faster play time
+    [SerializeField] private int m_timeScaleMultiplier;                             // additional maximum core earned through faster play time
     [Range(0f, 0.5f)] [SerializeField] private float m_scoreMultiplierCeiling;      // time remaining percentage of maximum score multiplier
 
     private void Awake()
@@ -103,8 +103,8 @@ public class GameManager : MonoBehaviour {
 
         // calculate and add score
         float chunkTimeLimit = ChunkManager.instance.GetChunkList()[ChunkManager.instance.GetChunkIndex(1)].timeLimit;
-        float multiplier = Mathf.Clamp01((m_timer / chunkTimeLimit) / m_scoreMultiplierCeiling);
-        AddScore(m_scoreBaseline + (int)(multiplier * m_scoreTimeScale));
+        float timeScale = Mathf.Clamp01((m_timer / chunkTimeLimit) / m_scoreMultiplierCeiling);
+        AddScore(m_scoreBaseline + (int)(timeScale * m_timeScaleMultiplier));
         
         // set timer to chunk's time limit
         m_timer = ChunkManager.instance.GetNewChunkTimeLimit();

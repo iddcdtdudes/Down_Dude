@@ -144,7 +144,7 @@ MonoBehaviour:
   checkpointsText: {fileID: 769474073}
   scoreText: {fileID: 1966272342}
   m_scoreBaseline: 200
-  m_scoreTimeScale: 1500
+  m_timeScaleMultiplier: 1500
   m_scoreMultiplierCeiling: 0.5
 --- !u!4 &133946287
 Transform:
