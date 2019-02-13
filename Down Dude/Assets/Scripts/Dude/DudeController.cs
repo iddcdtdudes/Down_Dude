@@ -19,6 +19,12 @@ public class DudeController : MonoBehaviour {
 
     public event Action reachCheckpointEvent;
 
+    private DudeMode m_dudeMode;
+    [SerializeField] private float m_jetpackForce;
+
+    [SerializeField] private float m_parachuteForce;
+    [SerializeField] private float m_maxParachuteForce;
+
     private void Awake()
     {
         // initialize singleton instance
@@ -29,30 +35,44 @@ public class DudeController : MonoBehaviour {
         }
     }
 
-    public bool m_dudeJetpackMode;
-    public bool m_dudeParachuteMode;
 
     private void FixedUpdate()
     {
+
+        //Debug.Log(GetComponent<Rigidbody2D>().velocity.y);
+
         if (Input.touchCount > 0)
         {
             //Set Character to Parachute Mode
-            m_dudeJetpackMode = false;
-            m_dudeParachuteMode = true;
+            m_dudeMode = DudeMode.PARACHUTE;
 
             Touch FirstTouch = Input.GetTouch(0);
-            while (FirstTouch.phase != TouchPhase.Ended)
-            {
-                Vector2 TargetPosition = CalculateTargetPosition(FirstTouch);
-                transform.position = Vector2.MoveTowards(transform.position, TargetPosition, Time.deltaTime);
+
+            Vector2 DudePosition = transform.position;
+            Vector2 TargetPosition = CalculateTargetPosition(FirstTouch);
+
+            Vector2 ForceDirection;
+            ForceDirection.x = TargetPosition.x - DudePosition.x;
+            ForceDirection.y = 0f;
+
+            if(ForceDirection.magnitude > m_maxParachuteForce) {
+                if(ForceDirection.x > 0) {
+                    ForceDirection = new Vector2(m_maxParachuteForce, 0f);
+                } else {
+                    ForceDirection = new Vector2(-m_maxParachuteForce, 0f);
+                }
             }
 
-            //Set Character Back to Jetpack Mode
-            if (FirstTouch.phase == TouchPhase.Ended)
-            {
-                m_dudeJetpackMode = true;
-                m_dudeParachuteMode = false;
-            }
+            GetComponent<Rigidbody2D>().AddForce(m_parachuteForce * ForceDirection, ForceMode2D.Force);
+            
+            
+        }
+        else 
+        {
+            //Set Character to Jetpack
+            m_dudeMode = DudeMode.JETPACK;
+
+            GetComponent<Rigidbody2D>().AddForce(Vector2.down * m_jetpackForce);
         }
     }
 
@@ -77,4 +97,11 @@ public class DudeController : MonoBehaviour {
         return TargetPosition;
     }
 
+    public DudeMode GetDudeMode()
+    {
+        return m_dudeMode;
+    }
 }
+
+public enum DudeMode
+{ PARACHUTE, JETPACK }

@@ -11,7 +11,11 @@ public class CameraController : MonoBehaviour {
     // singleton instance
     public static CameraController instance;
 
-    [SerializeField] private float m_yOffset;
+    [SerializeField] private float m_yOffsetTargetJetpack;
+    [SerializeField] private float m_yOffsetTargetParachute;
+    [SerializeField] private float m_yOffsetSmooth;
+
+    private float m_yOffset;
 
 
     private void Awake()
@@ -26,14 +30,16 @@ public class CameraController : MonoBehaviour {
 
     private void Update()
     {
-        if (DudeController.instance.m_dudeJetpackMode == true && DudeController.instance.m_dudeParachuteMode == false)
+        if (DudeController.instance.GetDudeMode() == DudeMode.JETPACK)
         {
-            transform.position = DudeController.instance.transform.position + new Vector3(0f, m_yOffset, -10f);
+            m_yOffset = Mathf.Lerp(m_yOffset, m_yOffsetTargetJetpack, m_yOffsetSmooth);
         }
         else
         {
-            transform.position = DudeController.instance.transform.position + new Vector3(0f, 0f, -10f);
+            m_yOffset = Mathf.Lerp(m_yOffset, m_yOffsetTargetParachute, m_yOffsetSmooth);
         }
+
+        transform.position = new Vector3(0f, DudeController.instance.transform.position.y + m_yOffset, -10f);
     }
 
 
