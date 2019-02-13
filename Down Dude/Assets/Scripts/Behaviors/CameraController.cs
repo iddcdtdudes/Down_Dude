@@ -26,7 +26,16 @@ public class CameraController : MonoBehaviour {
 
     private void Update()
     {
-        transform.position = DudeController.instance.transform.position + new Vector3(0f, m_yOffset, -10f);
+        if (DudeController.instance.m_dudeJetpackMode == true && DudeController.instance.m_dudeParachuteMode == false)
+        {
+            transform.position = DudeController.instance.transform.position + new Vector3(0f, m_yOffset, -10f);
+        }
+        else
+        {
+            transform.position = DudeController.instance.transform.position + new Vector3(0f, 0f, -10f);
+        }
     }
+
+
 
 }
