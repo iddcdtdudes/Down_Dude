@@ -39,9 +39,15 @@ public class CameraController : MonoBehaviour {
             m_yOffset = Mathf.Lerp(m_yOffset, m_yOffsetTargetParachute, m_yOffsetSmooth);
         }
 
-        transform.position = new Vector3(0f, DudeController.instance.transform.position.y + m_yOffset, -10f);
     }
 
+    private void FixedUpdate()
+    {
+        if (DudeController.instance.GetDudeAlive() == true)
+        {
+            transform.position = new Vector3(0f, DudeController.instance.transform.position.y + m_yOffset, -10f);
+        }
+    }
 
 
 }
