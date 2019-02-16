@@ -9,7 +9,7 @@ using UnityEngine;
 [RequireComponent(typeof(Collider2D))]
 public class ObstacleTrigger : MonoBehaviour {
 
-    [SerializeField] private Obstacle[] m_obstacles;
+    [SerializeField] private DynamicObstacle[] m_obstacles;
 
     private bool isTriggered = false;
 
@@ -28,14 +28,14 @@ public class ObstacleTrigger : MonoBehaviour {
             isTriggered = true;
 
             // activate obstacles
-            foreach(Obstacle obstacle in m_obstacles) {
+            foreach(DynamicObstacle obstacle in m_obstacles) {
                 StartCoroutine(DelayedActivateObstable(obstacle));
             }
         }
     }
 
     // activate obstacle after delay seconds specified in the Obstacle component
-    private IEnumerator DelayedActivateObstable(Obstacle obstacle)
+    private IEnumerator DelayedActivateObstable(DynamicObstacle obstacle)
     {
         yield return new WaitForSeconds(obstacle.GetSpawnDelay());
         obstacle.gameObject.SetActive(true);

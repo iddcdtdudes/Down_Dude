@@ -8,10 +8,4 @@ using UnityEngine;
 
 public class Obstacle : MonoBehaviour {
 
-    [SerializeField] private float m_spawnDelay;          // spawn delay after trigger
-
-    public float GetSpawnDelay()
-    {
-        return m_spawnDelay;
-    }
 }
