@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEditor;
 
 // ChunkManager : MonoBehaviour
 //
@@ -20,6 +21,12 @@ public class ChunkManager : MonoBehaviour {
 
     [SerializeField] private float spawnOffset;         // distance of Dude from the current chunk's checkpoint to spawn the next chunk
 
+
+    // DEBUG
+    [Header("Chunk Debugging")]
+    [SerializeField] private bool m_chunkDebugger;      // spawn specific chunk for debugging
+    [SerializeField] private int m_chunkToDebug;        // chunk to spawn when debugging
+
     private void Awake()
     {
         // initialize singleton instance
@@ -29,11 +36,22 @@ public class ChunkManager : MonoBehaviour {
             Destroy(gameObject);
         }
 
+        // clamp chunkToDebug
+        if(m_chunkToDebug < 0) {
+            m_chunkToDebug = 0;
+        } else if(m_chunkToDebug >= m_chunkListCount) {
+            m_chunkToDebug = m_chunkListCount - 1;
+        }
+
         // initialize loaded chunk list
         m_loadedChunks = new List<GameObject>();
 
         // randomize index of first chunk
-        m_firstChunkIndex = Random.Range(0, m_chunkListCount);
+        if(!m_chunkDebugger) {
+            m_firstChunkIndex = Random.Range(0, m_chunkListCount);
+        } else {
+            m_firstChunkIndex = m_chunkToDebug;
+        }
     }
 
     private void Start()
@@ -46,7 +64,11 @@ public class ChunkManager : MonoBehaviour {
     {
         // spawn chunk if ready
         if(ReadyToSpawnChunk()) {
-            PushChunk(Random.Range(0, m_chunkListCount));
+            if(!m_chunkDebugger) {
+                PushChunk(Random.Range(0, m_chunkListCount));
+            } else {
+                PushChunk(m_chunkToDebug);
+            }
 
             // if chunk count exceeds limit, pop a chunk
             if(m_loadedChunks.Count > m_loadedChunksLimit) {

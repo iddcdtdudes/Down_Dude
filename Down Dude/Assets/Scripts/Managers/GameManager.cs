@@ -69,7 +69,7 @@ public class GameManager : MonoBehaviour {
         if(m_timer > 0f) {
             m_timer -= Time.deltaTime;
         } else {
-            // TODO: trigger game over
+            DudeController.instance.SetDudeAlive(false);
         }
 
         // update timer text UI

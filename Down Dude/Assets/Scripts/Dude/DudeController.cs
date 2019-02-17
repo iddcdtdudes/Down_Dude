@@ -76,20 +76,23 @@ public class DudeController : MonoBehaviour {
     }
     #endregion
 
-    private void OnTriggerEnter2D(Collider2D collider)
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        // game over upon colliding with fatal hitbox
+        if(collision.collider.CompareTag("Fatal")) {
+            instance.SetDudeAlive(false);
+        }
+    }
+
+    private void OnTriggerEnter2D(Collider2D collision)
     {
         // invoke checkpoint event
-        if(collider.CompareTag("Checkpoint"))
+        if(collision.CompareTag("Checkpoint"))
         {
             if(reachCheckpointEvent != null) {
                 reachCheckpointEvent.Invoke();
             }
             
-        }
-        else if(collider.CompareTag("Fatal"))
-        {
-            Debug.Log("Dude is dead");
-            instance.SetDudeAlive(false);
         }
     }
 
@@ -132,6 +135,9 @@ public class DudeController : MonoBehaviour {
     public void SetDudeAlive (bool state)
     {
         m_dudeAlive = state;
+        if(!state) {
+            Debug.Log("Game Over");
+        }
     }
     #endregion
 }
