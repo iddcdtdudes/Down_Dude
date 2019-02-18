@@ -9,11 +9,20 @@ using UnityEngine;
 
 public class MovingObstacle : DynamicObstacle {
 
-    [SerializeField] private Vector2 m_velocity;      // moving velocity of obstacle
+    [SerializeField] private Vector2 m_velocity;    // moving velocity of obstacle
+
+    protected bool m_isStopped = false;               // obstacle is stopped by another obstacle
 
     private void Update()
     {
         // translate by velocity
-        transform.Translate(m_velocity * Time.deltaTime);
+        if(!m_isStopped) {
+            transform.Translate(m_velocity * Time.deltaTime);
+        }
+    }
+
+    public bool GetIsStopped()
+    {
+        return m_isStopped;
     }
 }
