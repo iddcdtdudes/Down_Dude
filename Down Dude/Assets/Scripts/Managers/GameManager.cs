@@ -41,6 +41,8 @@ public class GameManager : MonoBehaviour {
 
     private void Start()
     {
+        //Set device orientation
+        Screen.orientation = ScreenOrientation.Portrait;
         // event subscription
         DudeController.instance.reachCheckpointEvent += OnDudeReachCheckpoint;
 
