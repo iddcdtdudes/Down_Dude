@@ -18,7 +18,6 @@ public class DudeController : MonoBehaviour {
     public static DudeController instance;
 
     public event Action reachCheckpointEvent;
-
     public event Action dudeIsKilledEvent = instance.KillDude;
 
     private DudeMode m_dudeMode;
@@ -62,11 +61,6 @@ public class DudeController : MonoBehaviour {
 
             ForceVector = CalculateForceVector(FirstTouch); //Calculate the movement vector to use it in fixedUpdate to move the dude
         }
-        else //When dude is dead
-        {
-            instance.GetComponentInChildren<SpriteRenderer>().color = new Color(1f, 1f, 1f, 0f);
-        }
-
     }
 
     private void FixedUpdate()
@@ -93,11 +87,9 @@ public class DudeController : MonoBehaviour {
     private void OnCollisionEnter2D(Collision2D collision)
     {
         // game over upon colliding with fatal hitbox
-        if(collision.collider.CompareTag("Fatal")) {
-            if (dudeIsKilledEvent != null)
-            {
+        if(collision.collider.CompareTag("Fatal"))
+        {
                 dudeIsKilledEvent.Invoke();
-            }
         }
     }
 
@@ -117,8 +109,8 @@ public class DudeController : MonoBehaviour {
 
     private Vector2 CalculateForceVector(Touch FirstTouch)
     {
-        Vector2 TouchPosition = Camera.main.ScreenToWorldPoint(FirstTouch.position);
-        Vector2 ForceVector;
+        Vector2 TouchPosition = Camera.main.ScreenToWorldPoint(FirstTouch.position); //Convert screen touch position to world position
+        Vector2 ForceVector; //Vector2 that will be return
 
         if(Mathf.Abs(TouchPosition.x - instance.transform.position.x) >= m_forceSquareDistance) {
             ForceVector.x = TouchPosition.x - instance.transform.position.x;
@@ -162,11 +154,15 @@ public class DudeController : MonoBehaviour {
     public void KillDude ()
     {
         m_dudeAlive = false;
+        instance.GetComponentInChildren<SpriteRenderer>().color = new Color(1f, 1f, 1f, 0f);
+        instance.GetComponent<Rigidbody2D>().isKinematic = true;
     }
     //Restart dude
     public void ResetDude ()
     {
         m_dudeAlive = true;
+        instance.GetComponentInChildren<SpriteRenderer>().color = new Color(1f, 1f, 1f, 1f);
+        instance.GetComponent<Rigidbody2D>().isKinematic = false;
     }
     #endregion
 }

@@ -48,6 +48,7 @@ public class GameManager : MonoBehaviour {
         m_timer = ChunkManager.instance.GetNewChunkTimeLimit();
         m_checkpointsReached = 0;
         m_score = 0;
+        DudeController.instance.ResetDude();
 
         // initialize UI values
         timerText.text = m_timer.ToString("F1");

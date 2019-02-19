@@ -22,7 +22,7 @@ public class PincherHolder : MonoBehaviour {
     {
         // if 2 pinchers touch Dude, game over
         if(m_collisionCount >= 2 && !m_pincher1.GetIsStopped() && !m_pincher2.GetIsStopped()) {
-            DudeController.instance.SetDudeAlive(false);
+            DudeController.instance.KillDude();
         }
     }
 
