@@ -31,6 +31,10 @@ public class DudeController : MonoBehaviour {
     private Vector2 ForceVector;
     private Touch FirstTouch;
 
+    [SerializeField] private Vector2 m_drag;
+    [SerializeField] private Vector2 m_maxVelocity;
+    [SerializeField] private float m_forceSquareDistance;
+
     private void Awake()
     {
         // initialize singleton instance
@@ -67,14 +71,22 @@ public class DudeController : MonoBehaviour {
 
     private void FixedUpdate()
     {
+        Rigidbody2D rigidbody = GetComponent<Rigidbody2D>();
+
         if (m_dudeMode == DudeMode.PARACHUTE) //Parachute Mode
         {
-            GetComponent<Rigidbody2D>().AddForce(m_parachuteForce * ForceVector, ForceMode2D.Force);
+            rigidbody.AddForce(m_parachuteForce * ForceVector, ForceMode2D.Force);
         }
         else //Jetpace Mode
         {
-            GetComponent<Rigidbody2D>().AddForce(Vector2.down * m_jetpackForce);
+            rigidbody.AddForce(Vector2.down * m_jetpackForce);
         }
+
+        // apply drag and limit velocity
+        Vector2 vel = rigidbody.velocity;
+        vel.x = Mathf.Clamp(m_drag.x * vel.x, -m_maxVelocity.x, m_maxVelocity.x);
+        vel.y = Mathf.Clamp(m_drag.y * vel.y, -m_maxVelocity.y, m_maxVelocity.y);
+        rigidbody.velocity = vel;
     }
     #endregion
 
@@ -108,8 +120,18 @@ public class DudeController : MonoBehaviour {
         Vector2 TouchPosition = Camera.main.ScreenToWorldPoint(FirstTouch.position);
         Vector2 ForceVector;
 
-        ForceVector.x = TouchPosition.x - instance.transform.position.x;
+        if(Mathf.Abs(TouchPosition.x - instance.transform.position.x) >= m_forceSquareDistance) {
+            ForceVector.x = TouchPosition.x - instance.transform.position.x;
+        } else {
+            ForceVector.x = ((TouchPosition.x - instance.transform.position.x) / m_forceSquareDistance) * ((TouchPosition.x - instance.transform.position.x) / m_forceSquareDistance) * m_forceSquareDistance;
+            if(TouchPosition.x - instance.transform.position.x < 0) {
+                ForceVector.x *= -1;
+            }
+        }
         ForceVector.y = 0f;
+
+        Debug.Log(ForceVector.x);
+
 
         if (ForceVector.magnitude > m_maxParachuteForce)
         {

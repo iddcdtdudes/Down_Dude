@@ -7,5 +7,5 @@ using UnityEngine;
 // holds obstacle information
 
 public class Obstacle : MonoBehaviour {
-
+ 
 }

@@ -9,31 +9,31 @@ Prefab:
     m_Modifications: []
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 0}
-  m_RootGameObject: {fileID: 1887409037267050}
+  m_RootGameObject: {fileID: 1465969909572378}
   m_IsPrefabAsset: 1
---- !u!1 &1887409037267050
+--- !u!1 &1465969909572378
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 4084438370678326}
-  - component: {fileID: 61317545825773850}
-  - component: {fileID: 114405350465261828}
+  - component: {fileID: 4154368805274146}
+  - component: {fileID: 61356466518767290}
+  - component: {fileID: 114543819392046846}
   m_Layer: 0
-  m_Name: obstacle_trigger_test
+  m_Name: trig_0
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &4084438370678326
+--- !u!4 &4154368805274146
 Transform:
   m_ObjectHideFlags: 1
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1887409037267050}
+  m_GameObject: {fileID: 1465969909572378}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
@@ -41,12 +41,12 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!61 &61317545825773850
+--- !u!61 &61356466518767290
 BoxCollider2D:
   m_ObjectHideFlags: 1
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1887409037267050}
+  m_GameObject: {fileID: 1465969909572378}
   m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
@@ -66,15 +66,15 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 1, y: 1}
   m_EdgeRadius: 0
---- !u!114 &114405350465261828
+--- !u!114 &114543819392046846
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1887409037267050}
+  m_GameObject: {fileID: 1465969909572378}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: fe8f051cc597b2b44a430366fcf9ac3d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  obstacles: []
+  m_obstacles: []

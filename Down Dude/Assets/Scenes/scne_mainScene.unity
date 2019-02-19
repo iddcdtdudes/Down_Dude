@@ -193,7 +193,7 @@ MonoBehaviour:
   m_loadedChunksLimit: 3
   spawnOffset: 5
   m_chunkDebugger: 1
-  m_chunkToDebug: 0
+  m_chunkToDebug: 1
 --- !u!4 &269897184
 Transform:
   m_ObjectHideFlags: 0
@@ -691,7 +691,7 @@ Rigidbody2D:
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
   m_Mass: 1
-  m_LinearDrag: 10
+  m_LinearDrag: 0
   m_AngularDrag: 0
   m_GravityScale: 1
   m_Material: {fileID: 0}
@@ -725,8 +725,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_jetpackForce: 30
-  m_parachuteForce: 30
-  m_maxParachuteForce: 0.7
+  m_parachuteForce: 50
+  m_maxParachuteForce: 0.3
+  m_drag: {x: 0.95, y: 0.8}
+  m_maxVelocity: {x: 1.5, y: 2.3}
+  m_forceSquareDistance: 0
 --- !u!61 &1823921755
 BoxCollider2D:
   m_ObjectHideFlags: 0
