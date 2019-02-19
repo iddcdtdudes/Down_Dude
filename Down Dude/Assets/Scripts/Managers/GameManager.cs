@@ -48,7 +48,6 @@ public class GameManager : MonoBehaviour {
         m_timer = ChunkManager.instance.GetNewChunkTimeLimit();
         m_checkpointsReached = 0;
         m_score = 0;
-        DudeController.instance.SetDudeAlive(true);
 
         // initialize UI values
         timerText.text = m_timer.ToString("F1");
@@ -56,6 +55,7 @@ public class GameManager : MonoBehaviour {
         scoreText.text = m_score.ToString();
     }
 
+    #region Update
     private void Update()
     {
         UpdateTimer();
@@ -69,13 +69,15 @@ public class GameManager : MonoBehaviour {
         if(m_timer > 0f) {
             m_timer -= Time.deltaTime;
         } else {
-            DudeController.instance.SetDudeAlive(false);
+            DudeController.instance.KillDude();
         }
 
         // update timer text UI
         timerText.text = m_timer.ToString("F1");
     }
+    #endregion
 
+    #region Private
     // add amount to score
     private void AddScore(int amount)
     {
@@ -111,4 +113,5 @@ public class GameManager : MonoBehaviour {
         m_timer = ChunkManager.instance.GetNewChunkTimeLimit();
 
     }
+    #endregion
 }

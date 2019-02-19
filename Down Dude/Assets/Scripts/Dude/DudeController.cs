@@ -19,6 +19,8 @@ public class DudeController : MonoBehaviour {
 
     public event Action reachCheckpointEvent;
 
+    public event Action dudeIsKilledEvent = instance.KillDude;
+
     private DudeMode m_dudeMode;
     private bool m_dudeAlive;
     [SerializeField] private float m_jetpackForce;
@@ -80,7 +82,10 @@ public class DudeController : MonoBehaviour {
     {
         // game over upon colliding with fatal hitbox
         if(collision.collider.CompareTag("Fatal")) {
-            instance.SetDudeAlive(false);
+            if (dudeIsKilledEvent != null)
+            {
+                dudeIsKilledEvent.Invoke();
+            }
         }
     }
 
@@ -131,13 +136,15 @@ public class DudeController : MonoBehaviour {
     {
         return m_dudeAlive;
     }
-
-    public void SetDudeAlive (bool state)
+    //Kill dude
+    public void KillDude ()
     {
-        m_dudeAlive = state;
-        if(!state) {
-            Debug.Log("Game Over");
-        }
+        m_dudeAlive = false;
+    }
+    //Restart dude
+    public void ResetDude ()
+    {
+        m_dudeAlive = true;
     }
     #endregion
 }
