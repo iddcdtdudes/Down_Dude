@@ -18,7 +18,7 @@ public class DudeController : MonoBehaviour {
     public static DudeController instance;
 
     public event Action reachCheckpointEvent;
-    public event Action dudeIsKilledEvent = instance.KillDude;
+    public event Action dudeIsKilledEvent;
 
     private DudeMode m_dudeMode;
     private bool m_dudeAlive;
@@ -89,7 +89,7 @@ public class DudeController : MonoBehaviour {
         // game over upon colliding with fatal hitbox
         if(collision.collider.CompareTag("Fatal"))
         {
-                dudeIsKilledEvent.Invoke();
+            KillDude();
         }
     }
 
@@ -156,6 +156,10 @@ public class DudeController : MonoBehaviour {
         m_dudeAlive = false;
         instance.GetComponentInChildren<SpriteRenderer>().color = new Color(1f, 1f, 1f, 0f);
         instance.GetComponent<Rigidbody2D>().isKinematic = true;
+
+        if(dudeIsKilledEvent != null) {
+            dudeIsKilledEvent.Invoke();
+        }
     }
     //Restart dude
     public void ResetDude ()
