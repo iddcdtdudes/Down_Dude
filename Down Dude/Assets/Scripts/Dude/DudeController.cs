@@ -26,7 +26,7 @@ public class DudeController : MonoBehaviour {
 
     [SerializeField] private float m_parachuteForce;
     [SerializeField] private float m_maxParachuteForce;
-
+    [SerializeField] private float m_maxWalkingForce;
     private Vector2 ForceVector;
     private Touch FirstTouch;
 
@@ -49,6 +49,9 @@ public class DudeController : MonoBehaviour {
     {
         if (m_dudeAlive == true) //When dude is alive
         {
+            //Change m_dudeMode accordingly
+            ChangeDudeMode();
+            /*
             if (Input.touchCount > 0) //Check if screen is touch to set dude mode according to it
             {
                 FirstTouch = Input.GetTouch(0); //Receive first touch
@@ -58,6 +61,7 @@ public class DudeController : MonoBehaviour {
             {
                 m_dudeMode = DudeMode.JETPACK; //Set dude mode to jetpack
             }
+            */
 
             ForceVector = CalculateForceVector(FirstTouch); //Calculate the movement vector to use it in fixedUpdate to move the dude
         }
@@ -66,7 +70,7 @@ public class DudeController : MonoBehaviour {
     private void FixedUpdate()
     {
         Rigidbody2D rigidbody = GetComponent<Rigidbody2D>();
-
+        /*
         if (m_dudeMode == DudeMode.PARACHUTE) //Parachute Mode
         {
             rigidbody.AddForce(m_parachuteForce * ForceVector, ForceMode2D.Force);
@@ -74,6 +78,22 @@ public class DudeController : MonoBehaviour {
         else //Jetpace Mode
         {
             rigidbody.AddForce(Vector2.down * m_jetpackForce);
+        }
+        */
+        switch (m_dudeMode)
+        {
+            case DudeMode.PARACHUTE:
+                rigidbody.AddForce(m_parachuteForce * ForceVector, ForceMode2D.Force);
+                break;
+            case DudeMode.JETPACK:
+                rigidbody.AddForce(Vector2.down * m_jetpackForce);
+                break;
+            case DudeMode.WALKING:
+                rigidbody.AddForce(ForceVector, ForceMode2D.Force);
+                break;
+            case DudeMode.IDLE:
+
+                break;
         }
 
         // apply drag and limit velocity
@@ -104,8 +124,6 @@ public class DudeController : MonoBehaviour {
             
         }
     }
-
-
 
     private Vector2 CalculateForceVector(Touch FirstTouch)
     {
@@ -140,6 +158,51 @@ public class DudeController : MonoBehaviour {
         return ForceVector;
     }
 
+    private bool CheckDudeWalk ()
+    {
+        if (GetComponent<Rigidbody2D>().CompareTag("Obstacle") == true)
+        {
+            return true;
+        }
+        else
+        {
+            return false;
+        }
+    }
+
+    private void ChangeDudeMode ()
+    {
+        //PARACHUTE
+        if (Input.touchCount > 0 && m_dudeMode == DudeMode.JETPACK) //Check if screen is touch to set dude mode according to it
+        {
+            FirstTouch = Input.GetTouch(0); //Receive first touch
+            m_dudeMode = DudeMode.PARACHUTE; //Set dude mode to parachute
+            Debug.Log("Parachute Mode");
+
+        }
+        //WALKING
+        else if (Input.touchCount > 0 && instance.CheckDudeWalk() == true)
+        {
+            FirstTouch = Input.GetTouch(0); //Receive first touch
+            m_dudeMode = DudeMode.WALKING;
+            Debug.Log("Walking Mode");
+
+        }
+        //IDLE
+        else if (Input.touchCount == 0 && instance.CheckDudeWalk() == true)
+        {
+            m_dudeMode = DudeMode.IDLE;
+            Debug.Log("Idle Mode");
+
+        }
+        //JETPACK
+        else
+        {
+            m_dudeMode = DudeMode.JETPACK; //Set dude mode to jetpack
+            Debug.Log("Jetpack Mode");
+        }
+    }
+
     #region Public
     public DudeMode GetDudeMode()
     {
@@ -172,4 +235,4 @@ public class DudeController : MonoBehaviour {
 }
 
 public enum DudeMode
-{ PARACHUTE, JETPACK }
+{ IDLE, PARACHUTE, JETPACK, WALKING }
