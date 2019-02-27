@@ -29,10 +29,13 @@ public class DudeController : MonoBehaviour {
     [SerializeField] private float m_maxWalkingForce;
     private Vector2 ForceVector;
     private Touch FirstTouch;
+    private bool facingRight = false;
 
     [SerializeField] private Vector2 m_drag;
     [SerializeField] private Vector2 m_maxVelocity;
     [SerializeField] private float m_forceSquareDistance;
+
+    [SerializeField] private Animator m_animator;
 
     private void Awake()
     {
@@ -55,15 +58,25 @@ public class DudeController : MonoBehaviour {
             if (Input.touchCount > 0) //Check if screen is touch to set dude mode according to it
             {
                 FirstTouch = Input.GetTouch(0); //Receive first touch
-                m_dudeMode = DudeMode.PARACHUTE; //Set dude mode to parachute
+                SetDudeMode(DudeMode.PARACHUTE); //Set dude mode to parachute
             }
             else
             {
-                m_dudeMode = DudeMode.JETPACK; //Set dude mode to jetpack
+                SetDudeMode(DudeMode.JETPACK); //Set dude mode to jetpack
             }
             */
 
             ForceVector = CalculateForceVector(FirstTouch); //Calculate the movement vector to use it in fixedUpdate to move the dude
+
+            // update facing direction
+            float velX = GetComponent<Rigidbody2D>().velocity.x;
+            if(!facingRight && velX > 0.01f) {
+                transform.localScale = new Vector3(-transform.localScale.x, transform.localScale.y, transform.localScale.z);
+                facingRight = true;
+            } else if(facingRight && velX < -0.01f) {
+                transform.localScale = new Vector3(-transform.localScale.x, transform.localScale.y, transform.localScale.z);
+                facingRight = false;
+            }
         }
     }
 
@@ -140,8 +153,6 @@ public class DudeController : MonoBehaviour {
         }
         ForceVector.y = 0f;
 
-        Debug.Log(ForceVector.x);
-
 
         if (ForceVector.magnitude > m_maxParachuteForce)
         {
@@ -207,6 +218,20 @@ public class DudeController : MonoBehaviour {
     public DudeMode GetDudeMode()
     {
         return m_dudeMode;
+    }
+
+    public void SetDudeMode(DudeMode mode)
+    {
+        switch(mode) {
+            case DudeMode.JETPACK:
+                m_animator.SetTrigger("setJetpack");
+                break;
+            case DudeMode.PARACHUTE:
+                m_animator.SetTrigger("setParachute");
+                break;
+        }
+
+        m_dudeMode = mode;
     }
 
     public bool GetDudeAlive ()
