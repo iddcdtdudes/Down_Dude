@@ -30,6 +30,7 @@ public class CameraController : MonoBehaviour {
 
     private void Update()
     {
+        //Set offset according to mode dude is on
         if (DudeController.instance.GetDudeMode() == DudeMode.JETPACK)
         {
             m_yOffset = Mathf.Lerp(m_yOffset, m_yOffsetTargetJetpack, m_yOffsetSmooth);
@@ -43,6 +44,7 @@ public class CameraController : MonoBehaviour {
 
     private void FixedUpdate()
     {
+        //Offset the camera with value: m_yOffset
         if (DudeController.instance.GetDudeAlive() == true)
         {
             transform.position = new Vector3(0f, DudeController.instance.transform.position.y + m_yOffset, -10f);

@@ -77,6 +77,9 @@ public class DudeController : MonoBehaviour {
                 transform.localScale = new Vector3(-transform.localScale.x, transform.localScale.y, transform.localScale.z);
                 facingRight = false;
             }
+
+            //Update Animation
+            ChangeDudeAnimation();
         }
     }
 
@@ -138,6 +141,7 @@ public class DudeController : MonoBehaviour {
         }
     }
 
+    #region Private Functions
     private Vector2 CalculateForceVector(Touch FirstTouch)
     {
         Vector2 TouchPosition = Camera.main.ScreenToWorldPoint(FirstTouch.position); //Convert screen touch position to world position
@@ -169,7 +173,7 @@ public class DudeController : MonoBehaviour {
         return ForceVector;
     }
 
-    private bool CheckDudeWalk ()
+    private bool IsDudeWalking ()
     {
         if (GetComponent<Rigidbody2D>().CompareTag("Obstacle") == true)
         {
@@ -183,6 +187,41 @@ public class DudeController : MonoBehaviour {
 
     private void ChangeDudeMode ()
     {
+        //Screen is touched
+        if (Input.touchCount > 0)
+        {
+            //Walking
+            if (instance.IsDudeWalking() == true)
+            {
+                FirstTouch = Input.GetTouch(0); //Receive first touch
+                m_dudeMode = DudeMode.WALKING;
+                Debug.Log("Walking Mode");
+            }
+            //Parachute
+            else
+            {
+                FirstTouch = Input.GetTouch(0); //Receive first touch
+                m_dudeMode = DudeMode.PARACHUTE; //Set dude mode to parachute
+                Debug.Log("Parachute Mode");
+            }
+        }
+        //Screen is not touch
+        else
+        {
+            //Idle
+            if (instance.IsDudeWalking() == true)
+            {
+                m_dudeMode = DudeMode.IDLE;
+                Debug.Log("Idle Mode");
+            }
+            //Jetpack
+            else
+            {
+                m_dudeMode = DudeMode.JETPACK; //Set dude mode to jetpack
+                Debug.Log("Jetpack Mode");
+            }
+        }
+        /*
         //PARACHUTE
         if (Input.touchCount > 0 && m_dudeMode == DudeMode.JETPACK) //Check if screen is touch to set dude mode according to it
         {
@@ -192,7 +231,7 @@ public class DudeController : MonoBehaviour {
 
         }
         //WALKING
-        else if (Input.touchCount > 0 && instance.CheckDudeWalk() == true)
+        else if (Input.touchCount > 0 && instance.IsDudeWalking() == true)
         {
             FirstTouch = Input.GetTouch(0); //Receive first touch
             m_dudeMode = DudeMode.WALKING;
@@ -200,21 +239,46 @@ public class DudeController : MonoBehaviour {
 
         }
         //IDLE
-        else if (Input.touchCount == 0 && instance.CheckDudeWalk() == true)
+        else if (Input.touchCount == 0 && instance.IsDudeWalking() == true)
         {
             m_dudeMode = DudeMode.IDLE;
             Debug.Log("Idle Mode");
 
         }
         //JETPACK
-        else
+        else if (Input.touchCount == 0 && instance.IsDudeWalking() == false)
         {
             m_dudeMode = DudeMode.JETPACK; //Set dude mode to jetpack
             Debug.Log("Jetpack Mode");
         }
+        */
     }
 
-    #region Public
+    private void ChangeDudeAnimation ()
+    {
+        switch (m_dudeMode)
+        {
+            case DudeMode.JETPACK:
+                m_animator.ResetTrigger("setParachute");
+                m_animator.SetTrigger("setJetpack");
+                break;
+            case DudeMode.PARACHUTE:
+                m_animator.ResetTrigger("setJetpack");
+                m_animator.SetTrigger("setParachute");
+                break;
+            case DudeMode.WALKING:
+                m_animator.SetBool("isGrounded", false);
+                m_animator.SetBool("isWalking", true);
+                break;
+            case DudeMode.IDLE:
+                m_animator.SetBool("isWalking", false);
+                m_animator.SetBool("isGrounded", true);
+                break;
+        }
+    }
+    #endregion
+
+    #region Public Functions
     public DudeMode GetDudeMode()
     {
         return m_dudeMode;
