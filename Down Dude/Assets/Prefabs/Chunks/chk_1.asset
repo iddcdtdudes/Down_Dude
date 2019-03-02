@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Name: chk_1
   m_EditorClassIdentifier: 
   chunkIndex: 1
-  chunkPrefab: {fileID: 1242094915540792, guid: ddb324cd5c90ba544a893f19f9022fd8,
+  chunkPrefab: {fileID: 1459921268208010, guid: ddb324cd5c90ba544a893f19f9022fd8,
     type: 2}
   chunkHeight: 10
   timeLimit: 8
