@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 // GameManager : MonoBehabiour
 //
@@ -25,6 +26,8 @@ public class GameManager : MonoBehaviour {
     [SerializeField] private Text scoreText;            // score text UI
     private int m_score;                                // game score
 
+    [SerializeField] private List<GameObject> dudeIsKilledUI;
+
     [SerializeField] private int m_scoreBaseline;                                   // base score reward for reaching a checkpoint
     [SerializeField] private int m_timeScaleMultiplier;                             // additional maximum core earned through faster play time
     [Range(0f, 0.5f)] [SerializeField] private float m_scoreMultiplierCeiling;      // time remaining percentage of maximum score multiplier
@@ -45,6 +48,7 @@ public class GameManager : MonoBehaviour {
         Screen.orientation = ScreenOrientation.Portrait;
         // event subscription
         DudeController.instance.reachCheckpointEvent += OnDudeReachCheckpoint;
+        DudeController.instance.dudeIsKilledEvent += OnDudeIsKilled;
 
         // initialize variables
         m_timer = ChunkManager.instance.GetNewChunkTimeLimit();
@@ -62,6 +66,7 @@ public class GameManager : MonoBehaviour {
     private void Update()
     {
         UpdateTimer();
+
     }
 
     // decrement timer
@@ -116,5 +121,21 @@ public class GameManager : MonoBehaviour {
         m_timer = ChunkManager.instance.GetNewChunkTimeLimit();
 
     }
+
+
     #endregion
+
+    public void OnDudeIsKilled()
+    {
+        //Set active on UI to display
+        foreach (GameObject i in dudeIsKilledUI)
+        {
+            i.SetActive(true);
+        }
+    }
+
+    public void RestartGame()
+    {
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+    }
 }

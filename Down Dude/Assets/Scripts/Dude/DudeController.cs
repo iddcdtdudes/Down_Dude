@@ -37,6 +37,11 @@ public class DudeController : MonoBehaviour {
 
     [SerializeField] private Animator m_animator;
 
+    //For restart
+    private Rigidbody2D m_defaultDudeRigidbody;
+    private Vector3 m_defaultDudePosition;
+    private Color m_defaultDudeColor;
+
     private void Awake()
     {
         // initialize singleton instance
@@ -45,6 +50,13 @@ public class DudeController : MonoBehaviour {
         } else {
             Destroy(gameObject);
         }
+    }
+
+    private void Start()
+    {
+        m_defaultDudeRigidbody = instance.GetComponent<Rigidbody2D>();
+        m_defaultDudePosition = instance.transform.position;
+        m_defaultDudeColor = instance.GetComponentInChildren<SpriteRenderer>().color;
     }
 
     #region Update
@@ -307,7 +319,8 @@ public class DudeController : MonoBehaviour {
     {
         m_dudeAlive = false;
         instance.GetComponentInChildren<SpriteRenderer>().color = new Color(1f, 1f, 1f, 0f);
-        instance.GetComponent<Rigidbody2D>().isKinematic = true;
+        instance.GetComponent<Rigidbody2D>().bodyType = RigidbodyType2D.Kinematic;
+        //instance.gameObject.SetActive(false);
 
         if(dudeIsKilledEvent != null) {
             dudeIsKilledEvent.Invoke();
@@ -316,9 +329,15 @@ public class DudeController : MonoBehaviour {
     //Restart dude
     public void ResetDude ()
     {
+        /*
         m_dudeAlive = true;
-        instance.GetComponentInChildren<SpriteRenderer>().color = new Color(1f, 1f, 1f, 1f);
-        instance.GetComponent<Rigidbody2D>().isKinematic = false;
+        //instance.GetComponentInChildren<SpriteRenderer>().color = new Color(1f, 1f, 1f, 1f);
+        //instance.gameObject.SetActive(true);
+        instance.transform.position = Vector3.zero;
+        instance.GetComponent<Rigidbody2D>().bodyType = RigidbodyType2D.Dynamic;
+        instance.GetComponent<Rigidbody2D>().WakeUp();
+        Debug.Log("Dude is reset");
+        */
     }
     #endregion
 }

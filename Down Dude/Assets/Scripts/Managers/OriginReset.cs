@@ -27,9 +27,9 @@ public class OriginReset : MonoBehaviour {
     // Use this for initialization
     void Start () {
         //Add Player
-        m_gameObjectToReset.Add(DudeController.instance.gameObject);
+        //m_gameObjectToReset.Add(DudeController.instance.gameObject);
         //Add Camera
-        m_gameObjectToReset.Add(CameraController.instance.gameObject);
+        //m_gameObjectToReset.Add(CameraController.instance.gameObject);
 	}
 	
 	// Update is called once per frame
@@ -41,12 +41,15 @@ public class OriginReset : MonoBehaviour {
         }
 	}
 
-    private void ResetPosition ()
+    public void ResetPosition ()
     {
+        //CameraController.instance.instance.transform.position = new Vector3
         foreach (GameObject ObjectToReset in m_gameObjectToReset)
         {
             ObjectToReset.transform.position = Vector3.zero;
         }
+
+        DudeController.instance.ResetDude();
         
     }
 

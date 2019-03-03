@@ -45,10 +45,10 @@ public class CameraController : MonoBehaviour {
     private void FixedUpdate()
     {
         //Offset the camera with value: m_yOffset
-        if (DudeController.instance.GetDudeAlive() == true)
-        {
+        //if (DudeController.instance.GetDudeAlive() == true)
+        //{
             transform.position = new Vector3(0f, DudeController.instance.transform.position.y + m_yOffset, -10f);
-        }
+        //}
     }
 
 
