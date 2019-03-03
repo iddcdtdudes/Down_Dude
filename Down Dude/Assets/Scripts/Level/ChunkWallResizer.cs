@@ -8,11 +8,12 @@ public class ChunkWallResizer : MonoBehaviour {
     [SerializeField] private BoxCollider2D m_leftWall;
     [SerializeField] private BoxCollider2D m_rightWall;
 
+    [SerializeField] private GameObject m_chunkTop;
     [SerializeField] private GameObject m_chunkBottom;
 
     private void Update()
     {
-        float chunkHeight = Mathf.Abs(m_chunkBottom.transform.position.y);
+        float chunkHeight = Mathf.Abs(m_chunkTop.transform.position.y - m_chunkBottom.transform.position.y);
 
         UpdateWallSize(m_leftWall, chunkHeight);
         UpdateWallSize(m_rightWall, chunkHeight);

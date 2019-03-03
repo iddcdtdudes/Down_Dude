@@ -84,7 +84,7 @@ public class ChunkManager : MonoBehaviour {
 
         // y position of Dude that should spawn a chunk
         // equals to the the next checkpoint - spawnOffset
-        float spawningY = m_loadedChunks[m_loadedChunks.Count - 1].transform.position.y - m_chunkList[GetChunkIndex(0)].GetChunkHeight() + spawnOffset;
+        float spawningY = GetLoadedChunk(0).transform.position.y - GetLoadedChunk(0).GetChunkHeight() + spawnOffset;
 
         // if dude has surpassed the point, chunk is ready to spawn
         if(dudeY <= spawningY) {
@@ -100,21 +100,17 @@ public class ChunkManager : MonoBehaviour {
         // instantiate chunk
         m_loadedChunks.Add(Instantiate(m_chunkList[index].gameObject));
 
-        // add chunk info component and set index
-        m_loadedChunks[m_loadedChunks.Count - 1].AddComponent<ChunkInfo>();
-        m_loadedChunks[m_loadedChunks.Count - 1].GetComponent<ChunkInfo>().SetChunkIndex(index);
-
         // set parent
         m_loadedChunks[m_loadedChunks.Count - 1].transform.parent = this.transform;
 
         // position chunk
         if(m_loadedChunks.Count >= 2) {
-            float previousChunkY = m_loadedChunks[m_loadedChunks.Count - 2].transform.position.y;
-            float previousChunkHeight = m_chunkList[GetChunkIndex(1)].GetChunkHeight();
+            float previousChunkY = GetLoadedChunk(1).transform.position.y;
+            float previousChunkHeight = GetLoadedChunk(1).GetChunkHeight();
 
-            m_loadedChunks[m_loadedChunks.Count - 1].transform.position = new Vector3(0f, previousChunkY - previousChunkHeight, 0f);
+            GetLoadedChunk(0).transform.position = new Vector3(0f, previousChunkY - previousChunkHeight, 0f);
         } else {
-            m_loadedChunks[m_loadedChunks.Count - 1].transform.position = Vector3.zero;
+            GetLoadedChunk(0).transform.position = Vector3.zero;
         }
     }
 
@@ -141,10 +137,15 @@ public class ChunkManager : MonoBehaviour {
     public int GetChunkIndex(int chunk)
     {
         if(m_loadedChunks.Count - chunk - 1 >= 0) {
-            return m_loadedChunks[m_loadedChunks.Count - chunk - 1].GetComponent<ChunkInfo>().GetChunkIndex();
+            return m_loadedChunks[m_loadedChunks.Count - chunk - 1].GetComponent<Chunk>().GetChunkIndex();
         } else {
             return -1;
         }
+    }
+
+    public Chunk GetLoadedChunk(int chunk)
+    {
+        return m_loadedChunks[m_loadedChunks.Count - chunk - 1].GetComponent<Chunk>();
     }
 
     public Chunk[] GetChunkList()

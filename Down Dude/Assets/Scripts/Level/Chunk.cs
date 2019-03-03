@@ -9,12 +9,18 @@ public class Chunk : MonoBehaviour {
     [SerializeField] private float m_timeLimit;
 
     private float m_chunkHeight;
+    [SerializeField] private GameObject m_chunkTop;
     [SerializeField] private GameObject m_chunkButtom;
 
     private void Start()
     {
         // initialize chunk height
-        m_chunkHeight = Mathf.Abs(m_chunkButtom.transform.position.y);
+        m_chunkHeight = Mathf.Abs(m_chunkTop.transform.position.y - m_chunkButtom.transform.position.y);
+    }
+
+    public int GetChunkIndex()
+    {
+        return m_chunkIndex;
     }
 
     public float GetChunkHeight()

@@ -1633,6 +1633,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_chunkIndex: 2
   m_timeLimit: 15
+  m_chunkTop: {fileID: 1358968837740932}
   m_chunkButtom: {fileID: 1563096059730854}
 --- !u!114 &114762282182800320
 MonoBehaviour:
@@ -1647,6 +1648,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_leftWall: {fileID: 61659278319600418}
   m_rightWall: {fileID: 61262713042672340}
+  m_chunkTop: {fileID: 1358968837740932}
   m_chunkBottom: {fileID: 1563096059730854}
 --- !u!114 &114802827685785088
 MonoBehaviour:
