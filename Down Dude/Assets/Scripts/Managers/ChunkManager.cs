@@ -47,7 +47,7 @@ public class ChunkManager : MonoBehaviour {
 
         // randomize index of first chunk
         if(!m_chunkDebugger) {
-            m_firstChunkIndex = Random.Range(0, m_chunkList.Length);
+            m_firstChunkIndex = Random.Range(1, m_chunkList.Length);
         } else {
             m_firstChunkIndex = m_chunkToDebug;
         }

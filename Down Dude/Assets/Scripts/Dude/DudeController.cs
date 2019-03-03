@@ -55,11 +55,15 @@ public class DudeController : MonoBehaviour {
             if (Input.touchCount > 0) //Check if screen is touch to set dude mode according to it
             {
                 FirstTouch = Input.GetTouch(0); //Receive first touch
-                SetDudeMode(DudeMode.PARACHUTE); //Set dude mode to parachute
+                if(m_dudeMode != DudeMode.PARACHUTE) {
+                    SetDudeMode(DudeMode.PARACHUTE); //Set dude mode to parachute
+                }
             }
-            else if(Input.touchCount == 0)
+            else
             {
-                SetDudeMode(DudeMode.JETPACK); //Set dude mode to jetpack
+                if(m_dudeMode != DudeMode.JETPACK) {
+                    SetDudeMode(DudeMode.JETPACK); //Set dude mode to jetpack
+                }
             }
 
             ForceVector = CalculateForceVector(FirstTouch); //Calculate the movement vector to use it in fixedUpdate to move the dude
@@ -161,15 +165,10 @@ public class DudeController : MonoBehaviour {
     {
         switch(mode) {
             case DudeMode.JETPACK:
-                if(m_dudeMode != DudeMode.JETPACK) {
-                    m_animator.SetTrigger("setJetpack");
-                    Debug.Log("x");
-                }
+                m_animator.SetBool("isParachuting", false);
                 break;
             case DudeMode.PARACHUTE:
-                if(m_dudeMode != DudeMode.PARACHUTE) {
-                    m_animator.SetTrigger("setParachute");
-                }
+                m_animator.SetBool("isParachuting", true);
                 break;
         }
 

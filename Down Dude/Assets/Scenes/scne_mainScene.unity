@@ -342,7 +342,7 @@ MonoBehaviour:
   - {fileID: 114716085234219160, guid: 97ee6754ba4c271408ac4cc5118f8508, type: 2}
   m_loadedChunksLimit: 3
   spawnOffset: 5
-  m_chunkDebugger: 1
+  m_chunkDebugger: 0
   m_chunkToDebug: 0
 --- !u!4 &269897184
 Transform:
