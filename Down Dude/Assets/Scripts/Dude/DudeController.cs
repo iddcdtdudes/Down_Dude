@@ -57,7 +57,7 @@ public class DudeController : MonoBehaviour {
                 FirstTouch = Input.GetTouch(0); //Receive first touch
                 SetDudeMode(DudeMode.PARACHUTE); //Set dude mode to parachute
             }
-            else
+            else if(Input.touchCount == 0)
             {
                 SetDudeMode(DudeMode.JETPACK); //Set dude mode to jetpack
             }
@@ -161,10 +161,15 @@ public class DudeController : MonoBehaviour {
     {
         switch(mode) {
             case DudeMode.JETPACK:
-                m_animator.SetTrigger("setJetpack");
+                if(m_dudeMode != DudeMode.JETPACK) {
+                    m_animator.SetTrigger("setJetpack");
+                    Debug.Log("x");
+                }
                 break;
             case DudeMode.PARACHUTE:
-                m_animator.SetTrigger("setParachute");
+                if(m_dudeMode != DudeMode.PARACHUTE) {
+                    m_animator.SetTrigger("setParachute");
+                }
                 break;
         }
 

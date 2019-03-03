@@ -65,6 +65,7 @@ public class ChunkManager : MonoBehaviour {
         if(ReadyToSpawnChunk()) {
             if(!m_chunkDebugger) {
                 PushChunk(Random.Range(1, m_chunkList.Length));
+
             } else {
                 PushChunk(m_chunkToDebug);
             }
