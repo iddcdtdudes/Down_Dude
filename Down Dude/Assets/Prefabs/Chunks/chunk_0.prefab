@@ -135,25 +135,12 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4934232361889414}
+  - component: {fileID: 61322614056665620}
+  - component: {fileID: 61821659359737638}
+  - component: {fileID: 114191600747650960}
+  - component: {fileID: 114846760982196172}
   m_Layer: 0
   m_Name: chunk_0
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!1 &1708714725824890
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 4913725295453458}
-  - component: {fileID: 61542813932601814}
-  - component: {fileID: 61060973311246018}
-  m_Layer: 0
-  m_Name: walls
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -248,7 +235,7 @@ Transform:
   - {fileID: 4007644667868692}
   - {fileID: 4982437656414112}
   m_Father: {fileID: 4934232361889414}
-  m_RootOrder: 3
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &4345170076338358
 Transform:
@@ -289,19 +276,6 @@ Transform:
   m_Father: {fileID: 4056877115776738}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!4 &4913725295453458
-Transform:
-  m_ObjectHideFlags: 1
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1708714725824890}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 4934232361889414}
-  m_RootOrder: 2
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &4915638590399726
 Transform:
   m_ObjectHideFlags: 1
@@ -340,7 +314,6 @@ Transform:
   m_Children:
   - {fileID: 4056877115776738}
   - {fileID: 4962173357858754}
-  - {fileID: 4913725295453458}
   - {fileID: 4222342287487716}
   m_Father: {fileID: 0}
   m_RootOrder: 0
@@ -439,31 +412,6 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 1.03, y: 0.46}
   m_EdgeRadius: 0
---- !u!61 &61060973311246018
-BoxCollider2D:
-  m_ObjectHideFlags: 1
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1708714725824890}
-  m_Enabled: 1
-  m_Density: 1
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_UsedByEffector: 0
-  m_UsedByComposite: 0
-  m_Offset: {x: 1.85, y: -2.5}
-  m_SpriteTilingProperty:
-    border: {x: 0, y: 0, z: 0, w: 0}
-    pivot: {x: 0, y: 0}
-    oldSize: {x: 0, y: 0}
-    newSize: {x: 0, y: 0}
-    adaptiveTilingThreshold: 0
-    drawMode: 0
-    adaptiveTiling: 0
-  m_AutoTiling: 0
-  serializedVersion: 2
-  m_Size: {x: 1, y: 5}
-  m_EdgeRadius: 0
 --- !u!61 &61129024389843774
 BoxCollider2D:
   m_ObjectHideFlags: 1
@@ -514,6 +462,31 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 1.03, y: 0.46}
   m_EdgeRadius: 0
+--- !u!61 &61322614056665620
+BoxCollider2D:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1698665280763394}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: -1.85, y: -2.5}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0, y: 0}
+    oldSize: {x: 0, y: 0}
+    newSize: {x: 0, y: 0}
+    adaptiveTilingThreshold: 0
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  serializedVersion: 2
+  m_Size: {x: 1, y: 5}
+  m_EdgeRadius: 0
 --- !u!61 &61470784673874508
 BoxCollider2D:
   m_ObjectHideFlags: 1
@@ -539,31 +512,6 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 10, y: 1}
   m_EdgeRadius: 0
---- !u!61 &61542813932601814
-BoxCollider2D:
-  m_ObjectHideFlags: 1
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1708714725824890}
-  m_Enabled: 1
-  m_Density: 1
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_UsedByEffector: 0
-  m_UsedByComposite: 0
-  m_Offset: {x: -1.8499999, y: -2.5}
-  m_SpriteTilingProperty:
-    border: {x: 0, y: 0, z: 0, w: 0}
-    pivot: {x: 0, y: 0}
-    oldSize: {x: 0, y: 0}
-    newSize: {x: 0, y: 0}
-    adaptiveTilingThreshold: 0
-    drawMode: 0
-    adaptiveTiling: 0
-  m_AutoTiling: 0
-  serializedVersion: 2
-  m_Size: {x: 1, y: 5}
-  m_EdgeRadius: 0
 --- !u!61 &61653688221140026
 BoxCollider2D:
   m_ObjectHideFlags: 1
@@ -588,6 +536,31 @@ BoxCollider2D:
   m_AutoTiling: 0
   serializedVersion: 2
   m_Size: {x: 1.03, y: 0.4}
+  m_EdgeRadius: 0
+--- !u!61 &61821659359737638
+BoxCollider2D:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1698665280763394}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 1.85, y: -2.5}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0, y: 0}
+    oldSize: {x: 0, y: 0}
+    newSize: {x: 0, y: 0}
+    adaptiveTilingThreshold: 0
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  serializedVersion: 2
+  m_Size: {x: 1, y: 5}
   m_EdgeRadius: 0
 --- !u!114 &114049162405351856
 MonoBehaviour:
@@ -615,6 +588,34 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_spawnDelay: 0
   m_velocity: {x: -0.5, y: 0}
+--- !u!114 &114191600747650960
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1698665280763394}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b8ed159e644619a468598d78fd266f67, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_leftWall: {fileID: 61322614056665620}
+  m_rightWall: {fileID: 61821659359737638}
+  m_chunkBottom: {fileID: 1284440132551990}
+--- !u!114 &114846760982196172
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1698665280763394}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 26caae63e7d5d4542a185ce772e6794a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_chunkIndex: 0
+  m_timeLimit: 15
+  m_chunkButtom: {fileID: 1284440132551990}
 --- !u!114 &114859663868666010
 MonoBehaviour:
   m_ObjectHideFlags: 1

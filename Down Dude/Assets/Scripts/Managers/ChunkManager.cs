@@ -11,8 +11,7 @@ public class ChunkManager : MonoBehaviour {
 
     // singleton instance
     public static ChunkManager instance;
-
-    [SerializeField] private int m_chunkListCount;      // coun of chunks in chunkList
+    
     [SerializeField] private Chunk[] m_chunkList;       // list of all chunk scriptable objects available
 
     private int m_firstChunkIndex;                      // index of first chunk
@@ -39,8 +38,8 @@ public class ChunkManager : MonoBehaviour {
         // clamp chunkToDebug
         if(m_chunkToDebug < 0) {
             m_chunkToDebug = 0;
-        } else if(m_chunkToDebug >= m_chunkListCount) {
-            m_chunkToDebug = m_chunkListCount - 1;
+        } else if(m_chunkToDebug >= m_chunkList.Length) {
+            m_chunkToDebug = m_chunkList.Length - 1;
         }
 
         // initialize loaded chunk list
@@ -48,7 +47,7 @@ public class ChunkManager : MonoBehaviour {
 
         // randomize index of first chunk
         if(!m_chunkDebugger) {
-            m_firstChunkIndex = Random.Range(0, m_chunkListCount);
+            m_firstChunkIndex = Random.Range(0, m_chunkList.Length);
         } else {
             m_firstChunkIndex = m_chunkToDebug;
         }
@@ -65,7 +64,7 @@ public class ChunkManager : MonoBehaviour {
         // spawn chunk if ready
         if(ReadyToSpawnChunk()) {
             if(!m_chunkDebugger) {
-                PushChunk(Random.Range(0, m_chunkListCount));
+                PushChunk(Random.Range(1, m_chunkList.Length));
             } else {
                 PushChunk(m_chunkToDebug);
             }
@@ -85,7 +84,7 @@ public class ChunkManager : MonoBehaviour {
 
         // y position of Dude that should spawn a chunk
         // equals to the the next checkpoint - spawnOffset
-        float spawningY = m_loadedChunks[m_loadedChunks.Count - 1].transform.position.y - m_chunkList[GetChunkIndex(0)].chunkHeight + spawnOffset;
+        float spawningY = m_loadedChunks[m_loadedChunks.Count - 1].transform.position.y - m_chunkList[GetChunkIndex(0)].GetChunkHeight() + spawnOffset;
 
         // if dude has surpassed the point, chunk is ready to spawn
         if(dudeY <= spawningY) {
@@ -99,7 +98,7 @@ public class ChunkManager : MonoBehaviour {
     private void PushChunk(int index)
     {
         // instantiate chunk
-        m_loadedChunks.Add(Instantiate(m_chunkList[index].chunkPrefab));
+        m_loadedChunks.Add(Instantiate(m_chunkList[index].gameObject));
 
         // add chunk info component and set index
         m_loadedChunks[m_loadedChunks.Count - 1].AddComponent<ChunkInfo>();
@@ -111,7 +110,7 @@ public class ChunkManager : MonoBehaviour {
         // position chunk
         if(m_loadedChunks.Count >= 2) {
             float previousChunkY = m_loadedChunks[m_loadedChunks.Count - 2].transform.position.y;
-            float previousChunkHeight = m_chunkList[GetChunkIndex(1)].chunkHeight;
+            float previousChunkHeight = m_chunkList[GetChunkIndex(1)].GetChunkHeight();
 
             m_loadedChunks[m_loadedChunks.Count - 1].transform.position = new Vector3(0f, previousChunkY - previousChunkHeight, 0f);
         } else {
@@ -131,9 +130,9 @@ public class ChunkManager : MonoBehaviour {
     public float GetNewChunkTimeLimit()
     {
         if(m_loadedChunks.Count > 0) {
-            return m_chunkList[GetChunkIndex(0)].timeLimit;
+            return m_chunkList[GetChunkIndex(0)].GetTimeLimit();
         } else {
-            return m_chunkList[m_firstChunkIndex].timeLimit;
+            return m_chunkList[m_firstChunkIndex].GetTimeLimit();
         }
     }
 

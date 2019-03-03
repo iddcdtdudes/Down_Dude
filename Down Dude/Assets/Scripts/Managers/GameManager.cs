@@ -108,7 +108,7 @@ public class GameManager : MonoBehaviour {
         incrementCheckpoints();
 
         // calculate and add score
-        float chunkTimeLimit = ChunkManager.instance.GetChunkList()[ChunkManager.instance.GetChunkIndex(1)].timeLimit;
+        float chunkTimeLimit = ChunkManager.instance.GetChunkList()[ChunkManager.instance.GetChunkIndex(1)].GetTimeLimit();
         float timeScale = Mathf.Clamp01((m_timer / chunkTimeLimit) / m_scoreMultiplierCeiling);
         AddScore(m_scoreBaseline + (int)(timeScale * m_timeScaleMultiplier));
         
