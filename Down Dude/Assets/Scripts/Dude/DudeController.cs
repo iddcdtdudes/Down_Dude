@@ -16,27 +16,27 @@ public class DudeController : MonoBehaviour {
     
     // singleton instance
     public static DudeController instance;
-
+    //Event
     public event Action reachCheckpointEvent;
     public event Action dudeIsKilledEvent;
-
+    //State
     private DudeMode m_dudeMode;
     private bool m_dudeAlive;
     private bool m_dudeIsOnGround;
-
+    //Variable for controlling movements
     [SerializeField] private float m_jetpackForce;
     [SerializeField] private float m_parachuteForce;
     [SerializeField] private float m_walkingForce;
     [SerializeField] private float m_maxParachuteForce;
-
+    //Input
     private Vector2 ForceVector;
     private Touch FirstTouch;
     private bool facingRight = false;
-
+    //Direction
     [SerializeField] private Vector2 m_drag;
     [SerializeField] private Vector2 m_maxVelocity;
     [SerializeField] private float m_forceSquareDistance;
-
+    //Animation
     [SerializeField] private Animator m_animator;
 
     private void Awake()
@@ -134,18 +134,6 @@ public class DudeController : MonoBehaviour {
             KillDude();
         }
 
-        if(collision.collider.CompareTag("Obstacle"))
-        {
-            m_dudeIsOnGround = true;
-        }
-    }
-
-    private void OnCollisionExit2D(Collision2D collision)
-    {
-        if (collision.collider.CompareTag("Obstacle"))
-        {
-            m_dudeIsOnGround = false;
-        }
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
@@ -288,6 +276,11 @@ public class DudeController : MonoBehaviour {
         instance.GetComponentInChildren<SpriteRenderer>().color = new Color(1f, 1f, 1f, 1f);
         instance.GetComponent<Rigidbody2D>().isKinematic = false;
         instance.GetComponent<Rigidbody2D>().WakeUp();
+    }
+
+    public void SetDudeWalking (bool i)
+    {
+        m_dudeIsOnGround = i;
     }
     #endregion
 }

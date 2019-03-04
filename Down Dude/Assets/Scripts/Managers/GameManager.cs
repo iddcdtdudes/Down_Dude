@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 // GameManager : MonoBehabiour
 //
@@ -16,6 +17,8 @@ public class GameManager : MonoBehaviour {
     // singleton instance
     public static GameManager instance;
 
+    [SerializeField]private bool GameStart;
+
     [SerializeField] private Text timerText;            // timer text UI
     private float m_timer;                              // game timer
 
@@ -24,6 +27,8 @@ public class GameManager : MonoBehaviour {
 
     [SerializeField] private Text scoreText;            // score text UI
     private int m_score;                                // game score
+
+    [SerializeField] private List<GameObject> gameOverUI;
 
     [SerializeField] private int m_scoreBaseline;                                   // base score reward for reaching a checkpoint
     [SerializeField] private int m_timeScaleMultiplier;                             // additional maximum core earned through faster play time
@@ -41,10 +46,15 @@ public class GameManager : MonoBehaviour {
 
     private void Start()
     {
+        if (GameStart == false)
+        {
+            Time.timeScale = 0f;
+        }
         //Set device orientation
         Screen.orientation = ScreenOrientation.Portrait;
         // event subscription
         DudeController.instance.reachCheckpointEvent += OnDudeReachCheckpoint;
+        DudeController.instance.dudeIsKilledEvent += GameOverUI;
 
         // initialize variables
         m_timer = ChunkManager.instance.GetNewChunkTimeLimit();
@@ -117,4 +127,22 @@ public class GameManager : MonoBehaviour {
 
     }
     #endregion
+
+    public void StartGame ()
+    {
+        Time.timeScale = 1f;
+    }
+
+    public void GameOverUI ()
+    {
+        foreach (GameObject i in gameOverUI)
+        {
+            i.SetActive(true);
+        }
+    }
+
+    public void RestartGame ()
+    {
+        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+    }
 }
