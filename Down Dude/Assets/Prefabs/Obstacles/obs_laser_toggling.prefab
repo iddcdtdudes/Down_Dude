@@ -69,7 +69,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 11
+  m_SortingOrder: 10
   m_Sprite: {fileID: 21300000, guid: ab6b67ece341b944182ce64e26f20db9, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -213,5 +213,5 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_togglingObject: {fileID: 1418668382128518}
-  m_upTime: 1
+  m_upTime: 0.5
   m_downTime: 1
