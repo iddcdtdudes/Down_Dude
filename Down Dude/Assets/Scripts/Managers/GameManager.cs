@@ -50,8 +50,13 @@ public class GameManager : MonoBehaviour {
         {
             Time.timeScale = 0f;
         }
-        //Set device orientation
+
+        // set target framerate
+        Application.targetFrameRate = 60;
+
+        // set device orientation
         Screen.orientation = ScreenOrientation.Portrait;
+
         // event subscription
         DudeController.instance.reachCheckpointEvent += OnDudeReachCheckpoint;
         DudeController.instance.dudeIsKilledEvent += GameOverUI;

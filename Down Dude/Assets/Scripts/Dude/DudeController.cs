@@ -92,6 +92,8 @@ public class DudeController : MonoBehaviour {
 
     private void FixedUpdate()
     {
+        //Debug.Log(Application.targetFrameRate);
+
         Rigidbody2D rigidbody = GetComponent<Rigidbody2D>();
 
         switch (m_dudeMode)
