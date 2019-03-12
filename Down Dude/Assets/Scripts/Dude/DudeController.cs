@@ -140,8 +140,13 @@ public class DudeController : MonoBehaviour {
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
+        // game over upon colliding with fatal hitbox
+        if (collision.CompareTag("Fatal")) {
+            KillDude();
+        }
+
         // invoke checkpoint event
-        if(collision.CompareTag("Checkpoint"))
+        if (collision.CompareTag("Checkpoint"))
         {
             if(reachCheckpointEvent != null) {
                 reachCheckpointEvent.Invoke();
