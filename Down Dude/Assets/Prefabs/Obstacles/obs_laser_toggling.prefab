@@ -75,7 +75,7 @@ SpriteRenderer:
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 2
-  m_Size: {x: 1, y: 0.07}
+  m_Size: {x: 0.29000002, y: 0.11}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
@@ -99,13 +99,13 @@ BoxCollider2D:
     border: {x: 0, y: 0.02, z: 0, w: 0.02}
     pivot: {x: 0.5, y: 0.5}
     oldSize: {x: 0.01, y: 0.07}
-    newSize: {x: 1, y: 0.07}
+    newSize: {x: 0.29000002, y: 0.11}
     adaptiveTilingThreshold: 0.5
     drawMode: 2
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 1, y: 0.07}
+  m_Size: {x: 0.29000002, y: 0.11}
   m_EdgeRadius: 0
 --- !u!114 &6763828398543440324
 MonoBehaviour:
@@ -119,6 +119,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a3293fc4a602e55488e8ef12338ebc86, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  colliders: []
 --- !u!1 &1423231206226246
 GameObject:
   m_ObjectHideFlags: 0
@@ -130,6 +131,7 @@ GameObject:
   - component: {fileID: 4074834148346934}
   - component: {fileID: 212090916105415118}
   - component: {fileID: 114701727234894960}
+  - component: {fileID: 4671250962334571990}
   m_Layer: 0
   m_Name: obs_laser_toggling
   m_TagString: Obstacle
@@ -194,7 +196,7 @@ SpriteRenderer:
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 1
-  m_Size: {x: 0.5, y: 0.17}
+  m_Size: {x: 0.79, y: 0.17}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
@@ -215,3 +217,22 @@ MonoBehaviour:
   m_togglingObject: {fileID: 1418668382128518}
   m_upTime: 0.5
   m_downTime: 1
+--- !u!114 &4671250962334571990
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1423231206226246}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a3293fc4a602e55488e8ef12338ebc86, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  colliders:
+  - isChild: 1
+    collider: {fileID: 61880204813709214}
+    positionOffset: {x: 0, y: 0}
+    fixX: 0
+    fixY: 0
+    sizeOffset: {x: -0.5, y: -0.06}

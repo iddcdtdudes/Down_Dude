@@ -438,10 +438,11 @@ MonoBehaviour:
   - {fileID: 1201570606056366544, guid: 33b8ee7b7b824934aa7a9a09a021deae, type: 3}
   - {fileID: 5560199365362037056, guid: a112dd7fe93c77f49916603cdb0925d4, type: 3}
   - {fileID: 2321315405140550107, guid: fcdff05596301da4786f8beaba81a0ef, type: 3}
+  - {fileID: 1752272978506991166, guid: 720a78f2718c094459a184f10fae2800, type: 3}
   m_loadedChunksLimit: 3
   spawnOffset: 5
   m_chunkDebugger: 1
-  m_chunkToDebug: 0
+  m_chunkToDebug: 6
 --- !u!4 &269897184
 Transform:
   m_ObjectHideFlags: 0

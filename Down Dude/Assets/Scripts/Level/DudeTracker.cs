@@ -33,8 +33,6 @@ public class DudeTracker : DynamicObstacle
             // rotate toward dude
             float steer = Vector3.Cross(transform.up, m_dude.transform.position - transform.position).z;
             transform.Rotate(0f, 0f, steer * m_steerSpeed);
-        } else {
-            Debug.Log("deactivated");
         }
 
         // move forward

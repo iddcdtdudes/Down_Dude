@@ -27,10 +27,13 @@ public class BackgroundLooper : MonoBehaviour {
 
     private void FixedUpdate()
     {
-        // parallax
-        float dudeYVel = DudeController.instance.GetComponent<Rigidbody2D>().velocity.y;
-        m_otherBackground.transform.position = new Vector3(0.0f, m_otherBackground.transform.position.y + Time.deltaTime * (1 - m_parallax) * dudeYVel, 0.0f);
-        m_nextBackground.transform.position = new Vector3(0.0f, m_nextBackground.transform.position.y + Time.deltaTime * (1 - m_parallax) * dudeYVel, 0.0f);
+        if(m_parallax > 0.0f) {
+            // parallax
+            float dudeYVel = DudeController.instance.GetComponent<Rigidbody2D>().velocity.y;
+            m_otherBackground.transform.position = new Vector3(0.0f, m_otherBackground.transform.position.y + Time.deltaTime * (1 - m_parallax) * dudeYVel, 0.0f);
+            m_nextBackground.transform.position = new Vector3(0.0f, m_nextBackground.transform.position.y +  Time.deltaTime * (1 - m_parallax) * dudeYVel, 0.0f);
+        }
+        
     }
 
     private void Update()
@@ -42,6 +45,11 @@ public class BackgroundLooper : MonoBehaviour {
             GameObject temp = m_nextBackground;
             m_nextBackground = m_otherBackground;
             m_otherBackground = temp;
+        }
+
+        if(m_parallax == 0.0f) {
+            m_otherBackground.transform.position = new Vector3(0.0f, CameraController.instance.transform.position.y, 0.0f);
+            m_nextBackground.transform.position = new Vector3(0.0f, CameraController.instance.transform.position.y, 0.0f);
         }
     }
 

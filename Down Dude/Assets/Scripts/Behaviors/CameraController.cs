@@ -49,5 +49,9 @@ public class CameraController : MonoBehaviour {
         }
     }
 
-
+    public float GetOffsetSmooth()
+    {
+        Debug.Log(m_yOffsetTargetParachute - m_yOffset);
+        return m_yOffsetTargetParachute - m_yOffset;
+    }
 }
