@@ -28,7 +28,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1698149843216766}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0.135, y: -1.15, z: 0}
+  m_LocalPosition: {x: -0.0265, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4141414146647310}
@@ -89,7 +89,7 @@ SpriteRenderer:
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 2
-  m_Size: {x: 0.63, y: 0.25}
+  m_Size: {x: 0.57706153, y: 0.25}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
@@ -107,19 +107,19 @@ BoxCollider2D:
   m_Material: {fileID: 0}
   m_IsTrigger: 0
   m_UsedByEffector: 0
-  m_UsedByComposite: 0
+  m_UsedByComposite: 1
   m_Offset: {x: 0, y: 0}
   m_SpriteTilingProperty:
     border: {x: 0.03, y: 0.03, z: 0.03, w: 0.03}
     pivot: {x: 0.5, y: 0.5}
     oldSize: {x: 0.64, y: 0.64}
-    newSize: {x: 0.63, y: 0.25}
+    newSize: {x: 0.57706153, y: 0.25}
     adaptiveTilingThreshold: 0.5
     drawMode: 2
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 0.63, y: 0.25}
+  m_Size: {x: 0.57706153, y: 0.25}
   m_EdgeRadius: 0
 --- !u!114 &114786702303087038
 MonoBehaviour:
@@ -133,6 +133,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a3293fc4a602e55488e8ef12338ebc86, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  colliders:
+  - isChild: 0
+    collider: {fileID: 61343373187528766}
+    positionOffset: {x: 0, y: 0}
+    fixX: 0
+    fixY: 0
+    sizeOffset: {x: 0, y: 0}
+  - isChild: 1
+    collider: {fileID: 61215361030272242}
+    positionOffset: {x: 0, y: 0.175}
+    fixX: 0
+    fixY: 1
+    sizeOffset: {x: 0, y: -0.15}
 --- !u!1 &1841294232988314
 GameObject:
   m_ObjectHideFlags: 0
@@ -208,7 +221,7 @@ SpriteRenderer:
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 2
-  m_Size: {x: 0.63, y: 0.1}
+  m_Size: {x: 0.57706153, y: 0.099999994}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
@@ -232,13 +245,13 @@ BoxCollider2D:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
     oldSize: {x: 0.09, y: 0.1}
-    newSize: {x: 0.63, y: 0.1}
+    newSize: {x: 0.57706153, y: 0.099999994}
     adaptiveTilingThreshold: 0.5
     drawMode: 2
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 0.63, y: 0.1}
+  m_Size: {x: 0.57706153, y: 0.099999994}
   m_EdgeRadius: 0
 --- !u!114 &114050594389565228
 MonoBehaviour:
@@ -252,3 +265,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a3293fc4a602e55488e8ef12338ebc86, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  colliders: []

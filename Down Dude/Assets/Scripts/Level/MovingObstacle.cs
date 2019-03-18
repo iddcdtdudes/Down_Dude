@@ -25,4 +25,9 @@ public class MovingObstacle : DynamicObstacle {
     {
         return m_isStopped;
     }
+
+    public void SetVelocity(Vector2 velocity)
+    {
+        m_velocity = velocity;
+    }
 }
