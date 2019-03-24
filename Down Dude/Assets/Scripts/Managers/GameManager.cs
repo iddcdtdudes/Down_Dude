@@ -144,6 +144,16 @@ public class GameManager : MonoBehaviour {
     }
     #endregion
 
+    public int GetSessionScores ()
+    {
+        return m_score;
+    }
+
+    public int GetSessionCheckpoints ()
+    {
+        return m_checkpointsReached;
+    }
+
     public void StartGame ()
     {
         Time.timeScale = 1f;
