@@ -151,7 +151,6 @@ public class DudeController : MonoBehaviour {
             if(reachCheckpointEvent != null) {
                 reachCheckpointEvent.Invoke();
             }
-            
         }
     }
 

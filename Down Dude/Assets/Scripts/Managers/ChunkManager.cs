@@ -20,6 +20,7 @@ public class ChunkManager : MonoBehaviour {
 
     [SerializeField] private float spawnOffset;         // distance of Dude from the current chunk's checkpoint to spawn the next chunk
 
+    private float m_lastSpawnTime;
 
     // DEBUG
     [Header("Chunk Debugging")]
@@ -80,6 +81,11 @@ public class ChunkManager : MonoBehaviour {
     // returns true if next chunk must be spawned
     private bool ReadyToSpawnChunk()
     {
+        // if not passed delay time, return false
+        if(Time.time < m_lastSpawnTime + 1f) {
+            return false;
+        }
+
         // y position of Dude
         float dudeY = DudeController.instance.transform.position.y;
 
@@ -113,6 +119,9 @@ public class ChunkManager : MonoBehaviour {
         } else {
             GetLoadedChunk(0).transform.position = Vector3.zero;
         }
+
+        // update last spawn time
+        m_lastSpawnTime = Time.time;
     }
 
     // despawn the top most chunk

@@ -29,6 +29,7 @@ public class ObstacleShooter : StaticObstacle
 
             // instantiate bullet
             MovingObstacle bullet = Instantiate(m_ammo);
+            bullet.transform.parent = transform;
             bullet.transform.position = transform.position;
             bullet.SetVelocity(m_ammoVelocity);
 

@@ -24,6 +24,11 @@ public class BackgroundManager : MonoBehaviour {
         }
     }
 
+    private void Start()
+    {
+        RandomizeBackgroundTheme();
+    }
+
     private void Update()
     {
         if(Input.GetKeyDown(KeyCode.B)) {
@@ -53,7 +58,10 @@ public class BackgroundManager : MonoBehaviour {
     // set background theme
     private void SetBackgroundTheme(BackgroundTheme theme)
     {
-        m_backgrounds[(int)m_currentTheme].SetStatus(false);
+        foreach(BackgroundThemeHolder background in m_backgrounds) {
+            background.SetStatus(false);
+            Debug.Log("x");
+        }
         m_currentTheme = theme;
         m_backgrounds[(int)m_currentTheme].SetStatus(true);
         m_backgrounds[(int)m_currentTheme].InitializePositions();
