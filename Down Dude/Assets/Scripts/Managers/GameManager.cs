@@ -133,6 +133,20 @@ public class GameManager : MonoBehaviour {
     }
     #endregion
 
+    #region Public
+
+    //Return total score
+    public int GetSessionScores ()
+    {
+        return m_score;
+    }
+
+    //Return number of checkpoints reached
+    public int GetSessionCheckpoints ()
+    {
+        return m_checkpointsReached;
+    }
+
     public void StartGame ()
     {
         Time.timeScale = 1f;
@@ -144,10 +158,13 @@ public class GameManager : MonoBehaviour {
         {
             i.SetActive(true);
         }
+
     }
 
     public void RestartGame ()
     {
         SceneManager.LoadScene(SceneManager.GetActiveScene().name);
     }
+
+    #endregion
 }
