@@ -36,12 +36,20 @@ public class PlayerData
             
             //If more skins is added
             m_unlockedSkins = new bool[numberOfSkins]; //Update number of skins
-            
-            //Assign value
-            for (int i = 0; i < numberOfSkins; i++)
+
+            //Unlocked default skin
+            m_unlockedSkins[0] = true;
+
+            //Set other unlocked skin
+            if (numberOfSkins > 1)
             {
-                m_unlockedSkins[i] = player.m_unlockedSkins[i];
+                for (int i = 1; i < numberOfSkins; i++)
+                {
+                    Debug.Log("Skin Index = " + i);
+                    m_unlockedSkins[i] = player.m_unlockedSkins[i];
+                }
             }
+            
 
         }
 
@@ -131,9 +139,18 @@ public static class SaveLoadManager
         {
             BinaryFormatter bf = new BinaryFormatter();
             FileStream stream = new FileStream(path , FileMode.Open);
+            PlayerData loadedData;
 
-            PlayerData loadedData = (PlayerData)bf.Deserialize(stream);
-            stream.Close();
+            //Check if file is empty
+            if (stream.Length == 0)
+            {
+                loadedData = new PlayerData(numberOfSkins);
+            }
+            else
+            {
+                loadedData = (PlayerData)bf.Deserialize(stream);
+                stream.Close();
+            }
 
             return loadedData;
         }

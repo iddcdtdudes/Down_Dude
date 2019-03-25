@@ -8,7 +8,7 @@ public class SkinManager : MonoBehaviour
 
     [SerializeField]private int m_currentSkin;
 
-    private int m_skinsTotal;
+    public int m_skinsTotal;
 
     [SerializeField] private Skin[] m_skins;
 
