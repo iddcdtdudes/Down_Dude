@@ -245,6 +245,7 @@ public class DudeController : MonoBehaviour {
                 m_animator.SetBool("isGrounded", false);
                 break;
             case DudeMode.PARACHUTE:
+                m_animator.SetBool("isGrounded", false);
                 m_animator.SetBool("isParachuting", true);
                 break;
             case DudeMode.IDLE:
@@ -252,6 +253,7 @@ public class DudeController : MonoBehaviour {
                 m_animator.SetBool("isWalking", false);
                 break;
             case DudeMode.WALKING:
+                m_animator.SetBool("isGrounded", true);
                 m_animator.SetBool("isWalking", true);
                 break;
 
