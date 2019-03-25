@@ -6,32 +6,22 @@ public class PlayerDataManager : MonoBehaviour
 {
     public static PlayerDataManager instance;
 
-    private PlayerData m_player;
+    public PlayerData m_player;
 
     // Start is called before the first frame update
     void Start()
     {
         //Load save data
-        if (m_player == null)
-        {
+        //if (m_player == null)
+        //{
             LoadDataLocal();
-        }
+            Debug.Log("Load at start");
+        //}
 
         //Event Subscription
         DudeController.instance.dudeIsKilledEvent += SetAllTimeData;
         DudeController.instance.dudeIsKilledEvent += SaveDataLocal;
-        /*
-        if (LoadDataLocal() == null)
-        {
-            Debug.LogError("Can't find save data. Creating a new one");
-            m_player = new PlayerData(SkinManager.instance.GetSkinsNumber());
-        }
-        else
-        {
-            m_player = new PlayerData(LoadDataLocal(), SkinManager.instance.GetSkinsNumber());
-            Debug.LogError("Loaded Save Data");
-        }
-        */
+
     }
 
     // Update is called once per frame
@@ -52,28 +42,15 @@ public class PlayerDataManager : MonoBehaviour
     public PlayerData GetPlayerData ()
     {
         return m_player;
+        
     }
 
     public void LoadDataLocal()
     {
 
         m_player = SaveLoadManager.LoadData(SkinManager.instance.GetSkinsNumber());
-
-
         Debug.Log("Load Save Data.");
-        /*
-        if (SaveLoadManager.LoadData(SkinManager.instance.GetSkinsNumber()) != null)
-        {
-            PlayerData loadPlayer = SaveLoadManager.LoadData(SkinManager.instance.GetSkinsNumber());
-            Debug.Log("Load Save Files");
-            return loadPlayer;
-        }
-        else
-        {
-            Debug.Log("Created new save file");
-            return new PlayerData(SkinManager.instance.GetSkinsNumber());
-        }
-        */
+
     }
 
     public void SaveDataLocal()
@@ -127,15 +104,6 @@ public class PlayerDataManager : MonoBehaviour
     public int GetCoin ()
     {
         return m_player.m_coins;
-        //if (m_player != null)
-        //{
-        //    return m_player.m_coins;
-        //}
-        //else
-        //{
-        //    Debug.LogError("Null Player");
-        //    return - 100;
-        //}
     }
 
     public int GetAllTimeHS ()
@@ -152,6 +120,20 @@ public class PlayerDataManager : MonoBehaviour
     {
         return m_player.m_unlockedSkins[skinID];
     }
+
+    public int GetUsingSkin ()
+    {
+        return m_player.m_usingSkin;
+    }
+    #endregion
+
+    #region Setter
+
+    public void SetUsingSkin (int usingSkin)
+    {
+        m_player.m_usingSkin = usingSkin;
+    }
+
     #endregion
 
     #region Adjusting Data
