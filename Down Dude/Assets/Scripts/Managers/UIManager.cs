@@ -13,10 +13,15 @@ public class UIManager : MonoBehaviour
     public Text m_allTimeHS;
     public Text m_sessionCP;
     public Text m_allTimeCP;
+    public Text m_achievementCompleted;
 
     [Header("Achievement UI")]
     public GameObject m_achievementPanel;
     public GameObject m_achievementPrefab;
+
+    [Header("Menu")]
+    public Text m_coins;
+    
 
     // Start is called before the first frame update
     void Awake()
@@ -34,7 +39,17 @@ public class UIManager : MonoBehaviour
 
     private void Start()
     {
-        DudeController.instance.dudeIsKilledEvent += UpdateGameOverUI;
+
+        for (int i = 0; i < AchievementManager.instance.m_achievements.Count; i++)
+        {
+            if (PlayerDataManager.instance.m_player.m_unlockedAchievements[i])
+            {
+                AchievementManager.instance.m_achievements[i].SetComplete();
+            }
+        }
+
+        //Update Coins in menu
+        m_coins.text = PlayerDataManager.instance.GetCoin().ToString();
 
         for (int i = 0; i < AchievementManager.instance.m_achievements.Count; i++)
         {
@@ -50,6 +65,11 @@ public class UIManager : MonoBehaviour
         m_allTimeCP.text = PlayerDataManager.instance.GetAllTimeCP().ToString();
     }
 
+    public void UpdateAchiUI (AchievementObject achiData)
+    {
+        m_achievementCompleted.text = achiData.ach_Title;
+    }
+
     public void CreateAchievement (GameObject achParent, Achievement achData)
     {
         GameObject achPrefab = Instantiate(m_achievementPrefab);
@@ -63,17 +83,13 @@ public class UIManager : MonoBehaviour
         achPrefab.transform.localScale = new Vector3(1.0f, 1.0f, 1.0f);
 
         AchievementUI achievementPrefab = achPrefab.GetComponent<AchievementUI>();
-        achievementPrefab.SetTitle(achData.ach_Title);
-        achievementPrefab.SetDescription(achData.ach_Description, achData);
-        achievementPrefab.SetCoin(achData.ach_Reward);
+        achievementPrefab.SetTitle(achData.ach_object.ach_Title);
+        achievementPrefab.SetDescription(achData.ach_object.ach_Description);
+        achievementPrefab.SetCoin(achData.ach_object.ach_Reward);
 
-        if (achData.ach_Complete)
+        if (achData.GetComplete())
         {
-            achievementPrefab.ShowCoin(true);
-        }
-        else
-        {
-            achievementPrefab.ShowCoin(false);
+            achievementPrefab.ShowCoin(true, achData.GetReward());
         }
     }
 

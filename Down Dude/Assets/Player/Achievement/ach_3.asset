@@ -10,16 +10,16 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 78339b6f3b30aaf478c0d4d468b21f02, type: 3}
-  m_Name: ach_2
+  m_Name: ach_3
   m_EditorClassIdentifier: 
-  ach_ID: 2
-  ach_Reward: 5
-  ach_Title: Reach 5 Checkpoints
-  ach_Description: Reach more than 5 checkpoints
+  ach_ID: 3
+  ach_Reward: 10
+  ach_Title: Reach 10 Checkpoints
+  ach_Description: Reach more than 10 checkpoints
   ach_icon: {fileID: 0}
   ach_Trigger:
   - ach_Type: 1
-    ach_Goal: 5
+    ach_Goal: 10
     ach_Progress: 0
     ach_Doned: 0
   ach_Dynamic: 0

@@ -13,136 +13,121 @@ public class PlayerData
     public int m_allTimeHS;
     public int m_allTimeCP;
     public bool[] m_unlockedSkins;
-    //private bool[] m_unlockedAchievements;
+    public bool[] m_unlockedAchievements;
 
     //Constructor for saving and loading
-    public PlayerData (PlayerData player, int numberOfSkins)
+    public PlayerData (PlayerData player, int numberOfSkins, int numberOfAchievements)
     {
         m_coins = player.m_coins;
         m_usingSkin = player.m_usingSkin;
         m_allTimeHS = player.m_allTimeHS;
         m_allTimeCP = player.m_allTimeCP;
 
+        m_unlockedSkins = new bool[numberOfSkins];
+        player.m_unlockedSkins.CopyTo(m_unlockedSkins, 0);
+
+        //Unlocked all default skin
+        m_unlockedSkins[0] = true;
+        m_unlockedSkins[1] = true;
+        m_unlockedSkins[2] = true;
+
+        m_unlockedAchievements = new bool[numberOfAchievements];
+        player.m_unlockedAchievements.CopyTo(m_unlockedAchievements, 0);
+
         //Check if number of skins have changed
-        if (player.m_unlockedSkins.Length == numberOfSkins)
-        {
-            Debug.Log("Number of skin is the same");
+        //if (player.m_unlockedSkins.Length == numberOfSkins)
+        //{
+        //    //Debug.Log("Number of skin is the same");
 
-            m_unlockedSkins = new bool[numberOfSkins];
-            m_unlockedSkins[0] = true;
-            if (m_unlockedSkins.Length > 1)
-            {
-                for (int i = 1; i < player.m_unlockedSkins.Length; i++)
-                {
-                    m_unlockedSkins[i] = true;
-                    //m_unlockedSkins[i] = player.m_unlockedSkins[i];                                               need to be change back
-                }
-            }
+        //    m_unlockedSkins = new bool[numberOfSkins];
+        //    player.m_unlockedSkins.CopyTo(m_unlockedSkins, 0);
+        //    m_unlockedSkins[0] = true;
+        //    m_unlockedSkins[1] = true;
+        //    m_unlockedSkins[2] = true;
+        //    //if (m_unlockedSkins.Length > 1)
+        //    //{
+        //    //    for (int i = 1; i < player.m_unlockedSkins.Length; i++)
+        //    //    {
+        //    //        m_unlockedSkins[i] = true;
+        //    //        //m_unlockedSkins[i] = player.m_unlockedSkins[i];                                               need to be change back
+        //    //    }
+        //    //}
             
-        }
-        else
-        {
-            Debug.Log("Number of skins have changed");
+        //}
+        //else
+        //{
+        //    //Debug.Log("Number of skins have changed");
             
-            //If more skins is added
-            m_unlockedSkins = new bool[numberOfSkins]; //Update number of skins
+        //    //If more skins is added
+        //    m_unlockedSkins = new bool[numberOfSkins]; //Update number of skins
 
-            //Unlocked default skin
-            m_unlockedSkins[0] = true;
+        //    //Copy input player array
+        //    player.m_unlockedSkins.CopyTo(m_unlockedSkins, 0);
 
-            bool[] tmp = new bool[m_unlockedSkins.Length];
+        //    //Unlocked default skin
+        //    m_unlockedSkins[0] = true;
+        //    //bool[] tmp = new bool[m_unlockedSkins.Length];
 
-            m_unlockedSkins.CopyTo(tmp, 0);
+        //    //m_unlockedSkins.CopyTo(tmp, 0);
 
-            m_unlockedSkins = new bool[numberOfSkins];
+        //    //m_unlockedSkins = new bool[numberOfSkins];
 
-            //Set other unlocked skin
-            if (numberOfSkins > 1)
-            {
-                for (int i = 0; i < tmp.Length; i++)
-                {
-                    m_unlockedSkins[i] = tmp[i];
-                }
+        //    ////Set other unlocked skin
+        //    //if (numberOfSkins > 1)
+        //    //{
+        //    //    for (int i = 0; i < tmp.Length; i++)
+        //    //    {
+        //    //        m_unlockedSkins[i] = tmp[i];
+        //    //    }
 
-                for (int j = tmp.Length; j < numberOfSkins; j++)
-                {
-                    //m_unlockedSkins[j] = false;                                                           need to be changed back
-                    m_unlockedSkins[j] = true;
-                }
+        //    //    for (int j = tmp.Length; j < numberOfSkins; j++)
+        //    //    {
+        //    //        //m_unlockedSkins[j] = false;                                                           need to be changed back
+        //    //        m_unlockedSkins[j] = true;
+        //    //    }
+        //    //}
 
-                //for (int i = 1; i < numberOfSkins; i++)
-                //{
-                //    Debug.Log("Skin Index = " + i);
-                //    m_unlockedSkins[i] = player.m_unlockedSkins[i];
-                //}
-            }
+        //}
+
+        //if (player.m_unlockedAchievements.Length == numberOfAchievements)
+        //{
+        //    m_unlockedAchievements = new bool[numberOfAchievements];
+
+        //    player.m_unlockedAchievements.CopyTo(m_unlockedAchievements, 0);
+        //}
+        //else
+        //{
+        //    m_unlockedAchievements = new bool[numberOfAchievements];
+
+        //    player.m_unlockedAchievements.CopyTo(m_unlockedAchievements, 0);
             
 
-        }
+        //}
 
     }
 
     //Constructor creating the object first time
-    public PlayerData (int numberOfSkins)
+    public PlayerData (int numberOfSkins, int numberOfAchievements)
     {
         m_coins = 0;
         m_usingSkin = 0;
         m_allTimeHS = 0;
         m_allTimeCP = 0;
         m_unlockedSkins = new bool[numberOfSkins]; //Defaults is false
-        for (int i = 0; i < numberOfSkins; i++)
-        {
-            m_unlockedSkins[i] = true;
-        }
+        m_unlockedAchievements = new bool[numberOfAchievements];
+
+        m_unlockedSkins[0] = true;
+        m_unlockedSkins[1] = true;
+        m_unlockedSkins[2] = true;
+
+
+        //for (int i = 0; i < numberOfSkins; i++)
+        //{
+        //    m_unlockedSkins[i] = true;
+        //}
 
         //m_unlockedSkins[0] = true; //Setting default skins to true
     }
-
-    /*
-    
-    #region Setter
-
-    public void SetMoney (int money)
-    {
-        m_coins = money;
-    }
-
-    public void SetUnlockedSkin(int skinID)
-    {
-        m_unlockedSkins[skinID] = true;
-    }
-
-    #endregion
-
-    #region Getter
-
-    public int GetMoney ()
-    {
-        return m_coins;
-    }
-
-    public bool GetUnlockedSkins (int SkinID)
-    {
-        return m_unlockedSkins[SkinID];
-    }
-
-    #endregion
-
-    #region Adjusting
-
-    public void AddMoney (int moneyAmount)
-    {
-        m_coins += moneyAmount;
-    }
-
-    public void SubtractMoney (int moneyAmount)
-    {
-        m_coins -= moneyAmount;
-    }
-
-    #endregion
-    
-    */
 }
 
 public static class SaveLoadManager
@@ -150,12 +135,12 @@ public static class SaveLoadManager
 
     static string path = Application.persistentDataPath + "/DownDude.sav";
 
-    public static void SaveData (PlayerData player, int numberOfSkins)
+    public static void SaveData (PlayerData player, int numberOfSkins, int numberOfAchievements)
     {
         BinaryFormatter bf = new BinaryFormatter();
         FileStream stream = new FileStream(path , FileMode.Create);
 
-        PlayerData saveData = new PlayerData(player, numberOfSkins);
+        PlayerData saveData = new PlayerData(player, numberOfSkins, numberOfAchievements);
 
         bf.Serialize(stream, saveData);
         stream.Close();
@@ -165,7 +150,7 @@ public static class SaveLoadManager
     }
 
     //Return deserialized PlayerData or null
-    public static PlayerData LoadData (int numberOfSkins)
+    public static PlayerData LoadData (int numberOfSkins, int numberOfAchievements)
     {
         
         if (File.Exists(path))
@@ -177,7 +162,7 @@ public static class SaveLoadManager
             //Check if file is empty
             if (stream.Length == 0)
             {
-                loadedData = new PlayerData(numberOfSkins);
+                loadedData = new PlayerData(numberOfSkins, numberOfAchievements);
             }
             else
             {
@@ -185,12 +170,12 @@ public static class SaveLoadManager
                 
                 if (loadedData.m_unlockedSkins.Length != numberOfSkins)
                 {
-                    loadedData = new PlayerData(loadedData, numberOfSkins);
-                    Debug.Log("Change skin array");
+                    loadedData = new PlayerData(loadedData, numberOfSkins, numberOfAchievements);
+                    //Debug.Log("Change skin array");
                 }
                 else
                 {
-                    Debug.Log("Same skin array");
+                    //Debug.Log("Same skin array");
                 }
 
                 stream.Close();
@@ -201,7 +186,7 @@ public static class SaveLoadManager
         else
         {
             //Debug.LogError("No save files");
-            return new PlayerData(numberOfSkins);
+            return new PlayerData(numberOfSkins, numberOfAchievements);
         }
 
     }

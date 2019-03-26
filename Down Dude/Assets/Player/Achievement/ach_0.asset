@@ -9,18 +9,17 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 60e601806eefe574b85bdf91942bbe28, type: 3}
+  m_Script: {fileID: 11500000, guid: 78339b6f3b30aaf478c0d4d468b21f02, type: 3}
   m_Name: ach_0
   m_EditorClassIdentifier: 
   ach_ID: 0
-  ach_Reward: 5
-  ach_Title: New High Score
-  ach_Description: Get a new highscore.
+  ach_Reward: 2
+  ach_Title: Reach new high score
+  ach_Description: Get a new all time highscore
   ach_icon: {fileID: 0}
   ach_Trigger:
   - ach_Type: 0
-    ach_Goal: 300
+    ach_Goal: 0
     ach_Progress: 0
     ach_Doned: 0
-  ach_Complete: 0
   ach_Dynamic: 1

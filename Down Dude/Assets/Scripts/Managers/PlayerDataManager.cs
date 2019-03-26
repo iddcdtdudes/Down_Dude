@@ -9,18 +9,12 @@ public class PlayerDataManager : MonoBehaviour
     public PlayerData m_player;
 
     // Start is called before the first frame update
+
     void Start()
     {
         //Load save data
-        //if (m_player == null)
-        //{
-            LoadDataLocal();
-            Debug.Log("Load at start");
-        //}
-
-        //Event Subscription
-        DudeController.instance.dudeIsKilledEvent += SetAllTimeData;
-        DudeController.instance.dudeIsKilledEvent += SaveDataLocal;
+        LoadDataLocal();
+        Debug.Log("Load at start");
 
     }
 
@@ -48,7 +42,8 @@ public class PlayerDataManager : MonoBehaviour
     public void LoadDataLocal()
     {
 
-        m_player = SaveLoadManager.LoadData(SkinManager.instance.GetSkinsNumber());
+        m_player = SaveLoadManager.LoadData(SkinManager.instance.GetSkinsNumber(), AchievementManager.instance.m_achievements.Count);
+        SkinManager.instance.ChangeSkin(m_player.m_usingSkin);
         Debug.Log("Load Save Data.");
 
     }
@@ -57,7 +52,7 @@ public class PlayerDataManager : MonoBehaviour
     {
         if (m_player != null)
         {
-            SaveLoadManager.SaveData(m_player, SkinManager.instance.GetSkinsNumber());
+            SaveLoadManager.SaveData(m_player, SkinManager.instance.GetSkinsNumber(), AchievementManager.instance.m_achievements.Count);
         }
         else
         {
@@ -98,6 +93,17 @@ public class PlayerDataManager : MonoBehaviour
         }
     }
 
+    public void SetUsingSkin(int usingSkin)
+    {
+        m_player.m_usingSkin = usingSkin;
+    }
+
+    public void SetUnlockAch (int achID)
+    {
+        m_player.m_unlockedAchievements[achID] = true;
+    }
+
+
     #endregion
 
     #region Getter
@@ -125,15 +131,6 @@ public class PlayerDataManager : MonoBehaviour
     {
         return m_player.m_usingSkin;
     }
-    #endregion
-
-    #region Setter
-
-    public void SetUsingSkin (int usingSkin)
-    {
-        m_player.m_usingSkin = usingSkin;
-    }
-
     #endregion
 
     #region Adjusting Data

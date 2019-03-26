@@ -11,14 +11,16 @@ public class AchievementUI : MonoBehaviour
 
     [SerializeField] private GameObject m_CoinBtn;
 
+    private int CoinValue;
+
     public void SetTitle (string title)
     {
         m_Title.text = title;
     }
 
-    public void SetDescription (string description, Achievement achData)
+    public void SetDescription (string description)
     {
-        m_Description.text = description + " " + achData.ach_Trigger[0].ach_Progress + "/" + achData.ach_Trigger[0].ach_Goal;
+        m_Description.text = description;
     }
 
     public void SetCoin (int amount)
@@ -26,18 +28,11 @@ public class AchievementUI : MonoBehaviour
         m_Coin.text = amount.ToString();
     }
 
-    public void ShowCoin (bool i)
+    public void ShowCoin (bool i, int reward)
     {
         Button coin = m_CoinBtn.GetComponent<Button>();
-        if (i)
-        {
-            coin.interactable = true;
-        }
-        else
-        {
-            coin.interactable = false;
-        }
-
+        coin.onClick.AddListener(delegate { PlayerDataManager.instance.AddCoins(reward);  });
+        coin.interactable = true;
     }
 
 }

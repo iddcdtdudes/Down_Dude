@@ -2,31 +2,30 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-[CreateAssetMenu(fileName = "ach_")]
-public class Achievement : ScriptableObject
+[System.Serializable]
+public class Achievement
 {
-    //For UI
-    public int ach_ID;
-    public int ach_Reward;
-    public string ach_Title;
-    public string ach_Description;
-    public Sprite ach_icon;
+    public AchievementObject ach_object;
 
-    //For checking conditions of the achievement
-    public TriggerTracker[] ach_Trigger;
-    public bool ach_Complete;
-    public bool ach_Dynamic;
+    public bool ach_complete;
 
-    public void GetReward ()
+    public int GetReward()
     {
-        if (ach_Complete)
-        {
-            PlayerDataManager.instance.AddCoins(ach_Reward);
-        }
-        else
-        {
-            Debug.Log("Achievement Not Completed");
-        }
+        return ach_object.ach_Reward;
     }
 
+    public void SetComplete ()
+    {
+        ach_complete = true;
+    }
+
+    public void ResetComplete ()
+    {
+        ach_complete = false;
+    }
+
+    public bool GetComplete ()
+    {
+        return ach_complete;
+    }
 }

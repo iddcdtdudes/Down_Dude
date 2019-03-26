@@ -11,6 +11,8 @@ public class Skin
 
     public string m_name;
 
+    public bool m_unlock;
+
     public AnimatorOverrideController m_skinIDAnimator;
 
 }

@@ -8,13 +8,11 @@ public class SkinManager : MonoBehaviour
 
     [SerializeField]private int m_currentSkin;
 
-    private int m_chooseSkin;
-
     //[SerializeField]public int m_skinsTotal;
 
     [SerializeField] private Skin[] m_skins;
 
-    private Animator m_dudeAnimator;
+    [SerializeField]private Animator m_dudeAnimator;
 
     private void Awake()
     {
@@ -31,18 +29,11 @@ public class SkinManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        m_dudeAnimator = DudeController.instance.GetComponentInChildren<Animator>();
+        //m_dudeAnimator = DudeController.instance.GetComponentInChildren<Animator>();
         m_currentSkin = PlayerDataManager.instance.GetUsingSkin();
-
-        ChangeSkin(m_currentSkin);
         //OverrideAnimator(m_currentSkin);
 
         Debug.Log("Current skin = " + m_currentSkin);
-    }
-
-    private void LateUpdate()
-    {
-        //OverrideAnimator();
     }
 
     private void OverrideAnimator (int skinID)
@@ -72,11 +63,8 @@ public class SkinManager : MonoBehaviour
         {
             if (PlayerDataManager.instance.GetSkin(skinID))
             {
-                    m_currentSkin = skinID;
-                    PlayerDataManager.instance.SetUsingSkin(m_chooseSkin);
-
-                //m_chooseSkin = skinID;
-                //PlayerDataManager.instance.SetUsingSkin(m_currentSkin);
+                m_currentSkin = skinID;
+                PlayerDataManager.instance.SetUsingSkin(m_currentSkin);
                 OverrideAnimator(m_currentSkin);
             }
         }

@@ -59,6 +59,8 @@ public class GameManager : MonoBehaviour {
 
         // event subscription
         DudeController.instance.reachCheckpointEvent += OnDudeReachCheckpoint;
+        DudeController.instance.reachCheckpointEvent += AchievementManager.instance.UpdateAchProgress;
+        DudeController.instance.dudeIsKilledEvent += UIManager.instance.UpdateGameOverUI;
         DudeController.instance.dudeIsKilledEvent += GameOverUI;
         DudeController.instance.dudeIsKilledEvent += PlayerDataManager.instance.SetAllTimeData;
         DudeController.instance.dudeIsKilledEvent += PlayerDataManager.instance.SaveDataLocal;
