@@ -9,6 +9,7 @@ using System.IO;
 public class PlayerData
 {
     public int m_coins;
+    public int m_usingSkin;
     public int m_allTimeHS;
     public int m_allTimeCP;
     public bool[] m_unlockedSkins;
@@ -18,17 +19,26 @@ public class PlayerData
     public PlayerData (PlayerData player, int numberOfSkins)
     {
         m_coins = player.m_coins;
+        m_usingSkin = player.m_usingSkin;
         m_allTimeHS = player.m_allTimeHS;
         m_allTimeCP = player.m_allTimeCP;
 
         //Check if number of skins have changed
         if (player.m_unlockedSkins.Length == numberOfSkins)
         {
-            for (int i = 0; i < player.m_unlockedSkins.Length; i++)
+            Debug.Log("Number of skin is the same");
+
+            m_unlockedSkins = new bool[numberOfSkins];
+            m_unlockedSkins[0] = true;
+            if (m_unlockedSkins.Length > 1)
             {
-                m_unlockedSkins = new bool[numberOfSkins];
-                m_unlockedSkins[i] = player.m_unlockedSkins[i];
+                for (int i = 1; i < player.m_unlockedSkins.Length; i++)
+                {
+                    m_unlockedSkins[i] = true;
+                    //m_unlockedSkins[i] = player.m_unlockedSkins[i];                                               need to be change back
+                }
             }
+            
         }
         else
         {
@@ -40,14 +50,31 @@ public class PlayerData
             //Unlocked default skin
             m_unlockedSkins[0] = true;
 
+            bool[] tmp = new bool[m_unlockedSkins.Length];
+
+            m_unlockedSkins.CopyTo(tmp, 0);
+
+            m_unlockedSkins = new bool[numberOfSkins];
+
             //Set other unlocked skin
             if (numberOfSkins > 1)
             {
-                for (int i = 1; i < numberOfSkins; i++)
+                for (int i = 0; i < tmp.Length; i++)
                 {
-                    Debug.Log("Skin Index = " + i);
-                    m_unlockedSkins[i] = player.m_unlockedSkins[i];
+                    m_unlockedSkins[i] = tmp[i];
                 }
+
+                for (int j = tmp.Length; j < numberOfSkins; j++)
+                {
+                    //m_unlockedSkins[j] = false;                                                           need to be changed back
+                    m_unlockedSkins[j] = true;
+                }
+
+                //for (int i = 1; i < numberOfSkins; i++)
+                //{
+                //    Debug.Log("Skin Index = " + i);
+                //    m_unlockedSkins[i] = player.m_unlockedSkins[i];
+                //}
             }
             
 
@@ -59,9 +86,15 @@ public class PlayerData
     public PlayerData (int numberOfSkins)
     {
         m_coins = 0;
+        m_usingSkin = 0;
         m_allTimeHS = 0;
         m_allTimeCP = 0;
         m_unlockedSkins = new bool[numberOfSkins]; //Defaults is false
+        for (int i = 0; i < numberOfSkins; i++)
+        {
+            m_unlockedSkins[i] = true;
+        }
+
         //m_unlockedSkins[0] = true; //Setting default skins to true
     }
 
@@ -115,7 +148,7 @@ public class PlayerData
 public static class SaveLoadManager
 {
 
-    static string path = Application.persistentDataPath + "/DownDude.save";
+    static string path = Application.persistentDataPath + "/DownDude.sav";
 
     public static void SaveData (PlayerData player, int numberOfSkins)
     {
@@ -149,6 +182,17 @@ public static class SaveLoadManager
             else
             {
                 loadedData = (PlayerData)bf.Deserialize(stream);
+                
+                if (loadedData.m_unlockedSkins.Length != numberOfSkins)
+                {
+                    loadedData = new PlayerData(loadedData, numberOfSkins);
+                    Debug.Log("Change skin array");
+                }
+                else
+                {
+                    Debug.Log("Same skin array");
+                }
+
                 stream.Close();
             }
 
