@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.37311953, g: 0.38074014, b: 0.3587274, a: 1}
+  m_IndirectSpecularColor: {r: 0.37311992, g: 0.38074034, b: 0.35872713, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -490,8 +490,8 @@ MonoBehaviour:
   - {fileID: 1752272978506991166, guid: 720a78f2718c094459a184f10fae2800, type: 3}
   m_loadedChunksLimit: 3
   spawnOffset: 5
-  m_chunkDebugger: 0
-  m_chunkToDebug: 4
+  m_chunkDebugger: 1
+  m_chunkToDebug: 0
 --- !u!4 &269897184
 Transform:
   m_ObjectHideFlags: 0
@@ -923,7 +923,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 500}
+  m_AnchoredPosition: {x: 0, y: 600}
   m_SizeDelta: {x: 160, y: 30}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &523472954
@@ -2349,6 +2349,7 @@ MonoBehaviour:
   - m_bgLayer0: {fileID: 600145230}
     m_bgLayer1: {fileID: 793875540}
     m_bgLayer2: {fileID: 10853319}
+  m_checkpointsUntilChange: 4
 --- !u!114 &1762155502 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 6378587822471993111, guid: b3b6093bee101354eb43ed84815ffc19,
@@ -2925,9 +2926,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 60737463a279b4541b87a1ccb079baa6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_yOffsetTargetJetpack: 0.1
-  m_yOffsetTargetParachute: -0.3
-  m_yOffsetSmooth: 0.03
+  m_yOffsetTargetJetpack: -1
+  m_yOffsetTargetParachute: -0.4
+  m_yOffsetSmooth: 0.1
 --- !u!1 &1912121183
 GameObject:
   m_ObjectHideFlags: 0
@@ -3178,19 +3179,7 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 6378587822471993111, guid: b3b6093bee101354eb43ed84815ffc19,
-        type: 3}
-      propertyPath: m_FontData.m_Font
-      value: 
-      objectReference: {fileID: 12800000, guid: f81d518bdbcb97a45bc08e9844b055a2,
-        type: 3}
     - target: {fileID: 6378587822771435367, guid: b3b6093bee101354eb43ed84815ffc19,
-        type: 3}
-      propertyPath: m_FontData.m_Font
-      value: 
-      objectReference: {fileID: 12800000, guid: f81d518bdbcb97a45bc08e9844b055a2,
-        type: 3}
-    - target: {fileID: 6378587822618695250, guid: b3b6093bee101354eb43ed84815ffc19,
         type: 3}
       propertyPath: m_FontData.m_Font
       value: 
@@ -3301,6 +3290,18 @@ PrefabInstance:
       propertyPath: m_Pivot.y
       value: 0.5
       objectReference: {fileID: 0}
+    - target: {fileID: 6378587822618695250, guid: b3b6093bee101354eb43ed84815ffc19,
+        type: 3}
+      propertyPath: m_FontData.m_Font
+      value: 
+      objectReference: {fileID: 12800000, guid: f81d518bdbcb97a45bc08e9844b055a2,
+        type: 3}
+    - target: {fileID: 6378587822471993111, guid: b3b6093bee101354eb43ed84815ffc19,
+        type: 3}
+      propertyPath: m_FontData.m_Font
+      value: 
+      objectReference: {fileID: 12800000, guid: f81d518bdbcb97a45bc08e9844b055a2,
+        type: 3}
     - target: {fileID: 6378587821913908032, guid: b3b6093bee101354eb43ed84815ffc19,
         type: 3}
       propertyPath: m_FontData.m_Font
@@ -3814,6 +3815,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: SkinManager
       objectReference: {fileID: 0}
+    - target: {fileID: 3962270912111442817, guid: 39686a6be829197479cdbab2e565384b,
+        type: 3}
+      propertyPath: m_skinsTotal
+      value: 3
+      objectReference: {fileID: 0}
     - target: {fileID: 3962270912111442818, guid: 39686a6be829197479cdbab2e565384b,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -3868,11 +3874,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3962270912111442817, guid: 39686a6be829197479cdbab2e565384b,
-        type: 3}
-      propertyPath: m_skinsTotal
-      value: 3
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 39686a6be829197479cdbab2e565384b, type: 3}

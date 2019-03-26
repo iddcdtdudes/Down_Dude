@@ -18,20 +18,41 @@ public class BackgroundLooper : MonoBehaviour {
 
     [SerializeField] private float m_backgroundHeight;  // height of background sprite
 
+    private float m_lastCamY;
+
+    private bool m_firstActivated;
 
     private void Start()
     {
         // initialize sprite positions
         InitializePosition();
+
+        // initialize cam y
+        m_lastCamY = CameraController.instance.transform.position.y;
+
+        m_firstActivated = true;
     }
 
     private void FixedUpdate()
     {
         if(m_parallax > 0.0f) {
+
+            // update camera velocity
+            float camY = CameraController.instance.transform.position.y;
+            float camYVel;
+            if(!m_firstActivated) {
+                camYVel = camY - m_lastCamY;
+                m_lastCamY = camY;
+            } else {
+                m_lastCamY = camY;
+                camYVel = 0f;
+            }
+
             // parallax
-            float dudeYVel = DudeController.instance.GetComponent<Rigidbody2D>().velocity.y;
-            m_otherBackground.transform.position = new Vector3(0.0f, m_otherBackground.transform.position.y + Time.deltaTime * (1 - m_parallax) * dudeYVel, 0.0f);
-            m_nextBackground.transform.position = new Vector3(0.0f, m_nextBackground.transform.position.y +  Time.deltaTime * (1 - m_parallax) * dudeYVel, 0.0f);
+            //Debug.Log("before " + m_otherBackground.transform.position.y + " " + camYVel);
+            m_otherBackground.transform.position = new Vector3(0.0f, m_otherBackground.transform.position.y + Time.deltaTime * (1 - m_parallax) * 30 * camYVel, 0.0f);
+            m_nextBackground.transform.position = new Vector3(0.0f, m_nextBackground.transform.position.y +  Time.deltaTime * (1 - m_parallax) * 30 * camYVel, 0.0f);
+            //Debug.Log("after  " + m_otherBackground.transform.position.y);
         }
         
     }
@@ -55,7 +76,7 @@ public class BackgroundLooper : MonoBehaviour {
 
     public void InitializePosition()
     {
-        m_otherBackground.transform.position = new Vector3(0.0f, DudeController.instance.transform.position.y, 0.0f);
-        m_nextBackground.transform.position = new Vector3(0.0f, DudeController.instance.transform.position.y - m_backgroundHeight, 0.0f);
+        m_otherBackground.transform.position = new Vector3(0.0f, CameraController.instance.transform.position.y, 0.0f);
+        m_nextBackground.transform.position = new Vector3(0.0f, CameraController.instance.transform.position.y - m_backgroundHeight, 0.0f);
     }
 }
