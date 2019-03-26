@@ -14,6 +14,9 @@ public class BackgroundManager : MonoBehaviour {
 
     private BackgroundTheme m_currentTheme;     // current background theme
 
+    [SerializeField] private int m_checkpointsUntilChange;      // checkpoints count until theme change
+    private int m_checkpointsCount;                             // checkpoints count since last background change
+
     private void Awake()
     {
         // initialize singleton instance
@@ -26,7 +29,11 @@ public class BackgroundManager : MonoBehaviour {
 
     private void Start()
     {
-        RandomizeBackgroundTheme();
+        DudeController.instance.reachCheckpointEvent += OnDudeReachCheckpoint;
+
+        BackgroundTheme newTheme = (BackgroundTheme)Random.Range(0, m_backgrounds.Count);
+        SetBackgroundTheme(newTheme);
+        m_backgrounds[(int)m_currentTheme].InitializePositions();
     }
 
     private void Update()
@@ -60,15 +67,23 @@ public class BackgroundManager : MonoBehaviour {
     {
         foreach(BackgroundThemeHolder background in m_backgrounds) {
             background.SetStatus(false);
-            Debug.Log("x");
         }
         m_currentTheme = theme;
         m_backgrounds[(int)m_currentTheme].SetStatus(true);
         m_backgrounds[(int)m_currentTheme].InitializePositions();
     }
+
+    private void OnDudeReachCheckpoint()
+    {
+        m_checkpointsCount++;
+        if(m_checkpointsCount >= m_checkpointsUntilChange) {
+            RandomizeBackgroundTheme();
+            m_checkpointsCount = 0;
+        }
+    }
 }
 
-public enum BackgroundTheme { BLUE = 0, RED = 1 };
+public enum BackgroundTheme { CAVE = 0, FOREST = 1 };
 
 // Background Theme
 //

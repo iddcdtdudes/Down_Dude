@@ -398,7 +398,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_chunkIndex: 0
-  m_timeLimit: 20
+  m_timeLimit: 5
   m_chunkTop: {fileID: 1309469440693432}
   m_chunkButtom: {fileID: 1284440132551990}
 --- !u!1 &1910030281444920

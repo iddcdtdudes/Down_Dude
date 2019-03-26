@@ -136,6 +136,7 @@ public class ChunkManager : MonoBehaviour {
     public float GetNewChunkTimeLimit()
     {
         if(m_loadedChunks.Count > 0) {
+            Debug.Log(GetChunkIndex(0));
             return m_chunkList[GetChunkIndex(0)].GetTimeLimit();
         } else {
             return m_chunkList[m_firstChunkIndex].GetTimeLimit();

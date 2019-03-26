@@ -24,7 +24,6 @@ public class GameManager : MonoBehaviour {
 
     [SerializeField] private Text checkpointsText;      // checkpoints text UI
     private int m_checkpointsReached;                   // checkpoints reached
-    private float m_lastCheckpointTime;
 
     [SerializeField] private Text scoreText;            // score text UI
     private int m_score;                                // game score
@@ -75,9 +74,6 @@ public class GameManager : MonoBehaviour {
         timerText.text = m_timer.ToString("F1");
         checkpointsText.text = m_checkpointsReached.ToString();
         scoreText.text = m_score.ToString();
-
-        // intialize last checkpoint time
-        m_lastCheckpointTime = Time.time;
     }
 
     #region Update
@@ -126,10 +122,6 @@ public class GameManager : MonoBehaviour {
     // calls upon dude reaching checkpoint event
     private void OnDudeReachCheckpoint()
     {
-        if(Time.time < m_lastCheckpointTime + 1f) {
-            return;
-        }
-
         // increment Checkpoint
         incrementCheckpoints();
 
@@ -137,13 +129,9 @@ public class GameManager : MonoBehaviour {
         float chunkTimeLimit = ChunkManager.instance.GetChunkList()[ChunkManager.instance.GetChunkIndex(1)].GetTimeLimit();
         float timeScale = Mathf.Clamp01((m_timer / chunkTimeLimit) / m_scoreMultiplierCeiling);
         AddScore(m_scoreBaseline + (int)(timeScale * m_timeScaleMultiplier));
-        
+
         // set timer to chunk's time limit
         m_timer = ChunkManager.instance.GetNewChunkTimeLimit();
-
-        // update last checkpoint time
-        m_lastCheckpointTime = Time.time;
-
     }
     #endregion
 
