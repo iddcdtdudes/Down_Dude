@@ -39,6 +39,8 @@ public class DudeController : MonoBehaviour {
     //Animation
     [SerializeField] private Animator m_animator;
 
+    private float m_lastCheckpointTime;
+
     private void Awake()
     {
         // initialize singleton instance
@@ -52,6 +54,7 @@ public class DudeController : MonoBehaviour {
     private void Start()
     {
         m_dudeIsOnGround = false;
+        m_lastCheckpointTime = Time.time;
     }
 
     #region Update
@@ -146,11 +149,12 @@ public class DudeController : MonoBehaviour {
         }
 
         // invoke checkpoint event
-        if (collision.CompareTag("Checkpoint"))
+        if (collision.CompareTag("Checkpoint") && Time.time >= m_lastCheckpointTime + 1f)
         {
             if(reachCheckpointEvent != null) {
                 reachCheckpointEvent.Invoke();
             }
+            m_lastCheckpointTime = Time.time;
         }
     }
 
@@ -245,6 +249,7 @@ public class DudeController : MonoBehaviour {
                 m_animator.SetBool("isGrounded", false);
                 break;
             case DudeMode.PARACHUTE:
+                m_animator.SetBool("isGrounded", false);
                 m_animator.SetBool("isParachuting", true);
                 break;
             case DudeMode.IDLE:
@@ -252,6 +257,7 @@ public class DudeController : MonoBehaviour {
                 m_animator.SetBool("isWalking", false);
                 break;
             case DudeMode.WALKING:
+                m_animator.SetBool("isGrounded", true);
                 m_animator.SetBool("isWalking", true);
                 break;
 
