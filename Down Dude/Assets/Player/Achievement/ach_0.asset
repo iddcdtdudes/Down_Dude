@@ -1,0 +1,26 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 60e601806eefe574b85bdf91942bbe28, type: 3}
+  m_Name: ach_
+  m_EditorClassIdentifier: 
+  ach_ID: 0
+  ach_Reward: 5
+  ach_Title: New High Score
+  ach_Description: Get a new highscore.
+  ach_icon: {fileID: 0}
+  ach_Trigger:
+  - ach_Type: 0
+    ach_Goal: 0
+    ach_Progress: 0
+    ach_Doned: 1
+  ach_Complete: 1
+  ach_Dynamic: 1

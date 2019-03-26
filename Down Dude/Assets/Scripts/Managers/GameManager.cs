@@ -61,6 +61,9 @@ public class GameManager : MonoBehaviour {
         // event subscription
         DudeController.instance.reachCheckpointEvent += OnDudeReachCheckpoint;
         DudeController.instance.dudeIsKilledEvent += GameOverUI;
+        DudeController.instance.dudeIsKilledEvent += PlayerDataManager.instance.SetAllTimeData;
+        DudeController.instance.dudeIsKilledEvent += PlayerDataManager.instance.SaveDataLocal;
+        DudeController.instance.dudeIsKilledEvent += AchievementManager.instance.ResetAchievement;
 
         // initialize variables
         m_timer = ChunkManager.instance.GetNewChunkTimeLimit();
