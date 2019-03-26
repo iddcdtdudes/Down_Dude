@@ -126,7 +126,7 @@ public class GameManager : MonoBehaviour {
         float chunkTimeLimit = ChunkManager.instance.GetChunkList()[ChunkManager.instance.GetChunkIndex(1)].GetTimeLimit();
         float timeScale = Mathf.Clamp01((m_timer / chunkTimeLimit) / m_scoreMultiplierCeiling);
         AddScore(m_scoreBaseline + (int)(timeScale * m_timeScaleMultiplier));
-        
+
         // set timer to chunk's time limit
         m_timer = ChunkManager.instance.GetNewChunkTimeLimit();
     }

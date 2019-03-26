@@ -13,12 +13,14 @@ public class TogglingPart : StaticObstacle {
     [SerializeField] private float m_upTime;                    // active time period
     [SerializeField] private float m_downTime;                  // inactive time period
 
+    [SerializeField] private bool m_startState;
+
     private float m_lastToggleTime;
 
     private void Start()
     {
-        // activate toggling object
-        m_togglingObject.SetActive(true);
+        // initialize state
+        m_togglingObject.SetActive(m_startState);
     }
 
     private void Update()

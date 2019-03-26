@@ -488,9 +488,15 @@ MonoBehaviour:
   - {fileID: 5560199365362037056, guid: a112dd7fe93c77f49916603cdb0925d4, type: 3}
   - {fileID: 2321315405140550107, guid: fcdff05596301da4786f8beaba81a0ef, type: 3}
   - {fileID: 1752272978506991166, guid: 720a78f2718c094459a184f10fae2800, type: 3}
+  - {fileID: 229420178990373260, guid: cbf15398b645b454a909184b885d5371, type: 3}
+  - {fileID: 884165650938709247, guid: 6123c2fbabaaa2449aeab8b050a79453, type: 3}
+  - {fileID: 2528594777377585746, guid: 10aaea3dcc1f02a4ab6e5abd899558b9, type: 3}
+  - {fileID: 8168960146768436595, guid: de8f2cbca04888949838eeeb7d610379, type: 3}
+  - {fileID: 9122243151607115728, guid: 05bb8f4611d86254080bad71e33a24a9, type: 3}
+  - {fileID: 3583265569215170601, guid: f7fdc65e01d04d344b6fcb1253151922, type: 3}
   m_loadedChunksLimit: 3
   spawnOffset: 5
-  m_chunkDebugger: 1
+  m_chunkDebugger: 0
   m_chunkToDebug: 0
 --- !u!4 &269897184
 Transform:
