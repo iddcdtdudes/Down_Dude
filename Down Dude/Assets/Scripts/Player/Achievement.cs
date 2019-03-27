@@ -9,6 +9,8 @@ public class Achievement
 
     public bool ach_complete;
 
+    public bool ach_rewardClaimed;
+
     public int GetReward()
     {
         return ach_object.ach_Reward;
@@ -27,5 +29,15 @@ public class Achievement
     public bool GetComplete ()
     {
         return ach_complete;
+    }
+
+    public void SetRewardClaimed ()
+    {
+        ach_rewardClaimed = true;
+    }
+
+    public void ResetRewardClaimed ()
+    {
+        ach_rewardClaimed = false;
     }
 }

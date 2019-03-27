@@ -64,7 +64,7 @@ public class GameManager : MonoBehaviour {
         DudeController.instance.dudeIsKilledEvent += GameOverUI;
         DudeController.instance.dudeIsKilledEvent += PlayerDataManager.instance.SetAllTimeData;
         DudeController.instance.dudeIsKilledEvent += PlayerDataManager.instance.SaveDataLocal;
-        DudeController.instance.dudeIsKilledEvent += AchievementManager.instance.ResetAchievement;
+        //DudeController.instance.dudeIsKilledEvent += AchievementManager.instance.ResetAchievement;
 
         // initialize variables
         m_timer = ChunkManager.instance.GetNewChunkTimeLimit();

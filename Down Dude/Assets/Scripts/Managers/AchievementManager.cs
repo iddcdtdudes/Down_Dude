@@ -82,7 +82,7 @@ public class AchievementManager : MonoBehaviour
                         //Check if achievement is complete
                         if (AchCheckComplete(m_achievements[i].ach_object))
                         {
-                            m_achievements[i].SetComplete();
+                            //m_achievements[i].SetComplete();
                             PlayerDataManager.instance.SetUnlockAch(i);
 
                             //Update achievement UI in Gameover UI
@@ -120,30 +120,33 @@ public class AchievementManager : MonoBehaviour
     #endregion
 
     //For resetting the dynamic achievement
-    public void ResetAchievement()
+    public void ResetAchievement(Achievement achData)
     {
         //Reset Dynamic Achievement
-        for (int i = 0; i < m_achievements.Count; i++)
-        {
+        //for (int i = 0; i < m_achievements.Count; i++)
+        //{
             //Check if the achievement is dynamic
-            if (m_achievements[i].ach_object.ach_Dynamic == true)
+            if (achData.ach_object.ach_Dynamic == true)
             {
                 //---------------------------------Dynamic Achievement--------------------------------------------------//
                 //Check if the dynamic achievement is completed
-                if (m_achievements[i].GetComplete())
+                if (achData.GetComplete())
                 {
                     //Reset the dynamic achievement
-                    m_achievements[i].ResetComplete();
-                    for (int j = 0; j < m_achievements[i].ach_object.ach_Trigger.Length; j++)
+                    achData.ResetComplete();
+                    achData.ResetRewardClaimed();
+                    PlayerDataManager.instance.ResetUnlockAch(achData.ach_object.ach_ID);
+
+                    for (int j = 0; j < achData.ach_object.ach_Trigger.Length; j++)
                     {
-                        m_achievements[i].ach_object.ach_Trigger[j].ach_Doned = false;
-                        switch (m_achievements[i].ach_object.ach_Trigger[j].ach_Type)
+                        achData.ach_object.ach_Trigger[j].ach_Doned = false;
+                        switch (achData.ach_object.ach_Trigger[j].ach_Type)
                         {
                             case TRACKER.SCORE:
-                                m_achievements[i].ach_object.ach_Trigger[j].ach_Goal = PlayerDataManager.instance.GetAllTimeHS();
+                                achData.ach_object.ach_Trigger[j].ach_Goal = PlayerDataManager.instance.GetAllTimeHS();
                                 break;
                             case TRACKER.CHECKPOINT:
-                                m_achievements[i].ach_object.ach_Trigger[j].ach_Goal = PlayerDataManager.instance.GetAllTimeCP();
+                                achData.ach_object.ach_Trigger[j].ach_Goal = PlayerDataManager.instance.GetAllTimeCP();
                                 break;
                         }
                     }
@@ -151,22 +154,39 @@ public class AchievementManager : MonoBehaviour
 
             }
             ////---------------------------------Static Achievement--------------------------------------------------//
-            else
-            {
-                if (m_achievements[i].GetComplete() == false)
-                {
-                    for (int j = 0; j < m_achievements[i].ach_object.ach_Trigger.Length; j++)
-                    {
-                        m_achievements[i].ach_object.ach_Trigger[j].ach_Doned = false;
-                        m_achievements[i].ach_object.ach_Trigger[j].ach_Progress = 0;
-                    }
-                }
-            }
-        }
+            //else
+            //{
+            //    if (m_achievements[i].GetComplete() == false)
+            //    {
+            //        for (int j = 0; j < m_achievements[i].ach_object.ach_Trigger.Length; j++)
+            //        {
+            //            m_achievements[i].ach_object.ach_Trigger[j].ach_Doned = false;
+            //            m_achievements[i].ach_object.ach_Trigger[j].ach_Progress = 0;
+            //        }
+            //    }
+            //}
+       // }
 
     }
 
-
+    public void LoadFromPlayerdata()
+    {
+        for (int i = 0; i < m_achievements.Count; i++)
+        {
+            if (PlayerDataManager.instance.m_player.m_unlockedAchievements[i])
+            {
+                if (m_achievements[i].ach_object.ach_Dynamic == false)
+                {
+                    m_achievements[i].SetComplete();
+                    m_achievements[i].SetRewardClaimed();
+                }
+                else
+                {
+                    m_achievements[i].SetComplete();
+                }
+            }
+        }
+    }
 }
 
 [System.Serializable]

@@ -103,6 +103,11 @@ public class PlayerDataManager : MonoBehaviour
         m_player.m_unlockedAchievements[achID] = true;
     }
 
+    public void ResetUnlockAch (int achID)
+    {
+        m_player.m_unlockedAchievements[achID] = false;
+    }
+
 
     #endregion
 

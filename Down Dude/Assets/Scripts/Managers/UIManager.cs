@@ -39,23 +39,28 @@ public class UIManager : MonoBehaviour
 
     private void Start()
     {
-
-        for (int i = 0; i < AchievementManager.instance.m_achievements.Count; i++)
-        {
-            if (PlayerDataManager.instance.m_player.m_unlockedAchievements[i])
-            {
-                AchievementManager.instance.m_achievements[i].SetComplete();
-            }
-        }
+        //for (int i = 0; i < AchievementManager.instance.m_achievements.Count; i++)
+        //{
+        //    if (PlayerDataManager.instance.m_player.m_unlockedAchievements[i])
+        //    {
+        //        AchievementManager.instance.m_achievements[i].SetComplete();
+        //    }
+        //}
+        AchievementManager.instance.LoadFromPlayerdata();
 
         //Update Coins in menu
         m_coins.text = PlayerDataManager.instance.GetCoin().ToString();
 
+        //Create each achievement list in UI
         for (int i = 0; i < AchievementManager.instance.m_achievements.Count; i++)
         {
             CreateAchievement(m_achievementPanel, AchievementManager.instance.m_achievements[i]);
         }
+
+        //AchievementManager.instance.ResetAchievement();
     }
+
+    
 
     public void UpdateGameOverUI()
     {
@@ -89,8 +94,12 @@ public class UIManager : MonoBehaviour
 
         if (achData.GetComplete())
         {
-            achievementPrefab.ShowCoin(true, achData.GetReward());
+            achievementPrefab.ShowCoin(achData.GetReward(), achData);
         }
+        //else
+        //{
+        //    achievementPrefab.HideCoin();
+        //}
     }
 
 }
