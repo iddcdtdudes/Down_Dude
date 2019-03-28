@@ -19,7 +19,7 @@ MonoBehaviour:
   ach_icon: {fileID: 0}
   ach_Trigger:
   - ach_Type: 0
-    ach_Goal: 0
+    ach_Goal: 5102
     ach_Progress: 0
     ach_Doned: 0
   ach_Dynamic: 1

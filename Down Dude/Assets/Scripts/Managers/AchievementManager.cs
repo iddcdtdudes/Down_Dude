@@ -10,9 +10,9 @@ public class AchievementManager : MonoBehaviour
 {
     public static AchievementManager instance;
 
-    [SerializeField]public List<Achievement> m_achievements;
+    [SerializeField]public List<AchievementObject> m_achievements;
 
-    public event Action achiCompleteEvent;
+    public event Action AchiCompleteEvent;
 
     private void Awake()
     {
@@ -25,83 +25,12 @@ public class AchievementManager : MonoBehaviour
         }
     }
 
-    // Start is called before the first frame update
-    void Start()
+    private void Start()
     {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        ////Check through each achievement
-        //for (int i = 0; i < m_achievements.Count; i++)
-        //{
-        //    //Check if achievement have been completed
-        //    if (m_achievements[i].ach_Complete == false)
-        //    {
-        //        //Update the progress and complete the achievement if goal is met
-        //        UpdateAchProgress(m_achievements[i]);
-        //    }
-        //}
 
     }
-
 
     #region Private
-    //For pulling out achievement that are done
-    private void PullAch (int achID)
-    {
-        m_achievements.RemoveAt(achID);
-    }
-
-    //Call in update?
-    public void UpdateAchProgress ()
-    {
-        for (int i = 0; i < m_achievements.Count; i++)
-        {
-            if (m_achievements[i].GetComplete() == false)
-            {
-                for (int j = 0; j < m_achievements[i].ach_object.ach_Trigger.Length; j++)
-                {
-                    switch (m_achievements[i].ach_object.ach_Trigger[j].ach_Type)
-                    {
-                        case TRACKER.CHECKPOINT:
-                            m_achievements[i].ach_object.ach_Trigger[j].ach_Progress = GameManager.instance.GetSessionCheckpoints();
-                            break;
-                        case TRACKER.SCORE:
-                            m_achievements[i].ach_object.ach_Trigger[j].ach_Progress = GameManager.instance.GetSessionScores();
-                            break;
-                    }
-
-                    //Check if progress is done
-                    if (m_achievements[i].ach_object.ach_Trigger[j].ach_Progress > m_achievements[i].ach_object.ach_Trigger[j].ach_Goal)
-                    {
-                        m_achievements[i].ach_object.ach_Trigger[j].ach_Doned = true;
-
-                        //Check if achievement is complete
-                        if (AchCheckComplete(m_achievements[i].ach_object))
-                        {
-                            //m_achievements[i].SetComplete();
-                            PlayerDataManager.instance.SetUnlockAch(i);
-
-                            //Update achievement UI in Gameover UI
-                            UIManager.instance.UpdateAchiUI(m_achievements[i].ach_object);
-
-                            if (achiCompleteEvent != null)
-                            {
-                                achiCompleteEvent.Invoke();
-                            }
-                        }
-                    }
-                    else
-                    {
-                        Debug.Log("Progress is not met with goal");
-                    }
-                }
-            }
-        }
-    }
 
     //For checking all the trigger in achievement
     private bool AchCheckComplete (AchievementObject achToCheck)
@@ -119,74 +48,111 @@ public class AchievementManager : MonoBehaviour
 
     #endregion
 
-    //For resetting the dynamic achievement
-    public void ResetAchievement(Achievement achData)
+    #region Public
+
+    public void ResetAchievementGoal ()
     {
-        //Reset Dynamic Achievement
-        //for (int i = 0; i < m_achievements.Count; i++)
-        //{
-            //Check if the achievement is dynamic
-            if (achData.ach_object.ach_Dynamic == true)
-            {
-                //---------------------------------Dynamic Achievement--------------------------------------------------//
-                //Check if the dynamic achievement is completed
-                if (achData.GetComplete())
-                {
-                    //Reset the dynamic achievement
-                    achData.ResetComplete();
-                    achData.ResetRewardClaimed();
-                    PlayerDataManager.instance.ResetUnlockAch(achData.ach_object.ach_ID);
-
-                    for (int j = 0; j < achData.ach_object.ach_Trigger.Length; j++)
-                    {
-                        achData.ach_object.ach_Trigger[j].ach_Doned = false;
-                        switch (achData.ach_object.ach_Trigger[j].ach_Type)
-                        {
-                            case TRACKER.SCORE:
-                                achData.ach_object.ach_Trigger[j].ach_Goal = PlayerDataManager.instance.GetAllTimeHS();
-                                break;
-                            case TRACKER.CHECKPOINT:
-                                achData.ach_object.ach_Trigger[j].ach_Goal = PlayerDataManager.instance.GetAllTimeCP();
-                                break;
-                        }
-                    }
-                }
-
-            }
-            ////---------------------------------Static Achievement--------------------------------------------------//
-            //else
-            //{
-            //    if (m_achievements[i].GetComplete() == false)
-            //    {
-            //        for (int j = 0; j < m_achievements[i].ach_object.ach_Trigger.Length; j++)
-            //        {
-            //            m_achievements[i].ach_object.ach_Trigger[j].ach_Doned = false;
-            //            m_achievements[i].ach_object.ach_Trigger[j].ach_Progress = 0;
-            //        }
-            //    }
-            //}
-       // }
-
-    }
-
-    public void LoadFromPlayerdata()
-    {
+        //---------------------------------Dynamic Achievement--------------------------------------------------//
+        //Check if the dynamic achievement is completed
         for (int i = 0; i < m_achievements.Count; i++)
         {
-            if (PlayerDataManager.instance.m_player.m_unlockedAchievements[i])
+            if (m_achievements[i].ach_Dynamic)
             {
-                if (m_achievements[i].ach_object.ach_Dynamic == false)
+                //Reset the dynamic achievement Goal
+                for (int j = 0; j < m_achievements[i].GetTriggerSize(); j++)
                 {
-                    m_achievements[i].SetComplete();
-                    m_achievements[i].SetRewardClaimed();
-                }
-                else
-                {
-                    m_achievements[i].SetComplete();
+                    switch (m_achievements[i].GetTriggerType(j))
+                    {
+                        case TRACKER.SCORE:
+                            m_achievements[i].ach_Trigger[j].SetTriggerGoal(PlayerDataManager.instance.GetAllTimeHS());
+                            break;
+                        case TRACKER.CHECKPOINT:
+                            m_achievements[i].ach_Trigger[j].SetTriggerGoal(PlayerDataManager.instance.GetAllTimeCP());
+                            break;
+                    }
                 }
             }
         }
     }
+
+    public void ResetAchProgress ()
+    {
+        for (int i= 0; i < m_achievements.Count; i++)
+        {
+            for (int j = 0; j < m_achievements[i].GetTriggerSize(); j++)
+            {
+                m_achievements[i].ResetTrigger(j);
+            }
+        }
+    }
+
+    //Call in checkPointReachedEvent
+    public void UpdateAchProgress()
+    {
+        //Loop through achievement
+        for (int i = 0; i < m_achievements.Count; i++)
+        {
+            //If achievement is not completed
+            if (PlayerDataManager.instance.GetUnlockedAchievement(m_achievements[i].ach_ID) == false)
+            {
+
+                //Loop through all trigger
+                for (int j = 0; j < m_achievements[i].ach_Trigger.Length; j++)
+                {
+
+                    //Update achievement progress
+                    switch (m_achievements[i].ach_Trigger[j].ach_Type)
+                    {
+                        case TRACKER.CHECKPOINT:
+                            m_achievements[i].ach_Trigger[j].ach_Progress = GameManager.instance.GetSessionCheckpoints();
+                            if (m_achievements[i].ach_Dynamic)
+                            {
+                                m_achievements[i].ach_Trigger[j].ach_Goal = PlayerDataManager.instance.GetAllTimeCP();
+                            }
+                            break;
+                        case TRACKER.SCORE:
+                            m_achievements[i].ach_Trigger[j].ach_Progress = GameManager.instance.GetSessionScores();
+                            if (m_achievements[i].ach_Dynamic)
+                            {
+                                m_achievements[i].ach_Trigger[j].ach_Goal = PlayerDataManager.instance.GetAllTimeHS();
+                            }
+                            break;
+                    }
+
+                    //Check if progress is more than goal for that trigger
+                    if (m_achievements[i].ach_Trigger[j].ach_Progress > m_achievements[i].ach_Trigger[j].ach_Goal)
+                    {
+                        m_achievements[i].ach_Trigger[j].ach_Doned = true;
+                    }
+                    else
+                    {
+                        Debug.Log("Progress is not met with goal");
+                    }
+                }
+            }
+
+            //Check through achievement list for one that all trigger is true
+            if (!PlayerDataManager.instance.GetUnlockedAchievement(m_achievements[i].ach_ID))
+            {
+                if (AchCheckComplete(m_achievements[i]))
+                {
+                    //m_achievements[i].SetComplete();
+                    PlayerDataManager.instance.SetUnlockAch(m_achievements[i].ach_ID);
+
+                    //Create achievement UI in Gameover UI
+                    UIManager.instance.CreateAchInGameOverUI(m_achievements[i].ach_Description);
+
+                    if (AchiCompleteEvent != null)
+                    {
+                        AchiCompleteEvent.Invoke();
+                    }
+                }
+            }
+            
+        }
+    }
+
+    #endregion
 }
 
 [System.Serializable]
@@ -196,4 +162,15 @@ public class TriggerTracker
     public int ach_Goal;
     public int ach_Progress;
     public bool ach_Doned;
+
+    public void SetTriggerGoal(int newGoal)
+    {
+        ach_Goal = newGoal;
+    }
+
+    public void ResetTrigger ()
+    {
+        ach_Progress = 0;
+        ach_Doned = false;
+    }
 }

@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System;
 
 public class PlayerDataManager : MonoBehaviour
 {
@@ -8,12 +9,15 @@ public class PlayerDataManager : MonoBehaviour
 
     public PlayerData m_player;
 
+    public event Action LoadDataEvent;
+
     // Start is called before the first frame update
 
     void Start()
     {
         //Load save data
         LoadDataLocal();
+        
         Debug.Log("Load at start");
 
     }
@@ -45,6 +49,8 @@ public class PlayerDataManager : MonoBehaviour
         m_player = SaveLoadManager.LoadData(SkinManager.instance.GetSkinsNumber(), AchievementManager.instance.m_achievements.Count);
         SkinManager.instance.ChangeSkin(m_player.m_usingSkin);
         Debug.Log("Load Save Data.");
+        UIManager.instance.CreateAchievementMenu();
+        UIManager.instance.UpdateCoinValue();
 
     }
 
@@ -91,6 +97,8 @@ public class PlayerDataManager : MonoBehaviour
         {
             m_player.m_allTimeCP = GameManager.instance.GetSessionCheckpoints();
         }
+
+        AchievementManager.instance.ResetAchievementGoal();
     }
 
     public void SetUsingSkin(int usingSkin)
@@ -108,10 +116,20 @@ public class PlayerDataManager : MonoBehaviour
         m_player.m_unlockedAchievements[achID] = false;
     }
 
+    public void SetAchievementClaimed (int achID)
+    {
+        m_player.m_achievementClaimed[achID] = true;
+    }
+
+    public void ResetAchievementClaimed (int achID)
+    {
+        m_player.m_achievementClaimed[achID] = false;
+    }
 
     #endregion
 
     #region Getter
+
     public int GetCoin ()
     {
         return m_player.m_coins;
@@ -136,6 +154,18 @@ public class PlayerDataManager : MonoBehaviour
     {
         return m_player.m_usingSkin;
     }
+
+    public bool GetAchievementClaimed (int achID)
+    {
+        return m_player.m_achievementClaimed[achID];
+    }
+
+    public bool GetUnlockedAchievement (int achID)
+    {
+        //Debug.Log("Achievement ID: " + achID);
+        return m_player.m_unlockedAchievements[achID];
+    }
+
     #endregion
 
     #region Adjusting Data

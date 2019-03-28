@@ -7,11 +7,9 @@ public class AchievementUI : MonoBehaviour
 {
     [SerializeField]private Text m_Title;
     [SerializeField]private Text m_Description;
-    [SerializeField]private Text m_Coin;
+    [SerializeField]private Text m_reward;
 
-    [SerializeField] private GameObject m_CoinBtn;
-
-    private int CoinValue;
+    [SerializeField] private GameObject m_claimButton;
 
     public void SetTitle (string title)
     {
@@ -23,41 +21,70 @@ public class AchievementUI : MonoBehaviour
         m_Description.text = description;
     }
 
-    public void SetCoin (int amount)
+    public void SetReward (int amount)
     {
-        m_Coin.text = amount.ToString();
-        Button coin = m_CoinBtn.GetComponent<Button>();
-        coin.interactable = false;
+        m_reward.text = amount.ToString();
+        Button claimButton = m_claimButton.GetComponent<Button>();
+        claimButton.interactable = false;
     }
 
-    public void ShowCoin (int reward, Achievement achData)
+    public void ShowClaimButton (AchievementObject achData)
     {
-        Button coin = m_CoinBtn.GetComponent<Button>();
-        if (achData.ach_rewardClaimed)
+        Button claimButton = m_claimButton.GetComponent<Button>();
+
+        //If achievement is claimed
+        //Hide coin button
+        if (PlayerDataManager.instance.GetAchievementClaimed( achData.ach_ID ) )
         {
-            coin.gameObject.SetActive(false);
+            claimButton.gameObject.SetActive(false);
         }
         else
         {
-            if (achData.ach_object.ach_Dynamic)
+            if (achData.ach_Dynamic)
             {
-                coin.onClick.AddListener(delegate { PlayerDataManager.instance.AddCoins(reward); AudioManager.instance.Play("Button"); AchievementManager.instance.ResetAchievement(achData); HideCoin(coin); PlayerDataManager.instance.SaveDataLocal(); });
+                claimButton.onClick.AddListener(delegate 
+                {
+                    //Add coins
+                    PlayerDataManager.instance.AddCoins(achData.ach_Reward);
+                    //Play Sound
+                    AudioManager.instance.Play("Button");
+                    //Reset achievement
+                    PlayerDataManager.instance.ResetUnlockAch(achData.ach_ID);
+                    //Hide claim button
+                    HideClaimButton(claimButton);
+                    //Save player data
+                    PlayerDataManager.instance.SaveDataLocal();
+                    //Update coin in UI
+                    UIManager.instance.UpdateCoinValue();
+                });
             }
             else
             {
-                coin.onClick.AddListener(delegate { PlayerDataManager.instance.AddCoins(reward); AudioManager.instance.Play("Button"); HideCoin(coin); PlayerDataManager.instance.SaveDataLocal();  });
+                claimButton.onClick.AddListener(delegate 
+                {
+                    //Add coins
+                    PlayerDataManager.instance.AddCoins(achData.ach_Reward);
+                    //Play sound
+                    AudioManager.instance.Play("Button"); HideClaimButton(claimButton);
+                    //Save Data
+                    PlayerDataManager.instance.SaveDataLocal();
+                    //Update coin in UI
+                    UIManager.instance.UpdateCoinValue();
+                    //Set achievement as claimed
+                    PlayerDataManager.instance.SetAchievementClaimed(achData.ach_ID);
+                    claimButton.gameObject.SetActive(false);
+                });
             }
-            coin.interactable = true;
+
+            //Show Button
+            claimButton.interactable = true;
         }
-        
-        
-        
     }
 
 
-    public void HideCoin (Button coin)
+    public void HideClaimButton (Button claimButton)
     {
-        coin.interactable = false;
+        claimButton.interactable = false;
     }
 
 }

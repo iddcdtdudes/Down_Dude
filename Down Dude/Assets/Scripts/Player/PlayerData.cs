@@ -8,12 +8,14 @@ using System.IO;
 [System.Serializable]
 public class PlayerData
 {
+    public string m_version;
     public int m_coins;
     public int m_usingSkin;
     public int m_allTimeHS;
     public int m_allTimeCP;
     public bool[] m_unlockedSkins;
     public bool[] m_unlockedAchievements;
+    public bool[] m_achievementClaimed;
 
     //Constructor for saving and loading
     public PlayerData (PlayerData player, int numberOfSkins, int numberOfAchievements)
@@ -27,12 +29,15 @@ public class PlayerData
         player.m_unlockedSkins.CopyTo(m_unlockedSkins, 0);
 
         //Unlocked all default skin
-        m_unlockedSkins[0] = true;
-        m_unlockedSkins[1] = true;
-        m_unlockedSkins[2] = true;
+        //m_unlockedSkins[0] = true;
+        //m_unlockedSkins[1] = true;
+        //m_unlockedSkins[2] = true;
 
         m_unlockedAchievements = new bool[numberOfAchievements];
         player.m_unlockedAchievements.CopyTo(m_unlockedAchievements, 0);
+
+        m_achievementClaimed = new bool[numberOfAchievements];
+        player.m_achievementClaimed.CopyTo(m_achievementClaimed, 0);
 
         //Check if number of skins have changed
         //if (player.m_unlockedSkins.Length == numberOfSkins)
@@ -115,18 +120,12 @@ public class PlayerData
         m_allTimeCP = 0;
         m_unlockedSkins = new bool[numberOfSkins]; //Defaults is false
         m_unlockedAchievements = new bool[numberOfAchievements];
+        m_achievementClaimed = new bool[numberOfAchievements];
 
         m_unlockedSkins[0] = true;
         m_unlockedSkins[1] = true;
         m_unlockedSkins[2] = true;
 
-
-        //for (int i = 0; i < numberOfSkins; i++)
-        //{
-        //    m_unlockedSkins[i] = true;
-        //}
-
-        //m_unlockedSkins[0] = true; //Setting default skins to true
     }
 }
 

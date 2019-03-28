@@ -13,7 +13,9 @@ public class UIManager : MonoBehaviour
     public Text m_allTimeHS;
     public Text m_sessionCP;
     public Text m_allTimeCP;
-    public Text m_achievementCompleted;
+    //public Text m_achievementCompleted;
+    public GameObject m_achGameOverPanel;
+    public GameObject m_achGameOverPrefab;
 
     [Header("Achievement UI")]
     public GameObject m_achievementPanel;
@@ -37,30 +39,29 @@ public class UIManager : MonoBehaviour
         }
     }
 
-    private void Start()
+    void Start()
     {
-        //for (int i = 0; i < AchievementManager.instance.m_achievements.Count; i++)
-        //{
-        //    if (PlayerDataManager.instance.m_player.m_unlockedAchievements[i])
-        //    {
-        //        AchievementManager.instance.m_achievements[i].SetComplete();
-        //    }
-        //}
-        AchievementManager.instance.LoadFromPlayerdata();
+        //Set achievement according to playerdata
+        //AchievementManager.instance.LoadFromPlayerdata();
 
         //Update Coins in menu
-        m_coins.text = PlayerDataManager.instance.GetCoin().ToString();
+        UpdateCoinValue();
 
         //Create each achievement list in UI
-        for (int i = 0; i < AchievementManager.instance.m_achievements.Count; i++)
-        {
-            CreateAchievement(m_achievementPanel, AchievementManager.instance.m_achievements[i]);
-        }
-
-        //AchievementManager.instance.ResetAchievement();
+        
     }
 
-    
+    #region Main Menu
+
+    public void UpdateCoinValue ()
+    {
+        //Update Coins in menu
+        m_coins.text = PlayerDataManager.instance.GetCoin().ToString();
+    }
+
+    #endregion
+
+    #region Gameover UI
 
     public void UpdateGameOverUI()
     {
@@ -70,36 +71,61 @@ public class UIManager : MonoBehaviour
         m_allTimeCP.text = PlayerDataManager.instance.GetAllTimeCP().ToString();
     }
 
-    public void UpdateAchiUI (AchievementObject achiData)
+    public void CreateAchInGameOverUI (string description)
     {
-        m_achievementCompleted.text = achiData.ach_Title;
+        //Create new gameobject from the prefab
+        GameObject achGameOverPrefab = Instantiate(m_achGameOverPrefab);
+
+        //Set Data to Prefab
+        SetAchGameOverInfo(m_achGameOverPanel, achGameOverPrefab, description);
     }
 
-    public void CreateAchievement (GameObject achParent, Achievement achData)
+    private void SetAchGameOverInfo (GameObject achParent, GameObject achPrefab, string description)
+    {
+        achPrefab.transform.SetParent(achParent.transform);
+        achPrefab.transform.localScale = new Vector3(1.0f, 1.0f, 1.0f);
+
+        Text achDescription = achPrefab.GetComponentInChildren<Text>();
+        achDescription.text = description;
+    }
+
+    #endregion
+
+    #region Achievement Panel
+
+    public void CreateAchievementMenu ()
+    {
+        for (int i = 0; i < AchievementManager.instance.m_achievements.Count; i++)
+        {
+            CreateAchievement(m_achievementPanel, AchievementManager.instance.m_achievements[i]);
+        }
+    }
+
+    private void CreateAchievement (GameObject achParent, AchievementObject achData)
     {
         GameObject achPrefab = Instantiate(m_achievementPrefab);
 
         SetAchievementInfo(achParent, achPrefab , achData);
+
+        Debug.Log("Create achievement in menu");
     }
 
-    public void SetAchievementInfo (GameObject achParent, GameObject achPrefab, Achievement achData)
+    private void SetAchievementInfo (GameObject achParent, GameObject achPrefab, AchievementObject achData)
     {
         achPrefab.transform.SetParent(achParent.transform);
         achPrefab.transform.localScale = new Vector3(1.0f, 1.0f, 1.0f);
 
         AchievementUI achievementPrefab = achPrefab.GetComponent<AchievementUI>();
-        achievementPrefab.SetTitle(achData.ach_object.ach_Title);
-        achievementPrefab.SetDescription(achData.ach_object.ach_Description);
-        achievementPrefab.SetCoin(achData.ach_object.ach_Reward);
+        achievementPrefab.SetTitle(achData.ach_Title);
+        achievementPrefab.SetDescription(achData.ach_Description);
+        achievementPrefab.SetReward(achData.ach_Reward);
 
-        if (achData.GetComplete())
+        if (PlayerDataManager.instance.GetUnlockedAchievement(achData.ach_ID))
         {
-            achievementPrefab.ShowCoin(achData.GetReward(), achData);
+            achievementPrefab.ShowClaimButton(achData);
         }
-        //else
-        //{
-        //    achievementPrefab.HideCoin();
-        //}
     }
+
+    #endregion
 
 }
