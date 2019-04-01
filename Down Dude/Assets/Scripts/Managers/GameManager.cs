@@ -28,7 +28,9 @@ public class GameManager : MonoBehaviour {
     [SerializeField] private Text scoreText;            // score text UI
     private int m_score;                                // game score
 
-    [SerializeField] private List<GameObject> gameOverUI;
+    [SerializeField] private List<GameObject> gameOverUIShow;
+
+    [SerializeField] private List<GameObject> gameOverUIHide;
 
     [SerializeField] private int m_scoreBaseline;                                   // base score reward for reaching a checkpoint
     [SerializeField] private int m_timeScaleMultiplier;                             // additional maximum core earned through faster play time
@@ -154,9 +156,14 @@ public class GameManager : MonoBehaviour {
 
     public void GameOverUI ()
     {
-        foreach (GameObject i in gameOverUI)
+        foreach (GameObject i in gameOverUIShow)
         {
             i.SetActive(true);
+        }
+
+        foreach (GameObject i in gameOverUIHide)
+        {
+            i.SetActive(false);
         }
     }
 

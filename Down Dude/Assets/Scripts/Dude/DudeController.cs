@@ -21,15 +21,20 @@ public class DudeController : MonoBehaviour {
     public event Action dudeIsKilledEvent;
     //State
     private DudeMode m_dudeMode;
+    private DudeDirection m_dudeDir;
     private bool m_dudeAlive;
     private bool m_dudeIsOnGround;
+    //Alternate Control
+    [SerializeField]private bool m_dudeControlByButton;
+    [SerializeField] private GameObject m_dudeControlUI;
+    private bool m_buttonIsPressed;
     //Variable for controlling movements
     [SerializeField] private float m_jetpackForce;
     [SerializeField] private float m_parachuteForce;
     [SerializeField] private float m_walkingForce;
     [SerializeField] private float m_maxParachuteForce;
     //Input
-    private Vector2 ForceVector;
+    private Vector2 m_forceVector;
     private Touch FirstTouch;
     private bool facingRight = false;
     //Direction
@@ -62,7 +67,7 @@ public class DudeController : MonoBehaviour {
     {
         if (m_dudeAlive == true) //When dude is alive
         {
-            ChangeDudeMode();
+            
             /*
             if (Input.touchCount > 0) //Check if screen is touch to set dude mode according to it
             {
@@ -79,7 +84,31 @@ public class DudeController : MonoBehaviour {
             }
             */
 
-            ForceVector = CalculateForceVector(FirstTouch); //Calculate the movement vector to use it in fixedUpdate to move the dude
+            if (m_dudeControlByButton)
+            {
+                //Change Dude Mode
+                ChangeDudeModeButton();
+                //Change Moving direction Vector
+                switch (m_dudeDir)
+                {
+                    case DudeDirection.LEFT:
+                        m_forceVector.x = -1;
+                        break;
+                    case DudeDirection.RIGHT:
+                        m_forceVector.x = 1;
+                        break;
+                    case DudeDirection.CENTER:
+                        m_forceVector.x = 0;
+                        break;
+                }
+            }
+            else
+            {
+                //Change Dude Mode
+                ChangeDudeMode();
+                //Change Moving Direction Vector
+                m_forceVector = CalculateForceVector(FirstTouch); //Calculate the movement vector to use it in fixedUpdate to move the dude
+            }
 
             // update facing direction
             float velX = GetComponent<Rigidbody2D>().velocity.x;
@@ -105,10 +134,10 @@ public class DudeController : MonoBehaviour {
                 rigidbody.AddForce(Vector2.down * m_jetpackForce);
                 break;
             case DudeMode.PARACHUTE:
-                rigidbody.AddForce(m_parachuteForce * ForceVector, ForceMode2D.Force);
+                rigidbody.AddForce(m_parachuteForce * m_forceVector, ForceMode2D.Force);
                 break;
             case DudeMode.WALKING:
-                rigidbody.AddForce(m_walkingForce * ForceVector, ForceMode2D.Force);
+                rigidbody.AddForce(m_walkingForce * m_forceVector, ForceMode2D.Force);
                 break;
         }
 
@@ -157,8 +186,6 @@ public class DudeController : MonoBehaviour {
             m_lastCheckpointTime = Time.time;
         }
     }
-
-
 
     private Vector2 CalculateForceVector(Touch FirstTouch)
     {
@@ -235,10 +262,98 @@ public class DudeController : MonoBehaviour {
         }
     }
 
+    private void ChangeDudeModeButton ()
+    {
+        if (m_buttonIsPressed)
+        {
+            if (m_dudeIsOnGround)
+            {
+                if (m_dudeMode != DudeMode.WALKING)
+                {
+                    SetDudeMode(DudeMode.WALKING);
+                    Debug.Log("Walking");
+                }
+            }
+            else
+            {
+                if (m_dudeMode != DudeMode.PARACHUTE)
+                {
+                    SetDudeMode(DudeMode.PARACHUTE); //Set dude mode to parachute
+                    Debug.Log("Parachute");
+                }
+            }
+        }
+        else
+        {
+            if (m_dudeIsOnGround)
+            {
+                if (m_dudeMode != DudeMode.IDLE)
+                {
+                    SetDudeMode(DudeMode.IDLE);
+                    Debug.Log("Idle");
+                }
+            }
+            else
+            {
+                if (m_dudeMode != DudeMode.JETPACK)
+                {
+                    SetDudeMode(DudeMode.JETPACK); //Set dude mode to jetpack
+                    Debug.Log("Jetpack");
+                }
+            }
+        }
+    }
+
     #region Public
     public DudeMode GetDudeMode()
     {
         return m_dudeMode;
+    }
+
+    public void ChangeDudeDirection (int dir)
+    {
+        switch ((DudeDirection)dir)
+        {
+            case DudeDirection.CENTER:
+                m_dudeDir = DudeDirection.CENTER;
+                break;
+            case DudeDirection.LEFT:
+                m_dudeDir = DudeDirection.LEFT;
+                break;
+            case DudeDirection.RIGHT:
+                m_dudeDir = DudeDirection.RIGHT;
+                break;
+        }
+    }
+
+    public void ControlButtonIsPressed (bool i)
+    {
+        m_buttonIsPressed = i;
+    }
+
+    public void ChangeControlToButton (bool i)
+    {
+        m_dudeControlByButton = i;
+    }
+
+    public void ShowButtonUI ()
+    {
+        if (m_dudeControlByButton)
+        {
+            m_dudeControlUI.SetActive(true);
+        }
+        else
+        {
+            m_dudeControlUI.SetActive(false);
+        }
+    }
+
+    public void HideButtonUI ()
+    {
+        if (m_dudeControlByButton)
+        {
+            m_dudeControlUI.SetActive(false);
+        }
     }
 
     public void SetDudeMode(DudeMode mode)
@@ -299,3 +414,6 @@ public class DudeController : MonoBehaviour {
 
 public enum DudeMode
 { PARACHUTE, JETPACK , WALKING, IDLE}
+
+public enum DudeDirection
+{ LEFT, CENTER, RIGHT }
