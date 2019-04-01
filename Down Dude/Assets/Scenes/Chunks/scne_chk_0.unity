@@ -177,5 +177,35 @@ PrefabInstance:
       propertyPath: m_SortingOrder
       value: 18
       objectReference: {fileID: 0}
+    - target: {fileID: 7017699234010468264, guid: e0431ce60c79b384cb87bbd2723bc741,
+        type: 3}
+      propertyPath: m_LocalScale.x
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7177864653620062800, guid: e0431ce60c79b384cb87bbd2723bc741,
+        type: 3}
+      propertyPath: m_Size.x
+      value: 1.84
+      objectReference: {fileID: 0}
+    - target: {fileID: 2431385590016548424, guid: e0431ce60c79b384cb87bbd2723bc741,
+        type: 3}
+      propertyPath: colliders.Array.data[0].isChild
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1146488884514441765, guid: e0431ce60c79b384cb87bbd2723bc741,
+        type: 3}
+      propertyPath: m_upTime
+      value: 1.3
+      objectReference: {fileID: 0}
+    - target: {fileID: 1146488884514441765, guid: e0431ce60c79b384cb87bbd2723bc741,
+        type: 3}
+      propertyPath: m_downTime
+      value: 1.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 4465196803554818177, guid: e0431ce60c79b384cb87bbd2723bc741,
+        type: 3}
+      propertyPath: m_Size.x
+      value: 1.84
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e0431ce60c79b384cb87bbd2723bc741, type: 3}
