@@ -69,16 +69,12 @@ public class DudeController : MonoBehaviour {
             if (PlayerPrefs.GetInt("ButtonControl") == 1)
             {
                 m_dudeControlByButton = true;
-                Debug.Log("Set to Control by Button");
+                //Debug.Log("Set to Control by Button");
             }
             else
             {
                 m_dudeControlByButton = false;
             }
-        }
-        else
-        {
-            Debug.Log("PlayerPref do not contain key");
         }
     }
 
@@ -249,7 +245,7 @@ public class DudeController : MonoBehaviour {
                 if (m_dudeMode != DudeMode.WALKING)
                 {
                     SetDudeMode(DudeMode.WALKING);
-                    Debug.Log("Walking");
+                    //Debug.Log("Walking");
                 }
             }
             else 
@@ -257,7 +253,7 @@ public class DudeController : MonoBehaviour {
                 if (m_dudeMode != DudeMode.PARACHUTE)
                 {
                     SetDudeMode(DudeMode.PARACHUTE); //Set dude mode to parachute
-                    Debug.Log("Parachute");
+                    //Debug.Log("Parachute");
                 }
             }
         }
@@ -268,7 +264,7 @@ public class DudeController : MonoBehaviour {
                 if (m_dudeMode != DudeMode.IDLE)
                 {
                     SetDudeMode(DudeMode.IDLE);
-                    Debug.Log("Idle");
+                    //Debug.Log("Idle");
                 }
             }
             else
@@ -276,7 +272,7 @@ public class DudeController : MonoBehaviour {
                 if (m_dudeMode != DudeMode.JETPACK)
                 {
                     SetDudeMode(DudeMode.JETPACK); //Set dude mode to jetpack
-                    Debug.Log("Jetpack");
+                    //Debug.Log("Jetpack");
                 }
             }
             
@@ -293,7 +289,7 @@ public class DudeController : MonoBehaviour {
                 if (m_dudeMode != DudeMode.WALKING)
                 {
                     SetDudeMode(DudeMode.WALKING);
-                    Debug.Log("Walking");
+                    //Debug.Log("Walking");
                 }
             }
             else
@@ -301,7 +297,7 @@ public class DudeController : MonoBehaviour {
                 if (m_dudeMode != DudeMode.PARACHUTE)
                 {
                     SetDudeMode(DudeMode.PARACHUTE); //Set dude mode to parachute
-                    Debug.Log("Parachute");
+                    //Debug.Log("Parachute");
                 }
             }
         }
@@ -312,7 +308,7 @@ public class DudeController : MonoBehaviour {
                 if (m_dudeMode != DudeMode.IDLE)
                 {
                     SetDudeMode(DudeMode.IDLE);
-                    Debug.Log("Idle");
+                    //Debug.Log("Idle");
                 }
             }
             else
@@ -320,7 +316,7 @@ public class DudeController : MonoBehaviour {
                 if (m_dudeMode != DudeMode.JETPACK)
                 {
                     SetDudeMode(DudeMode.JETPACK); //Set dude mode to jetpack
-                    Debug.Log("Jetpack");
+                    //Debug.Log("Jetpack");
                 }
             }
         }
@@ -339,21 +335,21 @@ public class DudeController : MonoBehaviour {
                 //Left
                 if (RectTransformUtility.RectangleContainsScreenPoint(m_buttonLeft.GetComponent<RectTransform>(), touchPosition))
                 {
-                    Debug.Log("Left Button");
+                    //Debug.Log("Left Button");
                     m_buttonIsPressed = true;
                     m_dudeDir = DudeDirection.LEFT;
                 }
                 //Center
                 else if (RectTransformUtility.RectangleContainsScreenPoint(m_buttonCenter.GetComponent<RectTransform>(), touchPosition))
                 {
-                    Debug.Log("Center Button");
+                    //Debug.Log("Center Button");
                     m_buttonIsPressed = true;
                     m_dudeDir = DudeDirection.CENTER;
                 }
                 //Right
                 else if (RectTransformUtility.RectangleContainsScreenPoint(m_buttonRight.GetComponent<RectTransform>(), touchPosition))
                 {
-                    Debug.Log("Right Button");
+                    //Debug.Log("Right Button");
                     m_buttonIsPressed = true;
                     m_dudeDir = DudeDirection.RIGHT;
                 }
