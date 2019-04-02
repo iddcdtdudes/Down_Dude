@@ -113,10 +113,10 @@ public class DudeController : MonoBehaviour {
                 switch (m_dudeDir)
                 {
                     case DudeDirection.LEFT:
-                        m_forceVector.x = -1;
+                        m_forceVector.x = -1 * m_maxParachuteForce;
                         break;
                     case DudeDirection.RIGHT:
-                        m_forceVector.x = 1;
+                        m_forceVector.x = 1 * m_maxParachuteForce;
                         break;
                     case DudeDirection.CENTER:
                         m_forceVector.x = 0;
@@ -370,22 +370,6 @@ public class DudeController : MonoBehaviour {
     public DudeMode GetDudeMode()
     {
         return m_dudeMode;
-    }
-
-    public void ChangeDudeDirection (int dir)
-    {
-        switch ((DudeDirection)dir)
-        {
-            case DudeDirection.CENTER:
-                m_dudeDir = DudeDirection.CENTER;
-                break;
-            case DudeDirection.LEFT:
-                m_dudeDir = DudeDirection.LEFT;
-                break;
-            case DudeDirection.RIGHT:
-                m_dudeDir = DudeDirection.RIGHT;
-                break;
-        }
     }
 
     public void ChangeControlToButton (bool i)
