@@ -62,11 +62,13 @@ public class GameManager : MonoBehaviour {
         // event subscription
         DudeController.instance.reachCheckpointEvent += OnDudeReachCheckpoint;
         DudeController.instance.reachCheckpointEvent += AchievementManager.instance.UpdateAchProgress;
+        DudeController.instance.dudeIsKilledEvent += PlayDeadSound;
         DudeController.instance.dudeIsKilledEvent += PlayerDataManager.instance.SetAllTimeData;
         DudeController.instance.dudeIsKilledEvent += AchievementManager.instance.ResetAchProgress;
         DudeController.instance.dudeIsKilledEvent += UIManager.instance.UpdateGameOverUI;
         DudeController.instance.dudeIsKilledEvent += GameOverUI;
         DudeController.instance.dudeIsKilledEvent += PlayerDataManager.instance.SaveDataLocal;
+        
 
         // initialize variables
         m_timer = ChunkManager.instance.GetNewChunkTimeLimit();
@@ -167,6 +169,11 @@ public class GameManager : MonoBehaviour {
         {
             i.SetActive(false);
         }
+    }
+
+    public void PlayDeadSound ()
+    {
+        AudioManager.instance.Play("DudeDead");
     }
 
     public void RestartGame ()

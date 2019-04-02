@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.37311992, g: 0.38074034, b: 0.35872713, a: 1}
+  m_IndirectSpecularColor: {r: 0.37311953, g: 0.38074014, b: 0.3587274, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -7074,7 +7074,7 @@ PrefabInstance:
     - target: {fileID: 3227829095626825001, guid: 64a08cce59d90134c949590563e13db9,
         type: 3}
       propertyPath: sounds.Array.size
-      value: 4
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 3227829095626825001, guid: 64a08cce59d90134c949590563e13db9,
         type: 3}
@@ -7140,7 +7140,7 @@ PrefabInstance:
         type: 3}
       propertyPath: sounds.Array.data[3].clip
       value: 
-      objectReference: {fileID: 8300000, guid: 6126859e19f1f824abe75de40254ad06, type: 3}
+      objectReference: {fileID: 8300000, guid: fc4981554d16d9244a91f36b26407da5, type: 3}
     - target: {fileID: 3227829095626825001, guid: 64a08cce59d90134c949590563e13db9,
         type: 3}
       propertyPath: sounds.Array.data[3].volume
@@ -7149,6 +7149,26 @@ PrefabInstance:
     - target: {fileID: 3227829095626825001, guid: 64a08cce59d90134c949590563e13db9,
         type: 3}
       propertyPath: sounds.Array.data[3].pitch
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3227829095626825001, guid: 64a08cce59d90134c949590563e13db9,
+        type: 3}
+      propertyPath: sounds.Array.data[4].name
+      value: DudeDead
+      objectReference: {fileID: 0}
+    - target: {fileID: 3227829095626825001, guid: 64a08cce59d90134c949590563e13db9,
+        type: 3}
+      propertyPath: sounds.Array.data[4].clip
+      value: 
+      objectReference: {fileID: 8300000, guid: 35335454492008b4b955f53f0d049a23, type: 3}
+    - target: {fileID: 3227829095626825001, guid: 64a08cce59d90134c949590563e13db9,
+        type: 3}
+      propertyPath: sounds.Array.data[4].volume
+      value: 0.15
+      objectReference: {fileID: 0}
+    - target: {fileID: 3227829095626825001, guid: 64a08cce59d90134c949590563e13db9,
+        type: 3}
+      propertyPath: sounds.Array.data[4].pitch
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 3227829095626824982, guid: 64a08cce59d90134c949590563e13db9,
