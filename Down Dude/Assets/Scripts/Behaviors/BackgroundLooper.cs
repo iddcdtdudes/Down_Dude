@@ -46,6 +46,7 @@ public class BackgroundLooper : MonoBehaviour {
             } else {
                 m_lastCamY = camY;
                 camYVel = 0f;
+                m_firstActivated = false;
             }
 
             // parallax
@@ -78,5 +79,10 @@ public class BackgroundLooper : MonoBehaviour {
     {
         m_otherBackground.transform.position = new Vector3(0.0f, CameraController.instance.transform.position.y, 0.0f);
         m_nextBackground.transform.position = new Vector3(0.0f, CameraController.instance.transform.position.y - m_backgroundHeight, 0.0f);
+    }
+
+    public void SetFirstActivated(bool value)
+    {
+        m_firstActivated = value;
     }
 }

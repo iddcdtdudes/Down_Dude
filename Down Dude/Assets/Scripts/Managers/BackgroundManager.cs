@@ -102,6 +102,12 @@ class BackgroundThemeHolder
         m_bgLayer0.gameObject.SetActive(active);
         m_bgLayer1.gameObject.SetActive(active);
         m_bgLayer2.gameObject.SetActive(active);
+
+        if(active) {
+            m_bgLayer0.SetFirstActivated(true);
+            m_bgLayer1.SetFirstActivated(true);
+            m_bgLayer2.SetFirstActivated(true);
+        }
     }
 
     // initialize positions for all background layers

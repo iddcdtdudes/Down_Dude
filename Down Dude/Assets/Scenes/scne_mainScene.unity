@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.37311953, g: 0.38074014, b: 0.3587274, a: 1}
+  m_IndirectSpecularColor: {r: 0.37311992, g: 0.38074034, b: 0.35872713, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -143,7 +143,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_nextBackground: {fileID: 565402642}
   m_otherBackground: {fileID: 1477681989}
-  m_parallax: 0.5
+  m_parallax: 0.3
   m_backgroundHeight: 9.6
 --- !u!4 &10853320
 Transform:
@@ -1252,7 +1252,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_nextBackground: {fileID: 283437556}
   m_otherBackground: {fileID: 312944919}
-  m_parallax: 0.2
+  m_parallax: 0.1
   m_backgroundHeight: 9.6
 --- !u!4 &405830600
 Transform:
@@ -1386,7 +1386,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_nextBackground: {fileID: 1244267143}
   m_otherBackground: {fileID: 807465252}
-  m_parallax: 0.5
+  m_parallax: 0.3
   m_backgroundHeight: 9.6
 --- !u!4 &442064895
 Transform:
@@ -2503,7 +2503,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_nextBackground: {fileID: 1660736097}
   m_otherBackground: {fileID: 36341578}
-  m_parallax: 0.2
+  m_parallax: 0.1
   m_backgroundHeight: 6.44
 --- !u!4 &759324968
 Transform:
@@ -2647,7 +2647,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_nextBackground: {fileID: 1355233111}
   m_otherBackground: {fileID: 880341329}
-  m_parallax: 0.2
+  m_parallax: 0.1
   m_backgroundHeight: 9.6
 --- !u!4 &793875541
 Transform:
@@ -3664,7 +3664,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_nextBackground: {fileID: 1542237387}
   m_otherBackground: {fileID: 2126101463}
-  m_parallax: 0.5
+  m_parallax: 0.3
   m_backgroundHeight: 9.6
 --- !u!4 &1273173019
 Transform:
