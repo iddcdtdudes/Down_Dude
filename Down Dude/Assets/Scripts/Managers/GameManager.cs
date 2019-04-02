@@ -128,6 +128,8 @@ public class GameManager : MonoBehaviour {
     {
         // increment Checkpoint
         incrementCheckpoints();
+        PlayerDataManager.instance.AddCoins(1);
+        AudioManager.instance.Play("Checkpoint");
 
         // calculate and add score
         float chunkTimeLimit = ChunkManager.instance.GetChunkList()[ChunkManager.instance.GetChunkIndex(1)].GetTimeLimit();
