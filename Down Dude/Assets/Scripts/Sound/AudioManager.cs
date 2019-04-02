@@ -45,6 +45,18 @@ public class AudioManager : MonoBehaviour {
         
     }
 
+    public void Play(string name, Transform sourceTransform, float rangeY)
+    {
+        if(Mathf.Abs(DudeController.instance.transform.position.y - sourceTransform.position.y) <= rangeY) {
+            Sound s = Array.Find(sounds, sound => sound.name == name);
+            if (s == null) {
+                Debug.LogWarning("Cannot find sound");
+                return;
+            }
+            s.source.Play();
+        }
+    }
+
     public void StopMusic (string name)
     {
         Sound s = Array.Find(sounds, sound => sound.name == name);

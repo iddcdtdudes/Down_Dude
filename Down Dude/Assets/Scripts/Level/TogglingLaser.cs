@@ -35,14 +35,13 @@ public class TogglingLaser : StaticObstacle {
         // if time since last toggle exceeds up time / down time, toggle game object
         if(m_laser.activeSelf) {
             if(Time.time - m_lastToggleTime >= m_upTime) {
-                Debug.Log("down");
                 m_animator.SetBool("up", false);
                 m_lastToggleTime = Time.time;
             }
         } else {
             if(Time.time - m_lastToggleTime >= m_downTime) {
-                Debug.Log("up");
                 m_animator.SetBool("up", true);
+                AudioManager.instance.Play("Laser", transform, 3.4f);
                 m_lastToggleTime = Time.time;
             }
         }
