@@ -27,6 +27,9 @@ public class DudeController : MonoBehaviour {
     //Alternate Control
     [SerializeField]private bool m_dudeControlByButton;
     [SerializeField] private GameObject m_dudeControlUI;
+    [SerializeField] private GameObject m_buttonLeft;
+    [SerializeField] private GameObject m_buttonCenter;
+    [SerializeField] private GameObject m_buttonRight;
     private bool m_buttonIsPressed;
     //Variable for controlling movements
     [SerializeField] private float m_jetpackForce;
@@ -60,6 +63,23 @@ public class DudeController : MonoBehaviour {
     {
         m_dudeIsOnGround = false;
         m_lastCheckpointTime = Time.time;
+
+        if (PlayerPrefs.HasKey("ButtonControl"))
+        {
+            if (PlayerPrefs.GetInt("ButtonControl") == 1)
+            {
+                m_dudeControlByButton = true;
+                Debug.Log("Set to Control by Button");
+            }
+            else
+            {
+                m_dudeControlByButton = false;
+            }
+        }
+        else
+        {
+            Debug.Log("PlayerPref do not contain key");
+        }
     }
 
     #region Update
@@ -87,6 +107,7 @@ public class DudeController : MonoBehaviour {
             if (m_dudeControlByButton)
             {
                 //Change Dude Mode
+                CheckButtonPressed();
                 ChangeDudeModeButton();
                 //Change Moving direction Vector
                 switch (m_dudeDir)
@@ -264,6 +285,7 @@ public class DudeController : MonoBehaviour {
 
     private void ChangeDudeModeButton ()
     {
+
         if (m_buttonIsPressed)
         {
             if (m_dudeIsOnGround)
@@ -304,6 +326,46 @@ public class DudeController : MonoBehaviour {
         }
     }
 
+    private void CheckButtonPressed ()
+    {
+        if (Input.touchCount > 0)
+        {
+            Touch finger = Input.GetTouch(0);
+            Vector2 touchPosition = finger.position;
+            
+            //If the x position of touch is on the button
+            if(finger.phase != TouchPhase.Ended)
+            {
+                //Left
+                if (RectTransformUtility.RectangleContainsScreenPoint(m_buttonLeft.GetComponent<RectTransform>(), touchPosition))
+                {
+                    Debug.Log("Left Button");
+                    m_buttonIsPressed = true;
+                    m_dudeDir = DudeDirection.LEFT;
+                }
+                //Center
+                else if (RectTransformUtility.RectangleContainsScreenPoint(m_buttonCenter.GetComponent<RectTransform>(), touchPosition))
+                {
+                    Debug.Log("Center Button");
+                    m_buttonIsPressed = true;
+                    m_dudeDir = DudeDirection.CENTER;
+                }
+                //Right
+                else if (RectTransformUtility.RectangleContainsScreenPoint(m_buttonRight.GetComponent<RectTransform>(), touchPosition))
+                {
+                    Debug.Log("Right Button");
+                    m_buttonIsPressed = true;
+                    m_dudeDir = DudeDirection.RIGHT;
+                }
+            }
+            else
+            {
+                m_buttonIsPressed = false;
+            }
+        }
+        
+    }
+
     #region Public
     public DudeMode GetDudeMode()
     {
@@ -326,14 +388,20 @@ public class DudeController : MonoBehaviour {
         }
     }
 
-    public void ControlButtonIsPressed (bool i)
-    {
-        m_buttonIsPressed = i;
-    }
-
     public void ChangeControlToButton (bool i)
     {
         m_dudeControlByButton = i;
+        if (m_dudeControlByButton)
+        {
+            PlayerPrefs.SetInt("ButtonControl", 1);
+        }
+        else
+        {
+            PlayerPrefs.SetInt("ButtonControl", 0);
+        }
+
+        PlayerPrefs.Save();
+        
     }
 
     public void ShowButtonUI ()
