@@ -24,6 +24,7 @@ public class DudeController : MonoBehaviour {
     private DudeDirection m_dudeDir;
     private bool m_dudeAlive;
     private bool m_dudeIsOnGround;
+
     //Alternate Control
     [SerializeField]private bool m_dudeControlByButton;
     [SerializeField] private GameObject m_dudeControlUI;
@@ -31,21 +32,28 @@ public class DudeController : MonoBehaviour {
     [SerializeField] private GameObject m_buttonCenter;
     [SerializeField] private GameObject m_buttonRight;
     private bool m_buttonIsPressed;
+
     //Variable for controlling movements
     [SerializeField] private float m_jetpackForce;
     [SerializeField] private float m_parachuteForce;
     [SerializeField] private float m_walkingForce;
     [SerializeField] private float m_maxParachuteForce;
+
     //Input
     private Vector2 m_forceVector;
     private Touch FirstTouch;
     private bool facingRight = false;
+
     //Direction
     [SerializeField] private Vector2 m_drag;
     [SerializeField] private Vector2 m_maxVelocity;
-    [SerializeField] private float m_forceSquareDistance;
+    [SerializeField] private float m_touchForceThreshold;
+
     //Animation
     [SerializeField] private Animator m_animator;
+
+    // new movement variables
+    [SerializeField] private float m_jetpackHorizontalDrag;
 
     private float m_lastCheckpointTime;
 
@@ -83,23 +91,6 @@ public class DudeController : MonoBehaviour {
     {
         if (m_dudeAlive == true) //When dude is alive
         {
-            
-            /*
-            if (Input.touchCount > 0) //Check if screen is touch to set dude mode according to it
-            {
-                FirstTouch = Input.GetTouch(0); //Receive first touch
-                if(m_dudeMode != DudeMode.PARACHUTE) {
-                    SetDudeMode(DudeMode.PARACHUTE); //Set dude mode to parachute
-                }
-            }
-            else
-            {
-                if(m_dudeMode != DudeMode.JETPACK) {
-                    SetDudeMode(DudeMode.JETPACK); //Set dude mode to jetpack
-                }
-            }
-            */
-
             if (m_dudeControlByButton)
             {
                 //Change Dude Mode
@@ -123,8 +114,27 @@ public class DudeController : MonoBehaviour {
             {
                 //Change Dude Mode
                 ChangeDudeMode();
+                
                 //Change Moving Direction Vector
                 m_forceVector = CalculateForceVector(FirstTouch); //Calculate the movement vector to use it in fixedUpdate to move the dude
+
+                /*
+                // move dude
+                if(m_dudeMode == DudeMode.PARACHUTE) {
+                    float touchX = Camera.main.ScreenToWorldPoint(FirstTouch.position).x;
+
+                    // move amount
+                    float moveAmount = ((touchX - transform.position.x >= 0.0f) ? 1.0f : -1.0f) * m_parachuteMaxHorizontalSpeed;
+
+                    // if touch is closer than threshold, scale down move amount
+                    if (Mathf.Abs(touchX - transform.position.x) < m_touchForceThreshold) {
+                        moveAmount *= Mathf.Abs(touchX - transform.position.x);
+                    }
+
+                    // move dude
+                    transform.position += Vector3.right * moveAmount;
+                }
+                */
             }
 
             // update facing direction
@@ -144,7 +154,7 @@ public class DudeController : MonoBehaviour {
         //Debug.Log(Application.targetFrameRate);
 
         Rigidbody2D rigidbody = GetComponent<Rigidbody2D>();
-
+        
         switch (m_dudeMode)
         {
             case DudeMode.JETPACK:
@@ -157,23 +167,29 @@ public class DudeController : MonoBehaviour {
                 rigidbody.AddForce(m_walkingForce * m_forceVector, ForceMode2D.Force);
                 break;
         }
-
-        /*
-        if (m_dudeMode == DudeMode.PARACHUTE) //Parachute Mode
-        {
-            rigidbody.AddForce(m_parachuteForce * ForceVector, ForceMode2D.Force);
-        }
-        else //Jetpack Mode
-        {
-            rigidbody.AddForce(Vector2.down * m_jetpackForce);
-        }
-        */
+        
 
         // apply drag and limit velocity
         Vector2 vel = rigidbody.velocity;
         vel.x = Mathf.Clamp(m_drag.x * vel.x, -m_maxVelocity.x, m_maxVelocity.x);
         vel.y = Mathf.Clamp(m_drag.y * vel.y, -m_maxVelocity.y, m_maxVelocity.y);
         rigidbody.velocity = vel;
+
+        // horizontal drag
+        float drag = 1.0f;
+        if(m_dudeMode == DudeMode.JETPACK) {
+            drag = m_jetpackHorizontalDrag;
+        } else if(m_dudeMode == DudeMode.PARACHUTE || m_dudeMode == DudeMode.WALKING) {
+            // apply horizontal drag when touch is near dude
+            float dudeToTouch = Camera.main.ScreenToWorldPoint(FirstTouch.position).x - transform.position.x;
+            if (!m_dudeControlByButton && Mathf.Abs(dudeToTouch) < m_touchForceThreshold) {
+                if (m_touchForceThreshold != 0.0f) {
+                    drag = Mathf.Abs(dudeToTouch / m_touchForceThreshold);
+                }
+            }
+        }
+
+        rigidbody.velocity = new Vector2(drag * rigidbody.velocity.x, rigidbody.velocity.y);
     }
     #endregion
 
@@ -209,10 +225,12 @@ public class DudeController : MonoBehaviour {
         Vector2 TouchPosition = Camera.main.ScreenToWorldPoint(FirstTouch.position); //Convert screen touch position to world position
         Vector2 ForceVector; //Vector2 that will be return
 
-        if(Mathf.Abs(TouchPosition.x - instance.transform.position.x) >= m_forceSquareDistance) {
+        // if touch is more than touch force threshold
+        if (Mathf.Abs(TouchPosition.x - instance.transform.position.x) >= m_touchForceThreshold) {
+            // apply force
             ForceVector.x = TouchPosition.x - instance.transform.position.x;
         } else {
-            ForceVector.x = ((TouchPosition.x - instance.transform.position.x) / m_forceSquareDistance) * ((TouchPosition.x - instance.transform.position.x) / m_forceSquareDistance) * m_forceSquareDistance;
+            ForceVector.x = ((TouchPosition.x - instance.transform.position.x) / m_touchForceThreshold) * ((TouchPosition.x - instance.transform.position.x) / m_touchForceThreshold) * m_touchForceThreshold;
             if(TouchPosition.x - instance.transform.position.x < 0) {
                 ForceVector.x *= -1;
             }
