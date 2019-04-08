@@ -326,7 +326,7 @@ public class DudeController : MonoBehaviour {
                 if (m_dudeMode != DudeMode.IDLE)
                 {
                     SetDudeMode(DudeMode.IDLE);
-                    //Debug.Log("Idle");
+                    Debug.Log("Idle");
                 }
             }
             else
@@ -454,9 +454,15 @@ public class DudeController : MonoBehaviour {
     //Kill dude
     public void KillDude ()
     {
-        m_dudeAlive = false;
+        if (m_dudeAlive != false)
+        {
+            AudioManager.instance.Play("DudeDead");
+            m_dudeAlive = false;
+        }
+        
         instance.GetComponentInChildren<SpriteRenderer>().color = new Color(1f, 1f, 1f, 0f);
         instance.GetComponent<Rigidbody2D>().isKinematic = true;
+        
 
         if(dudeIsKilledEvent != null) {
             dudeIsKilledEvent.Invoke();
