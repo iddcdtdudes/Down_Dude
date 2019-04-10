@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 using UnityEditor;
 
 // ChunkManager : MonoBehaviour
@@ -26,6 +27,8 @@ public class ChunkManager : MonoBehaviour {
     [Header("Chunk Debugging")]
     [SerializeField] private bool m_chunkDebugger;      // spawn specific chunk for debugging
     [SerializeField] private int m_chunkToDebug;        // chunk to spawn when debugging
+
+    [SerializeField] private Text m_chunkInputText;
 
     private void Awake()
     {
@@ -56,6 +59,12 @@ public class ChunkManager : MonoBehaviour {
 
     private void Start()
     {
+        int testChunkIndex = int.Parse(m_chunkInputText.text);
+
+        if(testChunkIndex > 0 && testChunkIndex < m_chunkList.Length) {
+            m_firstChunkIndex = testChunkIndex;
+        }
+
         // add first chunk
         PushChunk(m_firstChunkIndex);
     }
