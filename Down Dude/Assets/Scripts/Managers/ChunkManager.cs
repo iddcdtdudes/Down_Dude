@@ -38,7 +38,7 @@ public class ChunkManager : MonoBehaviour {
         } else {
             Destroy(gameObject);
         }
-
+        
         // clamp chunkToDebug
         if(m_chunkToDebug < 0) {
             m_chunkToDebug = 0;
@@ -59,7 +59,8 @@ public class ChunkManager : MonoBehaviour {
 
     private void Start()
     {
-        int testChunkIndex = int.Parse(m_chunkInputText.text);
+        m_chunkInputText.text = "0";
+        int testChunkIndex = m_chunkToDebug;
 
         if(testChunkIndex > 0 && testChunkIndex < m_chunkList.Length) {
             m_firstChunkIndex = testChunkIndex;
@@ -171,5 +172,18 @@ public class ChunkManager : MonoBehaviour {
     public Chunk[] GetChunkList()
     {
         return m_chunkList;
+    }
+
+    public void UpdateChunkToDebug()
+    {
+        // FOR BUILD DEBUG
+        m_chunkToDebug = int.Parse(m_chunkInputText.text);
+
+        // clamp chunkToDebug
+        if (m_chunkToDebug < 0) {
+            m_chunkToDebug = 0;
+        } else if (m_chunkToDebug >= m_chunkList.Length) {
+            m_chunkToDebug = m_chunkList.Length - 1;
+        }
     }
 }
