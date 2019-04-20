@@ -411,7 +411,7 @@ MonoBehaviour:
   m_nextBackground: {fileID: 321683084}
   m_otherBackground: {fileID: 528269782}
   m_parallax: 0
-  m_backgroundHeight: 4.8
+  m_backgroundHeight: 9.6
   m_looping: 1
 --- !u!1 &98703740
 GameObject:
@@ -651,7 +651,7 @@ SpriteRenderer:
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
-  m_Size: {x: 2.7, y: 6.44}
+  m_Size: {x: 2.7, y: 9.6}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
@@ -1011,7 +1011,7 @@ SpriteRenderer:
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
-  m_Size: {x: 2.7, y: 4.8}
+  m_Size: {x: 2.7, y: 9.6}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
@@ -2591,7 +2591,7 @@ MonoBehaviour:
   m_nextBackground: {fileID: 1660736097}
   m_otherBackground: {fileID: 36341578}
   m_parallax: 0.1
-  m_backgroundHeight: 6.44
+  m_backgroundHeight: 9.6
   m_looping: 1
 --- !u!4 &759324968
 Transform:
@@ -3473,7 +3473,7 @@ SpriteRenderer:
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
-  m_Size: {x: 2.7, y: 6.44}
+  m_Size: {x: 2.7, y: 9.6}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
@@ -5995,7 +5995,7 @@ SpriteRenderer:
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
-  m_Size: {x: 2.7, y: 4.8}
+  m_Size: {x: 2.7, y: 9.6}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
