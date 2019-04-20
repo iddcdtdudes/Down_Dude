@@ -17,6 +17,8 @@ public class BackgroundLooper : MonoBehaviour {
     [SerializeField] private float m_parallax;          // parallax value (0.0 = static, 1.0 = dude)
 
     [SerializeField] private float m_backgroundHeight;  // height of background sprite
+    
+    [SerializeField] private bool m_looping = true;     // looping background
 
     private float m_lastCamY;
 
@@ -25,7 +27,7 @@ public class BackgroundLooper : MonoBehaviour {
     private void Start()
     {
         // initialize sprite positions
-        InitializePosition();
+        InitializePosition(!m_looping);
 
         // initialize cam y
         m_lastCamY = CameraController.instance.transform.position.y;
@@ -61,7 +63,7 @@ public class BackgroundLooper : MonoBehaviour {
     private void Update()
     {
         // move other background down
-        if (DudeController.instance.transform.position.y < m_nextBackground.transform.position.y) {
+        if (m_looping && DudeController.instance.transform.position.y < m_nextBackground.transform.position.y) {
             m_otherBackground.transform.position = new Vector3(0.0f, m_nextBackground.transform.position.y - m_backgroundHeight, 0.0f);
 
             GameObject temp = m_nextBackground;
@@ -75,10 +77,19 @@ public class BackgroundLooper : MonoBehaviour {
         }
     }
 
-    public void InitializePosition()
+    public void InitializePosition(bool overlap)
     {
         m_otherBackground.transform.position = new Vector3(0.0f, CameraController.instance.transform.position.y, 0.0f);
-        m_nextBackground.transform.position = new Vector3(0.0f, CameraController.instance.transform.position.y - m_backgroundHeight, 0.0f);
+        if(!overlap) {
+            m_nextBackground.transform.position = new Vector3(0.0f, CameraController.instance.transform.position.y - m_backgroundHeight, 0.0f);
+        } else {
+            m_nextBackground.transform.position = new Vector3(0.0f, CameraController.instance.transform.position.y, 0.0f);
+        }
+    }
+
+    public float GetBackgroundY()
+    {
+        return m_otherBackground.transform.position.y;
     }
 
     public void SetFirstActivated(bool value)

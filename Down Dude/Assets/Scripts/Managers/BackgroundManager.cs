@@ -10,12 +10,15 @@ public class BackgroundManager : MonoBehaviour {
 
     public static BackgroundManager instance;   // singleton instance
 
-    [SerializeField] private List<BackgroundThemeHolder> m_backgrounds;  // list of background themes
+    [SerializeField] private List<BackgroundThemeHolder> m_backgrounds;     // list of background themes
+    [SerializeField] private BackgroundLooper m_transition;                 // transition background
 
     private BackgroundTheme m_currentTheme;     // current background theme
 
     [SerializeField] private int m_checkpointsUntilChange;      // checkpoints count until theme change
     private int m_checkpointsCount;                             // checkpoints count since last background change
+
+    private bool m_backgroundTransitioning = false;             // transitioning
 
     private void Awake()
     {
@@ -34,6 +37,8 @@ public class BackgroundManager : MonoBehaviour {
         BackgroundTheme newTheme = (BackgroundTheme)Random.Range(0, m_backgrounds.Count);
         SetBackgroundTheme(newTheme);
         m_backgrounds[(int)m_currentTheme].InitializePositions();
+
+        m_transition.gameObject.SetActive(false);
     }
 
     private void Update()
@@ -47,6 +52,11 @@ public class BackgroundManager : MonoBehaviour {
     // - no repeating themes
     public void RandomizeBackgroundTheme()
     {
+        // stop if already transitioning
+        if(m_backgroundTransitioning) {
+            return;
+        }
+
         // loop until backgound does not repeat
         bool changed = false;
         while(!changed) {
@@ -55,11 +65,47 @@ public class BackgroundManager : MonoBehaviour {
 
             // if not current theme, change theme
             if(m_currentTheme != newTheme) {
-                SetBackgroundTheme(newTheme);
+                StartCoroutine(SetBackgroundThemeWithTransition(newTheme));
                 m_currentTheme = newTheme;
                 changed = true;
             }
         }
+    }
+
+    private IEnumerator SetBackgroundThemeWithTransition(BackgroundTheme theme)
+    {
+        m_backgroundTransitioning = true;
+
+        // initialize transition
+        InitializeTransition();
+        m_transition.gameObject.SetActive(true);
+
+        bool changed = false;
+        bool transitioning = true;
+        while(transitioning) {
+
+            // if dude move pass a threshold, change background
+            if (!changed) {
+                if (DudeController.instance.transform.position.y < m_transition.GetBackgroundY() - 5.0f) {
+                    SetBackgroundTheme(theme);
+                    changed = true;
+                }
+            }
+            
+            // if dude move pass a threashold, break from loop
+            else {
+                if (DudeController.instance.transform.position.y < m_transition.GetBackgroundY() - 12.0f) {
+                    transitioning = false;
+                }
+            }
+
+            yield return null;
+        }
+
+        // deactivate transition
+        m_transition.gameObject.SetActive(false);
+
+        m_backgroundTransitioning = false;
     }
 
     // set background theme
@@ -81,9 +127,14 @@ public class BackgroundManager : MonoBehaviour {
             m_checkpointsCount = 0;
         }
     }
+
+    private void InitializeTransition()
+    {
+        m_transition.InitializePosition(true);
+    }
 }
 
-public enum BackgroundTheme { CAVE = 0, FOREST = 1 };
+public enum BackgroundTheme { CAVE = 0, FOREST, CITY };
 
 // Background Theme
 //
@@ -113,8 +164,8 @@ class BackgroundThemeHolder
     // initialize positions for all background layers
     public void InitializePositions()
     {
-        m_bgLayer0.InitializePosition();
-        m_bgLayer1.InitializePosition();
-        m_bgLayer2.InitializePosition();
+        m_bgLayer0.InitializePosition(false);
+        m_bgLayer1.InitializePosition(false);
+        m_bgLayer2.InitializePosition(false);
     }
 }
