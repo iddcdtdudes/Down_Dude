@@ -88,9 +88,9 @@ public class PlayerDataManager : MonoBehaviour
 
     public void SetAllTimeData ()
     {
-        if (GameManager.instance.GetSessionScores() > m_player.m_allTimeHS)
+        if (GameManager.instance.GetSessionDistance() > m_player.m_allTimeHS)
         {
-            m_player.m_allTimeHS = GameManager.instance.GetSessionScores();
+            m_player.m_allTimeHS = (int)GameManager.instance.GetSessionDistance();
         }
 
         if (GameManager.instance.GetSessionCheckpoints() > m_player.m_allTimeCP)

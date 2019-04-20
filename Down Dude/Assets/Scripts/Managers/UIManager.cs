@@ -65,7 +65,7 @@ public class UIManager : MonoBehaviour
 
     public void UpdateGameOverUI()
     {
-        m_sessionHS.text = GameManager.instance.GetSessionScores().ToString();
+        m_sessionHS.text = GameManager.instance.GetSessionDistance().ToString();
         m_sessionCP.text = GameManager.instance.GetSessionCheckpoints().ToString();
         m_allTimeHS.text = PlayerDataManager.instance.GetAllTimeHS().ToString();
         m_allTimeCP.text = PlayerDataManager.instance.GetAllTimeCP().ToString();

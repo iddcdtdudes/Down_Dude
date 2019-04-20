@@ -524,7 +524,7 @@ MonoBehaviour:
   GameStart: 0
   timerText: {fileID: 523472954}
   checkpointsText: {fileID: 769474073}
-  scoreText: {fileID: 1966272342}
+  distanceText: {fileID: 1966272342}
   gameOverUIShow:
   - {fileID: 1463841248}
   gameOverUIHide:
@@ -532,6 +532,7 @@ MonoBehaviour:
   m_scoreBaseline: 200
   m_timeScaleMultiplier: 1500
   m_scoreMultiplierCeiling: 0.5
+  m_distanceScaler: 3
 --- !u!4 &133946287
 Transform:
   m_ObjectHideFlags: 0
@@ -1996,7 +1997,7 @@ GameObject:
   - component: {fileID: 608451039}
   - component: {fileID: 608451038}
   m_Layer: 5
-  m_Name: Scoring
+  m_Name: Distance
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -6013,7 +6014,7 @@ GameObject:
   - component: {fileID: 1966272342}
   - component: {fileID: 1966272344}
   m_Layer: 5
-  m_Name: score
+  m_Name: distance
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -6071,7 +6072,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 1
     m_VerticalOverflow: 1
     m_LineSpacing: 1
-  m_Text: '[ SCORE ]'
+  m_Text: '[ DIST ]'
 --- !u!222 &1966272343
 CanvasRenderer:
   m_ObjectHideFlags: 0

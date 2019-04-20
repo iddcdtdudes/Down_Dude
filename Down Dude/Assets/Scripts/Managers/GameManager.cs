@@ -25,8 +25,8 @@ public class GameManager : MonoBehaviour {
     [SerializeField] private Text checkpointsText;      // checkpoints text UI
     private int m_checkpointsReached;                   // checkpoints reached
 
-    [SerializeField] private Text scoreText;            // score text UI
-    private int m_score;                                // game score
+    [SerializeField] private Text distanceText;            // score text UI
+    private float m_distance;                                // game score
 
     [SerializeField] private List<GameObject> gameOverUIShow;
 
@@ -35,6 +35,9 @@ public class GameManager : MonoBehaviour {
     [SerializeField] private int m_scoreBaseline;                                   // base score reward for reaching a checkpoint
     [SerializeField] private int m_timeScaleMultiplier;                             // additional maximum core earned through faster play time
     [Range(0f, 0.5f)] [SerializeField] private float m_scoreMultiplierCeiling;      // time remaining percentage of maximum score multiplier
+
+    private float m_previousDudeY;                              // dude y position on previous update
+    [SerializeField] private float m_distanceScaler;      // scaler for distance
 
     private void Awake()
     {
@@ -72,19 +75,23 @@ public class GameManager : MonoBehaviour {
         // initialize variables
         m_timer = ChunkManager.instance.GetNewChunkTimeLimit();
         m_checkpointsReached = 0;
-        m_score = 0;
+        m_distance = 0;
         DudeController.instance.ResetDude();
 
         // initialize UI values
         timerText.text = m_timer.ToString("F1");
         checkpointsText.text = m_checkpointsReached.ToString();
-        scoreText.text = m_score.ToString();
+        distanceText.text = m_distance.ToString();
+
+        // initialize previous dude position
+        m_previousDudeY = 0.0f;
     }
 
     #region Update
     private void Update()
     {
         UpdateTimer();
+        UpdateDistance();
     }
 
     // decrement timer
@@ -105,13 +112,17 @@ public class GameManager : MonoBehaviour {
 
     #region Private
     // add amount to score
-    private void AddScore(int amount)
+    private void UpdateDistance()
     {
-        // add to score
-        m_score += amount;
+        // update delta y
+        float deltaY = m_previousDudeY - DudeController.instance.transform.position.y;
+        m_previousDudeY = DudeController.instance.transform.position.y;
+
+        // increment distance
+        m_distance += deltaY * m_distanceScaler;
 
         // update score text UI
-        scoreText.text = m_score.ToString();
+        distanceText.text = m_distance.ToString("F0") + 'm';
     }
 
     // add 1 to checkpoints reached
@@ -135,16 +146,15 @@ public class GameManager : MonoBehaviour {
         // calculate and add score
         float chunkTimeLimit = ChunkManager.instance.GetChunkList()[ChunkManager.instance.GetChunkIndex(1)].GetTimeLimit();
         float timeScale = Mathf.Clamp01((m_timer / chunkTimeLimit) / m_scoreMultiplierCeiling);
-        AddScore(m_scoreBaseline + (int)(timeScale * m_timeScaleMultiplier));
 
         // set timer to chunk's time limit
         m_timer = ChunkManager.instance.GetNewChunkTimeLimit();
     }
     #endregion
 
-    public int GetSessionScores ()
+    public float GetSessionDistance ()
     {
-        return m_score;
+        return m_distance;
     }
 
     public int GetSessionCheckpoints ()

@@ -111,7 +111,7 @@ public class AchievementManager : MonoBehaviour
                             }
                             break;
                         case TRACKER.SCORE:
-                            m_achievements[i].ach_Trigger[j].ach_Progress = GameManager.instance.GetSessionScores();
+                            m_achievements[i].ach_Trigger[j].ach_Progress = (int)GameManager.instance.GetSessionDistance();
                             if (m_achievements[i].ach_Dynamic)
                             {
                                 m_achievements[i].ach_Trigger[j].ach_Goal = PlayerDataManager.instance.GetAllTimeHS();
