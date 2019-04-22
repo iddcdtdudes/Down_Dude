@@ -10,7 +10,9 @@ public class SkinManager : MonoBehaviour
 
     //[SerializeField]public int m_skinsTotal;
 
-    [SerializeField] private Skin[] m_skins;
+    [SerializeField] public Skin[] m_skins;
+
+    [SerializeField] private SkinObject[] m_skin;
 
     [SerializeField]private Animator m_dudeAnimator;
 
@@ -32,7 +34,7 @@ public class SkinManager : MonoBehaviour
         //m_dudeAnimator = DudeController.instance.GetComponentInChildren<Animator>();
         m_currentSkin = PlayerDataManager.instance.GetUsingSkin();
         //OverrideAnimator(m_currentSkin);
-
+        UIManager.instance.m_skinExample.sprite = m_skin[m_currentSkin].GetSkinEx();
         Debug.Log("Current skin = " + m_currentSkin);
     }
 
@@ -42,7 +44,8 @@ public class SkinManager : MonoBehaviour
         //{
             if (m_dudeAnimator != null)
             {   
-                m_dudeAnimator.runtimeAnimatorController = m_skins[skinID].m_skinIDAnimator;
+                //m_dudeAnimator.runtimeAnimatorController = m_skins[skinID].m_skinIDAnimator;
+                m_dudeAnimator.runtimeAnimatorController = m_skin[skinID].m_skinIDAnimator;
             }
             else
             {
@@ -78,6 +81,25 @@ public class SkinManager : MonoBehaviour
 
     public int GetSkinsNumber ()
     {
-        return m_skins.Length;
+        return m_skin.Length;
+    }
+
+    public SkinObject GetSkin (int skinID)
+    {
+        return m_skin[skinID];
+    }
+
+    public void BuySkin (int skinID)
+    {
+        int skinCost = m_skin[skinID].GetSkinCost();
+
+        if (!PlayerDataManager.instance.GetSkin(skinID))
+        {
+            if (PlayerDataManager.instance.GetCoin() >= skinCost)
+            {
+                PlayerDataManager.instance.SubtractCoins(skinCost);
+                PlayerDataManager.instance.SetUnlockSkin(skinID);
+            }
+        }
     }
 }

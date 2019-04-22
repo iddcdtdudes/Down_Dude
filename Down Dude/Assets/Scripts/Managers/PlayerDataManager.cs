@@ -50,6 +50,7 @@ public class PlayerDataManager : MonoBehaviour
         SkinManager.instance.ChangeSkin(m_player.m_usingSkin);
         Debug.Log("Load Save Data.");
         UIManager.instance.CreateAchievementMenu();
+        UIManager.instance.CreateSkinMenu();
         UIManager.instance.UpdateCoinValue();
 
     }
@@ -88,9 +89,9 @@ public class PlayerDataManager : MonoBehaviour
 
     public void SetAllTimeData ()
     {
-        if (GameManager.instance.GetSessionDistance() > m_player.m_allTimeHS)
+        if (GameManager.instance.GetSessionDistance() > m_player.m_allTimeDist)
         {
-            m_player.m_allTimeHS = (int)GameManager.instance.GetSessionDistance();
+            m_player.m_allTimeDist = (int)GameManager.instance.GetSessionDistance();
         }
 
         if (GameManager.instance.GetSessionCheckpoints() > m_player.m_allTimeCP)
@@ -135,9 +136,9 @@ public class PlayerDataManager : MonoBehaviour
         return m_player.m_coins;
     }
 
-    public int GetAllTimeHS ()
+    public float GetAllTimeDist ()
     {
-        return m_player.m_allTimeHS;
+        return m_player.m_allTimeDist;
     }
 
     public int GetAllTimeCP ()

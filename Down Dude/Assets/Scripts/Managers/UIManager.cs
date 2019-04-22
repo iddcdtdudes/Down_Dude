@@ -9,8 +9,8 @@ public class UIManager : MonoBehaviour
     public static UIManager instance;
 
     [Header("Game Over UI")]
-    public Text m_sessionHS;
-    public Text m_allTimeHS;
+    public Text m_sessionDist;
+    public Text m_allTimeDist;
     public Text m_sessionCP;
     public Text m_allTimeCP;
     //public Text m_achievementCompleted;
@@ -20,6 +20,20 @@ public class UIManager : MonoBehaviour
     [Header("Achievement UI")]
     public GameObject m_achievementPanel;
     public GameObject m_achievementPrefab;
+
+    [Header("Skin UI")]
+    //Middle
+    public Text m_skinName;
+    public Text m_skinCost;
+    public GameObject m_skinBuyButton;
+    public GameObject m_skinSelectButton;
+    public Image m_skinExample;
+    //Lower
+    public GameObject m_skinPanel;
+    public GameObject m_skinPrefab;
+    //Sprite
+    public Sprite m_lockedICON;
+    public Sprite m_selectICON;
 
     [Header("Menu")]
     public Text m_coins;
@@ -46,7 +60,7 @@ public class UIManager : MonoBehaviour
 
         //Update Coins in menu
         UpdateCoinValue();
-
+        
         //Create each achievement list in UI
         
     }
@@ -65,9 +79,9 @@ public class UIManager : MonoBehaviour
 
     public void UpdateGameOverUI()
     {
-        m_sessionHS.text = GameManager.instance.GetSessionDistance().ToString();
+        m_sessionDist.text = ((int)GameManager.instance.GetSessionDistance()).ToString();
         m_sessionCP.text = GameManager.instance.GetSessionCheckpoints().ToString();
-        m_allTimeHS.text = PlayerDataManager.instance.GetAllTimeHS().ToString();
+        m_allTimeDist.text = PlayerDataManager.instance.GetAllTimeDist().ToString();
         m_allTimeCP.text = PlayerDataManager.instance.GetAllTimeCP().ToString();
     }
 
@@ -128,4 +142,91 @@ public class UIManager : MonoBehaviour
 
     #endregion
 
+    #region Skin Panel
+
+    public void SelectSkin (int skinID)
+    {
+        //Set Skin Name
+        m_skinName.text = SkinManager.instance.GetSkin(skinID).GetSkinName();
+        m_skinExample.sprite = SkinManager.instance.GetSkin(skinID).GetSkinEx();
+        //Reset Click Function
+        m_skinSelectButton.GetComponent<Button>().onClick.RemoveAllListeners();
+        if (PlayerDataManager.instance.GetSkin(skinID))
+        {
+            //Show Select Button
+            m_skinSelectButton.SetActive(true);
+            m_skinBuyButton.SetActive(false);
+            //Set Select Button
+            m_skinSelectButton.GetComponent<Button>().onClick.AddListener(delegate
+            {
+                SkinManager.instance.ChangeSkin(skinID);
+            });
+        }
+        else
+        {
+            //Show Buy Button
+            m_skinSelectButton.SetActive(false);
+            m_skinBuyButton.SetActive(true);
+            m_skinCost.text = SkinManager.instance.GetSkin(skinID).GetSkinCost().ToString();
+            //Set Select Button
+            m_skinSelectButton.GetComponent<Button>().onClick.AddListener(delegate
+            {
+                //Unlock Skin
+                SkinManager.instance.BuySkin(skinID);
+                //Show Select Button
+                m_skinSelectButton.SetActive(true);
+                m_skinBuyButton.SetActive(false);
+                //Set Function in Select Button
+                m_skinSelectButton.GetComponent<Button>().onClick.AddListener(delegate
+                {
+                    SkinManager.instance.ChangeSkin(skinID);
+                });
+            });
+        }
+    }
+
+    public void CreateSkinMenu ()
+    {
+        for (int i = 0; i < SkinManager.instance.m_skins.Length; i++)
+        {
+            CreateSkin(m_skinPanel, SkinManager.instance.GetSkin(i));
+        }
+    }
+
+    private void CreateSkin (GameObject skinParent, SkinObject skinData)
+    {
+        GameObject skinPrefab = Instantiate(m_skinPrefab);
+
+        SetSkinInfo(skinParent, skinPrefab, skinData);
+    }
+
+    private void SetSkinInfo (GameObject skinParent, GameObject skinPrefab, SkinObject skinData)
+    {
+        skinPrefab.transform.SetParent(skinParent.transform);
+        skinPrefab.transform.localScale = new Vector3(1.0f, 1.0f, 1.0f);
+
+        SkinUI ui = skinPrefab.GetComponent<SkinUI>();
+        if (PlayerDataManager.instance.GetUsingSkin() == skinData.GetSkinID())
+        {
+            ui.SetICON(m_selectICON);
+        }
+        else
+        {
+            if (PlayerDataManager.instance.GetSkin(skinData.GetSkinID()))
+            {
+                ui.SetICON(skinData.GetSkinICON());
+            }
+            else
+            {
+                ui.SetICON(m_lockedICON);
+            }
+        }
+
+        ui.GetButton().onClick.AddListener(delegate
+        {
+            SelectSkin(skinData.GetSkinID());
+        });
+    }
+
+    #endregion
 }

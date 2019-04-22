@@ -78,7 +78,7 @@ public class AudioManager : MonoBehaviour {
             return;
         }
         if (OnOff == true)
-            s.source.volume = 0.8f;
+            s.source.volume = 0.15f;
         else
             s.source.volume = 0f;
     }

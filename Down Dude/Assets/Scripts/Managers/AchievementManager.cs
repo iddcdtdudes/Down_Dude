@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public enum TRACKER
-{SCORE, CHECKPOINT}
+{DISTANCE, CHECKPOINT}
 
 public class AchievementManager : MonoBehaviour
 {
@@ -63,8 +63,8 @@ public class AchievementManager : MonoBehaviour
                 {
                     switch (m_achievements[i].GetTriggerType(j))
                     {
-                        case TRACKER.SCORE:
-                            m_achievements[i].ach_Trigger[j].SetTriggerGoal(PlayerDataManager.instance.GetAllTimeHS());
+                        case TRACKER.DISTANCE:
+                            m_achievements[i].ach_Trigger[j].SetTriggerGoal(PlayerDataManager.instance.GetAllTimeDist());
                             break;
                         case TRACKER.CHECKPOINT:
                             m_achievements[i].ach_Trigger[j].SetTriggerGoal(PlayerDataManager.instance.GetAllTimeCP());
@@ -110,11 +110,11 @@ public class AchievementManager : MonoBehaviour
                                 m_achievements[i].ach_Trigger[j].ach_Goal = PlayerDataManager.instance.GetAllTimeCP();
                             }
                             break;
-                        case TRACKER.SCORE:
+                        case TRACKER.DISTANCE:
                             m_achievements[i].ach_Trigger[j].ach_Progress = (int)GameManager.instance.GetSessionDistance();
                             if (m_achievements[i].ach_Dynamic)
                             {
-                                m_achievements[i].ach_Trigger[j].ach_Goal = PlayerDataManager.instance.GetAllTimeHS();
+                                m_achievements[i].ach_Trigger[j].ach_Goal = (int)PlayerDataManager.instance.GetAllTimeDist();
                             }
                             break;
                     }
@@ -166,6 +166,11 @@ public class TriggerTracker
     public void SetTriggerGoal(int newGoal)
     {
         ach_Goal = newGoal;
+    }
+
+    public void SetTriggerGoal(float newGoal)
+    {
+        ach_Goal = (int)newGoal;
     }
 
     public void ResetTrigger ()

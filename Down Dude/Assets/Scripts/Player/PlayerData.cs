@@ -11,8 +11,9 @@ public class PlayerData
     public string m_version;
     public int m_coins;
     public int m_usingSkin;
-    public int m_allTimeHS;
+    //public int m_allTimeHS;
     public int m_allTimeCP;
+    public float m_allTimeDist;
     public bool[] m_unlockedSkins;
     public bool[] m_unlockedAchievements;
     public bool[] m_achievementClaimed;
@@ -22,8 +23,9 @@ public class PlayerData
     {
         m_coins = player.m_coins;
         m_usingSkin = player.m_usingSkin;
-        m_allTimeHS = player.m_allTimeHS;
+        //m_allTimeHS = player.m_allTimeHS;
         m_allTimeCP = player.m_allTimeCP;
+        m_allTimeDist = player.m_allTimeDist;
 
         m_unlockedSkins = new bool[numberOfSkins];
         player.m_unlockedSkins.CopyTo(m_unlockedSkins, 0);
@@ -116,8 +118,9 @@ public class PlayerData
     {
         m_coins = 0;
         m_usingSkin = 0;
-        m_allTimeHS = 0;
+        //m_allTimeHS = 0;
         m_allTimeCP = 0;
+        m_allTimeDist = 0.0f;
         m_unlockedSkins = new bool[numberOfSkins]; //Defaults is false
         m_unlockedAchievements = new bool[numberOfAchievements];
         m_achievementClaimed = new bool[numberOfAchievements];
