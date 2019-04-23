@@ -85,6 +85,9 @@ public class GameManager : MonoBehaviour {
 
         // initialize previous dude position
         m_previousDudeY = 0.0f;
+
+        // play menu music
+        AudioManager.instance.Play("Menu");
     }
 
     #region Update
@@ -164,11 +167,15 @@ public class GameManager : MonoBehaviour {
 
     public void ResumeGame ()
     {
+        AudioManager.instance.Play("BGM");
+        AudioManager.instance.StopSound("Menu");
         Time.timeScale = 1f;
     }
 
     public void PauseGame ()
     {
+        AudioManager.instance.Play("Menu");
+        AudioManager.instance.StopSound("BGM");
         Time.timeScale = 0.0f;
     }
 
