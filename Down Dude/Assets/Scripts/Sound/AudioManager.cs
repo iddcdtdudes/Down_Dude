@@ -32,9 +32,16 @@ public class AudioManager : MonoBehaviour {
     void Start () {
         if (PlayerPrefs.HasKey("Music"))
         {
+            Play("Theme");
             if (PlayerPrefs.GetInt("Music") == 1)
             {
-                Play("Theme");
+                //Play("Theme");
+                Music(true);
+            }
+            else
+            {
+
+                Music(false);
             }
         }
         else
@@ -85,8 +92,11 @@ public class AudioManager : MonoBehaviour {
 
     public void Music(bool OnOff)
     {
-        string name = "Theme";
+        string name = "BGM";
+        string menu = "Menu";
+
         Sound s = Array.Find(sounds, sound => sound.name == name);
+        Sound s1 = Array.Find(sounds, sound => sound.name == menu);
         if (s == null)
         {
             Debug.LogWarning("Cannot find sound");
@@ -96,11 +106,13 @@ public class AudioManager : MonoBehaviour {
         if (OnOff)
         {
             s.source.volume = 0.15f;
+            s1.source.volume = 0.15f;
             PlayerPrefs.SetInt("Music", 1);
         } 
         else
         {
             s.source.volume = 0f;
+            s1.source.volume = 0f;
             PlayerPrefs.SetInt("Music", 0);
         }
 

@@ -35,6 +35,10 @@ public class UIManager : MonoBehaviour
     public Sprite m_lockedLabel;
     public Sprite m_selectLabel;
 
+    [Header("Skin UI")]
+    public Text m_statCP;
+    public Text m_statDistance;
+
     [Header("Menu")]
     public Text m_coins;
     public GameObject m_musicOnButton;
@@ -77,7 +81,7 @@ public class UIManager : MonoBehaviour
 
     public void OnButtonPressed ()
     {
-        AudioManager.instance.Play("Button");
+        AudioManager.instance.Play("Ok");
     }
 
     public void ShowMusicSetting()
@@ -199,8 +203,8 @@ public class UIManager : MonoBehaviour
                 SkinManager.instance.ChangeSkin(skinID);
                 prefab.SetLabel(m_selectLabel);
                 m_skinSelectButton.GetComponent<SkinChooseUI>().GetCurrSkinUI().SetLabel(m_selectLabel);
-                m_skinSelectButton.GetComponent<SkinChooseUI>().GetCurrSkinUI().ShowLabel();
-                m_skinSelectButton.GetComponent<SkinChooseUI>().GetPrevSkinUI().HideLabel();
+                //m_skinSelectButton.GetComponent<SkinChooseUI>().GetCurrSkinUI().ShowLabel();
+                //m_skinSelectButton.GetComponent<SkinChooseUI>().GetPrevSkinUI().HideLabel();
                 OnButtonPressed();
 
             });
@@ -211,15 +215,13 @@ public class UIManager : MonoBehaviour
             //Show Buy Button
             m_skinSelectButton.SetActive(false);
             m_skinBuyButton.SetActive(true);
-            //Send Data to select button
-            m_skinBuyButton.GetComponent<SkinChooseUI>().SetSkinUI(prefab);
             m_skinCost.text = SkinManager.instance.GetSkin(skinID).GetSkinCost().ToString();
             //Set Select Button
             m_skinBuyButton.GetComponent<Button>().onClick.AddListener(delegate
             {
                 //Unlock Skin
-                SkinManager.instance.BuySkin(skinID);
-                prefab.HideLabel();
+                SkinManager.instance.BuySkin(skinID, prefab);
+                
             });
         }
     }
@@ -271,6 +273,16 @@ public class UIManager : MonoBehaviour
         {
             SelectSkin(skinData.GetSkinID(), ui);
         });
+    }
+
+    #endregion
+
+    #region Statistics
+
+    public void UpdateStatPage ()
+    {
+        m_statCP.text = PlayerDataManager.instance.GetAllTimeCP().ToString();
+        m_statDistance.text = PlayerDataManager.instance.GetAllTimeDist().ToString();
     }
 
     #endregion
