@@ -10,11 +10,11 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 3c5d04ab419639049aab014b041111be, type: 3}
-  m_Name: skin_1
+  m_Name: skin_4
   m_EditorClassIdentifier: 
-  m_id: 1
-  m_name: Kaki
+  m_id: 4
+  m_name: Snow
   m_cost: 0
-  m_skinIDAnimator: {fileID: 22100000, guid: 0edce2c2cb00e43478508975a27c08c2, type: 2}
-  m_skinEx: {fileID: 21300000, guid: 275a8d916015cff4cafeefd1521efcb6, type: 3}
-  m_skinIcon: {fileID: 21300000, guid: 7a06958627c8c3c499d2f0ff6cd6c158, type: 3}
+  m_skinIDAnimator: {fileID: 22100000, guid: 26e4dac8ab62c8d4fb11b8dd4252832b, type: 2}
+  m_skinEx: {fileID: 21300000, guid: 12776d3c9da20654c90d50d83704f66b, type: 3}
+  m_skinIcon: {fileID: 21300000, guid: cc8256f0a6480874db7964c8a3577e32, type: 3}

@@ -6,7 +6,7 @@ AnimationClip:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: anim_dude_sandy_walking
+  m_Name: anim_snow_walking
   serializedVersion: 6
   m_Legacy: 0
   m_Compressed: 0
@@ -20,13 +20,13 @@ AnimationClip:
   m_PPtrCurves:
   - curve:
     - time: 0
-      value: {fileID: 21300000, guid: eedf283202547084098dd7ec5c4fa2ab, type: 3}
+      value: {fileID: 21300000, guid: 5c0ecdace8c7559478b23e7d3c15099c, type: 3}
     - time: 0.1
-      value: {fileID: 21300000, guid: f1e0ed4190e88bb4c91c17b666e07ac0, type: 3}
+      value: {fileID: 21300000, guid: 37c9b211437d1dd458edfc721d025e54, type: 3}
     - time: 0.2
-      value: {fileID: 21300000, guid: e58f82081bae6524c8b3166d80d3c79f, type: 3}
+      value: {fileID: 21300000, guid: 2db02687b5c8b2a4fa6488a35fcc108d, type: 3}
     - time: 0.3
-      value: {fileID: 21300000, guid: b74b674059ccfe847be4b0bd9b875fbe, type: 3}
+      value: {fileID: 21300000, guid: d0f709656d2f5af42ba7836c635f0b0d, type: 3}
     attribute: m_Sprite
     path: 
     classID: 212
@@ -46,10 +46,10 @@ AnimationClip:
       customType: 23
       isPPtrCurve: 1
     pptrCurveMapping:
-    - {fileID: 21300000, guid: eedf283202547084098dd7ec5c4fa2ab, type: 3}
-    - {fileID: 21300000, guid: f1e0ed4190e88bb4c91c17b666e07ac0, type: 3}
-    - {fileID: 21300000, guid: e58f82081bae6524c8b3166d80d3c79f, type: 3}
-    - {fileID: 21300000, guid: b74b674059ccfe847be4b0bd9b875fbe, type: 3}
+    - {fileID: 21300000, guid: 5c0ecdace8c7559478b23e7d3c15099c, type: 3}
+    - {fileID: 21300000, guid: 37c9b211437d1dd458edfc721d025e54, type: 3}
+    - {fileID: 21300000, guid: 2db02687b5c8b2a4fa6488a35fcc108d, type: 3}
+    - {fileID: 21300000, guid: d0f709656d2f5af42ba7836c635f0b0d, type: 3}
   m_AnimationClipSettings:
     serializedVersion: 2
     m_AdditiveReferencePoseClip: {fileID: 0}
