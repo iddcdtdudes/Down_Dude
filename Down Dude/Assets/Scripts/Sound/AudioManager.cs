@@ -30,7 +30,21 @@ public class AudioManager : MonoBehaviour {
     }
     // Use this for initialization
     void Start () {
-        Play("Theme");
+        if (PlayerPrefs.HasKey("Music"))
+        {
+            if (PlayerPrefs.GetInt("Music") == 1)
+            {
+                Play("Theme");
+            }
+        }
+        else
+        {
+            Play("Theme");
+            PlayerPrefs.SetInt("Music", 1);
+            PlayerPrefs.Save();
+            Debug.Log("No music key");
+        }
+        
 	}
 	
 	public void Play (string name)
@@ -57,7 +71,7 @@ public class AudioManager : MonoBehaviour {
         }
     }
 
-    public void StopMusic (string name)
+    public void StopSound (string name)
     {
         Sound s = Array.Find(sounds, sound => sound.name == name);
         if (s == null)
@@ -66,6 +80,7 @@ public class AudioManager : MonoBehaviour {
             return;
         }
         s.volume = 0f;
+        s.source.Stop();
     }
 
     public void Music(bool OnOff)
@@ -77,9 +92,21 @@ public class AudioManager : MonoBehaviour {
             Debug.LogWarning("Cannot find sound");
             return;
         }
-        if (OnOff == true)
-            s.source.volume = 0.8f;
+
+        if (OnOff)
+        {
+            s.source.volume = 0.15f;
+            PlayerPrefs.SetInt("Music", 1);
+        } 
         else
+        {
             s.source.volume = 0f;
+            PlayerPrefs.SetInt("Music", 0);
+        }
+
+        PlayerPrefs.Save();
+            
     }
+
+    
 }

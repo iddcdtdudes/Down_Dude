@@ -81,7 +81,6 @@ public class AchievementUI : MonoBehaviour
         }
     }
 
-
     public void HideClaimButton (Button claimButton)
     {
         claimButton.interactable = false;

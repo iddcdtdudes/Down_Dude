@@ -16,11 +16,18 @@ public class AchievementObject : ScriptableObject
     public TriggerTracker[] ach_Trigger;
     public bool ach_Dynamic;
 
+    //Getter
     public int GetTriggerSize ()
     {
         return ach_Trigger.Length;
     }
 
+    public TRACKER GetTriggerType(int index)
+    {
+        return ach_Trigger[index].ach_Type;
+    }
+
+    //Setter
     public void SetTrigger (int index)
     {
         if (index > ach_Trigger.Length || index < 0)
@@ -45,9 +52,6 @@ public class AchievementObject : ScriptableObject
         }
     }
 
-    public TRACKER GetTriggerType(int index)
-    {
-        return ach_Trigger[index].ach_Type;
-    }
+    
 
 }

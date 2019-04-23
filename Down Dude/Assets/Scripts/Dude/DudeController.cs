@@ -193,6 +193,7 @@ public class DudeController : MonoBehaviour {
     }
     #endregion
 
+    #region Private
     private void OnCollisionEnter2D(Collision2D collision)
     {
         // game over upon colliding with fatal hitbox
@@ -380,6 +381,8 @@ public class DudeController : MonoBehaviour {
         
     }
 
+    #endregion
+
     #region Public
     public DudeMode GetDudeMode()
     {
@@ -428,10 +431,12 @@ public class DudeController : MonoBehaviour {
             case DudeMode.JETPACK:
                 m_animator.SetBool("isParachuting", false);
                 m_animator.SetBool("isGrounded", false);
+                AudioManager.instance.Play("Jetpack");
                 break;
             case DudeMode.PARACHUTE:
                 m_animator.SetBool("isGrounded", false);
                 m_animator.SetBool("isParachuting", true);
+                AudioManager.instance.Play("Parachute");
                 break;
             case DudeMode.IDLE:
                 m_animator.SetBool("isGrounded", true);
@@ -457,6 +462,8 @@ public class DudeController : MonoBehaviour {
         if (m_dudeAlive != false)
         {
             AudioManager.instance.Play("DudeDead");
+            AudioManager.instance.Play("Menu");
+            AudioManager.instance.StopSound("BGM");
             m_dudeAlive = false;
         }
         

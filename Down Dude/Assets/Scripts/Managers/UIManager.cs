@@ -9,8 +9,8 @@ public class UIManager : MonoBehaviour
     public static UIManager instance;
 
     [Header("Game Over UI")]
-    public Text m_sessionHS;
-    public Text m_allTimeHS;
+    public Text m_sessionDist;
+    public Text m_allTimeDist;
     public Text m_sessionCP;
     public Text m_allTimeCP;
     //public Text m_achievementCompleted;
@@ -21,9 +21,25 @@ public class UIManager : MonoBehaviour
     public GameObject m_achievementPanel;
     public GameObject m_achievementPrefab;
 
+    [Header("Skin UI")]
+    //Middle
+    public Text m_skinName;
+    public Text m_skinCost;
+    public GameObject m_skinBuyButton;
+    public GameObject m_skinSelectButton;
+    public Image m_skinExample;
+    //Lower
+    public GameObject m_skinPanel;
+    public GameObject m_skinPrefab;
+    //Sprite
+    public Sprite m_lockedLabel;
+    public Sprite m_selectLabel;
+
     [Header("Menu")]
     public Text m_coins;
-    
+    public GameObject m_musicOnButton;
+    public GameObject m_musicOffButton;
+
 
     // Start is called before the first frame update
     void Awake()
@@ -46,7 +62,7 @@ public class UIManager : MonoBehaviour
 
         //Update Coins in menu
         UpdateCoinValue();
-
+        
         //Create each achievement list in UI
         
     }
@@ -59,15 +75,46 @@ public class UIManager : MonoBehaviour
         m_coins.text = PlayerDataManager.instance.GetCoin().ToString();
     }
 
+    public void OnButtonPressed ()
+    {
+        AudioManager.instance.Play("Button");
+    }
+
+    public void ShowMusicSetting()
+    {
+        if (PlayerPrefs.HasKey("Music"))
+        {
+            if (PlayerPrefs.GetInt("Music") == 1)
+            {
+                m_musicOffButton.SetActive(true);
+                m_musicOnButton.SetActive(false);
+            }
+            else
+            {
+                m_musicOffButton.SetActive(false);
+                m_musicOnButton.SetActive(true);
+            }
+        }
+        else
+        {
+            Debug.Log("No music key");
+        }
+    }
+
+    public void SetMusic (bool i)
+    {
+        AudioManager.instance.Music(i);
+    }
+
     #endregion
 
     #region Gameover UI
 
     public void UpdateGameOverUI()
     {
-        m_sessionHS.text = GameManager.instance.GetSessionDistance().ToString();
+        m_sessionDist.text = ((int)GameManager.instance.GetSessionDistance()).ToString();
         m_sessionCP.text = GameManager.instance.GetSessionCheckpoints().ToString();
-        m_allTimeHS.text = PlayerDataManager.instance.GetAllTimeHS().ToString();
+        m_allTimeDist.text = PlayerDataManager.instance.GetAllTimeDist().ToString();
         m_allTimeCP.text = PlayerDataManager.instance.GetAllTimeCP().ToString();
     }
 
@@ -107,7 +154,7 @@ public class UIManager : MonoBehaviour
 
         SetAchievementInfo(achParent, achPrefab , achData);
 
-        Debug.Log("Create achievement in menu");
+        //Debug.Log("Create achievement in menu");
     }
 
     private void SetAchievementInfo (GameObject achParent, GameObject achPrefab, AchievementObject achData)
@@ -128,4 +175,103 @@ public class UIManager : MonoBehaviour
 
     #endregion
 
+    #region Skin Panel
+
+    public void SelectSkin (int skinID, SkinUI prefab)
+    {
+        //Set Skin Name
+        m_skinName.text = SkinManager.instance.GetSkin(skinID).GetSkinName();
+        m_skinExample.sprite = SkinManager.instance.GetSkin(skinID).GetSkinEx();
+        //Reset Click Function
+        
+        
+        if (PlayerDataManager.instance.GetSkin(skinID))
+        {
+            m_skinSelectButton.GetComponent<Button>().onClick.RemoveAllListeners();
+            //Show Select Button
+            m_skinSelectButton.SetActive(true);
+            m_skinBuyButton.SetActive(false);
+            //Send Data to select button
+            m_skinSelectButton.GetComponent<SkinChooseUI>().SetSkinUI(prefab);
+            //Set Select Button
+            m_skinSelectButton.GetComponent<Button>().onClick.AddListener(delegate
+            {
+                SkinManager.instance.ChangeSkin(skinID);
+                prefab.SetLabel(m_selectLabel);
+                m_skinSelectButton.GetComponent<SkinChooseUI>().GetCurrSkinUI().SetLabel(m_selectLabel);
+                m_skinSelectButton.GetComponent<SkinChooseUI>().GetCurrSkinUI().ShowLabel();
+                m_skinSelectButton.GetComponent<SkinChooseUI>().GetPrevSkinUI().HideLabel();
+                OnButtonPressed();
+
+            });
+        }
+        else
+        {
+            m_skinBuyButton.GetComponent<Button>().onClick.RemoveAllListeners();
+            //Show Buy Button
+            m_skinSelectButton.SetActive(false);
+            m_skinBuyButton.SetActive(true);
+            //Send Data to select button
+            m_skinBuyButton.GetComponent<SkinChooseUI>().SetSkinUI(prefab);
+            m_skinCost.text = SkinManager.instance.GetSkin(skinID).GetSkinCost().ToString();
+            //Set Select Button
+            m_skinBuyButton.GetComponent<Button>().onClick.AddListener(delegate
+            {
+                //Unlock Skin
+                SkinManager.instance.BuySkin(skinID);
+                prefab.HideLabel();
+            });
+        }
+    }
+
+    public void CreateSkinMenu ()
+    {
+        for (int i = 0; i < SkinManager.instance.m_skins.Length; i++)
+        {
+            CreateSkin(m_skinPanel, SkinManager.instance.GetSkin(i));
+        }
+
+        m_skinExample.sprite = SkinManager.instance.GetSkin(PlayerDataManager.instance.GetUsingSkin()).GetSkinEx();
+        m_skinName.text = SkinManager.instance.GetSkin(PlayerDataManager.instance.GetUsingSkin()).GetSkinName();
+    }
+
+    private void CreateSkin (GameObject skinParent, SkinObject skinData)
+    {
+        GameObject skinPrefab = Instantiate(m_skinPrefab);
+
+        SetSkinInfo(skinParent, skinPrefab, skinData);
+    }
+
+    private void SetSkinInfo (GameObject skinParent, GameObject skinPrefab, SkinObject skinData)
+    {
+        skinPrefab.transform.SetParent(skinParent.transform);
+        skinPrefab.transform.localScale = new Vector3(1.0f, 1.0f, 1.0f);
+
+        SkinUI ui = skinPrefab.GetComponent<SkinUI>();
+        ui.SetICON(skinData.GetSkinICON());
+
+        if (PlayerDataManager.instance.GetUsingSkin() == skinData.GetSkinID())
+        {
+            ui.SetLabel(m_selectLabel);
+            m_skinSelectButton.GetComponent<SkinChooseUI>().SetSkinUI(ui);
+        }
+        else
+        {
+            if (!PlayerDataManager.instance.GetSkin(skinData.GetSkinID()))
+            {
+                ui.SetLabel(m_lockedLabel);
+            }
+            else
+            {
+                ui.HideLabel();
+            }
+        }
+
+        ui.GetButton().onClick.AddListener(delegate
+        {
+            SelectSkin(skinData.GetSkinID(), ui);
+        });
+    }
+
+    #endregion
 }
