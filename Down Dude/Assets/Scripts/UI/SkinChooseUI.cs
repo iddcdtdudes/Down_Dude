@@ -9,8 +9,30 @@ public class SkinChooseUI : MonoBehaviour
 
     public void SetSkinUI (SkinUI i)
     {
-        m_previousSkin = m_currentSkin;
+        if (m_previousSkin == null)
+        {
+            m_previousSkin = i;
+        }
+        else
+        {
+            m_previousSkin = m_currentSkin;
+        }
         m_currentSkin = i;
+    }
+
+    public void HidePreviousLabel ()
+    {
+        m_previousSkin.HideLabel();
+    }
+
+    public void HideCurrentLabel ()
+    {
+        m_currentSkin.HideLabel();
+    }
+
+    public void ShowCurrentLabel ()
+    {
+        m_currentSkin.ShowLabel();
     }
 
     public SkinUI GetCurrSkinUI ()

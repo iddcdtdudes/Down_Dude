@@ -32,9 +32,16 @@ public class AudioManager : MonoBehaviour {
     void Start () {
         if (PlayerPrefs.HasKey("Music"))
         {
+            Play("Theme");
             if (PlayerPrefs.GetInt("Music") == 1)
             {
-                Play("Theme");
+                //Play("Theme");
+                Music(true);
+            }
+            else
+            {
+
+                Music(false);
             }
         }
         else

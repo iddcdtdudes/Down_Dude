@@ -52,6 +52,7 @@ public class PlayerDataManager : MonoBehaviour
         UIManager.instance.CreateAchievementMenu();
         UIManager.instance.CreateSkinMenu();
         UIManager.instance.UpdateCoinValue();
+        UIManager.instance.UpdateStatPage();
 
     }
 

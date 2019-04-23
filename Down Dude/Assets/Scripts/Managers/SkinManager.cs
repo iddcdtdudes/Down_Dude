@@ -76,15 +76,12 @@ public class SkinManager : MonoBehaviour
             {
                 Debug.Log("Skin is locked");
             }
+            OverrideAnimator(m_currentSkin);
+            //Save player data
+            PlayerDataManager.instance.SaveDataLocal();
         }
-        else
-        {
-            m_currentSkin = 0;
-            PlayerDataManager.instance.SetUsingSkin(0);
-        }
-        OverrideAnimator(m_currentSkin);
-        //Save player data
-        PlayerDataManager.instance.SaveDataLocal();
+        
+        
     }
 
     public int GetSkinsNumber ()
@@ -97,7 +94,7 @@ public class SkinManager : MonoBehaviour
         return m_skin[skinID];
     }
 
-    public bool BuySkin (int skinID)
+    public void BuySkin (int skinID, SkinUI prefab)
     {
         int skinCost = m_skin[skinID].GetSkinCost();
 
@@ -105,29 +102,32 @@ public class SkinManager : MonoBehaviour
         {
             if (PlayerDataManager.instance.GetCoin() >= skinCost)
             {
+                //Player Sound
+                UIManager.instance.OnButtonPressed();
+                //Unlocked Skin
                 PlayerDataManager.instance.SubtractCoins(skinCost);
                 PlayerDataManager.instance.SetUnlockSkin(skinID);
+                //
                 UIManager.instance.m_skinBuyButton.SetActive(false);
                 UIManager.instance.m_skinSelectButton.SetActive(true);
+                prefab.HideLabel();
                 Button selectButton = UIManager.instance.m_skinSelectButton.GetComponent<Button>();
+                //Reset Select Button
                 selectButton.onClick.RemoveAllListeners();
-
+                //Add Function
                 selectButton.onClick.AddListener(delegate
                 {
                     ChangeSkin(skinID);
+                    selectButton.GetComponent<SkinChooseUI>().SetSkinUI(prefab);
+                    selectButton.GetComponent<SkinChooseUI>().GetCurrSkinUI().SetLabel(UIManager.instance.m_selectLabel);
+                    
+                    selectButton.GetComponent<SkinChooseUI>().HidePreviousLabel();
+                    selectButton.GetComponent<SkinChooseUI>().ShowCurrentLabel();
                     UIManager.instance.OnButtonPressed();
                 });
 
-                return true;
             }
-            else
-            {
-                return false;
-            }
-        }
-        else
-        {
-            return false;
+
         }
         
     }
