@@ -1644,6 +1644,11 @@ PrefabInstance:
       propertyPath: m_steerSpeed
       value: 2.5
       objectReference: {fileID: 0}
+    - target: {fileID: 402833244977992534, guid: 224485796ab6c404da3326fceeaf5a54,
+        type: 3}
+      propertyPath: m_trackingTime
+      value: 3
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 224485796ab6c404da3326fceeaf5a54, type: 3}
 --- !u!4 &2992651781966332356 stripped
@@ -1829,6 +1834,11 @@ PrefabInstance:
       propertyPath: m_steerSpeed
       value: 2.5
       objectReference: {fileID: 0}
+    - target: {fileID: 402833244977992534, guid: 224485796ab6c404da3326fceeaf5a54,
+        type: 3}
+      propertyPath: m_trackingTime
+      value: 3
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 224485796ab6c404da3326fceeaf5a54, type: 3}
 --- !u!4 &1646202191910802532 stripped
@@ -2011,6 +2021,11 @@ PrefabInstance:
       propertyPath: m_steerSpeed
       value: 2.5
       objectReference: {fileID: 0}
+    - target: {fileID: 402833244977992534, guid: 224485796ab6c404da3326fceeaf5a54,
+        type: 3}
+      propertyPath: m_trackingTime
+      value: 3
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 224485796ab6c404da3326fceeaf5a54, type: 3}
 --- !u!4 &94659208090018300 stripped
@@ -2102,6 +2117,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_steerSpeed
       value: 2.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 402833244977992534, guid: 224485796ab6c404da3326fceeaf5a54,
+        type: 3}
+      propertyPath: m_trackingTime
+      value: 3
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 224485796ab6c404da3326fceeaf5a54, type: 3}
@@ -2358,6 +2378,11 @@ PrefabInstance:
       propertyPath: m_steerSpeed
       value: 2.5
       objectReference: {fileID: 0}
+    - target: {fileID: 402833244977992534, guid: 224485796ab6c404da3326fceeaf5a54,
+        type: 3}
+      propertyPath: m_trackingTime
+      value: 3
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 224485796ab6c404da3326fceeaf5a54, type: 3}
 --- !u!4 &7499915980279234043 stripped
@@ -2450,6 +2475,11 @@ PrefabInstance:
       propertyPath: m_steerSpeed
       value: 2.5
       objectReference: {fileID: 0}
+    - target: {fileID: 402833244977992534, guid: 224485796ab6c404da3326fceeaf5a54,
+        type: 3}
+      propertyPath: m_trackingTime
+      value: 3
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 224485796ab6c404da3326fceeaf5a54, type: 3}
 --- !u!114 &6035304425659405894 stripped
@@ -2541,6 +2571,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_steerSpeed
       value: 2.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 402833244977992534, guid: 224485796ab6c404da3326fceeaf5a54,
+        type: 3}
+      propertyPath: m_trackingTime
+      value: 3
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 224485796ab6c404da3326fceeaf5a54, type: 3}
@@ -2717,6 +2752,11 @@ PrefabInstance:
       propertyPath: m_steerSpeed
       value: 2.5
       objectReference: {fileID: 0}
+    - target: {fileID: 402833244977992534, guid: 224485796ab6c404da3326fceeaf5a54,
+        type: 3}
+      propertyPath: m_trackingTime
+      value: 3
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 224485796ab6c404da3326fceeaf5a54, type: 3}
 --- !u!4 &4684740484036649973 stripped
@@ -2787,6 +2827,11 @@ PrefabInstance:
       propertyPath: m_steerSpeed
       value: 2.5
       objectReference: {fileID: 0}
+    - target: {fileID: 402833244977992534, guid: 224485796ab6c404da3326fceeaf5a54,
+        type: 3}
+      propertyPath: m_trackingTime
+      value: 3
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 224485796ab6c404da3326fceeaf5a54, type: 3}
 --- !u!4 &4684740483223675029 stripped
@@ -2851,6 +2896,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_steerSpeed
       value: 2.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 402833244977992534, guid: 224485796ab6c404da3326fceeaf5a54,
+        type: 3}
+      propertyPath: m_trackingTime
+      value: 3
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 224485796ab6c404da3326fceeaf5a54, type: 3}
@@ -2921,6 +2971,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_steerSpeed
       value: 2.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 402833244977992534, guid: 224485796ab6c404da3326fceeaf5a54,
+        type: 3}
+      propertyPath: m_trackingTime
+      value: 3
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 224485796ab6c404da3326fceeaf5a54, type: 3}
@@ -3001,6 +3056,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_steerSpeed
       value: 2.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 402833244977992534, guid: 224485796ab6c404da3326fceeaf5a54,
+        type: 3}
+      propertyPath: m_trackingTime
+      value: 3
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 224485796ab6c404da3326fceeaf5a54, type: 3}
