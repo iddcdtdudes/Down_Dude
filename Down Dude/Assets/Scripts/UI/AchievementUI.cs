@@ -47,15 +47,15 @@ public class AchievementUI : MonoBehaviour
                     //Add coins
                     PlayerDataManager.instance.AddCoins(achData.ach_Reward);
                     //Play Sound
-                    AudioManager.instance.Play("Button");
+                    AudioManager.instance.Play("Ok");
                     //Reset achievement
                     PlayerDataManager.instance.ResetUnlockAch(achData.ach_ID);
                     //Hide claim button
                     HideClaimButton(claimButton);
-                    //Save player data
-                    PlayerDataManager.instance.SaveDataLocal();
                     //Update coin in UI
                     UIManager.instance.UpdateCoinValue();
+                    //Save player data
+                    PlayerDataManager.instance.SaveDataLocal();
                 });
             }
             else
@@ -65,14 +65,15 @@ public class AchievementUI : MonoBehaviour
                     //Add coins
                     PlayerDataManager.instance.AddCoins(achData.ach_Reward);
                     //Play sound
-                    AudioManager.instance.Play("Button"); HideClaimButton(claimButton);
-                    //Save Data
-                    PlayerDataManager.instance.SaveDataLocal();
+                    AudioManager.instance.Play("Ok");
+                    HideClaimButton(claimButton);
                     //Update coin in UI
                     UIManager.instance.UpdateCoinValue();
                     //Set achievement as claimed
                     PlayerDataManager.instance.SetAchievementClaimed(achData.ach_ID);
                     claimButton.gameObject.SetActive(false);
+                    //Save Data
+                    PlayerDataManager.instance.SaveDataLocal();
                 });
             }
 

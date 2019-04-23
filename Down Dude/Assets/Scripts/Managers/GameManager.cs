@@ -172,6 +172,14 @@ public class GameManager : MonoBehaviour {
         Time.timeScale = 1f;
     }
 
+    public void StartGame ()
+    {
+        AudioManager.instance.Play("BGM");
+        AudioManager.instance.StopSound("Menu");
+        DudeController.instance.SetDudeState(DudeState.ALIVE);
+        Time.timeScale = 1f;
+    }
+
     public void PauseGame ()
     {
         AudioManager.instance.Play("Menu");

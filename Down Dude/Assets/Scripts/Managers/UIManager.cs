@@ -148,7 +148,8 @@ public class UIManager : MonoBehaviour
     {
         for (int i = 0; i < AchievementManager.instance.m_achievements.Count; i++)
         {
-            CreateAchievement(m_achievementPanel, AchievementManager.instance.m_achievements[i]);
+            if (!PlayerDataManager.instance.GetAchievementClaimed(i))
+                CreateAchievement(m_achievementPanel, AchievementManager.instance.m_achievements[i]);
         }
     }
 
@@ -204,7 +205,7 @@ public class UIManager : MonoBehaviour
                 prefab.SetLabel(m_selectLabel);
                 m_skinSelectButton.GetComponent<SkinChooseUI>().GetCurrSkinUI().SetLabel(m_selectLabel);
                 //m_skinSelectButton.GetComponent<SkinChooseUI>().GetCurrSkinUI().ShowLabel();
-                //m_skinSelectButton.GetComponent<SkinChooseUI>().GetPrevSkinUI().HideLabel();
+               // m_skinSelectButton.GetComponent<SkinChooseUI>().GetPrevSkinUI().HideLabel();
                 OnButtonPressed();
 
             });

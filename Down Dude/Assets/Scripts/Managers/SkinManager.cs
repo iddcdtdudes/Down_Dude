@@ -110,6 +110,8 @@ public class SkinManager : MonoBehaviour
                 //
                 UIManager.instance.m_skinBuyButton.SetActive(false);
                 UIManager.instance.m_skinSelectButton.SetActive(true);
+                UIManager.instance.UpdateCoinValue();
+                //Change Label
                 prefab.HideLabel();
                 Button selectButton = UIManager.instance.m_skinSelectButton.GetComponent<Button>();
                 //Reset Select Button
@@ -126,6 +128,13 @@ public class SkinManager : MonoBehaviour
                     UIManager.instance.OnButtonPressed();
                 });
 
+                //SaveData
+                PlayerDataManager.instance.SaveDataLocal();
+
+            }
+            else
+            {
+                AudioManager.instance.Play("Cancel");
             }
 
         }

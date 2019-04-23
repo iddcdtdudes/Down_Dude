@@ -22,6 +22,7 @@ public class DudeController : MonoBehaviour {
     //State
     private DudeMode m_dudeMode;
     private DudeDirection m_dudeDir;
+    private DudeState m_dudeState;
     private bool m_dudeAlive;
     private bool m_dudeIsOnGround;
 
@@ -89,7 +90,8 @@ public class DudeController : MonoBehaviour {
     #region Update
     private void Update()
     {
-        if (m_dudeAlive == true) //When dude is alive
+        //if (m_dudeAlive == true) //When dude is alive
+        if (m_dudeState == DudeState.ALIVE)
         {
             if (m_dudeControlByButton)
             {
@@ -454,17 +456,27 @@ public class DudeController : MonoBehaviour {
 
     public bool GetDudeAlive ()
     {
-        return m_dudeAlive;
+        switch (m_dudeState)
+        {
+            case DudeState.ALIVE:
+                return true;
+            default:
+                return false;
+        }
+        //return m_dudeAlive;
     }
+
     //Kill dude
     public void KillDude ()
     {
-        if (m_dudeAlive != false)
+        //if (m_dudeAlive != false)
+        if (m_dudeState != DudeState.DEAD)
         {
             AudioManager.instance.Play("DudeDead");
             AudioManager.instance.Play("Menu");
             AudioManager.instance.StopSound("BGM");
-            m_dudeAlive = false;
+            //m_dudeAlive = false;
+            m_dudeState = DudeState.DEAD;
         }
         
         instance.GetComponentInChildren<SpriteRenderer>().color = new Color(1f, 1f, 1f, 0f);
@@ -478,10 +490,16 @@ public class DudeController : MonoBehaviour {
     //Restart dude
     public void ResetDude ()
     {
-        m_dudeAlive = true;
+        //m_dudeAlive = true;
+        m_dudeState = DudeState.NONE;
         instance.GetComponentInChildren<SpriteRenderer>().color = new Color(1f, 1f, 1f, 1f);
         instance.GetComponent<Rigidbody2D>().isKinematic = false;
         instance.GetComponent<Rigidbody2D>().WakeUp();
+    }
+
+    public void SetDudeState (DudeState m)
+    {
+        m_dudeState = m;
     }
 
     public void SetDudeWalking (bool i)
@@ -496,3 +514,6 @@ public enum DudeMode
 
 public enum DudeDirection
 { LEFT, CENTER, RIGHT }
+
+public enum DudeState
+{ NONE, ALIVE, DEAD }
