@@ -4,18 +4,19 @@ using UnityEngine;
 
 public class WalkingCollider : MonoBehaviour {
  
-    private void OnCollisionEnter2D(Collision2D collision)
+    private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.collider.CompareTag("Obstacle"))
+        if (collision.CompareTag("Obstacle"))
         {
-            Debug.Log("Reached Obstacle");
             DudeController.instance.SetDudeWalking(true);
         }
     }
 
-    private void OnCollisionExit2D(Collision2D collision)
+    private void OnTriggerExit2D(Collider2D collision)
     {
-        DudeController.instance.SetDudeWalking(false);
+        if(collision.CompareTag("Obstacle")) {
+            DudeController.instance.SetDudeWalking(false);
+        }
     }
 
 }
