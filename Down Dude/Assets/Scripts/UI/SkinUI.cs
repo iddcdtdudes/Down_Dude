@@ -19,6 +19,16 @@ public class SkinUI : MonoBehaviour
         m_label.sprite = label;
     }
 
+    public void ShowLabel ()
+    {
+        m_label.gameObject.SetActive(true);
+    }
+
+    public void HideLabel ()
+    {
+        m_label.gameObject.SetActive(false);
+    }
+
     public Button GetButton ()
     {
         return m_button;

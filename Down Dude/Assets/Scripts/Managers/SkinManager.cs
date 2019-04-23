@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class SkinManager : MonoBehaviour
 {
@@ -34,9 +35,9 @@ public class SkinManager : MonoBehaviour
         //m_dudeAnimator = DudeController.instance.GetComponentInChildren<Animator>();
         m_currentSkin = PlayerDataManager.instance.GetUsingSkin();
         //OverrideAnimator(m_currentSkin);
-        UIManager.instance.m_skinExample.sprite = m_skin[m_currentSkin].GetSkinEx();
-        UIManager.instance.m_skinName.text = m_skin[m_currentSkin].GetSkinName();
-        //Debug.Log("Current skin = " + m_currentSkin);
+        //UIManager.instance.m_skinExample.sprite = m_skin[m_currentSkin].GetSkinEx();
+        //UIManager.instance.m_skinName.text = m_skin[m_currentSkin].GetSkinName();
+        Debug.Log("Current skin = " + m_currentSkin);
     }
 
     private void OverrideAnimator (int skinID)
@@ -69,15 +70,21 @@ public class SkinManager : MonoBehaviour
             {
                 m_currentSkin = skinID;
                 PlayerDataManager.instance.SetUsingSkin(m_currentSkin);
-                OverrideAnimator(m_currentSkin);
+                
+            }
+            else
+            {
+                Debug.Log("Skin is locked");
             }
         }
         else
         {
             m_currentSkin = 0;
             PlayerDataManager.instance.SetUsingSkin(0);
-            Debug.Log("Skin is locked");
         }
+        OverrideAnimator(m_currentSkin);
+        //Save player data
+        PlayerDataManager.instance.SaveDataLocal();
     }
 
     public int GetSkinsNumber ()
@@ -90,7 +97,7 @@ public class SkinManager : MonoBehaviour
         return m_skin[skinID];
     }
 
-    public void BuySkin (int skinID)
+    public bool BuySkin (int skinID)
     {
         int skinCost = m_skin[skinID].GetSkinCost();
 
@@ -100,7 +107,28 @@ public class SkinManager : MonoBehaviour
             {
                 PlayerDataManager.instance.SubtractCoins(skinCost);
                 PlayerDataManager.instance.SetUnlockSkin(skinID);
+                UIManager.instance.m_skinBuyButton.SetActive(false);
+                UIManager.instance.m_skinSelectButton.SetActive(true);
+                Button selectButton = UIManager.instance.m_skinSelectButton.GetComponent<Button>();
+                selectButton.onClick.RemoveAllListeners();
+
+                selectButton.onClick.AddListener(delegate
+                {
+                    ChangeSkin(skinID);
+                    UIManager.instance.OnButtonPressed();
+                });
+
+                return true;
+            }
+            else
+            {
+                return false;
             }
         }
+        else
+        {
+            return false;
+        }
+        
     }
 }

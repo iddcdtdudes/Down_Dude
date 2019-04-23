@@ -177,23 +177,30 @@ public class UIManager : MonoBehaviour
 
     #region Skin Panel
 
-    public void SelectSkin (int skinID)
+    public void SelectSkin (int skinID, SkinUI prefab)
     {
         //Set Skin Name
         m_skinName.text = SkinManager.instance.GetSkin(skinID).GetSkinName();
         m_skinExample.sprite = SkinManager.instance.GetSkin(skinID).GetSkinEx();
         //Reset Click Function
-        m_skinSelectButton.GetComponent<Button>().onClick.RemoveAllListeners();
+        
         
         if (PlayerDataManager.instance.GetSkin(skinID))
         {
+            m_skinSelectButton.GetComponent<Button>().onClick.RemoveAllListeners();
             //Show Select Button
             m_skinSelectButton.SetActive(true);
             m_skinBuyButton.SetActive(false);
+            //Send Data to select button
+            m_skinSelectButton.GetComponent<SkinChooseUI>().SetSkinUI(prefab);
             //Set Select Button
             m_skinSelectButton.GetComponent<Button>().onClick.AddListener(delegate
             {
                 SkinManager.instance.ChangeSkin(skinID);
+                prefab.SetLabel(m_selectLabel);
+                m_skinSelectButton.GetComponent<SkinChooseUI>().GetCurrSkinUI().SetLabel(m_selectLabel);
+                m_skinSelectButton.GetComponent<SkinChooseUI>().GetCurrSkinUI().ShowLabel();
+                m_skinSelectButton.GetComponent<SkinChooseUI>().GetPrevSkinUI().HideLabel();
                 OnButtonPressed();
 
             });
@@ -204,24 +211,15 @@ public class UIManager : MonoBehaviour
             //Show Buy Button
             m_skinSelectButton.SetActive(false);
             m_skinBuyButton.SetActive(true);
+            //Send Data to select button
+            m_skinBuyButton.GetComponent<SkinChooseUI>().SetSkinUI(prefab);
             m_skinCost.text = SkinManager.instance.GetSkin(skinID).GetSkinCost().ToString();
             //Set Select Button
-            m_skinSelectButton.GetComponent<Button>().onClick.AddListener(delegate
+            m_skinBuyButton.GetComponent<Button>().onClick.AddListener(delegate
             {
                 //Unlock Skin
                 SkinManager.instance.BuySkin(skinID);
-                //Show Select Button
-                m_skinSelectButton.SetActive(true);
-                m_skinBuyButton.SetActive(false);
-                //Set Function in Select Button
-                //SelectSkin(skinID);
-
-                m_skinSelectButton.GetComponent<Button>().onClick.AddListener(delegate
-                {
-                    m_skinSelectButton.GetComponent<Button>().onClick.RemoveAllListeners();
-                    SkinManager.instance.ChangeSkin(skinID);
-                    OnButtonPressed();
-                });
+                prefab.HideLabel();
             });
         }
     }
@@ -232,6 +230,9 @@ public class UIManager : MonoBehaviour
         {
             CreateSkin(m_skinPanel, SkinManager.instance.GetSkin(i));
         }
+
+        m_skinExample.sprite = SkinManager.instance.GetSkin(PlayerDataManager.instance.GetUsingSkin()).GetSkinEx();
+        m_skinName.text = SkinManager.instance.GetSkin(PlayerDataManager.instance.GetUsingSkin()).GetSkinName();
     }
 
     private void CreateSkin (GameObject skinParent, SkinObject skinData)
@@ -248,9 +249,11 @@ public class UIManager : MonoBehaviour
 
         SkinUI ui = skinPrefab.GetComponent<SkinUI>();
         ui.SetICON(skinData.GetSkinICON());
+
         if (PlayerDataManager.instance.GetUsingSkin() == skinData.GetSkinID())
         {
             ui.SetLabel(m_selectLabel);
+            m_skinSelectButton.GetComponent<SkinChooseUI>().SetSkinUI(ui);
         }
         else
         {
@@ -258,11 +261,15 @@ public class UIManager : MonoBehaviour
             {
                 ui.SetLabel(m_lockedLabel);
             }
+            else
+            {
+                ui.HideLabel();
+            }
         }
 
         ui.GetButton().onClick.AddListener(delegate
         {
-            SelectSkin(skinData.GetSkinID());
+            SelectSkin(skinData.GetSkinID(), ui);
         });
     }
 
