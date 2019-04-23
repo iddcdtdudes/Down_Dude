@@ -800,6 +800,7 @@ GameObject:
   - component: {fileID: 7797135046619368980}
   - component: {fileID: 7797135046619368981}
   - component: {fileID: 7797135046619368978}
+  - component: {fileID: 4779809495868634579}
   m_Layer: 5
   m_Name: BackButton
   m_TagString: Untagged
@@ -929,6 +930,19 @@ MonoBehaviour:
         m_CallState: 2
     m_TypeName: UnityEngine.UI.Button+ButtonClickedEvent, UnityEngine.UI, Version=1.0.0.0,
       Culture=neutral, PublicKeyToken=null
+--- !u!114 &4779809495868634579
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7797135046619368976}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b6381dfbf88d78946b64e01694dce9b0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_ok: 0
 --- !u!1 &7797135046662389532
 GameObject:
   m_ObjectHideFlags: 0
@@ -1468,15 +1482,15 @@ PrefabInstance:
       propertyPath: m_Pivot.y
       value: 1
       objectReference: {fileID: 0}
-    - target: {fileID: 8988281251730448320, guid: b68010bc02dd6354095fe5d219fa3603,
-        type: 3}
-      propertyPath: m_Text
-      value: Kanitpong Tangtrongchit
-      objectReference: {fileID: 0}
     - target: {fileID: 8656370488157825121, guid: b68010bc02dd6354095fe5d219fa3603,
         type: 3}
       propertyPath: m_Text
       value: Programming
+      objectReference: {fileID: 0}
+    - target: {fileID: 8988281251730448320, guid: b68010bc02dd6354095fe5d219fa3603,
+        type: 3}
+      propertyPath: m_Text
+      value: Kanitpong Tangtrongchit
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b68010bc02dd6354095fe5d219fa3603, type: 3}
@@ -1603,15 +1617,15 @@ PrefabInstance:
       propertyPath: m_Pivot.y
       value: 1
       objectReference: {fileID: 0}
-    - target: {fileID: 8988281251730448320, guid: b68010bc02dd6354095fe5d219fa3603,
-        type: 3}
-      propertyPath: m_Text
-      value: Patcharapol Srimanop
-      objectReference: {fileID: 0}
     - target: {fileID: 8656370488157825121, guid: b68010bc02dd6354095fe5d219fa3603,
         type: 3}
       propertyPath: m_Text
       value: Game Design / level design
+      objectReference: {fileID: 0}
+    - target: {fileID: 8988281251730448320, guid: b68010bc02dd6354095fe5d219fa3603,
+        type: 3}
+      propertyPath: m_Text
+      value: Patcharapol Srimanop
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b68010bc02dd6354095fe5d219fa3603, type: 3}
@@ -1738,15 +1752,15 @@ PrefabInstance:
       propertyPath: m_Pivot.y
       value: 1
       objectReference: {fileID: 0}
-    - target: {fileID: 8988281251730448320, guid: b68010bc02dd6354095fe5d219fa3603,
-        type: 3}
-      propertyPath: m_Text
-      value: Guy Sirithong
-      objectReference: {fileID: 0}
     - target: {fileID: 8656370488157825121, guid: b68010bc02dd6354095fe5d219fa3603,
         type: 3}
       propertyPath: m_Text
       value: Programming / Art
+      objectReference: {fileID: 0}
+    - target: {fileID: 8988281251730448320, guid: b68010bc02dd6354095fe5d219fa3603,
+        type: 3}
+      propertyPath: m_Text
+      value: Guy Sirithong
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b68010bc02dd6354095fe5d219fa3603, type: 3}
@@ -1873,15 +1887,15 @@ PrefabInstance:
       propertyPath: m_Pivot.y
       value: 1
       objectReference: {fileID: 0}
-    - target: {fileID: 8988281251730448320, guid: b68010bc02dd6354095fe5d219fa3603,
-        type: 3}
-      propertyPath: m_Text
-      value: Puh-Zang Liu
-      objectReference: {fileID: 0}
     - target: {fileID: 8656370488157825121, guid: b68010bc02dd6354095fe5d219fa3603,
         type: 3}
       propertyPath: m_Text
       value: Level Design / Sound
+      objectReference: {fileID: 0}
+    - target: {fileID: 8988281251730448320, guid: b68010bc02dd6354095fe5d219fa3603,
+        type: 3}
+      propertyPath: m_Text
+      value: Puh-Zang Liu
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b68010bc02dd6354095fe5d219fa3603, type: 3}
@@ -2008,15 +2022,15 @@ PrefabInstance:
       propertyPath: m_Pivot.y
       value: 1
       objectReference: {fileID: 0}
-    - target: {fileID: 8988281251730448320, guid: b68010bc02dd6354095fe5d219fa3603,
-        type: 3}
-      propertyPath: m_Text
-      value: Jirapipart Prasertsom
-      objectReference: {fileID: 0}
     - target: {fileID: 8656370488157825121, guid: b68010bc02dd6354095fe5d219fa3603,
         type: 3}
       propertyPath: m_Text
       value: Art
+      objectReference: {fileID: 0}
+    - target: {fileID: 8988281251730448320, guid: b68010bc02dd6354095fe5d219fa3603,
+        type: 3}
+      propertyPath: m_Text
+      value: Jirapipart Prasertsom
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b68010bc02dd6354095fe5d219fa3603, type: 3}
@@ -2143,15 +2157,15 @@ PrefabInstance:
       propertyPath: m_Pivot.y
       value: 1
       objectReference: {fileID: 0}
-    - target: {fileID: 8988281251730448320, guid: b68010bc02dd6354095fe5d219fa3603,
-        type: 3}
-      propertyPath: m_Text
-      value: Natthapong Vongjariyatham
-      objectReference: {fileID: 0}
     - target: {fileID: 8656370488157825121, guid: b68010bc02dd6354095fe5d219fa3603,
         type: 3}
       propertyPath: m_Text
       value: Level Design
+      objectReference: {fileID: 0}
+    - target: {fileID: 8988281251730448320, guid: b68010bc02dd6354095fe5d219fa3603,
+        type: 3}
+      propertyPath: m_Text
+      value: Natthapong Vongjariyatham
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b68010bc02dd6354095fe5d219fa3603, type: 3}

@@ -431,10 +431,12 @@ public class DudeController : MonoBehaviour {
             case DudeMode.JETPACK:
                 m_animator.SetBool("isParachuting", false);
                 m_animator.SetBool("isGrounded", false);
+                AudioManager.instance.Play("Jetpack");
                 break;
             case DudeMode.PARACHUTE:
                 m_animator.SetBool("isGrounded", false);
                 m_animator.SetBool("isParachuting", true);
+                AudioManager.instance.Play("Parachute");
                 break;
             case DudeMode.IDLE:
                 m_animator.SetBool("isGrounded", true);
@@ -460,6 +462,8 @@ public class DudeController : MonoBehaviour {
         if (m_dudeAlive != false)
         {
             AudioManager.instance.Play("DudeDead");
+            AudioManager.instance.Play("Menu");
+            AudioManager.instance.StopSound("BGM");
             m_dudeAlive = false;
         }
         

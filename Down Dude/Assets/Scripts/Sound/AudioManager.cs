@@ -87,6 +87,7 @@ public class AudioManager : MonoBehaviour {
             return;
         }
         s.volume = 0f;
+        s.source.Stop();
     }
 
     public void Music(bool OnOff)
