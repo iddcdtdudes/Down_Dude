@@ -81,7 +81,7 @@ public class UIManager : MonoBehaviour
 
     public void OnButtonPressed ()
     {
-        AudioManager.instance.Play("Button");
+        AudioManager.instance.Play("Ok");
     }
 
     public void ShowMusicSetting()
