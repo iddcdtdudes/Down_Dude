@@ -32,8 +32,8 @@ public class UIManager : MonoBehaviour
     public GameObject m_skinPanel;
     public GameObject m_skinPrefab;
     //Sprite
-    public Sprite m_lockedICON;
-    public Sprite m_selectICON;
+    public Sprite m_lockedLabel;
+    public Sprite m_selectLabel;
 
     [Header("Menu")]
     public Text m_coins;
@@ -184,7 +184,7 @@ public class UIManager : MonoBehaviour
         m_skinExample.sprite = SkinManager.instance.GetSkin(skinID).GetSkinEx();
         //Reset Click Function
         m_skinSelectButton.GetComponent<Button>().onClick.RemoveAllListeners();
-        m_skinBuyButton.GetComponent<Button>().onClick.RemoveAllListeners();
+        
         if (PlayerDataManager.instance.GetSkin(skinID))
         {
             //Show Select Button
@@ -200,6 +200,7 @@ public class UIManager : MonoBehaviour
         }
         else
         {
+            m_skinBuyButton.GetComponent<Button>().onClick.RemoveAllListeners();
             //Show Buy Button
             m_skinSelectButton.SetActive(false);
             m_skinBuyButton.SetActive(true);
@@ -246,19 +247,16 @@ public class UIManager : MonoBehaviour
         skinPrefab.transform.localScale = new Vector3(1.0f, 1.0f, 1.0f);
 
         SkinUI ui = skinPrefab.GetComponent<SkinUI>();
+        ui.SetICON(skinData.GetSkinICON());
         if (PlayerDataManager.instance.GetUsingSkin() == skinData.GetSkinID())
         {
-            ui.SetICON(m_selectICON);
+            ui.SetLabel(m_selectLabel);
         }
         else
         {
-            if (PlayerDataManager.instance.GetSkin(skinData.GetSkinID()))
+            if (!PlayerDataManager.instance.GetSkin(skinData.GetSkinID()))
             {
-                ui.SetICON(skinData.GetSkinICON());
-            }
-            else
-            {
-                ui.SetICON(m_lockedICON);
+                ui.SetLabel(m_lockedLabel);
             }
         }
 
