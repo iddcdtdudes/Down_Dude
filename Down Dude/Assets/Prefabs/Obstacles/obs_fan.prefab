@@ -173,7 +173,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   wind: {x: 1, y: 0}
-  jetpackForce: 0.5
+  jetpackForce: 5
   parachuteForce: 20
 --- !u!1001 &1810061385653542713
 PrefabInstance:

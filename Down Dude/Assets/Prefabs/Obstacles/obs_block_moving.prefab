@@ -223,7 +223,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_spawnDelay: 0
-  m_velocity: {x: 0.5, y: 0}
+  m_velocity: {x: 1.5, y: 0}
 --- !u!114 &4322063772492068447
 MonoBehaviour:
   m_ObjectHideFlags: 0
