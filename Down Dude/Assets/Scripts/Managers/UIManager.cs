@@ -37,7 +37,9 @@ public class UIManager : MonoBehaviour
 
     [Header("Menu")]
     public Text m_coins;
-    
+    public GameObject m_musicOnButton;
+    public GameObject m_musicOffButton;
+
 
     // Start is called before the first frame update
     void Awake()
@@ -71,6 +73,37 @@ public class UIManager : MonoBehaviour
     {
         //Update Coins in menu
         m_coins.text = PlayerDataManager.instance.GetCoin().ToString();
+    }
+
+    public void OnButtonPressed ()
+    {
+        AudioManager.instance.Play("Button");
+    }
+
+    public void ShowMusicSetting()
+    {
+        if (PlayerPrefs.HasKey("Music"))
+        {
+            if (PlayerPrefs.GetInt("Music") == 1)
+            {
+                m_musicOffButton.SetActive(true);
+                m_musicOnButton.SetActive(false);
+            }
+            else
+            {
+                m_musicOffButton.SetActive(false);
+                m_musicOnButton.SetActive(true);
+            }
+        }
+        else
+        {
+            Debug.Log("No music key");
+        }
+    }
+
+    public void SetMusic (bool i)
+    {
+        AudioManager.instance.Music(i);
     }
 
     #endregion
@@ -121,7 +154,7 @@ public class UIManager : MonoBehaviour
 
         SetAchievementInfo(achParent, achPrefab , achData);
 
-        Debug.Log("Create achievement in menu");
+        //Debug.Log("Create achievement in menu");
     }
 
     private void SetAchievementInfo (GameObject achParent, GameObject achPrefab, AchievementObject achData)
@@ -151,6 +184,7 @@ public class UIManager : MonoBehaviour
         m_skinExample.sprite = SkinManager.instance.GetSkin(skinID).GetSkinEx();
         //Reset Click Function
         m_skinSelectButton.GetComponent<Button>().onClick.RemoveAllListeners();
+        m_skinBuyButton.GetComponent<Button>().onClick.RemoveAllListeners();
         if (PlayerDataManager.instance.GetSkin(skinID))
         {
             //Show Select Button
@@ -160,6 +194,8 @@ public class UIManager : MonoBehaviour
             m_skinSelectButton.GetComponent<Button>().onClick.AddListener(delegate
             {
                 SkinManager.instance.ChangeSkin(skinID);
+                OnButtonPressed();
+
             });
         }
         else
@@ -177,9 +213,13 @@ public class UIManager : MonoBehaviour
                 m_skinSelectButton.SetActive(true);
                 m_skinBuyButton.SetActive(false);
                 //Set Function in Select Button
+                //SelectSkin(skinID);
+
                 m_skinSelectButton.GetComponent<Button>().onClick.AddListener(delegate
                 {
+                    m_skinSelectButton.GetComponent<Button>().onClick.RemoveAllListeners();
                     SkinManager.instance.ChangeSkin(skinID);
+                    OnButtonPressed();
                 });
             });
         }

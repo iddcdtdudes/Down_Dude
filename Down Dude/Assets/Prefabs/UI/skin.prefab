@@ -88,8 +88,9 @@ GameObject:
   - component: {fileID: 3675842831341256969}
   - component: {fileID: 8097380330506548395}
   - component: {fileID: 1611844718807345478}
+  - component: {fileID: 3012840547808652225}
   m_Layer: 5
-  m_Name: Skin 1
+  m_Name: Skin
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -240,3 +241,15 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_button: {fileID: 3675842831341256969}
   m_icon: {fileID: 5852124904980326297}
+--- !u!114 &3012840547808652225
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1532020028921425295}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b6381dfbf88d78946b64e01694dce9b0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

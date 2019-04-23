@@ -162,9 +162,14 @@ public class GameManager : MonoBehaviour {
         return m_checkpointsReached;
     }
 
-    public void StartGame ()
+    public void ResumeGame ()
     {
         Time.timeScale = 1f;
+    }
+
+    public void PauseGame ()
+    {
+        Time.timeScale = 0.0f;
     }
 
     public void GameOverUI ()

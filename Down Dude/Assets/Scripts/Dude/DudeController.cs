@@ -193,6 +193,7 @@ public class DudeController : MonoBehaviour {
     }
     #endregion
 
+    #region Private
     private void OnCollisionEnter2D(Collision2D collision)
     {
         // game over upon colliding with fatal hitbox
@@ -379,6 +380,8 @@ public class DudeController : MonoBehaviour {
         }
         
     }
+
+    #endregion
 
     #region Public
     public DudeMode GetDudeMode()

@@ -18,7 +18,7 @@ public class PlayerDataManager : MonoBehaviour
         //Load save data
         LoadDataLocal();
         
-        Debug.Log("Load at start");
+        //Debug.Log("Load at start");
 
     }
 
