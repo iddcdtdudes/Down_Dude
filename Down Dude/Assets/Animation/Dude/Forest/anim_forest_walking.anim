@@ -6,7 +6,7 @@ AnimationClip:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: anim_dude_sandy_walking
+  m_Name: anim_forest_walking
   serializedVersion: 6
   m_Legacy: 0
   m_Compressed: 0

@@ -5613,7 +5613,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 20
-  m_Sprite: {fileID: 21300000, guid: 049041331a978774daa6dab4f5ca8d30, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 6adea63dc2629ce43b3d9fba892f748f, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -9782,7 +9782,12 @@ PrefabInstance:
     - target: {fileID: 3962270912111442817, guid: 39686a6be829197479cdbab2e565384b,
         type: 3}
       propertyPath: m_skin.Array.size
-      value: 3
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 3962270912111442817, guid: 39686a6be829197479cdbab2e565384b,
+        type: 3}
+      propertyPath: m_skins.Array.size
+      value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 3962270912111442817, guid: 39686a6be829197479cdbab2e565384b,
         type: 3}
@@ -9811,6 +9816,72 @@ PrefabInstance:
       propertyPath: m_skin.Array.data[2]
       value: 
       objectReference: {fileID: 11400000, guid: bba6863a16ccc844d827e0bbb8af16c9,
+        type: 2}
+    - target: {fileID: 3962270912111442817, guid: 39686a6be829197479cdbab2e565384b,
+        type: 3}
+      propertyPath: m_skins.Array.data[3].m_id
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 3962270912111442817, guid: 39686a6be829197479cdbab2e565384b,
+        type: 3}
+      propertyPath: m_skins.Array.data[3].m_name
+      value: Forest
+      objectReference: {fileID: 0}
+    - target: {fileID: 3962270912111442817, guid: 39686a6be829197479cdbab2e565384b,
+        type: 3}
+      propertyPath: m_skins.Array.data[3].m_skinIDAnimator
+      value: 
+      objectReference: {fileID: 22100000, guid: 472ddd2ee16f38a40be751b175c9608d,
+        type: 2}
+    - target: {fileID: 3962270912111442817, guid: 39686a6be829197479cdbab2e565384b,
+        type: 3}
+      propertyPath: m_skins.Array.data[4].m_id
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 3962270912111442817, guid: 39686a6be829197479cdbab2e565384b,
+        type: 3}
+      propertyPath: m_skins.Array.data[4].m_name
+      value: Snow
+      objectReference: {fileID: 0}
+    - target: {fileID: 3962270912111442817, guid: 39686a6be829197479cdbab2e565384b,
+        type: 3}
+      propertyPath: m_skins.Array.data[4].m_skinIDAnimator
+      value: 
+      objectReference: {fileID: 22100000, guid: 26e4dac8ab62c8d4fb11b8dd4252832b,
+        type: 2}
+    - target: {fileID: 3962270912111442817, guid: 39686a6be829197479cdbab2e565384b,
+        type: 3}
+      propertyPath: m_skins.Array.data[5].m_id
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 3962270912111442817, guid: 39686a6be829197479cdbab2e565384b,
+        type: 3}
+      propertyPath: m_skins.Array.data[5].m_name
+      value: Desert
+      objectReference: {fileID: 0}
+    - target: {fileID: 3962270912111442817, guid: 39686a6be829197479cdbab2e565384b,
+        type: 3}
+      propertyPath: m_skins.Array.data[5].m_skinIDAnimator
+      value: 
+      objectReference: {fileID: 22100000, guid: 1a9f6cca07b3a8748991b66f328592f5,
+        type: 2}
+    - target: {fileID: 3962270912111442817, guid: 39686a6be829197479cdbab2e565384b,
+        type: 3}
+      propertyPath: m_skin.Array.data[3]
+      value: 
+      objectReference: {fileID: 11400000, guid: f2fa88825ff126c498af01b032391814,
+        type: 2}
+    - target: {fileID: 3962270912111442817, guid: 39686a6be829197479cdbab2e565384b,
+        type: 3}
+      propertyPath: m_skin.Array.data[4]
+      value: 
+      objectReference: {fileID: 11400000, guid: 290d2025ee2252141b5b0f0476db4a69,
+        type: 2}
+    - target: {fileID: 3962270912111442817, guid: 39686a6be829197479cdbab2e565384b,
+        type: 3}
+      propertyPath: m_skin.Array.data[5]
+      value: 
+      objectReference: {fileID: 11400000, guid: 19d639784d5774845b7cbf42f1457dec,
         type: 2}
     - target: {fileID: 3962270912111442818, guid: 39686a6be829197479cdbab2e565384b,
         type: 3}

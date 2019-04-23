@@ -6,7 +6,7 @@ AnimationClip:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: anim_dude_sandy_walking
+  m_Name: anim_forest_jetpack
   serializedVersion: 6
   m_Legacy: 0
   m_Compressed: 0
@@ -20,13 +20,13 @@ AnimationClip:
   m_PPtrCurves:
   - curve:
     - time: 0
-      value: {fileID: 21300000, guid: eedf283202547084098dd7ec5c4fa2ab, type: 3}
+      value: {fileID: 21300000, guid: 7b348c6086e7acd4984f7a8b732466a7, type: 3}
     - time: 0.1
-      value: {fileID: 21300000, guid: f1e0ed4190e88bb4c91c17b666e07ac0, type: 3}
+      value: {fileID: 21300000, guid: f28de7cde3cb6f94db14662165fbf925, type: 3}
     - time: 0.2
-      value: {fileID: 21300000, guid: e58f82081bae6524c8b3166d80d3c79f, type: 3}
+      value: {fileID: 21300000, guid: 2a3a8e808c1b73d4d8a9efd2dfdff451, type: 3}
     - time: 0.3
-      value: {fileID: 21300000, guid: b74b674059ccfe847be4b0bd9b875fbe, type: 3}
+      value: {fileID: 21300000, guid: aa96cc43c8f017643ae1b9a736752572, type: 3}
     attribute: m_Sprite
     path: 
     classID: 212
@@ -46,10 +46,10 @@ AnimationClip:
       customType: 23
       isPPtrCurve: 1
     pptrCurveMapping:
-    - {fileID: 21300000, guid: eedf283202547084098dd7ec5c4fa2ab, type: 3}
-    - {fileID: 21300000, guid: f1e0ed4190e88bb4c91c17b666e07ac0, type: 3}
-    - {fileID: 21300000, guid: e58f82081bae6524c8b3166d80d3c79f, type: 3}
-    - {fileID: 21300000, guid: b74b674059ccfe847be4b0bd9b875fbe, type: 3}
+    - {fileID: 21300000, guid: 7b348c6086e7acd4984f7a8b732466a7, type: 3}
+    - {fileID: 21300000, guid: f28de7cde3cb6f94db14662165fbf925, type: 3}
+    - {fileID: 21300000, guid: 2a3a8e808c1b73d4d8a9efd2dfdff451, type: 3}
+    - {fileID: 21300000, guid: aa96cc43c8f017643ae1b9a736752572, type: 3}
   m_AnimationClipSettings:
     serializedVersion: 2
     m_AdditiveReferencePoseClip: {fileID: 0}
