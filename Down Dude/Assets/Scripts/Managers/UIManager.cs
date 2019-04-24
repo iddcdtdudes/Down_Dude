@@ -17,6 +17,9 @@ public class UIManager : MonoBehaviour
     public GameObject m_achGameOverPanel;
     public GameObject m_achGameOverPrefab;
 
+    [Header("In-Game Panel")]
+    public GameObject m_inGamePanel;
+
     [Header("Achievement UI")]
     public GameObject m_achievementPanel;
     public GameObject m_achievementPrefab;
@@ -192,30 +195,47 @@ public class UIManager : MonoBehaviour
         
         if (PlayerDataManager.instance.GetSkin(skinID))
         {
+            //Get Component From Select Button
+            SkinChooseUI skinSelectButton = m_skinSelectButton.GetComponent<SkinChooseUI>();
+            //Reset Select Button
             m_skinSelectButton.GetComponent<Button>().onClick.RemoveAllListeners();
-            //Show Select Button
-            m_skinSelectButton.SetActive(true);
-            m_skinBuyButton.SetActive(false);
             //Send Data to select button
-            m_skinSelectButton.GetComponent<SkinChooseUI>().SetSkinUI(prefab);
-            //Set Select Button
-            m_skinSelectButton.GetComponent<Button>().onClick.AddListener(delegate
+            skinSelectButton.HoldSkinUI(prefab);
+            //Show Select Button
+            if (skinSelectButton.GetCurrSkinUI().GetSkinID() != skinSelectButton.GetTmpSkinUI().GetSkinID())
             {
-                SkinManager.instance.ChangeSkin(skinID);
-                prefab.SetLabel(m_selectLabel);
-                m_skinSelectButton.GetComponent<SkinChooseUI>().GetCurrSkinUI().SetLabel(m_selectLabel);
-                //m_skinSelectButton.GetComponent<SkinChooseUI>().GetCurrSkinUI().ShowLabel();
-               // m_skinSelectButton.GetComponent<SkinChooseUI>().GetPrevSkinUI().HideLabel();
-                OnButtonPressed();
+                //Show Select Button
+                ShowSelectButton();
+                //Set Select Button
+                m_skinSelectButton.GetComponent<Button>().onClick.AddListener(delegate
+                {
+                    SkinManager.instance.ChangeSkin(skinID);
+                    prefab.SetLabel(m_selectLabel);
+                    skinSelectButton.SetSkinUI();
+                    skinSelectButton.GetCurrSkinUI().SetLabel(m_selectLabel);
+                    skinSelectButton.ShowCurrentLabel();
+                    skinSelectButton.HidePreviousLabel();
+                    OnButtonPressed();
+                    m_skinSelectButton.SetActive(false);
 
-            });
+                });
+            }
+            else
+            {
+                m_skinSelectButton.SetActive(false);
+                m_skinBuyButton.SetActive(false);
+
+            }
+            
+            
+            
         }
         else
         {
+            //Reset Buy Button
             m_skinBuyButton.GetComponent<Button>().onClick.RemoveAllListeners();
             //Show Buy Button
-            m_skinSelectButton.SetActive(false);
-            m_skinBuyButton.SetActive(true);
+            ShowBuyButton();
             m_skinCost.text = SkinManager.instance.GetSkin(skinID).GetSkinCost().ToString();
             //Set Select Button
             m_skinBuyButton.GetComponent<Button>().onClick.AddListener(delegate
@@ -252,11 +272,14 @@ public class UIManager : MonoBehaviour
 
         SkinUI ui = skinPrefab.GetComponent<SkinUI>();
         ui.SetICON(skinData.GetSkinICON());
+        ui.SetSkinID(skinData.GetSkinID());
 
         if (PlayerDataManager.instance.GetUsingSkin() == skinData.GetSkinID())
         {
             ui.SetLabel(m_selectLabel);
-            m_skinSelectButton.GetComponent<SkinChooseUI>().SetSkinUI(ui);
+            m_skinSelectButton.GetComponent<SkinChooseUI>().HoldSkinUI(ui);
+            m_skinSelectButton.GetComponent<SkinChooseUI>().SetSkinUI();
+
         }
         else
         {
@@ -274,6 +297,23 @@ public class UIManager : MonoBehaviour
         {
             SelectSkin(skinData.GetSkinID(), ui);
         });
+    }
+
+    public void ShowSelectButton ()
+    {
+        m_skinSelectButton.SetActive(true);
+        m_skinBuyButton.SetActive(false);
+    }
+
+    public void ShowBuyButton ()
+    {
+        m_skinSelectButton.SetActive(false);
+        m_skinBuyButton.SetActive(true);
+    }
+
+    public void HideInGamePanel ()
+    {
+        m_inGamePanel.SetActive(false);
     }
 
     #endregion

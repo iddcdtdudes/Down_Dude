@@ -116,20 +116,26 @@ public class SkinManager : MonoBehaviour
                 Button selectButton = UIManager.instance.m_skinSelectButton.GetComponent<Button>();
                 //Reset Select Button
                 selectButton.onClick.RemoveAllListeners();
-                //Add Function
-                selectButton.onClick.AddListener(delegate
-                {
-                    ChangeSkin(skinID);
-                    selectButton.GetComponent<SkinChooseUI>().SetSkinUI(prefab);
-                    selectButton.GetComponent<SkinChooseUI>().GetCurrSkinUI().SetLabel(UIManager.instance.m_selectLabel);
-                    
-                    selectButton.GetComponent<SkinChooseUI>().HidePreviousLabel();
-                    selectButton.GetComponent<SkinChooseUI>().ShowCurrentLabel();
-                    UIManager.instance.OnButtonPressed();
-                });
+                
+                ////Add Function
+                //selectButton.onClick.AddListener(delegate
+                //{
+                //    ChangeSkin(skinID);
+                //    //Hide Label
+                //    selectButton.GetComponent<SkinChooseUI>().SetSkinUI();
+                //    selectButton.GetComponent<SkinChooseUI>().GetCurrSkinUI().SetLabel(UIManager.instance.m_selectLabel);
+                //    selectButton.GetComponent<SkinChooseUI>().ShowCurrentLabel();
+                //    selectButton.GetComponent<SkinChooseUI>().HidePreviousLabel();
+                //    //Hide Select Button
+                //    selectButton.gameObject.SetActive(false);
+                //    //Play Sound
+                //    UIManager.instance.OnButtonPressed();
+                //});
 
                 //SaveData
                 PlayerDataManager.instance.SaveDataLocal();
+
+                UIManager.instance.SelectSkin(skinID, prefab);
 
             }
             else
