@@ -205,8 +205,8 @@ public class GameManager : MonoBehaviour {
         AudioManager.instance.Play("BGM");
         AudioManager.instance.StopSound("Menu");
         DudeController.instance.SetDudeState(DudeState.ALIVE);
-        DudeController.instance.ShowButtonUI();
         UIManager.instance.HideMenu();
+        //DudeController.instance.ShowButtonUI();
         Time.timeScale = 1f;
     }
 
