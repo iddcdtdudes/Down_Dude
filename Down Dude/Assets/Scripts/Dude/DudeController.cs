@@ -56,6 +56,9 @@ public class DudeController : MonoBehaviour {
     // new movement variables
     [SerializeField] private float m_jetpackHorizontalDrag;
 
+    //For Game Over Sequence
+    [SerializeField] private List<BoxCollider2D> m_dudeCollider;
+
     private float m_lastCheckpointTime;
 
     private void Awake()
@@ -154,44 +157,61 @@ public class DudeController : MonoBehaviour {
     private void FixedUpdate()
     {
         //Debug.Log(Application.targetFrameRate);
-
         Rigidbody2D rigidbody = GetComponent<Rigidbody2D>();
-        
-        switch (m_dudeMode)
+        switch (m_dudeState)
         {
-            case DudeMode.JETPACK:
-                rigidbody.AddForce(Vector2.down * m_jetpackForce);
-                break;
-            case DudeMode.PARACHUTE:
-                rigidbody.AddForce(m_parachuteForce * m_forceVector, ForceMode2D.Force);
-                break;
-            case DudeMode.WALKING:
-                rigidbody.AddForce(m_walkingForce * m_forceVector, ForceMode2D.Force);
-                break;
-        }
-        
+            case DudeState.ALIVE:
+                #region DudeState: Alive
+                
 
-        // apply drag and limit velocity
-        Vector2 vel = rigidbody.velocity;
-        vel.x = Mathf.Clamp(m_drag.x * vel.x, -m_maxVelocity.x, m_maxVelocity.x);
-        vel.y = Mathf.Clamp(m_drag.y * vel.y, -m_maxVelocity.y, m_maxVelocity.y);
-        rigidbody.velocity = vel;
-
-        // horizontal drag
-        float drag = 1.0f;
-        if(m_dudeMode == DudeMode.JETPACK) {
-            drag = m_jetpackHorizontalDrag;
-        } else if(m_dudeMode == DudeMode.PARACHUTE || m_dudeMode == DudeMode.WALKING) {
-            // apply horizontal drag when touch is near dude
-            float dudeToTouch = Camera.main.ScreenToWorldPoint(FirstTouch.position).x - transform.position.x;
-            if (!m_dudeControlByButton && Mathf.Abs(dudeToTouch) < m_touchForceThreshold) {
-                if (m_touchForceThreshold != 0.0f) {
-                    drag = Mathf.Abs(dudeToTouch / m_touchForceThreshold);
+                switch (m_dudeMode)
+                {
+                    case DudeMode.JETPACK:
+                        rigidbody.AddForce(Vector2.down * m_jetpackForce);
+                        break;
+                    case DudeMode.PARACHUTE:
+                        rigidbody.AddForce(m_parachuteForce * m_forceVector, ForceMode2D.Force);
+                        break;
+                    case DudeMode.WALKING:
+                        rigidbody.AddForce(m_walkingForce * m_forceVector, ForceMode2D.Force);
+                        break;
                 }
-            }
+
+
+                // apply drag and limit velocity
+                Vector2 vel = rigidbody.velocity;
+                vel.x = Mathf.Clamp(m_drag.x * vel.x, -m_maxVelocity.x, m_maxVelocity.x);
+                vel.y = Mathf.Clamp(m_drag.y * vel.y, -m_maxVelocity.y, m_maxVelocity.y);
+                rigidbody.velocity = vel;
+
+                // horizontal drag
+                float drag = 1.0f;
+                if (m_dudeMode == DudeMode.JETPACK)
+                {
+                    drag = m_jetpackHorizontalDrag;
+                }
+                else if (m_dudeMode == DudeMode.PARACHUTE || m_dudeMode == DudeMode.WALKING)
+                {
+                    // apply horizontal drag when touch is near dude
+                    float dudeToTouch = Camera.main.ScreenToWorldPoint(FirstTouch.position).x - transform.position.x;
+                    if (!m_dudeControlByButton && Mathf.Abs(dudeToTouch) < m_touchForceThreshold)
+                    {
+                        if (m_touchForceThreshold != 0.0f)
+                        {
+                            drag = Mathf.Abs(dudeToTouch / m_touchForceThreshold);
+                        }
+                    }
+                }
+
+                rigidbody.velocity = new Vector2(drag * rigidbody.velocity.x, rigidbody.velocity.y);
+                #endregion
+                break;
+            case DudeState.DEAD:
+                //rigidbody.AddTorque(500);
+                break;
         }
 
-        rigidbody.velocity = new Vector2(drag * rigidbody.velocity.x, rigidbody.velocity.y);
+
     }
     #endregion
 
@@ -479,8 +499,18 @@ public class DudeController : MonoBehaviour {
             m_dudeState = DudeState.DEAD;
         }
         
-        instance.GetComponentInChildren<SpriteRenderer>().color = new Color(1f, 1f, 1f, 0f);
-        instance.GetComponent<Rigidbody2D>().isKinematic = true;
+        if (m_dudeCollider.Count > 0)
+        {
+            foreach (BoxCollider2D i in m_dudeCollider)
+            {
+                i.enabled = false;
+            }
+        }
+
+        transform.Rotate(Vector3.forward * 50 * Time.deltaTime);
+
+        //instance.GetComponentInChildren<SpriteRenderer>().color = new Color(1f, 1f, 1f, 0f);
+        //instance.GetComponent<Rigidbody2D>().isKinematic = true;
         
 
         if(dudeIsKilledEvent != null) {

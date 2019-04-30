@@ -17,9 +17,6 @@ public class UIManager : MonoBehaviour
     public GameObject m_achGameOverPanel;
     public GameObject m_achGameOverPrefab;
 
-    [Header("In-Game Panel")]
-    public GameObject m_inGamePanel;
-
     [Header("Achievement UI")]
     public GameObject m_achievementPanel;
     public GameObject m_achievementPrefab;
@@ -43,6 +40,7 @@ public class UIManager : MonoBehaviour
     public Text m_statDistance;
 
     [Header("Menu")]
+    public Animator m_menuAnim;
     public Text m_coins;
     public GameObject m_musicOnButton;
     public GameObject m_musicOffButton;
@@ -111,6 +109,16 @@ public class UIManager : MonoBehaviour
     public void SetMusic (bool i)
     {
         AudioManager.instance.Music(i);
+    }
+
+    public void OpenMenu (bool i)
+    {
+        if (m_menuAnim != null)
+        {
+            //bool isOpen = m_menuAnim.GetBool("menu_open");
+
+            m_menuAnim.SetBool("menu_open", i);
+        }
     }
 
     #endregion
@@ -309,11 +317,6 @@ public class UIManager : MonoBehaviour
     {
         m_skinSelectButton.SetActive(false);
         m_skinBuyButton.SetActive(true);
-    }
-
-    public void HideInGamePanel ()
-    {
-        m_inGamePanel.SetActive(false);
     }
 
     #endregion
