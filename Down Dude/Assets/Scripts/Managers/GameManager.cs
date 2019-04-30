@@ -28,16 +28,16 @@ public class GameManager : MonoBehaviour {
     [SerializeField] private Text distanceText;            // score text UI
     private float m_distance;                                // game score
 
+    [SerializeField] private List<GameObject> gameOverUIShow;
+
+    [SerializeField] private List<GameObject> gameOverUIHide;
+
     [SerializeField] private int m_scoreBaseline;                                   // base score reward for reaching a checkpoint
     [SerializeField] private int m_timeScaleMultiplier;                             // additional maximum core earned through faster play time
     [Range(0f, 0.5f)] [SerializeField] private float m_scoreMultiplierCeiling;      // time remaining percentage of maximum score multiplier
 
     private float m_previousDudeY;                              // dude y position on previous update
     [SerializeField] private float m_distanceScaler;      // scaler for distance
-
-    [Header("GameOver Sequence")]
-    [SerializeField] private List<GameObject> gameOverUIShow;
-    [SerializeField] private List<GameObject> gameOverUIHide;
 
     private void Awake()
     {
@@ -67,6 +67,7 @@ public class GameManager : MonoBehaviour {
         DudeController.instance.reachCheckpointEvent += AchievementManager.instance.UpdateAchProgress;
         DudeController.instance.dudeIsKilledEvent += PlayerDataManager.instance.SetAllTimeData;
         DudeController.instance.dudeIsKilledEvent += AchievementManager.instance.ResetAchProgress;
+        DudeController.instance.dudeIsKilledEvent += UIManager.instance.HideInGamePanel;
         DudeController.instance.dudeIsKilledEvent += UIManager.instance.UpdateGameOverUI;
         DudeController.instance.dudeIsKilledEvent += GameOverUI;
         DudeController.instance.dudeIsKilledEvent += PlayerDataManager.instance.SaveDataLocal;
