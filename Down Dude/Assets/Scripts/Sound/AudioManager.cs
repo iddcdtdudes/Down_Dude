@@ -32,7 +32,7 @@ public class AudioManager : MonoBehaviour {
     void Start () {
         if (PlayerPrefs.HasKey("Music"))
         {
-            Play("Theme");
+            //Play("Theme");
             if (PlayerPrefs.GetInt("Music") == 1)
             {
                 //Play("Theme");
@@ -118,6 +118,30 @@ public class AudioManager : MonoBehaviour {
 
         PlayerPrefs.Save();
             
+    }
+
+    public void GameSound(bool OnOff)
+    {
+        string laser = "Laser";
+        string jetpack = "Jetpack";
+        string parachute = "Parachute";
+
+        Sound s = Array.Find(sounds, sound => sound.name == laser);
+        Sound s1 = Array.Find(sounds, sound => sound.name == jetpack);
+        Sound s2 = Array.Find(sounds, sound => sound.name == parachute);
+
+        if (OnOff)
+        {
+            s.source.volume = 0.15f;
+            s1.source.volume = 0.097f;
+            s2.source.volume = 0.15f;
+        }
+        else
+        {
+            s.source.volume = 0f;
+            s1.source.volume = 0f;
+            s2.source.volume = 0f;
+        }
     }
 
     

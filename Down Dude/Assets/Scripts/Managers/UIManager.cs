@@ -43,7 +43,10 @@ public class UIManager : MonoBehaviour
     public Text m_statDistance;
 
     [Header("Menu")]
+    public GameObject m_menuPanel;
     public Text m_coins;
+    public GameObject m_startText;
+    public Animator m_menuAnim;
     public GameObject m_musicOnButton;
     public GameObject m_musicOffButton;
 
@@ -113,6 +116,17 @@ public class UIManager : MonoBehaviour
         AudioManager.instance.Music(i);
     }
 
+    public void ToggleMenu (bool i)
+    {
+        m_menuAnim.SetBool("menu_open", i);
+    }
+
+    public void HideMenu ()
+    {
+        m_startText.SetActive(false);
+        m_menuPanel.SetActive(false);
+        m_inGamePanel.SetActive(true);
+    }
     #endregion
 
     #region Gameover UI

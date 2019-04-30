@@ -72,6 +72,7 @@ public class DudeController : MonoBehaviour {
     {
         m_dudeIsOnGround = false;
         m_lastCheckpointTime = Time.time;
+        m_dudeState = DudeState.NONE;
 
         if (PlayerPrefs.HasKey("ButtonControl"))
         {
@@ -391,6 +392,11 @@ public class DudeController : MonoBehaviour {
         return m_dudeMode;
     }
 
+    public DudeState GetDudeState ()
+    {
+        return m_dudeState;
+    }
+
     public void ChangeControlToButton (bool i)
     {
         m_dudeControlByButton = i;
@@ -475,6 +481,9 @@ public class DudeController : MonoBehaviour {
             AudioManager.instance.Play("DudeDead");
             AudioManager.instance.Play("Menu");
             AudioManager.instance.StopSound("BGM");
+            AudioManager.instance.GameSound(false);
+
+
             //m_dudeAlive = false;
             m_dudeState = DudeState.DEAD;
         }
@@ -492,6 +501,7 @@ public class DudeController : MonoBehaviour {
     {
         //m_dudeAlive = true;
         m_dudeState = DudeState.NONE;
+        AudioManager.instance.GameSound(true);
         instance.GetComponentInChildren<SpriteRenderer>().color = new Color(1f, 1f, 1f, 1f);
         instance.GetComponent<Rigidbody2D>().isKinematic = false;
         instance.GetComponent<Rigidbody2D>().WakeUp();
