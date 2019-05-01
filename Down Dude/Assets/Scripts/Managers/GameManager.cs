@@ -203,6 +203,10 @@ public class GameManager : MonoBehaviour {
     public void StartGame ()
     {
         AudioManager.instance.Play("BGM");
+
+        // synchronize music
+        AudioManager.instance.SynchronizeAudio("Menu", "BGM");
+
         AudioManager.instance.StopSound("Menu");
         DudeController.instance.SetDudeState(DudeState.ALIVE);
         
@@ -214,11 +218,13 @@ public class GameManager : MonoBehaviour {
     public void PauseGame ()
     {
         AudioManager.instance.Play("Menu");
+
+        //synchronize music
+        AudioManager.instance.SynchronizeAudio("BGM", "Menu");
+
         AudioManager.instance.StopSound("BGM");
         Time.timeScale = 0.0f;
     }
-
-    
 
     public void GameOverUI ()
     {

@@ -90,6 +90,43 @@ public class AudioManager : MonoBehaviour {
         s.source.Stop();
     }
 
+    public int GetTimeSamples(string name)
+    {
+        Sound s = Array.Find(sounds, sound => sound.name == name);
+        if(s == null) {
+            Debug.LogWarning("Cannot find sound");
+            return 0;
+        }
+        return s.source.timeSamples;
+    }
+
+    public void SetTimeSamples(string name, int timeSamples)
+    {
+        Sound s = Array.Find(sounds, sound => sound.name == name);
+        if(s == null) {
+            Debug.LogWarning("Cannot find sound");
+            return;
+        }
+        s.source.timeSamples = timeSamples;
+    }
+
+    public int GetTimeSamplesLength(string name)
+    {
+        Sound s = Array.Find(sounds, sound => sound.name == name);
+        if (s == null) {
+            Debug.LogWarning("Cannot find sound");
+            return 0;
+        }
+        return s.source.clip.samples;
+    }
+
+    public void SynchronizeAudio(string prev, string next)
+    {
+        int prevTimeSamples = AudioManager.instance.GetTimeSamples(prev);
+        prevTimeSamples = prevTimeSamples % AudioManager.instance.GetTimeSamplesLength(next);
+        AudioManager.instance.SetTimeSamples(next, prevTimeSamples);
+    }
+
     public void Music(bool OnOff)
     {
         string name = "BGM";

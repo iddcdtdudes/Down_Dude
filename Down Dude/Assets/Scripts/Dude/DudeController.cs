@@ -153,8 +153,6 @@ public class DudeController : MonoBehaviour {
                 facingRight = false;
             }
         }
-
-        Debug.Log(GetComponent<Rigidbody2D>().velocity);
     }
 
     private void FixedUpdate()
