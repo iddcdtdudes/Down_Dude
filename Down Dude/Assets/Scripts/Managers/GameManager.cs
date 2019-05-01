@@ -70,9 +70,9 @@ public class GameManager : MonoBehaviour {
         DudeController.instance.dudeIsKilledEvent += AchievementManager.instance.ResetAchProgress;
         DudeController.instance.dudeIsKilledEvent += UIManager.instance.HideInGamePanel;
         DudeController.instance.dudeIsKilledEvent += UIManager.instance.UpdateGameOverUI;
-        DudeController.instance.dudeIsKilledEvent += GameOverUI;
+        //DudeController.instance.dudeIsKilledEvent += GameOverUI;
         DudeController.instance.dudeIsKilledEvent += PlayerDataManager.instance.SaveDataLocal;
-        
+        //DudeController.instance.dudeIsKilledEvent += DudeController.instance.DudeKilledSequence;
 
         // initialize variables
         m_timer = ChunkManager.instance.GetNewChunkTimeLimit();
@@ -218,8 +218,11 @@ public class GameManager : MonoBehaviour {
         Time.timeScale = 0.0f;
     }
 
+    
+
     public void GameOverUI ()
     {
+        //StartCoroutine("GameOverScreen");
         foreach (GameObject i in gameOverUIShow)
         {
             i.SetActive(true);

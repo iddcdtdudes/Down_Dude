@@ -212,6 +212,16 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 3263990943614414642}
     m_Modifications:
+    - target: {fileID: 3756663211075251503, guid: 0753f020431ebbd41b62ca8695bc5465,
+        type: 3}
+      propertyPath: m_Name
+      value: InfoPanel
+      objectReference: {fileID: 0}
+    - target: {fileID: 3756663211075251503, guid: 0753f020431ebbd41b62ca8695bc5465,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 3756663211075251502, guid: 0753f020431ebbd41b62ca8695bc5465,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -316,16 +326,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Pivot.y
       value: 0.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 3756663211075251503, guid: 0753f020431ebbd41b62ca8695bc5465,
-        type: 3}
-      propertyPath: m_Name
-      value: InfoPanel
-      objectReference: {fileID: 0}
-    - target: {fileID: 3756663211075251503, guid: 0753f020431ebbd41b62ca8695bc5465,
-        type: 3}
-      propertyPath: m_IsActive
-      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7797135046619368978, guid: 0753f020431ebbd41b62ca8695bc5465,
         type: 3}
@@ -2610,7 +2610,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0}
   m_AnchorMax: {x: 0.5, y: 0}
-  m_AnchoredPosition: {x: 0, y: 500}
+  m_AnchoredPosition: {x: 0, y: 600}
   m_SizeDelta: {x: 160, y: 30}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!95 &448491448
@@ -8394,7 +8394,7 @@ Rigidbody2D:
   m_LinearDrag: 0
   m_AngularDrag: 0
   m_GravityScale: 0.2
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 6200000, guid: ea57ed1f5215fd94aba737dfa8f85655, type: 2}
   m_Interpolate: 0
   m_SleepingMode: 1
   m_CollisionDetection: 0
@@ -8441,6 +8441,8 @@ MonoBehaviour:
   m_touchForceThreshold: 0.6
   m_animator: {fileID: 1550701360}
   m_jetpackHorizontalDrag: 0.9
+  m_dudeCorpse: {fileID: 861672944121885539, guid: 3b893899972e04046a6ac803a1f925d7,
+    type: 3}
 --- !u!61 &1823921755
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -9544,6 +9546,10 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 1463841250, guid: 0990c11b7ebc4de4a9eb27555c8626bb, type: 3}
+      propertyPath: m_Color.a
+      value: 0.2784314
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 0990c11b7ebc4de4a9eb27555c8626bb, type: 3}
 --- !u!1 &2051633479
@@ -10200,6 +10206,16 @@ PrefabInstance:
       propertyPath: m_startText
       value: 
       objectReference: {fileID: 448491446}
+    - target: {fileID: 947104530977979111, guid: cd034ca4773f6364c80c18cc557dbac1,
+        type: 3}
+      propertyPath: m_controlType
+      value: ButtonControl
+      objectReference: {fileID: 0}
+    - target: {fileID: 947104530977979111, guid: cd034ca4773f6364c80c18cc557dbac1,
+        type: 3}
+      propertyPath: m_musicSetting
+      value: MusicSetting
+      objectReference: {fileID: 0}
     - target: {fileID: 947104530977979110, guid: cd034ca4773f6364c80c18cc557dbac1,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -11678,6 +11694,21 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3215211336070362622, guid: 40c9884276800814fa80ab484204743c,
+        type: 3}
+      propertyPath: m_playerPref_Control
+      value: ControlSetting
+      objectReference: {fileID: 0}
+    - target: {fileID: 3215211336070362622, guid: 40c9884276800814fa80ab484204743c,
+        type: 3}
+      propertyPath: m_playerPref_Music
+      value: MusicSetting
+      objectReference: {fileID: 0}
+    - target: {fileID: 3215211336070362622, guid: 40c9884276800814fa80ab484204743c,
+        type: 3}
+      propertyPath: m_playerPref_Skin
+      value: CurrentSkin
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 40c9884276800814fa80ab484204743c, type: 3}

@@ -51,6 +51,7 @@ public class UIManager : MonoBehaviour
     public GameObject m_musicOffButton;
 
 
+
     // Start is called before the first frame update
     void Awake()
     {
@@ -92,9 +93,9 @@ public class UIManager : MonoBehaviour
 
     public void ShowMusicSetting()
     {
-        if (PlayerPrefs.HasKey("Music"))
+        if (PlayerPrefs.HasKey(PlayerDataManager.instance.m_playerPref_Music))
         {
-            if (PlayerPrefs.GetInt("Music") == 1)
+            if (PlayerPrefs.GetInt(PlayerDataManager.instance.m_playerPref_Music) == 1)
             {
                 m_musicOffButton.SetActive(true);
                 m_musicOnButton.SetActive(false);
@@ -227,6 +228,7 @@ public class UIManager : MonoBehaviour
                 m_skinSelectButton.GetComponent<Button>().onClick.AddListener(delegate
                 {
                     SkinManager.instance.ChangeSkin(skinID);
+                    //PlayerDataManager.instance.SetUsingSkin(skinID);
                     prefab.SetLabel(m_selectLabel);
                     skinSelectButton.SetSkinUI();
                     skinSelectButton.GetCurrSkinUI().SetLabel(m_selectLabel);

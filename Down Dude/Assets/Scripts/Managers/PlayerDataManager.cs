@@ -9,6 +9,9 @@ public class PlayerDataManager : MonoBehaviour
 
     public PlayerData m_player;
 
+    [SerializeField] public string m_playerPref_Control;
+    [SerializeField] public string m_playerPref_Music;
+
     public event Action LoadDataEvent;
 
     // Start is called before the first frame update
