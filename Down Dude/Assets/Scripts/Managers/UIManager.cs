@@ -43,9 +43,13 @@ public class UIManager : MonoBehaviour
     public Text m_statDistance;
 
     [Header("Menu")]
+    public GameObject m_menuPanel;
     public Text m_coins;
+    public GameObject m_startText;
+    public Animator m_menuAnim;
     public GameObject m_musicOnButton;
     public GameObject m_musicOffButton;
+
 
 
     // Start is called before the first frame update
@@ -89,9 +93,9 @@ public class UIManager : MonoBehaviour
 
     public void ShowMusicSetting()
     {
-        if (PlayerPrefs.HasKey("Music"))
+        if (PlayerPrefs.HasKey(PlayerDataManager.instance.m_playerPref_Music))
         {
-            if (PlayerPrefs.GetInt("Music") == 1)
+            if (PlayerPrefs.GetInt(PlayerDataManager.instance.m_playerPref_Music) == 1)
             {
                 m_musicOffButton.SetActive(true);
                 m_musicOnButton.SetActive(false);
@@ -113,6 +117,20 @@ public class UIManager : MonoBehaviour
         AudioManager.instance.Music(i);
     }
 
+    public void ToggleMenu (bool i)
+    {
+        m_menuAnim.SetBool("menu_open", i);
+    }
+
+    public void HideMenu ()
+    {
+        m_startText.SetActive(false);
+        m_menuAnim.SetBool("game_start", true);
+        //m_menuPanel.SetActive(false);
+        m_inGamePanel.SetActive(true);
+        DudeController.instance.ShowButtonUI();
+        m_inGamePanel.GetComponent<Animator>().SetBool("game_start", true);
+    }
     #endregion
 
     #region Gameover UI
@@ -210,6 +228,7 @@ public class UIManager : MonoBehaviour
                 m_skinSelectButton.GetComponent<Button>().onClick.AddListener(delegate
                 {
                     SkinManager.instance.ChangeSkin(skinID);
+                    //PlayerDataManager.instance.SetUsingSkin(skinID);
                     prefab.SetLabel(m_selectLabel);
                     skinSelectButton.SetSkinUI();
                     skinSelectButton.GetCurrSkinUI().SetLabel(m_selectLabel);

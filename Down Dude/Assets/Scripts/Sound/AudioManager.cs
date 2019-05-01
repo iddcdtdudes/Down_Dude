@@ -30,10 +30,10 @@ public class AudioManager : MonoBehaviour {
     }
     // Use this for initialization
     void Start () {
-        if (PlayerPrefs.HasKey("Music"))
+        if (PlayerPrefs.HasKey(PlayerDataManager.instance.m_playerPref_Music))
         {
-            Play("Theme");
-            if (PlayerPrefs.GetInt("Music") == 1)
+            //Play("Theme");
+            if (PlayerPrefs.GetInt(PlayerDataManager.instance.m_playerPref_Music) == 1)
             {
                 //Play("Theme");
                 Music(true);
@@ -47,7 +47,7 @@ public class AudioManager : MonoBehaviour {
         else
         {
             Play("Theme");
-            PlayerPrefs.SetInt("Music", 1);
+            PlayerPrefs.SetInt(PlayerDataManager.instance.m_playerPref_Music, 1);
             PlayerPrefs.Save();
             Debug.Log("No music key");
         }
@@ -107,17 +107,41 @@ public class AudioManager : MonoBehaviour {
         {
             s.source.volume = 0.15f;
             s1.source.volume = 0.15f;
-            PlayerPrefs.SetInt("Music", 1);
+            PlayerPrefs.SetInt(PlayerDataManager.instance.m_playerPref_Music, 1);
         } 
         else
         {
             s.source.volume = 0f;
             s1.source.volume = 0f;
-            PlayerPrefs.SetInt("Music", 0);
+            PlayerPrefs.SetInt(PlayerDataManager.instance.m_playerPref_Music, 0);
         }
 
         PlayerPrefs.Save();
             
+    }
+
+    public void GameSound(bool OnOff)
+    {
+        string laser = "Laser";
+        string jetpack = "Jetpack";
+        string parachute = "Parachute";
+
+        Sound s = Array.Find(sounds, sound => sound.name == laser);
+        Sound s1 = Array.Find(sounds, sound => sound.name == jetpack);
+        Sound s2 = Array.Find(sounds, sound => sound.name == parachute);
+
+        if (OnOff)
+        {
+            s.source.volume = 0.15f;
+            s1.source.volume = 0.097f;
+            s2.source.volume = 0.15f;
+        }
+        else
+        {
+            s.source.volume = 0f;
+            s1.source.volume = 0f;
+            s2.source.volume = 0f;
+        }
     }
 
     

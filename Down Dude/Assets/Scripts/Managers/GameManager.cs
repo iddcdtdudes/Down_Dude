@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
+using UnityEngine.EventSystems;
 
 // GameManager : MonoBehabiour
 //
@@ -69,9 +70,9 @@ public class GameManager : MonoBehaviour {
         DudeController.instance.dudeIsKilledEvent += AchievementManager.instance.ResetAchProgress;
         DudeController.instance.dudeIsKilledEvent += UIManager.instance.HideInGamePanel;
         DudeController.instance.dudeIsKilledEvent += UIManager.instance.UpdateGameOverUI;
-        DudeController.instance.dudeIsKilledEvent += GameOverUI;
+        //DudeController.instance.dudeIsKilledEvent += GameOverUI;
         DudeController.instance.dudeIsKilledEvent += PlayerDataManager.instance.SaveDataLocal;
-        
+        //DudeController.instance.dudeIsKilledEvent += DudeController.instance.DudeKilledSequence;
 
         // initialize variables
         m_timer = ChunkManager.instance.GetNewChunkTimeLimit();
@@ -94,6 +95,11 @@ public class GameManager : MonoBehaviour {
     #region Update
     private void Update()
     {
+        if (DudeController.instance.GetDudeState() == DudeState.NONE)
+        {
+            CheckTouchOnScreen();
+        }
+
         UpdateTimer();
         UpdateDistance();
     }
@@ -115,6 +121,25 @@ public class GameManager : MonoBehaviour {
     #endregion
 
     #region Private
+
+    private void CheckTouchOnScreen ()
+    {
+        if (Input.touchCount > 0 && Input.GetTouch(0).phase == TouchPhase.Began)
+        {
+            Debug.Log("Found Touch");
+            //Make sure finger is NOT over a UI element
+            if (!EventSystem.current.IsPointerOverGameObject(Input.GetTouch(0).fingerId))
+            {
+                Debug.Log("Touch on Screen");
+                StartGame();
+            }
+            else
+            {
+                Debug.Log("Touch on UI");
+            }
+        }
+    }
+
     // add amount to score
     private void UpdateDistance()
     {
@@ -156,6 +181,8 @@ public class GameManager : MonoBehaviour {
     }
     #endregion
 
+    #region Public
+
     public float GetSessionDistance ()
     {
         return m_distance;
@@ -178,6 +205,9 @@ public class GameManager : MonoBehaviour {
         AudioManager.instance.Play("BGM");
         AudioManager.instance.StopSound("Menu");
         DudeController.instance.SetDudeState(DudeState.ALIVE);
+        
+        UIManager.instance.HideMenu();
+        
         Time.timeScale = 1f;
     }
 
@@ -188,8 +218,11 @@ public class GameManager : MonoBehaviour {
         Time.timeScale = 0.0f;
     }
 
+    
+
     public void GameOverUI ()
     {
+        //StartCoroutine("GameOverScreen");
         foreach (GameObject i in gameOverUIShow)
         {
             i.SetActive(true);
@@ -205,4 +238,7 @@ public class GameManager : MonoBehaviour {
     {
         SceneManager.LoadScene(SceneManager.GetActiveScene().name);
     }
+
+    #endregion
+
 }

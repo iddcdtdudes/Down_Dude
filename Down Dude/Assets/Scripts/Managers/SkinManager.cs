@@ -89,6 +89,11 @@ public class SkinManager : MonoBehaviour
         return m_skin.Length;
     }
 
+    public AnimatorOverrideController GetSkinAnimator (int skinID)
+    {
+        return m_skin[skinID].m_skinIDAnimator;
+    }
+
     public SkinObject GetSkin (int skinID)
     {
         return m_skin[skinID];
