@@ -496,17 +496,19 @@ public class DudeController : MonoBehaviour {
             AudioManager.instance.Play("Menu");
             AudioManager.instance.StopSound("BGM");
             AudioManager.instance.GameSound(false);
-
-            
-            //m_dudeAlive = false;
             m_dudeState = DudeState.DEAD;
+            instance.GetComponentInChildren<SpriteRenderer>().color = new Color(1f, 1f, 1f, 0f);
+            //instance.GetComponent<Rigidbody2D>().isKinematic = true;
+            instance.GetComponent<Rigidbody2D>().bodyType = RigidbodyType2D.Static;
+            //m_dudeAlive = false;
+            
             DudeKilledSequence();
+            
         }
 
         
-        instance.GetComponentInChildren<SpriteRenderer>().color = new Color(1f, 1f, 1f, 0f);
-        instance.GetComponent<Rigidbody2D>().isKinematic = true;
-        gameObject.SetActive(false);
+        
+        //
 
         if (dudeIsKilledEvent != null) {
             dudeIsKilledEvent.Invoke();
@@ -547,16 +549,20 @@ public class DudeController : MonoBehaviour {
         rigidbody.AddTorque(500.0f);
         
         Debug.Log("kill dude");
-        StartCoroutine("GameOverScreen");
-       
+
+        StartCoroutine(GameOverScreen());
+        
     }
 
     IEnumerator GameOverScreen()
     {
-        
+        Debug.Log("Before game over UI");
+        yield return new WaitForSecondsRealtime(1.0f);
+        Debug.Log("After game over UI");
         GameManager.instance.GameOverUI();
+        //gameObject.SetActive(false);
         //corpse.GetComponent<Rigidbody2D>().isKinematic = true;
-        yield return new WaitForSecondsRealtime(2.0f);
+
     }
 
     #endregion

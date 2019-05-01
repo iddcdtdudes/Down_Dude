@@ -119,17 +119,18 @@ public class UIManager : MonoBehaviour
 
     public void ToggleMenu (bool i)
     {
-        m_menuAnim.SetBool("menu_open", i);
+        m_menuAnim.SetBool("ButtomMenuToggle", i);
     }
 
     public void HideMenu ()
     {
         m_startText.SetActive(false);
-        m_menuAnim.SetBool("game_start", true);
+        //m_menuAnim.SetBool("GameStart", true);
+        m_menuAnim.SetTrigger("GameStart");
         //m_menuPanel.SetActive(false);
         m_inGamePanel.SetActive(true);
         DudeController.instance.ShowButtonUI();
-        m_inGamePanel.GetComponent<Animator>().SetBool("game_start", true);
+        //m_inGamePanel.GetComponent<Animator>().SetBool("game_start", true);
     }
     #endregion
 
