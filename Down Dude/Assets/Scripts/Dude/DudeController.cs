@@ -418,7 +418,7 @@ public class DudeController : MonoBehaviour {
         if (m_dudeControlByButton)
         {
             m_dudeControlUI.SetActive(true);
-            m_dudeControlUI.GetComponent<Animator>().SetBool("ControlUI", true);
+            //m_dudeControlUI.GetComponent<Animator>().SetBool("ControlUI", true);
         }
         else
         {

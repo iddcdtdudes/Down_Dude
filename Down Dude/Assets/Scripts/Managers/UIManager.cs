@@ -124,10 +124,10 @@ public class UIManager : MonoBehaviour
     public void HideMenu ()
     {
         m_startText.SetActive(false);
-        
         m_menuAnim.SetBool("game_start", true);
         //m_menuPanel.SetActive(false);
-        //m_inGamePanel.SetActive(true);
+        m_inGamePanel.SetActive(true);
+        DudeController.instance.ShowButtonUI();
         m_inGamePanel.GetComponent<Animator>().SetBool("game_start", true);
     }
     #endregion
