@@ -9,6 +9,7 @@ using System.IO;
 public class PlayerData
 {
     public string m_version;
+    public bool m_tutorialChunk;
     public int m_coins;
     public int m_usingSkin;
     //public int m_allTimeHS;
@@ -21,6 +22,7 @@ public class PlayerData
     //Constructor for saving and loading
     public PlayerData (PlayerData player, int numberOfSkins, int numberOfAchievements)
     {
+        m_tutorialChunk = player.m_tutorialChunk;
         m_coins = player.m_coins;
         m_usingSkin = player.m_usingSkin;
         //m_allTimeHS = player.m_allTimeHS;
@@ -116,6 +118,7 @@ public class PlayerData
     //Constructor creating the object first time
     public PlayerData (int numberOfSkins, int numberOfAchievements)
     {
+        m_tutorialChunk = false;
         m_coins = 0;
         m_usingSkin = 0;
         //m_allTimeHS = 0;

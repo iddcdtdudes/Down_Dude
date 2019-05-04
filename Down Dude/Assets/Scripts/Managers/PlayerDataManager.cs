@@ -131,6 +131,11 @@ public class PlayerDataManager : MonoBehaviour
         m_player.m_achievementClaimed[achID] = false;
     }
 
+    public void SetTutorialPlayed ()
+    {
+        m_player.m_tutorialChunk = true;
+    }
+
     #endregion
 
     #region Getter
@@ -169,6 +174,11 @@ public class PlayerDataManager : MonoBehaviour
     {
         //Debug.Log("Achievement ID: " + achID);
         return m_player.m_unlockedAchievements[achID];
+    }
+
+    public bool GetTutorial ()
+    {
+        return m_player.m_tutorialChunk;
     }
 
     #endregion
