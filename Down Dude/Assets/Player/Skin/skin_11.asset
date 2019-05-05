@@ -1,0 +1,20 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3c5d04ab419639049aab014b041111be, type: 3}
+  m_Name: skin_11
+  m_EditorClassIdentifier: 
+  m_id: 11
+  m_name: Alien
+  m_cost: 120
+  m_skinIDAnimator: {fileID: 22100000, guid: 2f74edb39207a3845b5bdd801c44fc67, type: 2}
+  m_skinEx: {fileID: 21300000, guid: b6307328ee2745d47b239a1c186b32b6, type: 3}
+  m_skinIcon: {fileID: 21300000, guid: 4eec1e028b71ffc4f9a733481319d9b9, type: 3}

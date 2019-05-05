@@ -44,14 +44,66 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_currentSkin: 0
-  m_skinsTotal: 0
   m_skins:
   - m_id: 0
     m_name: skinDefault
+    m_unlock: 0
     m_skinIDAnimator: {fileID: 22100000, guid: 0deffe7995fb3ae44bd9d20f2f4d2a89, type: 2}
   - m_id: 1
     m_name: Kaki
+    m_unlock: 0
     m_skinIDAnimator: {fileID: 22100000, guid: 0edce2c2cb00e43478508975a27c08c2, type: 2}
   - m_id: 2
     m_name: Sandy
+    m_unlock: 0
     m_skinIDAnimator: {fileID: 22100000, guid: f8a15882e47f3bf4f9a5ddef233b2468, type: 2}
+  - m_id: 3
+    m_name: Forest
+    m_unlock: 0
+    m_skinIDAnimator: {fileID: 22100000, guid: 472ddd2ee16f38a40be751b175c9608d, type: 2}
+  - m_id: 4
+    m_name: Snow
+    m_unlock: 0
+    m_skinIDAnimator: {fileID: 22100000, guid: 26e4dac8ab62c8d4fb11b8dd4252832b, type: 2}
+  - m_id: 5
+    m_name: Desert
+    m_unlock: 0
+    m_skinIDAnimator: {fileID: 22100000, guid: 1a9f6cca07b3a8748991b66f328592f5, type: 2}
+  - m_id: 6
+    m_name: Cola
+    m_unlock: 0
+    m_skinIDAnimator: {fileID: 22100000, guid: fb85ae4d189b5564497054ba22b2af49, type: 2}
+  - m_id: 7
+    m_name: Beach
+    m_unlock: 0
+    m_skinIDAnimator: {fileID: 22100000, guid: b8098dffad0845d44bf195f36568c7b5, type: 2}
+  - m_id: 8
+    m_name: Nyan
+    m_unlock: 0
+    m_skinIDAnimator: {fileID: 22100000, guid: ef3c7533a68c37d4c9ad1b70ec784fec, type: 2}
+  - m_id: 9
+    m_name: Trench
+    m_unlock: 0
+    m_skinIDAnimator: {fileID: 22100000, guid: c50140716bf602b49a03e9c331ddd83a, type: 2}
+  - m_id: 10
+    m_name: Ghost
+    m_unlock: 0
+    m_skinIDAnimator: {fileID: 22100000, guid: aab4a5ed09a04084fa56315f9665a303, type: 2}
+  - m_id: 11
+    m_name: Alien
+    m_unlock: 0
+    m_skinIDAnimator: {fileID: 22100000, guid: 2f74edb39207a3845b5bdd801c44fc67, type: 2}
+  m_skin:
+  - {fileID: 11400000, guid: a6725debce4fc9445b60092afebf2583, type: 2}
+  - {fileID: 11400000, guid: 209a0160b9af2744ba715b5bb4b8ae9c, type: 2}
+  - {fileID: 11400000, guid: bba6863a16ccc844d827e0bbb8af16c9, type: 2}
+  - {fileID: 11400000, guid: f2fa88825ff126c498af01b032391814, type: 2}
+  - {fileID: 11400000, guid: 290d2025ee2252141b5b0f0476db4a69, type: 2}
+  - {fileID: 11400000, guid: 19d639784d5774845b7cbf42f1457dec, type: 2}
+  - {fileID: 11400000, guid: 0d01d23ec003b894287e1d305e1bacc3, type: 2}
+  - {fileID: 11400000, guid: a10c14c9d13eceb43bdbd72f4a81d828, type: 2}
+  - {fileID: 11400000, guid: ca367bc0d96807d469f278d19224d91f, type: 2}
+  - {fileID: 11400000, guid: f4043677b201ced43a5c01a4a7d6fe56, type: 2}
+  - {fileID: 11400000, guid: 210f8041fe05d2042a19032680eeccbd, type: 2}
+  - {fileID: 11400000, guid: 2f3cc66412ef32f4eb4200f50e3075da, type: 2}
+  m_dudeAnimator: {fileID: 0}
