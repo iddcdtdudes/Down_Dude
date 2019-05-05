@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_id: 2
   m_name: Sandy
-  m_cost: 0
+  m_cost: 10
   m_skinIDAnimator: {fileID: 22100000, guid: f8a15882e47f3bf4f9a5ddef233b2468, type: 2}
   m_skinEx: {fileID: 21300000, guid: d51e861abda9cc14a93f86fcbeca0d4b, type: 3}
   m_skinIcon: {fileID: 21300000, guid: 66ae279cbd91c7348947b32cfe251f98, type: 3}

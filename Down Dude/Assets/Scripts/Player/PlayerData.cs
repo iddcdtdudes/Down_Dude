@@ -32,11 +32,6 @@ public class PlayerData
         m_unlockedSkins = new bool[numberOfSkins];
         player.m_unlockedSkins.CopyTo(m_unlockedSkins, 0);
 
-        //Unlocked all default skin
-        //m_unlockedSkins[0] = true;
-        //m_unlockedSkins[1] = true;
-        //m_unlockedSkins[2] = true;
-
         m_unlockedAchievements = new bool[numberOfAchievements];
         player.m_unlockedAchievements.CopyTo(m_unlockedAchievements, 0);
 
@@ -129,8 +124,6 @@ public class PlayerData
         m_achievementClaimed = new bool[numberOfAchievements];
 
         m_unlockedSkins[0] = true;
-        m_unlockedSkins[1] = true;
-        m_unlockedSkins[2] = true;
 
     }
 }

@@ -17,7 +17,7 @@ public class GameManager : MonoBehaviour {
 
     // singleton instance
     public static GameManager instance;
-
+    
     [SerializeField]private bool GameStart;
 
     [SerializeField] private Text timerText;            // timer text UI
@@ -170,6 +170,8 @@ public class GameManager : MonoBehaviour {
         // increment Checkpoint
         incrementCheckpoints();
         PlayerDataManager.instance.AddCoins(1);
+        Vector2 dudePosition = new Vector2(DudeController.instance.gameObject.transform.position.x, DudeController.instance.gameObject.transform.position.y);
+        CoinChangeDisplayManager.instance.displayCoinChange(Camera.main.WorldToScreenPoint(dudePosition), 1);
         AudioManager.instance.Play("Checkpoint");
 
         // calculate and add score

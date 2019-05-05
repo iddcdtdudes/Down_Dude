@@ -16,6 +16,7 @@ public class UIManager : MonoBehaviour
     //public Text m_achievementCompleted;
     public GameObject m_achGameOverPanel;
     public GameObject m_achGameOverPrefab;
+    public GameObject m_achGameOver;
 
     [Header("In-Game Panel")]
     public GameObject m_inGamePanel;
@@ -138,9 +139,9 @@ public class UIManager : MonoBehaviour
 
     public void UpdateGameOverUI()
     {
-        m_sessionDist.text = ((int)GameManager.instance.GetSessionDistance()).ToString();
+        m_sessionDist.text = ((int)GameManager.instance.GetSessionDistance()).ToString() + " m";
         m_sessionCP.text = GameManager.instance.GetSessionCheckpoints().ToString();
-        m_allTimeDist.text = PlayerDataManager.instance.GetAllTimeDist().ToString();
+        m_allTimeDist.text = PlayerDataManager.instance.GetAllTimeDist().ToString() + " m";
         m_allTimeCP.text = PlayerDataManager.instance.GetAllTimeCP().ToString();
     }
 

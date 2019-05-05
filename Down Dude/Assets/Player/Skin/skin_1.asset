@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_id: 1
   m_name: Kaki
-  m_cost: 0
+  m_cost: 10
   m_skinIDAnimator: {fileID: 22100000, guid: 0edce2c2cb00e43478508975a27c08c2, type: 2}
   m_skinEx: {fileID: 21300000, guid: 275a8d916015cff4cafeefd1521efcb6, type: 3}
   m_skinIcon: {fileID: 21300000, guid: 7a06958627c8c3c499d2f0ff6cd6c158, type: 3}
