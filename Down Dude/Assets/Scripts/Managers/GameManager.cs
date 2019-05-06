@@ -131,6 +131,7 @@ public class GameManager : MonoBehaviour {
             if (!EventSystem.current.IsPointerOverGameObject(Input.GetTouch(0).fingerId))
             {
                 Debug.Log("Touch on Screen");
+                ChunkManager.instance.UpdateChunkToDebug();
                 StartGame();
             }
             else
