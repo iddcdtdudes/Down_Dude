@@ -108,13 +108,6 @@ public class BackgroundManager : MonoBehaviour {
         m_backgroundTransitioning = false;
     }
 
-    public void GameStart()
-    {
-        foreach(BackgroundThemeHolder theme in m_backgrounds) {
-            theme.SetRising(false);
-        }
-    }
-
     // set background theme
     private void SetBackgroundTheme(BackgroundTheme theme)
     {
@@ -174,13 +167,5 @@ class BackgroundThemeHolder
         m_bgLayer0.InitializePosition(false);
         m_bgLayer1.InitializePosition(false);
         m_bgLayer2.InitializePosition(false);
-    }
-
-    // set rising
-    public void SetRising(bool value)
-    {
-        m_bgLayer0.SetRising(value);
-        m_bgLayer1.SetRising(value);
-        m_bgLayer2.SetRising(value);
     }
 }
