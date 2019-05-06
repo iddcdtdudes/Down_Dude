@@ -24,6 +24,9 @@ public class BackgroundLooper : MonoBehaviour {
 
     private bool m_firstActivated;
 
+    private float m_risingSpeed = 0.1f;
+    private bool m_rising = true;
+
     private void Start()
     {
         // initialize sprite positions
@@ -38,10 +41,9 @@ public class BackgroundLooper : MonoBehaviour {
     private void FixedUpdate()
     {
         if(m_parallax > 0.0f) {
-
             // update camera velocity
-            float camY = CameraController.instance.transform.position.y;
             float camYVel;
+            float camY = CameraController.instance.transform.position.y;
             if(!m_firstActivated) {
                 camYVel = camY - m_lastCamY;
                 m_lastCamY = camY;
@@ -52,16 +54,21 @@ public class BackgroundLooper : MonoBehaviour {
             }
 
             // parallax
-            //Debug.Log("before " + m_otherBackground.transform.position.y + " " + camYVel);
-            m_otherBackground.transform.position = new Vector3(0.0f, m_otherBackground.transform.position.y + Time.deltaTime * (1 - m_parallax) * 30 * camYVel, 0.0f);
-            m_nextBackground.transform.position = new Vector3(0.0f, m_nextBackground.transform.position.y +  Time.deltaTime * (1 - m_parallax) * 30 * camYVel, 0.0f);
-            //Debug.Log("after  " + m_otherBackground.transform.position.y);
+            m_otherBackground.transform.position = new Vector3(0.0f, m_otherBackground.transform.position.y + (1 - m_parallax) * 1 * camYVel, 0.0f);
+            m_nextBackground.transform.position = new Vector3(0.0f, m_nextBackground.transform.position.y + (1 - m_parallax) * 1 * camYVel, 0.0f);
         }
         
     }
 
     private void Update()
     {
+        /*
+        // rising
+        if (m_rising) {
+            m_otherBackground.transform.position = new Vector3(0.0f, m_otherBackground.transform.position.y + m_parallax * -m_risingSpeed, 0.0f);
+            m_nextBackground.transform.position =  new Vector3(0.0f, m_nextBackground.transform.position.y +  m_parallax * -m_risingSpeed, 0.0f);
+        }*/
+
         // move other background down
         if (m_looping && DudeController.instance.transform.position.y < m_nextBackground.transform.position.y) {
             m_otherBackground.transform.position = new Vector3(0.0f, m_nextBackground.transform.position.y - m_backgroundHeight, 0.0f);
@@ -95,5 +102,10 @@ public class BackgroundLooper : MonoBehaviour {
     public void SetFirstActivated(bool value)
     {
         m_firstActivated = value;
+    }
+
+    public void SetRising(bool value)
+    {
+        m_rising = value;
     }
 }

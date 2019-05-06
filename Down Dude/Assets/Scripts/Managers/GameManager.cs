@@ -90,6 +90,7 @@ public class GameManager : MonoBehaviour {
 
         // play menu music
         AudioManager.instance.Play("Menu");
+        AudioManager.instance.Play("Helicopter");
     }
 
     #region Update
@@ -210,10 +211,13 @@ public class GameManager : MonoBehaviour {
         AudioManager.instance.SynchronizeAudio("Menu", "BGM");
 
         AudioManager.instance.StopSound("Menu");
+        AudioManager.instance.StopSound("Helicopter");
         DudeController.instance.SetDudeState(DudeState.ALIVE);
         
         UIManager.instance.HideMenu();
-        
+
+        BackgroundManager.instance.GameStart();
+
         Time.timeScale = 1f;
     }
 
