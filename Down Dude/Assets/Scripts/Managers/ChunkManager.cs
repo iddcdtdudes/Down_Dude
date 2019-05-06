@@ -1,17 +1,19 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 using UnityEditor;
 
 // ChunkManager : MonoBehaviour
 //
 // provides chunk spawning / despawning interface
 
-public class ChunkManager : MonoBehaviour {
+public class ChunkManager : MonoBehaviour
+{
 
     // singleton instance
     public static ChunkManager instance;
-    
+
     [SerializeField] private Chunk[] m_chunkList;       // list of all chunk scriptable objects available
 
     private int m_firstChunkIndex;                      // index of first chunk
@@ -27,19 +29,21 @@ public class ChunkManager : MonoBehaviour {
     [SerializeField] private bool m_chunkDebugger;      // spawn specific chunk for debugging
     [SerializeField] private int m_chunkToDebug;        // chunk to spawn when debugging
 
+    [SerializeField] private Text m_chunkInputText;
+
     private void Awake()
     {
         // initialize singleton instance
-        if(instance == null) {
+        if (instance == null) {
             instance = this;
         } else {
             Destroy(gameObject);
         }
 
         // clamp chunkToDebug
-        if(m_chunkToDebug < 0) {
+        if (m_chunkToDebug < 0) {
             m_chunkToDebug = 0;
-        } else if(m_chunkToDebug >= m_chunkList.Length) {
+        } else if (m_chunkToDebug >= m_chunkList.Length) {
             m_chunkToDebug = m_chunkList.Length - 1;
         }
 
@@ -47,7 +51,7 @@ public class ChunkManager : MonoBehaviour {
         m_loadedChunks = new List<GameObject>();
 
         // randomize index of first chunk
-        if(!m_chunkDebugger) {
+        if (!m_chunkDebugger) {
             m_firstChunkIndex = Random.Range(1, m_chunkList.Length);
         } else {
             m_firstChunkIndex = m_chunkToDebug;
@@ -56,6 +60,13 @@ public class ChunkManager : MonoBehaviour {
 
     private void Start()
     {
+        m_chunkInputText.text = "0";
+        int testChunkIndex = m_chunkToDebug;
+
+        if (testChunkIndex > 0 && testChunkIndex < m_chunkList.Length) {
+            m_firstChunkIndex = testChunkIndex;
+        }
+
         // add first chunk
         PushChunk(m_firstChunkIndex);
     }
@@ -63,8 +74,8 @@ public class ChunkManager : MonoBehaviour {
     private void Update()
     {
         // spawn chunk if ready
-        if(ReadyToSpawnChunk()) {
-            if(!m_chunkDebugger) {
+        if (ReadyToSpawnChunk()) {
+            if (!m_chunkDebugger) {
                 PushChunk(Random.Range(1, m_chunkList.Length));
 
             } else {
@@ -72,7 +83,7 @@ public class ChunkManager : MonoBehaviour {
             }
 
             // if chunk count exceeds limit, pop a chunk
-            if(m_loadedChunks.Count > m_loadedChunksLimit) {
+            if (m_loadedChunks.Count > m_loadedChunksLimit) {
                 PopChunk();
             }
         }
@@ -82,7 +93,7 @@ public class ChunkManager : MonoBehaviour {
     private bool ReadyToSpawnChunk()
     {
         // if not passed delay time, return false
-        if(Time.time < m_lastSpawnTime + 1f) {
+        if (Time.time < m_lastSpawnTime + 1f) {
             return false;
         }
 
@@ -94,7 +105,7 @@ public class ChunkManager : MonoBehaviour {
         float spawningY = GetLoadedChunk(0).transform.position.y - GetLoadedChunk(0).GetChunkHeight() + spawnOffset;
 
         // if dude has surpassed the point, chunk is ready to spawn
-        if(dudeY <= spawningY) {
+        if (dudeY <= spawningY) {
             return true;
         } else {
             return false;
@@ -111,7 +122,7 @@ public class ChunkManager : MonoBehaviour {
         m_loadedChunks[m_loadedChunks.Count - 1].transform.parent = this.transform;
 
         // position chunk
-        if(m_loadedChunks.Count >= 2) {
+        if (m_loadedChunks.Count >= 2) {
             float previousChunkY = GetLoadedChunk(1).transform.position.y;
             float previousChunkHeight = GetLoadedChunk(1).GetChunkHeight();
 
@@ -135,7 +146,7 @@ public class ChunkManager : MonoBehaviour {
     // returns the latest spawned chunk's time limit
     public float GetNewChunkTimeLimit()
     {
-        if(m_loadedChunks.Count > 0) {
+        if (m_loadedChunks.Count > 0) {
             Debug.Log(GetChunkIndex(0));
             return m_chunkList[GetChunkIndex(0)].GetTimeLimit();
         } else {
@@ -147,7 +158,7 @@ public class ChunkManager : MonoBehaviour {
     // chunk = 0 : latest chunk; +1 every older chunk
     public int GetChunkIndex(int chunk)
     {
-        if(m_loadedChunks.Count - chunk - 1 >= 0) {
+        if (m_loadedChunks.Count - chunk - 1 >= 0) {
             return m_loadedChunks[m_loadedChunks.Count - chunk - 1].GetComponent<Chunk>().GetChunkIndex();
         } else {
             return -1;
@@ -162,5 +173,18 @@ public class ChunkManager : MonoBehaviour {
     public Chunk[] GetChunkList()
     {
         return m_chunkList;
+    }
+
+    public void UpdateChunkToDebug()
+    {
+        // FOR BUILD DEBUG
+        m_chunkToDebug = int.Parse(m_chunkInputText.text);
+
+        // clamp chunkToDebug
+        if (m_chunkToDebug < 0) {
+            m_chunkToDebug = 0;
+        } else if (m_chunkToDebug >= m_chunkList.Length) {
+            m_chunkToDebug = m_chunkList.Length - 1;
+        }
     }
 }
