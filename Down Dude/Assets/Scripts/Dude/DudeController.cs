@@ -425,6 +425,22 @@ public class DudeController : MonoBehaviour {
         
     }
 
+    public void ChangeControlToButton (float i)
+    {
+        if (i >= 0.5)
+        {
+            m_dudeControlByButton = true;
+            PlayerPrefs.SetInt(PlayerDataManager.instance.m_playerPref_Control, 1);
+        }
+        else
+        {
+            m_dudeControlByButton = false;
+            PlayerPrefs.SetInt(PlayerDataManager.instance.m_playerPref_Control, 0);
+        }
+        PlayerPrefs.Save();
+
+    }
+
     public void ShowButtonUI ()
     {
         if (m_dudeControlByButton)
@@ -556,9 +572,7 @@ public class DudeController : MonoBehaviour {
 
     IEnumerator GameOverScreen()
     {
-        Debug.Log("Before game over UI");
         yield return new WaitForSecondsRealtime(1.0f);
-        Debug.Log("After game over UI");
         GameManager.instance.GameOverUI();
         //gameObject.SetActive(false);
         //corpse.GetComponent<Rigidbody2D>().isKinematic = true;

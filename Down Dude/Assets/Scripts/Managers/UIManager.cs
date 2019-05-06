@@ -51,7 +51,9 @@ public class UIManager : MonoBehaviour
     public GameObject m_musicOnButton;
     public GameObject m_musicOffButton;
 
-
+    [Header("Settings")]
+    public Text m_dudeControlButton;
+    public Text m_dudeControlTouch;
 
     // Start is called before the first frame update
     void Awake()
@@ -74,9 +76,9 @@ public class UIManager : MonoBehaviour
 
         //Update Coins in menu
         UpdateCoinValue();
-        
+        //DudeControlChange();
         //Create each achievement list in UI
-        
+
     }
 
     #region Main Menu
@@ -139,9 +141,9 @@ public class UIManager : MonoBehaviour
 
     public void UpdateGameOverUI()
     {
-        m_sessionDist.text = ((int)GameManager.instance.GetSessionDistance()).ToString() + " m";
+        m_sessionDist.text = ((int)GameManager.instance.GetSessionDistance()).ToString() + "m";
         m_sessionCP.text = GameManager.instance.GetSessionCheckpoints().ToString();
-        m_allTimeDist.text = PlayerDataManager.instance.GetAllTimeDist().ToString() + " m";
+        m_allTimeDist.text = PlayerDataManager.instance.GetAllTimeDist().ToString() + "m";
         m_allTimeCP.text = PlayerDataManager.instance.GetAllTimeCP().ToString();
     }
 
@@ -348,4 +350,40 @@ public class UIManager : MonoBehaviour
     }
 
     #endregion
+
+    public void DudeControlChange()
+    {
+        //if (i >= 0.5)
+        //{
+        //    m_dudeControlTouch.color = new Color(0.0f, 0.0f, 0.0f, 0.5f);
+        //    m_dudeControlButton.color = new Color(0.0f, 0.0f, 0.0f, 1.0f);
+        //}
+        //else
+        //{
+        //    m_dudeControlTouch.color = new Color(0.0f, 0.0f, 0.0f, 1.0f);
+        //    m_dudeControlButton.color = new Color(0.0f, 0.0f, 0.0f, 0.5f);
+        //}
+
+        if (PlayerPrefs.HasKey(PlayerDataManager.instance.m_playerPref_Control))
+        {
+            Slider controlSetting = m_dudeControlTouch.GetComponentInParent<Slider>();
+            controlSetting.onValueChanged.AddListener(delegate
+            {
+                AudioManager.instance.Play("Ok");
+            });
+
+            if (PlayerPrefs.GetInt(PlayerDataManager.instance.m_playerPref_Control) == 1)
+            {
+                controlSetting.value = 1;
+                m_dudeControlTouch.color = new Color(0.0f, 0.0f, 0.0f, 0.5f);
+                m_dudeControlButton.color = new Color(0.0f, 0.0f, 0.0f, 1.0f);
+            }
+            else
+            {
+                controlSetting.value = 0;
+                m_dudeControlTouch.color = new Color(0.0f, 0.0f, 0.0f, 1.0f);
+                m_dudeControlButton.color = new Color(0.0f, 0.0f, 0.0f, 0.5f);
+            }
+        }
+    }
 }
