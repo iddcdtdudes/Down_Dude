@@ -127,17 +127,17 @@ public class GameManager : MonoBehaviour {
     {
         if (Input.touchCount > 0 && Input.GetTouch(0).phase == TouchPhase.Began)
         {
-            //Debug.Log("Found Touch");
+            Debug.Log("Found Touch");
             //Make sure finger is NOT over a UI element
             if (!EventSystem.current.IsPointerOverGameObject(Input.GetTouch(0).fingerId))
             {
-                //Debug.Log("Touch on Screen");
+                Debug.Log("Touch on Screen");
                 StartGame();
             }
-            //else
-            //{
-            //    Debug.Log("Touch on UI");
-            //}
+            else
+            {
+                Debug.Log("Touch on UI");
+            }
         }
     }
 

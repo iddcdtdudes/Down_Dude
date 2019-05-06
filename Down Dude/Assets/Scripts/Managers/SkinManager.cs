@@ -37,7 +37,7 @@ public class SkinManager : MonoBehaviour
         //OverrideAnimator(m_currentSkin);
         //UIManager.instance.m_skinExample.sprite = m_skin[m_currentSkin].GetSkinEx();
         //UIManager.instance.m_skinName.text = m_skin[m_currentSkin].GetSkinName();
-        //Debug.Log("Current skin = " + m_currentSkin);
+        Debug.Log("Current skin = " + m_currentSkin);
     }
 
     private void OverrideAnimator (int skinID)
