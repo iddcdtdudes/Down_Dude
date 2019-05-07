@@ -89,7 +89,7 @@ public class GameManager : MonoBehaviour {
         m_previousDudeY = 0.0f;
 
         // play menu music
-        AudioManager.instance.Play("Menu");
+        AudioManager.instance.Play("Helicopter");
     }
 
     #region Update
@@ -204,25 +204,28 @@ public class GameManager : MonoBehaviour {
 
     public void StartGame ()
     {
-        // synchronize music
-        AudioManager.instance.Play("BGM");
-        AudioManager.instance.SynchronizeAudio("Menu", "BGM");
-        AudioManager.instance.StopSound("Menu");
-
-        DudeController.instance.SetDudeState(DudeState.ALIVE);
-        
         UIManager.instance.HideMenu();
-        
+        StartSequence.instance.GameStart();
+    }
+
+    public void OnDudeJump()
+    {
+        AudioManager.instance.Play("BGM");
+        AudioManager.instance.StopSound("Helicopter");
+
+        ChunkManager.instance.GameStart();
+        DudeController.instance.SetDudeState(DudeState.ALIVE);
+
+        BackgroundManager.instance.GameStart();
+
         Time.timeScale = 1f;
     }
 
     public void PauseGame ()
     {
-        AudioManager.instance.Play("Menu");
-
         //synchronize music
+        AudioManager.instance.Play("Menu");
         AudioManager.instance.SynchronizeAudio("BGM", "Menu");
-
         AudioManager.instance.StopSound("BGM");
         Time.timeScale = 0.0f;
     }

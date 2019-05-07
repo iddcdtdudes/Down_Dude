@@ -6,7 +6,7 @@ AnimationClip:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: anim_helicopter
+  m_Name: anim_helicopter_engine
   serializedVersion: 6
   m_Legacy: 0
   m_Compressed: 0
@@ -28,7 +28,7 @@ AnimationClip:
     - time: 0.1
       value: {fileID: 21300000, guid: a3542b20bb81cdf4297ff2376f59afd8, type: 3}
     attribute: m_Sprite
-    path: plane_engine
+    path: 
     classID: 212
     script: {fileID: 0}
   m_SampleRate: 30
@@ -39,7 +39,7 @@ AnimationClip:
   m_ClipBindingConstant:
     genericBindings:
     - serializedVersion: 2
-      path: 3140090547
+      path: 0
       attribute: 0
       script: {fileID: 0}
       typeID: 212

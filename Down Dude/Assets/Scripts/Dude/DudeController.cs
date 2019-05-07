@@ -89,6 +89,8 @@ public class DudeController : MonoBehaviour {
                 m_dudeControlByButton = false;
             }
         }
+
+        SetDudeMode(DudeMode.IDLE);
     }
 
     #region Update
@@ -577,6 +579,11 @@ public class DudeController : MonoBehaviour {
         //gameObject.SetActive(false);
         //corpse.GetComponent<Rigidbody2D>().isKinematic = true;
 
+    }
+
+    public void OnDudeFadeInComplete()
+    {
+        GetComponent<Animator>().enabled = false;
     }
 
     #endregion

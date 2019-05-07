@@ -20,6 +20,8 @@ public class BackgroundManager : MonoBehaviour {
 
     private bool m_backgroundTransitioning = false;             // transitioning
 
+    [SerializeField] private int m_startingBackground = -1;
+
     private void Awake()
     {
         // initialize singleton instance
@@ -34,7 +36,13 @@ public class BackgroundManager : MonoBehaviour {
     {
         DudeController.instance.reachCheckpointEvent += OnDudeReachCheckpoint;
 
-        BackgroundTheme newTheme = (BackgroundTheme)Random.Range(0, m_backgrounds.Count);
+        BackgroundTheme newTheme;
+        if (m_startingBackground < 0 || m_startingBackground >= m_backgrounds.Count) {
+            newTheme = (BackgroundTheme)Random.Range(0, m_backgrounds.Count);
+        } else {
+            newTheme = (BackgroundTheme)m_startingBackground;
+        }
+
         SetBackgroundTheme(newTheme);
         m_backgrounds[(int)m_currentTheme].InitializePositions();
 
@@ -132,9 +140,16 @@ public class BackgroundManager : MonoBehaviour {
     {
         m_transition.InitializePosition(true);
     }
+
+    public void GameStart()
+    {
+        foreach(BackgroundThemeHolder theme in m_backgrounds) {
+            theme.SetRising(false);
+        }
+    }
 }
 
-public enum BackgroundTheme { CAVE = 0, FOREST, CITY };
+public enum BackgroundTheme { CAVE = 0, FOREST, CITY, VALLEY };
 
 // Background Theme
 //
@@ -167,5 +182,13 @@ class BackgroundThemeHolder
         m_bgLayer0.InitializePosition(false);
         m_bgLayer1.InitializePosition(false);
         m_bgLayer2.InitializePosition(false);
+    }
+
+    // rising
+    public void SetRising(bool value)
+    {
+        m_bgLayer0.SetRising(value);
+        m_bgLayer1.SetRising(value);
+        m_bgLayer2.SetRising(value);
     }
 }

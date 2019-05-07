@@ -23,6 +23,7 @@ public class BackgroundLooper : MonoBehaviour {
     private float m_lastCamY;
 
     private bool m_firstActivated;
+    private bool m_rising = true;
 
     private void Start()
     {
@@ -71,6 +72,20 @@ public class BackgroundLooper : MonoBehaviour {
             m_otherBackground = temp;
         }
 
+        // rising
+        if(m_rising) {
+            m_otherBackground.transform.position = new Vector3(0.0f, m_otherBackground.transform.position.y + Time.unscaledDeltaTime * m_parallax * -2.0f, 0.0f);
+            m_nextBackground.transform.position =  new Vector3(0.0f, m_nextBackground.transform.position.y +  Time.unscaledDeltaTime * m_parallax * -2.0f, 0.0f);
+
+            if(m_looping && Camera.main.transform.position.y > m_otherBackground.transform.position.y) {
+                m_nextBackground.transform.position = new Vector3(0.0f, m_otherBackground.transform.position.y + m_backgroundHeight, 0.0f);
+
+                GameObject temp = m_nextBackground;
+                m_nextBackground = m_otherBackground;
+                m_otherBackground = temp;
+            }
+        }
+
         if(m_parallax == 0.0f) {
             m_otherBackground.transform.position = new Vector3(0.0f, CameraController.instance.transform.position.y, 0.0f);
             m_nextBackground.transform.position = new Vector3(0.0f, CameraController.instance.transform.position.y, 0.0f);
@@ -85,6 +100,11 @@ public class BackgroundLooper : MonoBehaviour {
         } else {
             m_nextBackground.transform.position = new Vector3(0.0f, CameraController.instance.transform.position.y, 0.0f);
         }
+    }
+
+    public void SetRising(bool value)
+    {
+        m_rising = value;
     }
 
     public float GetBackgroundY()
