@@ -204,12 +204,11 @@ public class GameManager : MonoBehaviour {
 
     public void StartGame ()
     {
-        AudioManager.instance.Play("BGM");
-
         // synchronize music
+        AudioManager.instance.Play("BGM");
         AudioManager.instance.SynchronizeAudio("Menu", "BGM");
-
         AudioManager.instance.StopSound("Menu");
+
         DudeController.instance.SetDudeState(DudeState.ALIVE);
         
         UIManager.instance.HideMenu();

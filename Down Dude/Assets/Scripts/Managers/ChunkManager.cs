@@ -27,6 +27,8 @@ public class ChunkManager : MonoBehaviour {
     [SerializeField] private bool m_chunkDebugger;      // spawn specific chunk for debugging
     [SerializeField] private int m_chunkToDebug;        // chunk to spawn when debugging
 
+    private bool m_spawning = false;             // spawning chunk
+
     private void Awake()
     {
         // initialize singleton instance
@@ -56,14 +58,12 @@ public class ChunkManager : MonoBehaviour {
 
     private void Start()
     {
-        // add first chunk
-        PushChunk(m_firstChunkIndex);
     }
 
     private void Update()
     {
         // spawn chunk if ready
-        if(ReadyToSpawnChunk()) {
+        if(m_spawning && ReadyToSpawnChunk()) {
             if(!m_chunkDebugger) {
                 PushChunk(Random.Range(1, m_chunkList.Length));
 
@@ -76,6 +76,14 @@ public class ChunkManager : MonoBehaviour {
                 PopChunk();
             }
         }
+    }
+
+    public void GameStart()
+    {
+        m_spawning = true;
+
+        // add first chunk
+        PushChunk(m_firstChunkIndex);
     }
 
     // returns true if next chunk must be spawned
