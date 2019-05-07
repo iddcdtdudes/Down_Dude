@@ -8,7 +8,6 @@ using System.IO;
 [System.Serializable]
 public class PlayerData
 {
-    public string m_version;
     public bool m_tutorialChunk;
     public int m_coins;
     public int m_usingSkin;

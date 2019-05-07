@@ -22,6 +22,8 @@ public class UIManager : MonoBehaviour
     public GameObject m_inGamePanel;
 
     [Header("Achievement UI")]
+    public GameObject m_achNotif;
+    public Text m_achNotifNum;
     public GameObject m_achievementPanel;
     public GameObject m_achievementPrefab;
 

@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public enum TRACKER
-{DISTANCE, CHECKPOINT}
+{DISTANCE, CHECKPOINT, DEATH}
 
 public class AchievementManager : MonoBehaviour
 {

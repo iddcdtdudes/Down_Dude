@@ -10,16 +10,16 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 78339b6f3b30aaf478c0d4d468b21f02, type: 3}
-  m_Name: ach_0
+  m_Name: ach_7
   m_EditorClassIdentifier: 
-  ach_ID: 0
-  ach_Reward: 2
-  ach_Title: Reach new distance highscore
-  ach_Description: Get a new all time distance highscore
+  ach_ID: 7
+  ach_Reward: 5
+  ach_Title: Reach 300 m
+  ach_Description: Reach the distance of 300 meter
   ach_icon: {fileID: 0}
   ach_Trigger:
   - ach_Type: 0
-    ach_Goal: 581
+    ach_Goal: 300
     ach_Progress: 0
     ach_Doned: 0
-  ach_Dynamic: 1
+  ach_Dynamic: 0
