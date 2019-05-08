@@ -143,9 +143,9 @@ public class UIManager : MonoBehaviour
 
     public void UpdateGameOverUI()
     {
-        m_sessionDist.text = ((int)GameManager.instance.GetSessionDistance()).ToString() + "m";
+        m_sessionDist.text = ((int)GameManager.instance.GetSessionDistance()).ToString();
         m_sessionCP.text = GameManager.instance.GetSessionCheckpoints().ToString();
-        m_allTimeDist.text = PlayerDataManager.instance.GetAllTimeDist().ToString() + "m";
+        m_allTimeDist.text = PlayerDataManager.instance.GetAllTimeDist().ToString();
         m_allTimeCP.text = PlayerDataManager.instance.GetAllTimeCP().ToString();
     }
 

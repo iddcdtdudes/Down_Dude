@@ -16,22 +16,22 @@ using UnityEngine.EventSystems;
 public class GameManager : MonoBehaviour {
 
     // singleton instance
+
     public static GameManager instance;
     
     [SerializeField]private bool GameStart;
+    [SerializeField] private List<GameObject> gameOverUIShow;
+    [SerializeField] private List<GameObject> gameOverUIHide;
 
+    [Header("Score and Checkpoints")]
     [SerializeField] private Text timerText;            // timer text UI
     private float m_timer;                              // game timer
-
+    [SerializeField] private Animator m_timerAnim;
     [SerializeField] private Text checkpointsText;      // checkpoints text UI
     private int m_checkpointsReached;                   // checkpoints reached
 
     [SerializeField] private Text distanceText;            // score text UI
     private float m_distance;                                // game score
-
-    [SerializeField] private List<GameObject> gameOverUIShow;
-
-    [SerializeField] private List<GameObject> gameOverUIHide;
 
     [SerializeField] private int m_scoreBaseline;                                   // base score reward for reaching a checkpoint
     [SerializeField] private int m_timeScaleMultiplier;                             // additional maximum core earned through faster play time
@@ -39,6 +39,8 @@ public class GameManager : MonoBehaviour {
 
     private float m_previousDudeY;                              // dude y position on previous update
     [SerializeField] private float m_distanceScaler;      // scaler for distance
+
+
 
     private void Awake()
     {
@@ -103,13 +105,23 @@ public class GameManager : MonoBehaviour {
         UpdateTimer();
         UpdateDistance();
     }
+    #endregion
 
+    #region Private
     // decrement timer
     // call once per frame
     private void UpdateTimer()
     {
+        if (m_timer < 6f)
+        {
+            m_timerAnim.SetBool("TimerCountdown", true);
+        }
+        else
+        {
+            m_timerAnim.SetBool("TimerCountdown", false);
+        }
         // decrement timer
-        if(m_timer > 0f) {
+        if (m_timer > 0f) {
             m_timer -= Time.deltaTime;
         } else {
             DudeController.instance.KillDude();
@@ -118,9 +130,9 @@ public class GameManager : MonoBehaviour {
         // update timer text UI
         timerText.text = m_timer.ToString("F1");
     }
-    #endregion
 
-    #region Private
+
+
 
     private void CheckTouchOnScreen ()
     {

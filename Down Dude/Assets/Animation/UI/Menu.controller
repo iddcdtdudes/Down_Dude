@@ -21,6 +21,12 @@ AnimatorController:
     m_DefaultInt: 0
     m_DefaultBool: 0
     m_Controller: {fileID: 0}
+  - m_Name: TimerCountdown
+    m_Type: 4
+    m_DefaultFloat: 0
+    m_DefaultInt: 0
+    m_DefaultBool: 0
+    m_Controller: {fileID: 0}
   m_AnimatorLayers:
   - serializedVersion: 5
     m_Name: Base Layer
@@ -264,24 +270,24 @@ AnimatorStateMachine:
   m_ChildStates:
   - serializedVersion: 1
     m_State: {fileID: 1102467606629279052}
-    m_Position: {x: 804, y: 396, z: 0}
+    m_Position: {x: 864, y: -360, z: 0}
   - serializedVersion: 1
     m_State: {fileID: 1102165023008440644}
-    m_Position: {x: 276, y: 432, z: 0}
+    m_Position: {x: 336, y: -324, z: 0}
   - serializedVersion: 1
     m_State: {fileID: 1102798422968787234}
-    m_Position: {x: 540, y: 444, z: 0}
+    m_Position: {x: 600, y: -312, z: 0}
   - serializedVersion: 1
     m_State: {fileID: 1102010988435188840}
-    m_Position: {x: 432, y: 552, z: 0}
+    m_Position: {x: 492, y: -204, z: 0}
   m_ChildStateMachines: []
   m_AnyStateTransitions:
   - {fileID: 1101261977814672612}
   m_EntryTransitions: []
   m_StateMachineTransitions: {}
   m_StateMachineBehaviours: []
-  m_AnyStatePosition: {x: 564, y: 300, z: 0}
-  m_EntryPosition: {x: 564, y: 384, z: 0}
-  m_ExitPosition: {x: 828, y: 288, z: 0}
+  m_AnyStatePosition: {x: 624, y: -456, z: 0}
+  m_EntryPosition: {x: 624, y: -372, z: 0}
+  m_ExitPosition: {x: 288, y: -468, z: 0}
   m_ParentStateMachinePosition: {x: 800, y: 20, z: 0}
   m_DefaultState: {fileID: 1102798422968787234}
