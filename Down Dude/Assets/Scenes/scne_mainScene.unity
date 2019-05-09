@@ -7500,6 +7500,12 @@ RectTransform:
     type: 3}
   m_PrefabInstance: {fileID: 2041291618}
   m_PrefabAsset: {fileID: 0}
+--- !u!95 &1463841250 stripped
+Animator:
+  m_CorrespondingSourceObject: {fileID: 1463841252, guid: 0990c11b7ebc4de4a9eb27555c8626bb,
+    type: 3}
+  m_PrefabInstance: {fileID: 2041291618}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1471771252
 GameObject:
   m_ObjectHideFlags: 0
@@ -10754,9 +10760,21 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 923200170, guid: 0990c11b7ebc4de4a9eb27555c8626bb, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 923200170, guid: 0990c11b7ebc4de4a9eb27555c8626bb, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_Target
       value: 
       objectReference: {fileID: 133946286}
+    - target: {fileID: 923200170, guid: 0990c11b7ebc4de4a9eb27555c8626bb, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[2].m_Mode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 923200170, guid: 0990c11b7ebc4de4a9eb27555c8626bb, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[2].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 2073500064, guid: 0990c11b7ebc4de4a9eb27555c8626bb, type: 3}
       propertyPath: m_Text
       value: 0
@@ -10810,6 +10828,10 @@ PrefabInstance:
     - target: {fileID: 1033654061, guid: 0990c11b7ebc4de4a9eb27555c8626bb, type: 3}
       propertyPath: m_SizeDelta.x
       value: 220
+      objectReference: {fileID: 0}
+    - target: {fileID: 923200168, guid: 0990c11b7ebc4de4a9eb27555c8626bb, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 0990c11b7ebc4de4a9eb27555c8626bb, type: 3}
@@ -11851,6 +11873,11 @@ PrefabInstance:
       propertyPath: m_achNotifNum
       value: 
       objectReference: {fileID: 1274455594}
+    - target: {fileID: 947104530977979111, guid: cd034ca4773f6364c80c18cc557dbac1,
+        type: 3}
+      propertyPath: m_animGameOverUI
+      value: 
+      objectReference: {fileID: 1463841250}
     - target: {fileID: 947104530977979110, guid: cd034ca4773f6364c80c18cc557dbac1,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -17391,6 +17418,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: CoinChangePanel
+      objectReference: {fileID: 0}
+    - target: {fileID: 5642056822280380172, guid: 710a57f5ff4292e44843455284e0c5b3,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5642056822280380173, guid: 710a57f5ff4292e44843455284e0c5b3,
         type: 3}

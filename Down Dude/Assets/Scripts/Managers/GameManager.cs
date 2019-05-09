@@ -71,10 +71,8 @@ public class GameManager : MonoBehaviour {
         DudeController.instance.dudeIsKilledEvent += PlayerDataManager.instance.SetAllTimeData;
         DudeController.instance.dudeIsKilledEvent += AchievementManager.instance.ResetAchProgress;
         DudeController.instance.dudeIsKilledEvent += UIManager.instance.HideInGamePanel;
-        DudeController.instance.dudeIsKilledEvent += UIManager.instance.UpdateGameOverUI;
-        //DudeController.instance.dudeIsKilledEvent += GameOverUI;
+        //DudeController.instance.dudeIsKilledEvent += UIManager.instance.StartGameOverUI;
         DudeController.instance.dudeIsKilledEvent += PlayerDataManager.instance.SaveDataLocal;
-        //DudeController.instance.dudeIsKilledEvent += DudeController.instance.DudeKilledSequence;
 
         // initialize variables
         m_timer = ChunkManager.instance.GetNewChunkTimeLimit();
