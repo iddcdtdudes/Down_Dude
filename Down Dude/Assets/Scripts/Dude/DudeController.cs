@@ -579,8 +579,10 @@ public class DudeController : MonoBehaviour {
     {
         yield return new WaitForSecondsRealtime(1.0f);
         GameManager.instance.GameOverUI();
-        yield return new WaitForSecondsRealtime(1.0f);
         UIManager.instance.StartGameOverUI();
+        //UIManager.instance.UpdateScoreStart();
+        yield return new WaitForSecondsRealtime(1.0f);
+        //UIManager.instance.StartGameOverUI();
         //gameObject.SetActive(false);
         //corpse.GetComponent<Rigidbody2D>().isKinematic = true;
 

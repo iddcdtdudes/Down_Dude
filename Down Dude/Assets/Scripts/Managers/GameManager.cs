@@ -73,7 +73,6 @@ public class GameManager : MonoBehaviour {
         DudeController.instance.dudeIsKilledEvent += PlayerDataManager.instance.SetAllTimeData;
         DudeController.instance.dudeIsKilledEvent += AchievementManager.instance.ResetAchProgress;
         DudeController.instance.dudeIsKilledEvent += UIManager.instance.HideInGamePanel;
-        //DudeController.instance.dudeIsKilledEvent += UIManager.instance.StartGameOverUI;
         DudeController.instance.dudeIsKilledEvent += PlayerDataManager.instance.SaveDataLocal;
 
         // initialize variables
@@ -150,9 +149,6 @@ public class GameManager : MonoBehaviour {
         // update timer text UI
         timerText.text = m_timer.ToString("F1");
     }
-
-
-
 
     private void CheckTouchOnScreen ()
     {
