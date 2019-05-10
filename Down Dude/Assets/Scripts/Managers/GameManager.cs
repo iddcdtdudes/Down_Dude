@@ -26,6 +26,8 @@ public class GameManager : MonoBehaviour {
     [Header("Score and Checkpoints")]
     [SerializeField] private Text timerText;            // timer text UI
     private float m_timer;                              // game timer
+    [SerializeField]private int m_timerFontSizeInit;
+    [SerializeField]private int m_timerFontSizeIncre;
     [SerializeField] private Animator m_timerAnim;
     [SerializeField] private Text checkpointsText;      // checkpoints text UI
     private int m_checkpointsReached;                   // checkpoints reached
@@ -113,6 +115,26 @@ public class GameManager : MonoBehaviour {
         if (m_timer < 6f)
         {
             m_timerAnim.SetBool("TimerCountdown", true);
+            if (m_timer < 1f)
+            {
+                timerText.fontSize = m_timerFontSizeInit + (10 * 9);
+            }
+            else if (m_timer < 2f)
+            {
+                timerText.fontSize = m_timerFontSizeInit + (10 * 7);
+            }
+            else if (m_timer < 3f)
+            {
+                timerText.fontSize = m_timerFontSizeInit + (10 * 5);
+            }
+            else if (m_timer < 4f)
+            {
+                timerText.fontSize = m_timerFontSizeInit + (10 * 3);
+            }
+            else
+            {
+                timerText.fontSize = m_timerFontSizeInit + (10 * 1);
+            }
         }
         else
         {

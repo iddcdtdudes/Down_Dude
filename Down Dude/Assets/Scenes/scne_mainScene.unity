@@ -739,6 +739,8 @@ MonoBehaviour:
   gameOverUIHide:
   - {fileID: 1165799051}
   timerText: {fileID: 523472954}
+  m_timerFontSizeInit: 100
+  m_timerFontSizeIncre: 10
   m_timerAnim: {fileID: 2036948070}
   checkpointsText: {fileID: 769474073}
   distanceText: {fileID: 1966272342}
@@ -3091,7 +3093,7 @@ MonoBehaviour:
     m_FontStyle: 1
     m_BestFit: 0
     m_MinSize: 1
-    m_MaxSize: 100
+    m_MaxSize: 123
     m_Alignment: 4
     m_AlignByGeometry: 0
     m_RichText: 1
