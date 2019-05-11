@@ -11,7 +11,6 @@ public class PlayerData
     public bool m_tutorialChunk;
     public int m_coins;
     public int m_usingSkin;
-    //public int m_allTimeHS;
     public int m_allTimeCP;
     public float m_allTimeDist;
     public bool[] m_unlockedSkins;
@@ -24,7 +23,6 @@ public class PlayerData
         m_tutorialChunk = player.m_tutorialChunk;
         m_coins = player.m_coins;
         m_usingSkin = player.m_usingSkin;
-        //m_allTimeHS = player.m_allTimeHS;
         m_allTimeCP = player.m_allTimeCP;
         m_allTimeDist = player.m_allTimeDist;
 

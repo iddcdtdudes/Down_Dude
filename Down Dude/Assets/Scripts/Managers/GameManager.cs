@@ -90,6 +90,7 @@ public class GameManager : MonoBehaviour {
         m_previousDudeY = 0.0f;
 
         // play menu music
+        AudioManager.instance.StopSound("Menu");
         AudioManager.instance.Play("Helicopter");
     }
 
@@ -138,6 +139,7 @@ public class GameManager : MonoBehaviour {
         else
         {
             m_timerAnim.SetBool("TimerCountdown", false);
+            timerText.fontSize = m_timerFontSizeInit;
         }
         // decrement timer
         if (m_timer > 0f) {

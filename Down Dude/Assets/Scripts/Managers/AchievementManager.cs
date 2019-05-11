@@ -124,10 +124,6 @@ public class AchievementManager : MonoBehaviour
                     {
                         m_achievements[i].ach_Trigger[j].ach_Doned = true;
                     }
-                    else
-                    {
-                        Debug.Log("Progress is not met with goal");
-                    }
                 }
             }
 

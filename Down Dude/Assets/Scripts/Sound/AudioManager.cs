@@ -46,7 +46,8 @@ public class AudioManager : MonoBehaviour {
         }
         else
         {
-            Play("Theme");
+            //Play("Theme");
+            Music(true);
             PlayerPrefs.SetInt(PlayerDataManager.instance.m_playerPref_Music, 1);
             PlayerPrefs.Save();
             Debug.Log("No music key");
