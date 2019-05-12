@@ -42,7 +42,7 @@ public class GameManager : MonoBehaviour {
     private float m_previousDudeY;                              // dude y position on previous update
     [SerializeField] private float m_distanceScaler;      // scaler for distance
 
-
+    private bool m_retrivedFirstTimeLimit = false;
 
     private void Awake()
     {
@@ -76,7 +76,6 @@ public class GameManager : MonoBehaviour {
         DudeController.instance.dudeIsKilledEvent += PlayerDataManager.instance.SaveDataLocal;
 
         // initialize variables
-        m_timer = ChunkManager.instance.GetNewChunkTimeLimit();
         m_checkpointsReached = 0;
         m_distance = 0;
         DudeController.instance.ResetDude();
@@ -100,6 +99,11 @@ public class GameManager : MonoBehaviour {
         if (DudeController.instance.GetDudeState() == DudeState.NONE)
         {
             CheckTouchOnScreen();
+        }
+
+        if(!m_retrivedFirstTimeLimit) {
+            m_timer = ChunkManager.instance.GetNewChunkTimeLimit();
+            m_retrivedFirstTimeLimit = true;
         }
 
         UpdateTimer();

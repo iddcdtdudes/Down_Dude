@@ -64,9 +64,7 @@ public class ChunkManager : MonoBehaviour {
 
     private void Start()
     {
-        // initialize playing tutorial
-        //m_playingTutorial = PlayerDataManager.instance.GetTutorial();
-        m_playingTutorial = true;
+        m_playingTutorial = PlayerDataManager.instance.GetTutorial();
     }
 
     private void Update()
@@ -132,13 +130,9 @@ public class ChunkManager : MonoBehaviour {
     private void PushTutorialChunk()
     {
         // push tutorial chunk
-        if (m_currentTutorialChunk < m_tutorialChunkList.Length) {
-            PushChunk(true, m_currentTutorialChunk);
+        PushChunk(true, m_currentTutorialChunk);
+        if (m_currentTutorialChunk < m_tutorialChunkList.Length - 1) {
             m_currentTutorialChunk++;
-
-            if (m_currentTutorialChunk >= m_tutorialChunkList.Length) {
-                m_playingTutorial = false;
-            }
         }
     }
 
@@ -181,10 +175,17 @@ public class ChunkManager : MonoBehaviour {
     public float GetNewChunkTimeLimit()
     {
         if(m_loadedChunks.Count > 0) {
-            Debug.Log(GetChunkIndex(0));
-            return m_chunkList[GetChunkIndex(0)].GetTimeLimit();
+            if(m_playingTutorial) {
+                return m_tutorialChunkList[GetChunkIndex(0)].GetTimeLimit();
+            } else {
+                return m_chunkList[GetChunkIndex(0)].GetTimeLimit();
+            }
         } else {
-            return m_chunkList[m_firstChunkIndex].GetTimeLimit();
+            if(m_playingTutorial) {
+                return m_tutorialChunkList[0].GetTimeLimit();
+            } else {
+                return m_chunkList[m_firstChunkIndex].GetTimeLimit();
+            }
         }
     }
 
