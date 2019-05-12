@@ -26,6 +26,7 @@ public class ChunkManager : MonoBehaviour {
     // TUTORIAL
     private bool m_playingTutorial = true;
     [SerializeField] private Chunk[] m_tutorialChunkList;   // list of all tutorial scriptable object chunk in order
+    [SerializeField] private TutorialInstruction[] m_tutorialInstructionList;   // list of all tutorial instructions
     private int m_currentTutorialChunk = 0;                 // currently playing tutorial chunk
 
     // DEBUG
@@ -206,5 +207,19 @@ public class ChunkManager : MonoBehaviour {
     public Chunk[] GetChunkList()
     {
         return m_chunkList;
+    }
+
+    public void DisplayTutorialChunk(string id)
+    {
+        // if matching id found, display instruction and return
+        foreach(TutorialInstruction instruction in m_tutorialInstructionList) {
+            if(instruction.getId() == id) {
+                instruction.Display();
+                return;
+            }
+        }
+
+        // log warning if cannot find instruction with matching id
+        Debug.LogWarning("cannot find tutorial instruction with matching id: " + id);
     }
 }

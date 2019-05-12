@@ -246,6 +246,7 @@ public class GameManager : MonoBehaviour {
 
         ChunkManager.instance.GameStart();
         DudeController.instance.SetDudeState(DudeState.ALIVE);
+        DudeController.instance.GetComponent<Animator>().updateMode = AnimatorUpdateMode.Normal;
 
         BackgroundManager.instance.GameStart();
 

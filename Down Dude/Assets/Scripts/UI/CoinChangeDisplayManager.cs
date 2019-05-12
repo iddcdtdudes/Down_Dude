@@ -28,7 +28,7 @@ public class CoinChangeDisplayManager : MonoBehaviour
     public void displayCoinChange(Vector2 position, int amount)
     {
         CoinChangeDisplayUI display = Instantiate(CoinChangeDisplay);
-        display.transform.parent = transform;
+        display.transform.SetParent(transform);
         display.transform.position = position;
         display.SetCoinAmount(amount);
     }
