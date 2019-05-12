@@ -12,22 +12,27 @@ public class ChunkManager : MonoBehaviour {
     // singleton instance
     public static ChunkManager instance;
     
-    [SerializeField] private Chunk[] m_chunkList;       // list of all chunk scriptable objects available
+    // CHUNK LIST
+    [SerializeField] private Chunk[] m_chunkList;           // list of all chunk scriptable objects available
 
+    // LOADING AND SPAWNING
     private int m_firstChunkIndex;                      // index of first chunk
     [SerializeField] private int m_loadedChunksLimit;   // limit of chunks loaded at once
     private List<GameObject> m_loadedChunks;            // chunks loaded
-
     [SerializeField] private float spawnOffset;         // distance of Dude from the current chunk's checkpoint to spawn the next chunk
-
     private float m_lastSpawnTime;
+    private bool m_spawning = false;             // spawning chunk
+
+    // TUTORIAL
+    private bool m_playingTutorial = true;
+    [SerializeField] private Chunk[] m_tutorialChunkList;   // list of all tutorial scriptable object chunk in order
+    private int m_currentTutorialChunk = 0;                 // currently playing tutorial chunk
 
     // DEBUG
     [Header("Chunk Debugging")]
     [SerializeField] private bool m_chunkDebugger;      // spawn specific chunk for debugging
     [SerializeField] private int m_chunkToDebug;        // chunk to spawn when debugging
 
-    private bool m_spawning = false;             // spawning chunk
 
     private void Awake()
     {
@@ -58,17 +63,22 @@ public class ChunkManager : MonoBehaviour {
 
     private void Start()
     {
+        // initialize playing tutorial
+        //m_playingTutorial = PlayerDataManager.instance.GetTutorial();
+        m_playingTutorial = true;
     }
 
     private void Update()
     {
         // spawn chunk if ready
         if(m_spawning && ReadyToSpawnChunk()) {
-            if(!m_chunkDebugger) {
-                PushChunk(Random.Range(1, m_chunkList.Length));
 
+            if (m_chunkDebugger) {
+                PushArcadeChunk(m_chunkToDebug);
+            } else if (m_playingTutorial) {
+                PushTutorialChunk();
             } else {
-                PushChunk(m_chunkToDebug);
+                PushArcadeChunk(Random.Range(1, m_chunkList.Length));
             }
 
             // if chunk count exceeds limit, pop a chunk
@@ -83,7 +93,11 @@ public class ChunkManager : MonoBehaviour {
         m_spawning = true;
 
         // add first chunk
-        PushChunk(m_firstChunkIndex);
+        if(m_playingTutorial) {
+            PushTutorialChunk();
+        } else {
+            PushArcadeChunk(m_firstChunkIndex);
+        }
     }
 
     // returns true if next chunk must be spawned
@@ -109,11 +123,33 @@ public class ChunkManager : MonoBehaviour {
         }
     }
 
+    private void PushArcadeChunk(int index)
+    {
+        PushChunk(false, index);
+    }
+
+    private void PushTutorialChunk()
+    {
+        // push tutorial chunk
+        if (m_currentTutorialChunk < m_tutorialChunkList.Length) {
+            PushChunk(true, m_currentTutorialChunk);
+            m_currentTutorialChunk++;
+
+            if (m_currentTutorialChunk >= m_tutorialChunkList.Length) {
+                m_playingTutorial = false;
+            }
+        }
+    }
+
     // spawn a chunk
-    private void PushChunk(int index)
+    private void PushChunk(bool tutorialChunk, int index)
     {
         // instantiate chunk
-        m_loadedChunks.Add(Instantiate(m_chunkList[index].gameObject));
+        if(tutorialChunk) {
+            m_loadedChunks.Add(Instantiate(m_tutorialChunkList[index].gameObject));
+        } else {
+            m_loadedChunks.Add(Instantiate(m_chunkList[index].gameObject));
+        }
 
         // set parent
         m_loadedChunks[m_loadedChunks.Count - 1].transform.parent = this.transform;

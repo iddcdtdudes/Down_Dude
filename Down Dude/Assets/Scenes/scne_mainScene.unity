@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.37311953, g: 0.38074014, b: 0.3587274, a: 1}
+  m_IndirectSpecularColor: {r: 0.37311992, g: 0.38074034, b: 0.35872713, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -1724,8 +1724,11 @@ MonoBehaviour:
   - {fileID: 3583265569215170601, guid: f7fdc65e01d04d344b6fcb1253151922, type: 3}
   m_loadedChunksLimit: 3
   spawnOffset: 5
+  m_tutorialChunkList:
+  - {fileID: 114434720075548196, guid: 2f8b829ea51971f4fbb072d093ce250a, type: 3}
+  - {fileID: 114434720075548196, guid: 14b6788a2dad9414b94f7fab376591af, type: 3}
   m_chunkDebugger: 0
-  m_chunkToDebug: 2
+  m_chunkToDebug: 0
 --- !u!4 &269897184
 Transform:
   m_ObjectHideFlags: 0
