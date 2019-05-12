@@ -24,7 +24,7 @@ public class ChunkManager : MonoBehaviour {
     private bool m_spawning = false;             // spawning chunk
 
     // TUTORIAL
-    private bool m_playingTutorial = true;
+    [SerializeField] private bool m_playingTutorial = true;
     [SerializeField] private Chunk[] m_tutorialChunkList;   // list of all tutorial scriptable object chunk in order
     [SerializeField] private TutorialInstruction[] m_tutorialInstructionList;   // list of all tutorial instructions
     private int m_currentTutorialChunk = 0;                 // currently playing tutorial chunk
