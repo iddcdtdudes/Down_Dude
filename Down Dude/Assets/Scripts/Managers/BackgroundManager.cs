@@ -146,6 +146,7 @@ public class BackgroundManager : MonoBehaviour {
         foreach(BackgroundThemeHolder theme in m_backgrounds) {
             theme.SetRising(false);
         }
+        m_transition.SetRising(false);
     }
 }
 
