@@ -24,7 +24,7 @@ public class ChunkManager : MonoBehaviour {
     private bool m_spawning = false;             // spawning chunk
 
     // TUTORIAL
-    [SerializeField] private bool m_playingTutorial = true;
+    private bool m_playingTutorial = true;
     [SerializeField] private Chunk[] m_tutorialChunkList;   // list of all tutorial scriptable object chunk in order
     [SerializeField] private TutorialInstruction[] m_tutorialInstructionList;   // list of all tutorial instructions
     private int m_currentTutorialChunk = 0;                 // currently playing tutorial chunk
@@ -64,7 +64,7 @@ public class ChunkManager : MonoBehaviour {
 
     private void Start()
     {
-        m_playingTutorial = PlayerDataManager.instance.GetTutorial();
+        //m_playingTutorial = PlayerDataManager.instance.GetTutorial();
     }
 
     private void Update()
@@ -74,7 +74,7 @@ public class ChunkManager : MonoBehaviour {
 
             if (m_chunkDebugger) {
                 PushArcadeChunk(m_chunkToDebug);
-            } else if (m_playingTutorial) {
+            } else if (!m_playingTutorial) {
                 PushTutorialChunk();
             } else {
                 PushArcadeChunk(Random.Range(1, m_chunkList.Length));
@@ -92,7 +92,7 @@ public class ChunkManager : MonoBehaviour {
         m_spawning = true;
 
         // add first chunk
-        if(m_playingTutorial) {
+        if(!m_playingTutorial) {
             PushTutorialChunk();
         } else {
             PushArcadeChunk(m_firstChunkIndex);
@@ -175,13 +175,13 @@ public class ChunkManager : MonoBehaviour {
     public float GetNewChunkTimeLimit()
     {
         if(m_loadedChunks.Count > 0) {
-            if(m_playingTutorial) {
+            if(!m_playingTutorial) {
                 return m_tutorialChunkList[GetChunkIndex(0)].GetTimeLimit();
             } else {
                 return m_chunkList[GetChunkIndex(0)].GetTimeLimit();
             }
         } else {
-            if(m_playingTutorial) {
+            if(!m_playingTutorial) {
                 return m_tutorialChunkList[0].GetTimeLimit();
             } else {
                 return m_chunkList[m_firstChunkIndex].GetTimeLimit();
@@ -208,6 +208,11 @@ public class ChunkManager : MonoBehaviour {
     public Chunk[] GetChunkList()
     {
         return m_chunkList;
+    }
+
+    public void SetTutorialBool (bool i)
+    {
+        m_playingTutorial = i;
     }
 
     public void DisplayTutorialChunk(string id)

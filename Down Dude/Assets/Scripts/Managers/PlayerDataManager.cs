@@ -53,6 +53,7 @@ public class PlayerDataManager : MonoBehaviour
         m_player = SaveLoadManager.LoadData(SkinManager.instance.GetSkinsNumber(), AchievementManager.instance.m_achievements.Count);
         SkinManager.instance.ChangeSkin(m_player.m_usingSkin);
         Debug.Log("Load Save Data.");
+        ChunkManager.instance.SetTutorialBool(GetTutorial());
         UIManager.instance.CreateAchievementMenu();
         UIManager.instance.CreateSkinMenu();
         UIManager.instance.UpdateCoinValue();
