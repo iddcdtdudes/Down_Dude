@@ -31,6 +31,7 @@ public class GameManager : MonoBehaviour {
     [SerializeField] private Animator m_timerAnim;
     [SerializeField] private Text checkpointsText;      // checkpoints text UI
     private int m_checkpointsReached;                   // checkpoints reached
+    private bool[] m_timerSoundPlayed = { false, false, false, false, false };
 
     [SerializeField] private Text distanceText;            // score text UI
     private float m_distance;                                // game score
@@ -120,28 +121,48 @@ public class GameManager : MonoBehaviour {
     // call once per frame
     private void UpdateTimer()
     {
-        if (m_timer < 6f)
+        if (m_timer < 5f)
         {
             m_timerAnim.SetBool("TimerCountdown", true);
             if (m_timer < 1f)
             {
                 timerText.fontSize = m_timerFontSizeInit + (10 * 9);
+                if (!m_timerSoundPlayed[4]) {
+                    AudioManager.instance.Play("Time Alert");
+                    m_timerSoundPlayed[4] = true;
+                }
             }
             else if (m_timer < 2f)
             {
                 timerText.fontSize = m_timerFontSizeInit + (10 * 7);
+                if (!m_timerSoundPlayed[3]) {
+                    AudioManager.instance.Play("Time Alert");
+                    m_timerSoundPlayed[3] = true;
+                }
             }
             else if (m_timer < 3f)
             {
                 timerText.fontSize = m_timerFontSizeInit + (10 * 5);
+                if (!m_timerSoundPlayed[2]) {
+                    AudioManager.instance.Play("Time Alert");
+                    m_timerSoundPlayed[2] = true;
+                }
             }
             else if (m_timer < 4f)
             {
                 timerText.fontSize = m_timerFontSizeInit + (10 * 3);
+                if (!m_timerSoundPlayed[1]) {
+                    AudioManager.instance.Play("Time Alert");
+                    m_timerSoundPlayed[1] = true;
+                }
             }
             else
             {
                 timerText.fontSize = m_timerFontSizeInit + (10 * 1);
+                if(!m_timerSoundPlayed[0]) {
+                    AudioManager.instance.Play("Time Alert");
+                    m_timerSoundPlayed[0] = true;
+                }
             }
         }
         else
@@ -250,12 +271,13 @@ public class GameManager : MonoBehaviour {
     {
         UIManager.instance.HideMenu();
         StartSequence.instance.GameStart();
+        AudioManager.instance.Play("Door");
     }
 
     public void OnDudeJump()
     {
-        AudioManager.instance.Play("BGM");
         AudioManager.instance.StopSound("Helicopter");
+        AudioManager.instance.Play("BGM");
 
         ChunkManager.instance.GameStart();
         DudeController.instance.SetDudeState(DudeState.ALIVE);

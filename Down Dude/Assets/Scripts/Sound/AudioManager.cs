@@ -60,7 +60,7 @@ public class AudioManager : MonoBehaviour {
         Sound s = Array.Find(sounds, sound => sound.name == name);
         if (s == null)
         {
-            Debug.LogWarning("Cannot find sound");
+            Debug.LogWarning("Cannot find sound: " + name);
             return;
         }
         s.source.Play();
@@ -72,7 +72,7 @@ public class AudioManager : MonoBehaviour {
         if(Mathf.Abs(DudeController.instance.transform.position.y - sourceTransform.position.y) <= rangeY) {
             Sound s = Array.Find(sounds, sound => sound.name == name);
             if (s == null) {
-                Debug.LogWarning("Cannot find sound");
+                Debug.LogWarning("Cannot find sound: " + name);
                 return;
             }
             s.source.Play();
@@ -82,9 +82,8 @@ public class AudioManager : MonoBehaviour {
     public void StopSound (string name)
     {
         Sound s = Array.Find(sounds, sound => sound.name == name);
-        if (s == null)
-        {
-            Debug.LogWarning("Cannot find sound");
+        if (s == null) {
+            Debug.LogWarning("Cannot find sound: " + name);
             return;
         }
         s.volume = 0f;
@@ -95,7 +94,7 @@ public class AudioManager : MonoBehaviour {
     {
         Sound s = Array.Find(sounds, sound => sound.name == name);
         if(s == null) {
-            Debug.LogWarning("Cannot find sound");
+            Debug.LogWarning("Cannot find sound: " + name);
             return 0;
         }
         return s.source.timeSamples;
@@ -105,7 +104,7 @@ public class AudioManager : MonoBehaviour {
     {
         Sound s = Array.Find(sounds, sound => sound.name == name);
         if(s == null) {
-            Debug.LogWarning("Cannot find sound");
+            Debug.LogWarning("Cannot find sound: " + name);
             return;
         }
         s.source.timeSamples = timeSamples;
@@ -115,7 +114,7 @@ public class AudioManager : MonoBehaviour {
     {
         Sound s = Array.Find(sounds, sound => sound.name == name);
         if (s == null) {
-            Debug.LogWarning("Cannot find sound");
+            Debug.LogWarning("Cannot find sound: " + name);
             return 0;
         }
         return s.source.clip.samples;
@@ -135,9 +134,8 @@ public class AudioManager : MonoBehaviour {
 
         Sound s = Array.Find(sounds, sound => sound.name == name);
         Sound s1 = Array.Find(sounds, sound => sound.name == menu);
-        if (s == null)
-        {
-            Debug.LogWarning("Cannot find sound");
+        if (s == null) {
+            Debug.LogWarning("Cannot find sound: " + name);
             return;
         }
 

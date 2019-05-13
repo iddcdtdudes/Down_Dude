@@ -45,6 +45,7 @@ public class GameoverUI : MonoBehaviour
                 {
                     //Debug.Log("Update Distance");
                     m_currentDist += (1.5f * Time.deltaTime) * (m_targetDist - m_originalDist);
+                    AudioManager.instance.Play("Score");
                     if (m_currentDist >= m_targetDist)
                     {
                         m_currentDist = m_targetDist;
@@ -64,6 +65,7 @@ public class GameoverUI : MonoBehaviour
                 {
                     //Debug.Log("Update CP");
                     m_currentCP += (1.5f * Time.deltaTime) * (m_targetCP - m_originalCP);
+                    AudioManager.instance.Play("Score");
                     if (m_currentCP >= m_targetCP)
                     {
                         m_currentCP = m_targetCP;
