@@ -384,14 +384,14 @@ public class UIManager : MonoBehaviour
             if (PlayerPrefs.GetInt(PlayerDataManager.instance.m_playerPref_Control) == 1)
             {
                 controlSetting.value = 1;
-                m_dudeControlTouch.color = new Color(0.0f, 0.0f, 0.0f, 0.5f);
-                m_dudeControlButton.color = new Color(0.0f, 0.0f, 0.0f, 1.0f);
+                m_dudeControlTouch.color =  new Color(1.0f, 1.0f, 1.0f, 0.5f);
+                m_dudeControlButton.color = new Color(1.0f, 1.0f, 1.0f, 1.0f);
             }
             else
             {
                 controlSetting.value = 0;
-                m_dudeControlTouch.color = new Color(0.0f, 0.0f, 0.0f, 1.0f);
-                m_dudeControlButton.color = new Color(0.0f, 0.0f, 0.0f, 0.5f);
+                m_dudeControlTouch.color =  new Color(1.0f, 1.0f, 1.0f, 1.0f);
+                m_dudeControlButton.color = new Color(1.0f, 1.0f, 1.0f, 0.5f);
             }
         }
     }

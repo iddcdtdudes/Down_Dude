@@ -3286,15 +3286,15 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 7600841561163536694, guid: 3f75ad3161b485b4c8fe297f7278ff09,
-        type: 3}
-      propertyPath: m_LocalPosition.x
-      value: -0.8
-      objectReference: {fileID: 0}
     - target: {fileID: 2708813756379346743, guid: 3f75ad3161b485b4c8fe297f7278ff09,
         type: 3}
       propertyPath: m_LocalPosition.x
       value: -0.9
+      objectReference: {fileID: 0}
+    - target: {fileID: 7600841561163536694, guid: 3f75ad3161b485b4c8fe297f7278ff09,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -0.8
       objectReference: {fileID: 0}
     - target: {fileID: 5118129751045810204, guid: 3f75ad3161b485b4c8fe297f7278ff09,
         type: 3}
@@ -3923,6 +3923,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: obs_fan
       objectReference: {fileID: 0}
+    - target: {fileID: 2872455826873310993, guid: 9caf85bb8891a9c4fb5afb2a4f67a451,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 2872455826873310992, guid: 9caf85bb8891a9c4fb5afb2a4f67a451,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -4294,15 +4299,15 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 7600841561163536694, guid: 3f75ad3161b485b4c8fe297f7278ff09,
-        type: 3}
-      propertyPath: m_LocalPosition.x
-      value: -1.2
-      objectReference: {fileID: 0}
     - target: {fileID: 2708813756379346743, guid: 3f75ad3161b485b4c8fe297f7278ff09,
         type: 3}
       propertyPath: m_LocalPosition.x
       value: -1.1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7600841561163536694, guid: 3f75ad3161b485b4c8fe297f7278ff09,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -1.2
       objectReference: {fileID: 0}
     - target: {fileID: 5118129751045810204, guid: 3f75ad3161b485b4c8fe297f7278ff09,
         type: 3}

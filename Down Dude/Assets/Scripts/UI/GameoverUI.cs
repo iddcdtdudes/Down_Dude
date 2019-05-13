@@ -105,7 +105,7 @@ public class GameoverUI : MonoBehaviour
         m_sessionCP.text = m_originalCP.ToString();
 
         //All Time
-        m_allTimeDist.text = PlayerDataManager.instance.GetAllTimeDist().ToString();
+        m_allTimeDist.text = PlayerDataManager.instance.GetAllTimeDist().ToString() + 'm';
         m_allTimeCP.text = PlayerDataManager.instance.GetAllTimeCP().ToString();
     }
 
