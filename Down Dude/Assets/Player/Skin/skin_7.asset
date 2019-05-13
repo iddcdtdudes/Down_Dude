@@ -17,4 +17,4 @@ MonoBehaviour:
   m_cost: 60
   m_skinIDAnimator: {fileID: 22100000, guid: b8098dffad0845d44bf195f36568c7b5, type: 2}
   m_skinEx: {fileID: 21300000, guid: f0a1aa4c286875547b083d125317c981, type: 3}
-  m_skinIcon: {fileID: 21300000, guid: 49dd37b31c4a9014b979b9067878940a, type: 3}
+  m_skinIcon: {fileID: 21300000, guid: 2313e5563b16cf94ab0f01d4a93fbb1d, type: 3}
