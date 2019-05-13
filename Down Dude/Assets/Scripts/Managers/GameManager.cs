@@ -35,6 +35,9 @@ public class GameManager : MonoBehaviour {
     [SerializeField] private Text distanceText;            // score text UI
     private float m_distance;                                // game score
 
+    [SerializeField] private Text sessionCoinText;
+    private int m_coinCollected;
+
     [SerializeField] private int m_scoreBaseline;                                   // base score reward for reaching a checkpoint
     [SerializeField] private int m_timeScaleMultiplier;                             // additional maximum core earned through faster play time
     [Range(0f, 0.5f)] [SerializeField] private float m_scoreMultiplierCeiling;      // time remaining percentage of maximum score multiplier
@@ -78,6 +81,7 @@ public class GameManager : MonoBehaviour {
         // initialize variables
         m_checkpointsReached = 0;
         m_distance = 0;
+        m_coinCollected = 0;
         DudeController.instance.ResetDude();
 
         // initialize UI values
@@ -227,6 +231,11 @@ public class GameManager : MonoBehaviour {
     public int GetSessionCheckpoints ()
     {
         return m_checkpointsReached;
+    }
+
+    public void AddSessionCoin ()
+    {
+        m_coinCollected += 1;
     }
 
     public void ResumeGame ()

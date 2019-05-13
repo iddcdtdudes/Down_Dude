@@ -16,6 +16,9 @@ public class Coin : MonoBehaviour
         // add coin
         PlayerDataManager.instance.AddCoins(1);
 
+        // Add session coin
+        GameManager.instance.AddSessionCoin();
+
         // display coin change
         CoinChangeDisplayManager.instance.displayCoinChange(Camera.main.WorldToScreenPoint(transform.position), 1);
 

@@ -147,6 +147,11 @@ public class PlayerDataManager : MonoBehaviour
         return m_player.m_coins;
     }
 
+    public int GetDeath()
+    {
+        return m_player.m_death;
+    }
+
     public float GetAllTimeDist ()
     {
         return m_player.m_allTimeDist;
@@ -180,7 +185,14 @@ public class PlayerDataManager : MonoBehaviour
 
     public bool GetTutorial ()
     {
-        return m_player.m_tutorialChunk;
+        if (!m_player.m_tutorialChunk)
+        {
+            return true;
+        }
+        else
+        {
+            return false;
+        }
     }
 
     #endregion

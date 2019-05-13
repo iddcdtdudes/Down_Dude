@@ -39,7 +39,8 @@ public class UIManager : MonoBehaviour
     public Sprite m_lockedLabel;
     public Sprite m_selectLabel;
 
-    [Header("Skin UI")]
+    [Header("Stat UI")]
+    public Text m_death;
     public Text m_statCP;
     public Text m_statDistance;
 
@@ -279,7 +280,7 @@ public class UIManager : MonoBehaviour
 
     public void CreateSkinMenu ()
     {
-        for (int i = 0; i < SkinManager.instance.m_skins.Length; i++)
+        for (int i = 0; i < SkinManager.instance.GetSkinsNumber(); i++)
         {
             CreateSkin(m_skinPanel, SkinManager.instance.GetSkin(i));
         }
@@ -352,6 +353,7 @@ public class UIManager : MonoBehaviour
 
     public void UpdateStatPage ()
     {
+        m_death.text = PlayerDataManager.instance.GetDeath().ToString();
         m_statCP.text = PlayerDataManager.instance.GetAllTimeCP().ToString();
         m_statDistance.text = PlayerDataManager.instance.GetAllTimeDist().ToString();
     }
