@@ -36,7 +36,6 @@ public class GameManager : MonoBehaviour {
     [SerializeField] private Text distanceText;            // score text UI
     private float m_distance;                                // game score
 
-    [SerializeField] private Text sessionCoinText;
     private int m_coinCollected;
 
     [SerializeField] private int m_scoreBaseline;                                   // base score reward for reaching a checkpoint
@@ -77,6 +76,7 @@ public class GameManager : MonoBehaviour {
         DudeController.instance.dudeIsKilledEvent += PlayerDataManager.instance.SetAllTimeData;
         DudeController.instance.dudeIsKilledEvent += AchievementManager.instance.ResetAchProgress;
         DudeController.instance.dudeIsKilledEvent += UIManager.instance.HideInGamePanel;
+        DudeController.instance.dudeIsKilledEvent += PlayerDataManager.instance.AddDeath;
         DudeController.instance.dudeIsKilledEvent += PlayerDataManager.instance.SaveDataLocal;
 
         // initialize variables
@@ -169,6 +169,10 @@ public class GameManager : MonoBehaviour {
         {
             m_timerAnim.SetBool("TimerCountdown", false);
             timerText.fontSize = m_timerFontSizeInit;
+            for (int i = 0; i < m_timerSoundPlayed.Length; i++)
+            {
+                m_timerSoundPlayed[i] = false;
+            }
         }
         // decrement timer
         if (m_timer > 0f) {
@@ -228,9 +232,6 @@ public class GameManager : MonoBehaviour {
     {
         // increment Checkpoint
         incrementCheckpoints();
-        PlayerDataManager.instance.AddCoins(1);
-        Vector2 dudePosition = new Vector2(DudeController.instance.gameObject.transform.position.x, DudeController.instance.gameObject.transform.position.y);
-        CoinChangeDisplayManager.instance.displayCoinChange(Camera.main.WorldToScreenPoint(dudePosition), 1);
         AudioManager.instance.Play("Checkpoint");
 
         // calculate and add score
@@ -254,9 +255,15 @@ public class GameManager : MonoBehaviour {
         return m_checkpointsReached;
     }
 
+    public int GetSessionCoins ()
+    {
+        return m_coinCollected;
+    }
+
     public void AddSessionCoin ()
     {
         m_coinCollected += 1;
+        //Debug.Log("Session Coin: " + m_coinCollected);
     }
 
     public void ResumeGame ()
@@ -277,7 +284,30 @@ public class GameManager : MonoBehaviour {
     public void OnDudeJump()
     {
         AudioManager.instance.StopSound("Helicopter");
-        AudioManager.instance.Play("BGM");
+        //AudioManager.instance.Play("BGM");
+        if (PlayerPrefs.HasKey(PlayerDataManager.instance.m_playerPref_Music))
+        {
+            //Play("Theme");
+            if (PlayerPrefs.GetInt(PlayerDataManager.instance.m_playerPref_Music) == 1)
+            {
+                AudioManager.instance.Play("BGM");
+                AudioManager.instance.Music(true);
+            }
+            else
+            {
+
+                AudioManager.instance.Music(false);
+            }
+        }
+        else
+        {
+            //Play("Theme");
+            AudioManager.instance.Music(true);
+            AudioManager.instance.Play("BGM");
+            PlayerPrefs.SetInt(PlayerDataManager.instance.m_playerPref_Music, 1);
+            PlayerPrefs.Save();
+            Debug.Log("No music key");
+        }
 
         ChunkManager.instance.GameStart();
         DudeController.instance.SetDudeState(DudeState.ALIVE);

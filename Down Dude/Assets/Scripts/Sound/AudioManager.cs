@@ -30,28 +30,27 @@ public class AudioManager : MonoBehaviour {
     }
     // Use this for initialization
     void Start () {
-        if (PlayerPrefs.HasKey(PlayerDataManager.instance.m_playerPref_Music))
-        {
-            //Play("Theme");
-            if (PlayerPrefs.GetInt(PlayerDataManager.instance.m_playerPref_Music) == 1)
-            {
-                //Play("Theme");
-                Music(true);
-            }
-            else
-            {
+        //if (PlayerPrefs.HasKey(PlayerDataManager.instance.m_playerPref_Music))
+        //{
+        //    //Play("Theme");
+        //    if (PlayerPrefs.GetInt(PlayerDataManager.instance.m_playerPref_Music) == 1)
+        //    {
+        //        Music(true);
+        //    }
+        //    else
+        //    {
 
-                Music(false);
-            }
-        }
-        else
-        {
-            //Play("Theme");
-            Music(true);
-            PlayerPrefs.SetInt(PlayerDataManager.instance.m_playerPref_Music, 1);
-            PlayerPrefs.Save();
-            Debug.Log("No music key");
-        }
+        //        Music(false);
+        //    }
+        //}
+        //else
+        //{
+        //    //Play("Theme");
+        //    Music(true);
+        //    PlayerPrefs.SetInt(PlayerDataManager.instance.m_playerPref_Music, 1);
+        //    PlayerPrefs.Save();
+        //    Debug.Log("No music key");
+        //}
         
 	}
 	
@@ -144,12 +143,15 @@ public class AudioManager : MonoBehaviour {
             s.source.volume = 0.15f;
             s1.source.volume = 0.15f;
             PlayerPrefs.SetInt(PlayerDataManager.instance.m_playerPref_Music, 1);
+            Debug.Log("Music True");
         } 
         else
         {
             s.source.volume = 0f;
             s1.source.volume = 0f;
             PlayerPrefs.SetInt(PlayerDataManager.instance.m_playerPref_Music, 0);
+            Debug.Log("Music False");
+
         }
 
         PlayerPrefs.Save();
@@ -161,22 +163,26 @@ public class AudioManager : MonoBehaviour {
         string laser = "Laser";
         string jetpack = "Jetpack";
         string parachute = "Parachute";
+        string timer = "Time Alert";
 
         Sound s = Array.Find(sounds, sound => sound.name == laser);
         Sound s1 = Array.Find(sounds, sound => sound.name == jetpack);
         Sound s2 = Array.Find(sounds, sound => sound.name == parachute);
+        Sound s3 = Array.Find(sounds, sound => sound.name == timer);
 
         if (OnOff)
         {
             s.source.volume = 0.15f;
             s1.source.volume = 0.097f;
             s2.source.volume = 0.15f;
+            s3.source.volume = 0.097f;
         }
         else
         {
             s.source.volume = 0f;
             s1.source.volume = 0f;
             s2.source.volume = 0f;
+            s3.source.volume = 0f;
         }
     }
 

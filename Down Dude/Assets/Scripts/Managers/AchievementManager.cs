@@ -117,6 +117,9 @@ public class AchievementManager : MonoBehaviour
                                 m_achievements[i].ach_Trigger[j].ach_Goal = (int)PlayerDataManager.instance.GetAllTimeDist();
                             }
                             break;
+                        case TRACKER.DEATH:
+                            m_achievements[i].ach_Trigger[j].ach_Progress = PlayerDataManager.instance.GetDeath();
+                            break;
                     }
 
                     //Check if progress is more than goal for that trigger

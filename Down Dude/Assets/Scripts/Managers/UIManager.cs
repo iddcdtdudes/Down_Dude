@@ -398,4 +398,4 @@ public class UIManager : MonoBehaviour
 }
 
 enum GameOverUIUpdate
-{ DISTANCE, CHECKPOINT, MENU}
+{ DISTANCE, CHECKPOINT, COIN, MENU}

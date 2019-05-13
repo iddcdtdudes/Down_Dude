@@ -138,6 +138,11 @@ public class PlayerDataManager : MonoBehaviour
         m_player.m_tutorialChunk = true;
     }
 
+    public void AddDeath ()
+    {
+        m_player.m_death += 1;
+    }
+
     #endregion
 
     #region Getter

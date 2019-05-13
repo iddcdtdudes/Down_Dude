@@ -6,19 +6,27 @@ using UnityEngine.UI;
 
 public class GameoverUI : MonoBehaviour
 {
-    [SerializeField] public Text m_sessionDist;
+    public Text m_sessionDist;
     public Text m_allTimeDist;
     public Text m_sessionCP;
     public Text m_allTimeCP;
+    public Text m_sessionCoins;
     [SerializeField] private Animator m_animGameoverUI;
     //For updating UI
     private bool m_updateGameOverUI;
+    //Distance
     private float m_originalDist;
     private float m_currentDist;
     private float m_targetDist;
+    //Checkpoint
     private float m_originalCP;
     private float m_currentCP;
     private float m_targetCP;
+    //Coins
+    private float m_originalCoins;
+    private float m_currentCoins;
+    private float m_targetCoins;
+
     private GameOverUIUpdate m_gameoverUIUpdate;
     //UI
    
@@ -69,6 +77,24 @@ public class GameoverUI : MonoBehaviour
                     if (m_currentCP >= m_targetCP)
                     {
                         m_currentCP = m_targetCP;
+                        m_gameoverUIUpdate = GameOverUIUpdate.COIN;
+                    }
+                }
+                else
+                {
+                    m_gameoverUIUpdate = GameOverUIUpdate.COIN;
+                }
+
+                m_sessionCP.text = ((int)m_currentCP).ToString();
+                break;
+            case GameOverUIUpdate.COIN:
+                if (m_currentCoins < m_targetCoins)
+                {
+                    m_currentCoins += (1.5f * Time.deltaTime) * (m_targetCoins - m_originalCoins);
+                    AudioManager.instance.Play("Collect Coin");
+                    if (m_currentCoins >= m_targetCoins)
+                    {
+                        m_currentCoins = m_targetCoins;
                         m_gameoverUIUpdate = GameOverUIUpdate.MENU;
                     }
                 }
@@ -77,7 +103,7 @@ public class GameoverUI : MonoBehaviour
                     m_gameoverUIUpdate = GameOverUIUpdate.MENU;
                 }
 
-                m_sessionCP.text = ((int)m_currentCP).ToString();
+                m_sessionCoins.text = ((int)m_currentCoins).ToString();
                 break;
             case GameOverUIUpdate.MENU:
                 
@@ -96,15 +122,19 @@ public class GameoverUI : MonoBehaviour
         //Origin
         m_originalDist = 0f;
         m_originalCP = 0f;
+        m_originalCoins = 0f;
         //Current
         m_currentDist = m_originalDist;
         m_currentCP = m_originalCP;
+        m_currentCoins = m_originalCoins;
         //Target
         m_targetDist = GameManager.instance.GetSessionDistance();
         m_targetCP = GameManager.instance.GetSessionCheckpoints();
+        m_targetCoins = GameManager.instance.GetSessionCoins();
 
         m_sessionDist.text = m_originalDist.ToString();
         m_sessionCP.text = m_originalCP.ToString();
+        m_sessionCoins.text = m_originalCoins.ToString();
 
         //All Time
         m_allTimeDist.text = PlayerDataManager.instance.GetAllTimeDist().ToString() + 'm';
