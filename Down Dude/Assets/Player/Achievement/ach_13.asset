@@ -20,6 +20,6 @@ MonoBehaviour:
   ach_Trigger:
   - ach_Type: 2
     ach_Goal: 50
-    ach_Progress: 33
-    ach_Doned: 1
+    ach_Progress: 0
+    ach_Doned: 0
   ach_Dynamic: 0

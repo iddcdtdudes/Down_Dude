@@ -27,7 +27,7 @@ public class DudeController : MonoBehaviour {
     private bool m_dudeIsOnGround;
 
     //Alternate Control
-    [SerializeField]private bool m_dudeControlByButton;
+    [SerializeField] private bool m_dudeControlByButton = false;
     [SerializeField] private GameObject m_dudeControlUI;
     [SerializeField] private GameObject m_buttonLeft;
     [SerializeField] private GameObject m_buttonCenter;

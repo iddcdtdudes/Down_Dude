@@ -10,7 +10,7 @@ public class PlayerData
 {
     public bool m_tutorialChunk;
     public int m_coins;
-    public int m_death;
+    public int m_playTime;
     public int m_usingSkin;
     public int m_allTimeCP;
     public float m_allTimeDist;
@@ -23,7 +23,7 @@ public class PlayerData
     {
         m_tutorialChunk = player.m_tutorialChunk;
         m_coins = player.m_coins;
-        m_death = player.m_death;
+        m_playTime = player.m_playTime;
         m_usingSkin = player.m_usingSkin;
         m_allTimeCP = player.m_allTimeCP;
         m_allTimeDist = player.m_allTimeDist;
@@ -114,7 +114,7 @@ public class PlayerData
     {
         m_tutorialChunk = false;
         m_coins = 0;
-        m_death = 0;
+        m_playTime = 0;
         m_usingSkin = 0;
         //m_allTimeHS = 0;
         m_allTimeCP = 0;
@@ -124,6 +124,16 @@ public class PlayerData
         m_achievementClaimed = new bool[numberOfAchievements];
 
         m_unlockedSkins[0] = true;
+
+        if (!PlayerPrefs.HasKey(PlayerDataManager.instance.m_playerPref_Control))
+        {
+            PlayerPrefs.SetInt(PlayerDataManager.instance.m_playerPref_Control, 0);
+        }
+
+        if (!PlayerPrefs.HasKey(PlayerDataManager.instance.m_playerPref_Music))
+        {
+            PlayerPrefs.SetInt(PlayerDataManager.instance.m_playerPref_Music, 1);
+        }
 
     }
 }

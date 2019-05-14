@@ -283,7 +283,6 @@ public class UIManager : MonoBehaviour
             {
                 //Unlock Skin
                 SkinManager.instance.BuySkin(skinID, prefab);
-                MinusCoinSkin(SkinManager.instance.GetSkin(skinID).GetSkinCost());
                 
             });
         }
@@ -364,7 +363,7 @@ public class UIManager : MonoBehaviour
 
     public void UpdateStatPage ()
     {
-        m_death.text = PlayerDataManager.instance.GetDeath().ToString();
+        m_death.text = PlayerDataManager.instance.GetPlayTime().ToString();
         m_statCP.text = PlayerDataManager.instance.GetAllTimeCP().ToString();
         m_statDistance.text = PlayerDataManager.instance.GetAllTimeDist().ToString();
     }

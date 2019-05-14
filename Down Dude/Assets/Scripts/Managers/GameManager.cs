@@ -73,10 +73,10 @@ public class GameManager : MonoBehaviour {
         // event subscription
         DudeController.instance.reachCheckpointEvent += OnDudeReachCheckpoint;
         DudeController.instance.reachCheckpointEvent += AchievementManager.instance.UpdateAchProgress;
+        DudeController.instance.dudeIsKilledEvent += AchievementManager.instance.UpdateAchProgress;
         DudeController.instance.dudeIsKilledEvent += PlayerDataManager.instance.SetAllTimeData;
         DudeController.instance.dudeIsKilledEvent += AchievementManager.instance.ResetAchProgress;
         DudeController.instance.dudeIsKilledEvent += UIManager.instance.HideInGamePanel;
-        DudeController.instance.dudeIsKilledEvent += PlayerDataManager.instance.AddDeath;
         DudeController.instance.dudeIsKilledEvent += PlayerDataManager.instance.SaveDataLocal;
 
         // initialize variables
@@ -312,6 +312,7 @@ public class GameManager : MonoBehaviour {
         ChunkManager.instance.GameStart();
         DudeController.instance.SetDudeState(DudeState.ALIVE);
         DudeController.instance.GetComponent<Animator>().updateMode = AnimatorUpdateMode.Normal;
+        PlayerDataManager.instance.AddPlayTime();
 
         BackgroundManager.instance.GameStart();
 

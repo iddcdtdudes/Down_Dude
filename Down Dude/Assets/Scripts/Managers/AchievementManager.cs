@@ -12,6 +12,8 @@ public class AchievementManager : MonoBehaviour
 
     [SerializeField]public List<AchievementObject> m_achievements;
 
+    private int progressTracker;
+
     public event Action AchiCompleteEvent;
 
     private void Awake()
@@ -122,7 +124,7 @@ public class AchievementManager : MonoBehaviour
                             }
                             break;
                         case TRACKER.DEATH:
-                            m_achievements[i].ach_Trigger[j].ach_Progress = PlayerDataManager.instance.GetDeath();
+                            m_achievements[i].ach_Trigger[j].ach_Progress = PlayerDataManager.instance.GetPlayTime();
                             break;
                     }
 
@@ -153,6 +155,8 @@ public class AchievementManager : MonoBehaviour
             }
             
         }
+
+        ResetAchProgress();
     }
 
     #endregion

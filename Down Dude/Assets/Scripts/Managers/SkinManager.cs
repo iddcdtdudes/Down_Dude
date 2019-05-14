@@ -121,7 +121,7 @@ public class SkinManager : MonoBehaviour
                 Button selectButton = UIManager.instance.m_skinSelectButton.GetComponent<Button>();
                 //Reset Select Button
                 selectButton.onClick.RemoveAllListeners();
-                
+
                 ////Add Function
                 //selectButton.onClick.AddListener(delegate
                 //{
@@ -136,6 +136,7 @@ public class SkinManager : MonoBehaviour
                 //    //Play Sound
                 //    UIManager.instance.OnButtonPressed();
                 //});
+                UIManager.instance.MinusCoinSkin(skinCost);
 
                 //SaveData
                 PlayerDataManager.instance.SaveDataLocal();

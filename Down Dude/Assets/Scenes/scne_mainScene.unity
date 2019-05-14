@@ -24008,7 +24008,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 1
     m_VerticalOverflow: 1
     m_LineSpacing: 1
-  m_Text: 'Version: 1.0.0'
+  m_Text: 'Version: 1.0.1'
 --- !u!114 &7305053925838755902
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -138,9 +138,10 @@ public class PlayerDataManager : MonoBehaviour
         m_player.m_tutorialChunk = true;
     }
 
-    public void AddDeath ()
+    public void AddPlayTime ()
     {
-        m_player.m_death += 1;
+        m_player.m_playTime += 1;
+        
     }
 
     #endregion
@@ -149,12 +150,13 @@ public class PlayerDataManager : MonoBehaviour
 
     public int GetCoin ()
     {
+        Debug.Log("Death = " + m_player.m_playTime);
         return m_player.m_coins;
     }
 
-    public int GetDeath()
+    public int GetPlayTime()
     {
-        return m_player.m_death;
+        return m_player.m_playTime;
     }
 
     public float GetAllTimeDist ()
