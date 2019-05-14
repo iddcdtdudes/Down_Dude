@@ -33,6 +33,12 @@ public class DudeTracker : DynamicObstacle
             // rotate toward dude
             float steer = Vector3.Cross(transform.up, m_dude.transform.position - transform.position).z;
             transform.Rotate(0f, 0f, steer * m_steerSpeed);
+        } else {
+            SpriteRenderer sprite = GetComponent<SpriteRenderer>();
+            sprite.color = new Color(1.0f, 1.0f, 1.0f, sprite.color.a - 0.05f);
+            if(sprite.color.a <= 0.0f) {
+                Destroy(gameObject);
+            }
         }
 
         // move forward

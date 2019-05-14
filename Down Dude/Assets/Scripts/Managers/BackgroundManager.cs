@@ -150,7 +150,7 @@ public class BackgroundManager : MonoBehaviour {
     }
 }
 
-public enum BackgroundTheme { CAVE = 0, FOREST, CITY, VALLEY };
+public enum BackgroundTheme { CAVE = 0, FOREST, CITY, VALLEY, SKY };
 
 // Background Theme
 //
