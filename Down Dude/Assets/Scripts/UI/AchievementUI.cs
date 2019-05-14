@@ -47,6 +47,7 @@ public class AchievementUI : MonoBehaviour
                 {
                     //Add coins
                     PlayerDataManager.instance.AddCoins(achData.ach_Reward);
+                    UIManager.instance.PlusCoinAch(achData.ach_Reward);
                     //Play Sound
                     AudioManager.instance.Play("Checkpoint");
                     //Reset achievement
@@ -65,6 +66,7 @@ public class AchievementUI : MonoBehaviour
                 {
                     //Add coins
                     PlayerDataManager.instance.AddCoins(achData.ach_Reward);
+                    UIManager.instance.PlusCoinAch(achData.ach_Reward);
                     //CoinChangeDisplayManager.instance.displayCoinChange()
                     //Play sound
                     AudioManager.instance.Play("Checkpoint");

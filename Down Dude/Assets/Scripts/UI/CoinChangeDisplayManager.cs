@@ -21,15 +21,23 @@ public class CoinChangeDisplayManager : MonoBehaviour
     private void Update()
     {
         if(Input.GetKeyDown(KeyCode.C)) {
-            displayCoinChange(new Vector2(100, 100), 2);
+            displayCoinChange(new Vector2(100, 100), 2, true);
         }
     }
 
-    public void displayCoinChange(Vector2 position, int amount)
+    public void displayCoinChange(Vector2 position, int amount, bool plus)
     {
         CoinChangeDisplayUI display = Instantiate(CoinChangeDisplay);
         display.transform.SetParent(transform);
         display.transform.position = position;
-        display.SetCoinAmount(amount);
+        if (plus)
+        {
+            display.PlusCoinAmount(amount);
+        }
+        else
+        {
+            display.MinusCoinAmount(amount);
+        }
+        
     }
 }

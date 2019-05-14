@@ -13,13 +13,13 @@ MonoBehaviour:
   m_Name: ach_15
   m_EditorClassIdentifier: 
   ach_ID: 15
-  ach_Reward: 100
+  ach_Reward: 1200
   ach_Title: Professional Dude
-  ach_Description: Died 100 times;
+  ach_Description: Play 200 times.
   ach_icon: {fileID: 0}
   ach_Trigger:
   - ach_Type: 2
-    ach_Goal: 100
+    ach_Goal: 200
     ach_Progress: 33
     ach_Doned: 0
   ach_Dynamic: 0

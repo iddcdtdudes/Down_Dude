@@ -13,9 +13,9 @@ MonoBehaviour:
   m_Name: ach_3
   m_EditorClassIdentifier: 
   ach_ID: 3
-  ach_Reward: 10
-  ach_Title: Reach 10 Checkpoints
-  ach_Description: Reach more than 10 checkpoints
+  ach_Reward: 400
+  ach_Title: 10 checkpoints
+  ach_Description: Reach 10 checkpoints
   ach_icon: {fileID: 0}
   ach_Trigger:
   - ach_Type: 1

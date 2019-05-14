@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: ach_0
   m_EditorClassIdentifier: 
   ach_ID: 0
-  ach_Reward: 2
+  ach_Reward: 20
   ach_Title: Reach new distance highscore
   ach_Description: Get a new all time distance highscore
   ach_icon: {fileID: 0}

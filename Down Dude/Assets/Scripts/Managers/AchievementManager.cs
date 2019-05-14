@@ -99,6 +99,10 @@ public class AchievementManager : MonoBehaviour
                 //Loop through all trigger
                 for (int j = 0; j < m_achievements[i].ach_Trigger.Length; j++)
                 {
+                    if (m_achievements[i].ach_Trigger[j].ach_Doned)
+                    {
+                        continue;
+                    }
 
                     //Update achievement progress
                     switch (m_achievements[i].ach_Trigger[j].ach_Type)
@@ -123,7 +127,7 @@ public class AchievementManager : MonoBehaviour
                     }
 
                     //Check if progress is more than goal for that trigger
-                    if (m_achievements[i].ach_Trigger[j].ach_Progress > m_achievements[i].ach_Trigger[j].ach_Goal)
+                    if (m_achievements[i].ach_Trigger[j].ach_Progress >= m_achievements[i].ach_Trigger[j].ach_Goal)
                     {
                         m_achievements[i].ach_Trigger[j].ach_Doned = true;
                     }

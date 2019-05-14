@@ -177,6 +177,11 @@ public class UIManager : MonoBehaviour
 
     #region Achievement Panel
 
+    public void PlusCoinAch(int price)
+    {
+        CoinChangeDisplayManager.instance.displayCoinChange(m_coins.gameObject.transform.position, price, true);
+    }
+
     public void CreateAchievementMenu ()
     {
         for (int i = 0; i < AchievementManager.instance.m_achievements.Count; i++)
@@ -214,6 +219,11 @@ public class UIManager : MonoBehaviour
     #endregion
 
     #region Skin Panel
+
+    public void MinusCoinSkin(int price)
+    {
+        CoinChangeDisplayManager.instance.displayCoinChange(m_coins.gameObject.transform.position, price, false);
+    }
 
     public void SelectSkin (int skinID, SkinUI prefab)
     {
@@ -273,6 +283,7 @@ public class UIManager : MonoBehaviour
             {
                 //Unlock Skin
                 SkinManager.instance.BuySkin(skinID, prefab);
+                MinusCoinSkin(SkinManager.instance.GetSkin(skinID).GetSkinCost());
                 
             });
         }
@@ -359,6 +370,8 @@ public class UIManager : MonoBehaviour
     }
 
     #endregion
+
+
 
     public void DudeControlChange()
     {

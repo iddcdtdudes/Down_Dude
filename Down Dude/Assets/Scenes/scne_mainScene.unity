@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.37311992, g: 0.38074034, b: 0.35872713, a: 1}
+  m_IndirectSpecularColor: {r: 0.37311953, g: 0.38074014, b: 0.3587274, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -2457,7 +2457,7 @@ MonoBehaviour:
   - {fileID: 2067487639}
   - {fileID: 268007695}
   - {fileID: 104560392}
-  m_chunkDebugger: 1
+  m_chunkDebugger: 0
   m_chunkToDebug: 6
 --- !u!4 &269897184
 Transform:
@@ -8416,8 +8416,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0.5}
   m_AnchorMax: {x: 1, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: -300}
-  m_SizeDelta: {x: -100, y: 600}
+  m_AnchoredPosition: {x: 0, y: -250}
+  m_SizeDelta: {x: -100, y: 500}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &997597237
 GameObject:
@@ -18534,8 +18534,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 1}
   m_AnchorMax: {x: 0.5, y: 1}
-  m_AnchoredPosition: {x: -349.99997, y: -0.000091552734}
-  m_SizeDelta: {x: 700, y: 0}
+  m_AnchoredPosition: {x: -349.99997, y: -0.000061035156}
+  m_SizeDelta: {x: 700, y: 20}
   m_Pivot: {x: 0.000000027939677, y: 0.9999998}
 --- !u!114 &1857881626316672757
 MonoBehaviour:
@@ -18842,10 +18842,10 @@ MonoBehaviour:
   m_Padding:
     m_Left: 0
     m_Right: 0
-    m_Top: 0
+    m_Top: 20
     m_Bottom: 0
   m_ChildAlignment: 0
-  m_Spacing: 30
+  m_Spacing: 10
   m_ChildForceExpandWidth: 0
   m_ChildForceExpandHeight: 0
   m_ChildControlWidth: 0
@@ -19095,7 +19095,7 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
   m_AnchoredPosition: {x: 0, y: -50}
-  m_SizeDelta: {x: -40, y: -140}
+  m_SizeDelta: {x: -180, y: -140}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &2355754880025450896
 MonoBehaviour:
@@ -23122,10 +23122,10 @@ RectTransform:
   m_Father: {fileID: 992487670}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 1}
-  m_AnchorMax: {x: 1, y: 1}
+  m_AnchorMin: {x: 0.5, y: 1}
+  m_AnchorMax: {x: 0.5, y: 1}
   m_AnchoredPosition: {x: 0, y: -60}
-  m_SizeDelta: {x: 0, y: 120}
+  m_SizeDelta: {x: 800, y: 120}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &4989020927442929823
 GameObject:
@@ -24019,6 +24019,16 @@ PrefabInstance:
         type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_Arguments.m_StringArgument
       value: Ok
+      objectReference: {fileID: 0}
+    - target: {fileID: 4839504263960305180, guid: 0ef40c60a42dcf049aaebd76ff740b48,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5675631373395153162, guid: 0ef40c60a42dcf049aaebd76ff740b48,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 0ef40c60a42dcf049aaebd76ff740b48, type: 3}

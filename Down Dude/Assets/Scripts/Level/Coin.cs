@@ -20,7 +20,7 @@ public class Coin : MonoBehaviour
         GameManager.instance.AddSessionCoin();
 
         // display coin change
-        CoinChangeDisplayManager.instance.displayCoinChange(Camera.main.WorldToScreenPoint(transform.position), 1);
+        //CoinChangeDisplayManager.instance.displayCoinChange(Camera.main.WorldToScreenPoint(transform.position), 1, true);
 
         // sound
         AudioManager.instance.Play("Collect Coin");

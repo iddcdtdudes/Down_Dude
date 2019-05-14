@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: ach_11
   m_EditorClassIdentifier: 
   ach_ID: 11
-  ach_Reward: 80
+  ach_Reward: 2400
   ach_Title: Reach 2400 m
   ach_Description: Reach the distance of 2400 m
   ach_icon: {fileID: 0}
