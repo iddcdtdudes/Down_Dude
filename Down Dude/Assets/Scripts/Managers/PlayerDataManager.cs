@@ -50,7 +50,7 @@ public class PlayerDataManager : MonoBehaviour
     public void LoadDataLocal()
     {
 
-        m_player = SaveLoadManager.LoadData(SkinManager.instance.GetSkinsNumber(), AchievementManager.instance.m_achievements.Count);
+        m_player = SaveLoadManager.LoadData(m_version ,SkinManager.instance.GetSkinsNumber(), AchievementManager.instance.m_achievements.Count);
         SkinManager.instance.ChangeSkin(m_player.m_usingSkin);
         Debug.Log("Load Save Data.");
         ChunkManager.instance.SetTutorialBool(GetTutorial());
@@ -65,7 +65,7 @@ public class PlayerDataManager : MonoBehaviour
     {
         if (m_player != null)
         {
-            SaveLoadManager.SaveData(m_player, SkinManager.instance.GetSkinsNumber(), AchievementManager.instance.m_achievements.Count);
+            SaveLoadManager.SaveData(m_version ,m_player, SkinManager.instance.GetSkinsNumber(), AchievementManager.instance.m_achievements.Count);
         }
         else
         {

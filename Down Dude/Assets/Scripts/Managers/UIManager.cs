@@ -179,7 +179,9 @@ public class UIManager : MonoBehaviour
 
     public void PlusCoinAch(int price)
     {
-        CoinChangeDisplayManager.instance.displayCoinChange(m_coins.gameObject.transform.position, price, true);
+        Vector3 pos = new Vector3(m_coins.transform.position.x - 50f, m_coins.transform.position.y, 0.0f);
+        //CoinChangeDisplayManager.instance.displayCoinChange(m_coins.gameObject.transform.position, price, true);
+        CoinChangeDisplayManager.instance.displayCoinChange(pos, price, true);
     }
 
     public void CreateAchievementMenu ()
@@ -222,7 +224,8 @@ public class UIManager : MonoBehaviour
 
     public void MinusCoinSkin(int price)
     {
-        CoinChangeDisplayManager.instance.displayCoinChange(m_coins.gameObject.transform.position, price, false);
+        Vector3 pos = new Vector3(m_coins.transform.position.x - 50f, m_coins.transform.position.y, 0.0f);
+        CoinChangeDisplayManager.instance.displayCoinChange(pos, price, false);
     }
 
     public void SelectSkin (int skinID, SkinUI prefab)

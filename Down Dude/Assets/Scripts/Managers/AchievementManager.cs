@@ -143,7 +143,10 @@ public class AchievementManager : MonoBehaviour
                 {
                     //m_achievements[i].SetComplete();
                     PlayerDataManager.instance.SetUnlockAch(m_achievements[i].ach_ID);
-                    UIManager.instance.m_achGameOver.SetActive(true);
+                    if(!UIManager.instance.m_achGameOver.activeSelf)
+                    {
+                        UIManager.instance.m_achGameOver.SetActive(true);
+                    }
                     //Create achievement UI in Gameover UI
                     UIManager.instance.CreateAchInGameOverUI(m_achievements[i].ach_Description);
 

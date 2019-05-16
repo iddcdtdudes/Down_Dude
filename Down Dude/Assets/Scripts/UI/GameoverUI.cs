@@ -11,7 +11,8 @@ public class GameoverUI : MonoBehaviour
     public Text m_sessionCP;
     public Text m_allTimeCP;
     public Text m_sessionCoins;
-    [SerializeField] private Animator m_animGameoverUI;
+    public GameObject m_achievement;
+    public Animator m_animGameoverUI;
     //For updating UI
     private bool m_updateGameOverUI;
     //Distance
@@ -106,8 +107,15 @@ public class GameoverUI : MonoBehaviour
                 m_sessionCoins.text = ((int)m_currentCoins).ToString();
                 break;
             case GameOverUIUpdate.MENU:
-                
-                m_animGameoverUI.SetTrigger("UpdateScoreDone");
+                if (m_achievement.activeSelf)
+                {
+                    ShowContinueButton();
+                }
+                else
+                {
+                    ShowMenuButton();
+                }
+                //m_animGameoverUI.SetTrigger("UpdateScoreDone");
                 break;
         }
         //m_sessionDist.text = ((int)GameManager.instance.GetSessionDistance()).ToString();
@@ -141,4 +149,19 @@ public class GameoverUI : MonoBehaviour
         m_allTimeCP.text = PlayerDataManager.instance.GetAllTimeCP().ToString();
     }
 
+
+    private void ShowContinueButton ()
+    {
+        m_animGameoverUI.SetTrigger("GameoverUICont");
+    }
+
+    private void ShowMenuButton()
+    {
+        m_animGameoverUI.SetTrigger("GameoverUIMenu");
+    }
+
+    public void ShowGameoverUIAch ()
+    {
+        m_animGameoverUI.SetTrigger("GameoverUIAch");
+    }
 }

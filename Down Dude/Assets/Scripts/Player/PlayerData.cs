@@ -20,8 +20,9 @@ public class PlayerData
     public bool[] m_achievementClaimed;
 
     //Constructor for saving and loading
-    public PlayerData (PlayerData player, int numberOfSkins, int numberOfAchievements)
+    public PlayerData (uint playerData_Version, PlayerData player, int numberOfSkins, int numberOfAchievements)
     {
+        m_version = playerData_Version;
         m_tutorialChunk = player.m_tutorialChunk;
         m_coins = player.m_coins;
         m_playTime = player.m_playTime;
@@ -111,8 +112,9 @@ public class PlayerData
     }
 
     //Constructor creating the object first time
-    public PlayerData (int numberOfSkins, int numberOfAchievements)
+    public PlayerData (uint playerData_Version, int numberOfSkins, int numberOfAchievements)
     {
+        m_version = playerData_Version;
         m_tutorialChunk = false;
         m_coins = 0;
         m_playTime = 0;
@@ -144,12 +146,12 @@ public static class SaveLoadManager
 
     static string path = Application.persistentDataPath + "/DownDude.sav";
 
-    public static void SaveData (PlayerData player, int numberOfSkins, int numberOfAchievements)
+    public static void SaveData (uint playerData_Version, PlayerData player, int numberOfSkins, int numberOfAchievements)
     {
         BinaryFormatter bf = new BinaryFormatter();
         FileStream stream = new FileStream(path , FileMode.Create);
 
-        PlayerData saveData = new PlayerData(player, numberOfSkins, numberOfAchievements);
+        PlayerData saveData = new PlayerData(playerData_Version , player, numberOfSkins, numberOfAchievements);
 
         bf.Serialize(stream, saveData);
         stream.Close();
@@ -159,32 +161,42 @@ public static class SaveLoadManager
     }
 
     //Return deserialized PlayerData or null
-    public static PlayerData LoadData (int numberOfSkins, int numberOfAchievements)
+    public static PlayerData LoadData (uint playerData_Version, int numberOfSkins, int numberOfAchievements)
     {
-        
+        //Check if path exist
         if (File.Exists(path))
         {
+            //Initialize Formatter and File reading stream
             BinaryFormatter bf = new BinaryFormatter();
             FileStream stream = new FileStream(path , FileMode.Open);
+            //Declare new variable to keep loaded data
             PlayerData loadedData;
 
             //Check if file is empty
             if (stream.Length == 0)
             {
-                loadedData = new PlayerData(numberOfSkins, numberOfAchievements);
+                //Create new save data
+                loadedData = new PlayerData(playerData_Version ,numberOfSkins, numberOfAchievements);
             }
             else
             {
+                //Load save data
                 loadedData = (PlayerData)bf.Deserialize(stream);
                 
-                if (loadedData.m_unlockedSkins.Length != numberOfSkins)
+                if (loadedData.m_version != playerData_Version)
                 {
-                    loadedData = new PlayerData(loadedData, numberOfSkins, numberOfAchievements);
-                    //Debug.Log("Change skin array");
+                    Debug.Log("Different version of save data: " + loadedData.m_version);
+                    switch (loadedData.m_version)
+                    {
+                        default:
+                            loadedData = new PlayerData(playerData_Version, numberOfSkins, numberOfAchievements);
+                            break;
+                    }
                 }
                 else
                 {
-                    //Debug.Log("Same skin array");
+                    Debug.Log("Same version of save data: " + playerData_Version);
+                    loadedData = new PlayerData(playerData_Version, loadedData, numberOfSkins, numberOfAchievements);
                 }
 
                 stream.Close();
@@ -192,10 +204,11 @@ public static class SaveLoadManager
 
             return loadedData;
         }
+        //Create new save files
         else
         {
             //Debug.LogError("No save files");
-            return new PlayerData(numberOfSkins, numberOfAchievements);
+            return new PlayerData(playerData_Version ,numberOfSkins, numberOfAchievements);
         }
 
     }
