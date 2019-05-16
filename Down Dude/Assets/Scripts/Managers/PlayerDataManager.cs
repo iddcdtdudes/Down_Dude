@@ -7,7 +7,7 @@ public class PlayerDataManager : MonoBehaviour
 {
     public static PlayerDataManager instance;
 
-    public string m_version;
+    [SerializeField] public uint m_version;
     public PlayerData m_player;
 
     [SerializeField] public string m_playerPref_Control;

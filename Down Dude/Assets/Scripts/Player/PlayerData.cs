@@ -8,6 +8,7 @@ using System.IO;
 [System.Serializable]
 public class PlayerData
 {
+    public uint m_version;
     public bool m_tutorialChunk;
     public int m_coins;
     public int m_playTime;
