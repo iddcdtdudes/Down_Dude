@@ -11,6 +11,8 @@ public class CameraController : MonoBehaviour {
     // singleton instance
     public static CameraController instance;
 
+    [SerializeField] private float m_worldXSize;
+
     [SerializeField] private float m_yOffsetTargetJetpack;
     [SerializeField] private float m_yOffsetTargetParachute;
     [SerializeField] private float m_yOffsetSmooth;
@@ -26,6 +28,12 @@ public class CameraController : MonoBehaviour {
         } else {
             Destroy(gameObject);
         }
+    }
+
+    private void Start()
+    {
+        // set camera orthographic size to match device screen size
+        GetComponent<Camera>().orthographicSize = m_worldXSize * Screen.height / Screen.width * 0.5f;
     }
 
     private void Update()
