@@ -45,6 +45,7 @@ public class GameManager : MonoBehaviour {
     private float m_previousDudeY;                              // dude y position on previous update
     [SerializeField] private float m_distanceScaler;      // scaler for distance
 
+    private bool m_gameStarted = false;
     private bool m_retrivedFirstTimeLimit = false;
 
     private void Awake()
@@ -191,10 +192,11 @@ public class GameManager : MonoBehaviour {
         {
             //Debug.Log("Found Touch");
             //Make sure finger is NOT over a UI element
-            if (!EventSystem.current.IsPointerOverGameObject(Input.GetTouch(0).fingerId))
+            if (!EventSystem.current.IsPointerOverGameObject(Input.GetTouch(0).fingerId) && !m_gameStarted)
             {
                 //Debug.Log("Touch on Screen");
                 StartGame();
+                m_gameStarted = true;
             }
             //else
             //{
