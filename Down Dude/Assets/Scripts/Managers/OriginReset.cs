@@ -37,7 +37,7 @@ public class OriginReset : MonoBehaviour {
 		if (Mathf.Abs(DudeController.instance.gameObject.transform.position.y) > m_positionLimit)
         {
             //Reset
-            ResetPosition();
+            //ResetPosition();
         }
 	}
 
